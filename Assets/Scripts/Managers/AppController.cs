@@ -19,6 +19,7 @@ public class AppController : MonoBehaviour
 
         // Add the SimulationManager component to this new object
         SimulationManager simulationManager = managers.AddComponent<SimulationManager>();
+        UIManager uiManager = managers.AddComponent<UIManager>();
 
         // Make the managers object persistent
         DontDestroyOnLoad(managers);

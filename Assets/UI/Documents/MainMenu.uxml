@@ -1,7 +1,0 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=8b6ae62d1e1d74ad789598270b2c42f5&amp;type=3#AppStyles" />
-    <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
-    <engine:VisualElement name="Container" class="container" style="flex-grow: 1;">
-        <engine:VisualElement name="Menu" class="menu" style="flex-grow: 1;" />
-    </engine:VisualElement>
-</engine:UXML>

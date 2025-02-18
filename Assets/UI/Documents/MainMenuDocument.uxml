@@ -1,0 +1,29 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <engine:VisualElement name="Container" class="container" style="flex-grow: 1;">
+        <engine:VisualElement name="Menu" class="menu" style="flex-grow: 1; padding-bottom: 60px;">
+            <engine:VisualElement name="TitleContainer" class="flex-col-start" style="flex-grow: 0; flex-wrap: nowrap;">
+                <engine:Label text="Main Title" class="title my-2" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <engine:Label text="3D Space Debris Collision Simulator" class="subtitle my-2" style="white-space: normal; font-size: 28px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="NavLinks" style="flex-grow: 0; align-items: flex-start; justify-content: center; padding-top: 48px; padding-right: 0;">
+                <engine:VisualElement name="LoadSatellites" class="nav-link" style="flex-grow: 0;">
+                    <engine:Label text="Load Satellites" name="LinkText" class="my-2 nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ViewSpaceDebris" class="nav-link" style="flex-grow: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                    <engine:Label text="View Space Debris" name="LinkText" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="About" class="nav-link" style="flex-grow: 0;">
+                    <engine:Label text="About" name="LinkText" class="my-2 nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Settings" class="nav-link" style="flex-grow: 0;">
+                    <engine:Label text="Settings" name="LinkText" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ReturnToEarth" class="nav-link" style="flex-grow: 0;">
+                    <engine:Label text="Return to Earth" name="LinkText" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
