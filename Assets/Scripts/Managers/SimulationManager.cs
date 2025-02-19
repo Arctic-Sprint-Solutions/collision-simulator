@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public enum SimulationState
 {
   MainMenu,
+  SelectSatellite,
 }
 
 /// <summary>
@@ -25,22 +26,21 @@ public class SimulationManager : MonoBehaviour
   /// </summary>
   private void Awake()
   {
-    Debug.Log("SimulationManager initialized");
     // Ensure that there is only one instance of SimulationManager
-    if (Instance == null)
+     if (Instance != null && Instance != this)
     {
-      Instance = this;
-      DontDestroyOnLoad(gameObject);
-      SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-    else
-    {
-      Destroy(gameObject);
+        Destroy(gameObject);
+        return;
     }
 
-    // Start with the MainMenu state
-    currentState = SimulationState.MainMenu;
+    Instance = this;
+    DontDestroyOnLoad(gameObject);
+    SceneManager.sceneLoaded += OnSceneLoaded;
+    
+    // Load the main menu scene
+    SceneManager.LoadScene("MainMenu");
   }
+
 
   /// <summary>
   /// Handles scene-specific logic when a new scene is loaded
@@ -50,11 +50,27 @@ public class SimulationManager : MonoBehaviour
   private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
   {
     // Handle scene-specific logic here
-    if (scene.name == "MainMenu")
+    switch (scene.name)
     {
-      currentState = SimulationState.MainMenu;
-      Debug.Log("MainMenu loaded");
+      case "MainMenu":
+        currentState = SimulationState.MainMenu;
+        UIManager.Instance.HideNavBar();
+        break;
+      case "SatellitesGridScene":
+        currentState = SimulationState.SelectSatellite;
+        UIManager.Instance.ShowNavBar();
+        break;
+      case "Init":
+        break;
+      default:
+        Debug.LogWarning("Unknown scene loaded: " + scene.name);
+        break;
     }
+  }
+
+  public void LoadScene(string sceneName)
+  {
+    SceneManager.LoadScene(sceneName);
   }
 
   /// <summary>
@@ -63,6 +79,5 @@ public class SimulationManager : MonoBehaviour
   private void OnDestroy()
   {
       SceneManager.sceneLoaded -= OnSceneLoaded;
-      Debug.Log("SimulationManager destroyed");
   }
 }

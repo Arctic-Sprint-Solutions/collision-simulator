@@ -1,13 +1,21 @@
+// Description: Handles the main menu UI logic
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Controller for the main menu UI
+/// </summary>
 public class MainMenuController : MonoBehaviour
 {
   [SerializeField] private UIDocument menuUIDocument;
 
   private VisualElement _rootElement;
 
+  /// <summary>
+  /// Called when the script instance is being loaded.
+  /// </summary>
   private void OnEnable()
   {
       // Get the root visual element of the UI document
@@ -19,14 +27,15 @@ public class MainMenuController : MonoBehaviour
           return;
       }
 
-      Debug.Log("Root element found: " + _rootElement.name);
-
     // Use schedule to ensure UI is fully loaded
     _rootElement.schedule.Execute(() => {
         InitializeNavLinks();
     });
   }
 
+  /// <summary>
+  /// Initializes the navigation links in the main menu and adds click event listeners
+  /// </summary>
   private void InitializeNavLinks()
   {
       // Find the navigation links container
@@ -38,11 +47,10 @@ public class MainMenuController : MonoBehaviour
           return;
       }
       
-      // Find all elements with class "nav-link" under the container
+      // Find all elements with class "nav-link" in the container
       UQueryBuilder<VisualElement> linkQuery = navLinksContainer.Query(className: "nav-link");
       List<VisualElement> navLinkElements = linkQuery.ToList();
       
-      Debug.Log($"Found {navLinkElements.Count} navigation links");
       
       foreach (VisualElement navLink in navLinkElements)
       {
@@ -51,10 +59,16 @@ public class MainMenuController : MonoBehaviour
       }
   }
 
-    private void OnNavLinkClicked(VisualElement navLink)
-    {
-        // Handle the click event for the navigation link
-        Debug.Log($"Navigation link clicked: {navLink.name}");
-    }
+  /// <summary>
+  /// Handles the click event for the navigation link
+  /// </summary>
+  private void OnNavLinkClicked(VisualElement navLink)
+  {
+      // Handle the click event for the navigation link
+      Debug.Log($"Navigation link clicked: {navLink.name}");
+      // TODO: Implement navigation logic
+      // For now, just load the SatellitesGridScene
+      SimulationManager.Instance.LoadScene("SatellitesGridScene");
+  }
 
 }
