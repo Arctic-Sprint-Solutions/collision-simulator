@@ -8,19 +8,24 @@
                 <engine:Label text="3D Space Debris Collision Simulator" class="subtitle my-2" style="white-space: normal; font-size: 28px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             </engine:VisualElement>
             <engine:VisualElement name="NavLinks" style="flex-grow: 0; align-items: flex-start; justify-content: center; padding-top: 48px; padding-right: 0;">
-                <engine:VisualElement name="LoadSatellites" class="nav-link" style="flex-grow: 0;">
+                <engine:VisualElement name="LoadSatellites" class="nav-link" style="flex-grow: 0; align-items: center;">
+                    <engine:VisualElement name="SatelliteIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/icons/satellite-icon.png?fileID=2800000&amp;guid=6eecfe7d9fdad433195a2941a7d6dbbc&amp;type=3#satellite-icon&quot;);" />
                     <engine:Label text="Load Satellites" name="LinkText" class="my-2 nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
                 </engine:VisualElement>
                 <engine:VisualElement name="ViewSpaceDebris" class="nav-link" style="flex-grow: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                    <engine:VisualElement name="StarsIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/icons/stars-icon.png?fileID=2800000&amp;guid=a0e7388b2327e45518bedd9fdc142088&amp;type=3#stars-icon&quot;);" />
                     <engine:Label text="View Space Debris" name="LinkText" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
                 </engine:VisualElement>
                 <engine:VisualElement name="About" class="nav-link" style="flex-grow: 0;">
+                    <engine:VisualElement name="InfoIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/icons/info-icon.png?fileID=2800000&amp;guid=e7bbd3c7172a542d6bddca8175749c88&amp;type=3#info-icon&quot;);" />
                     <engine:Label text="About" name="LinkText" class="my-2 nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
                 </engine:VisualElement>
                 <engine:VisualElement name="Settings" class="nav-link" style="flex-grow: 0;">
+                    <engine:VisualElement name="SettingsIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/icons/settings-icon.png?fileID=2800000&amp;guid=73608bb90d22c495a9cf3ef10fa87ea4&amp;type=3#settings-icon&quot;);" />
                     <engine:Label text="Settings" name="LinkText" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
                 </engine:VisualElement>
                 <engine:VisualElement name="ReturnToEarth" class="nav-link" style="flex-grow: 0;">
+                    <engine:VisualElement name="EarthIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/icons/earth-icon.png?fileID=2800000&amp;guid=bc3dd244fee794ece9e2adf0523b1ff0&amp;type=3#earth-icon&quot;);" />
                     <engine:Label text="Return to Earth" name="LinkText" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
                 </engine:VisualElement>
             </engine:VisualElement>

@@ -23,6 +23,7 @@
     justify-content: flex-start;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 .nav-link-text {
@@ -30,4 +31,21 @@
     font-size: 32px;
     margin: 8px 0;
     color: rgb(0, 200, 255);
+}
+
+.nav-icon {
+    width: 30px;
+    height: 30px;
+    padding-right: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+}
+
+.subtitle {
+    font-size: 28px;
+    color: rgb(230, 230, 230);
+    margin: 0;
+    padding: 0;
 }
