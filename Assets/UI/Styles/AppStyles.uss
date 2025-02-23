@@ -1,0 +1,66 @@
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+
+.my-1 {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.my-2 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.full-width-container {
+    width: 100%;
+    padding: 64px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.flex-col-start {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.flex-row-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-row-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.title {
+    font-size: 60px;
+    color: rgb(0, 200, 255);
+    margin: 0;
+    padding: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/Orbitron-Regular.ttf?fileID=12800000&guid=8d9b146c6ee6241558a82ea5922c5327&type=3#Orbitron-Regular");
+}
+
+.navbar {
+    padding-top: 32px;
+    padding-right: 64px;
+    padding-bottom: 32px;
+    padding-left: 48px;
+    width: 100%;
+    height: auto;
+    display: none;
+}
