@@ -20,6 +20,15 @@
     margin-bottom: 8px;
 }
 
+.full-width-container {
+    width: 100%;
+    padding: 64px;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    height: 100%;
+}
+
 .flex-col-start {
     display: flex;
     flex-direction: column;

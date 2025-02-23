@@ -1,8 +1,8 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
     <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
-    <engine:VisualElement name="Container" class="container" style="flex-grow: 1;">
-        <engine:VisualElement name="Menu" class="menu" style="flex-grow: 1; padding-bottom: 60px;">
+    <engine:VisualElement name="Container" class="full-width-container" style="flex-grow: 1; align-items: flex-start; max-width: 1600px;">
+        <engine:VisualElement name="Menu" class="menu" style="flex-grow: 1; padding-bottom: 60px; margin-top: 40px; margin-left: 40px; margin-right: 0; margin-bottom: 0;">
             <engine:VisualElement name="TitleContainer" class="flex-col-start" style="flex-grow: 0; flex-wrap: nowrap;">
                 <engine:Label text="Main Title" class="title my-2" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
                 <engine:Label text="3D Space Debris Collision Simulator" class="subtitle my-2" style="white-space: normal; font-size: 28px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
