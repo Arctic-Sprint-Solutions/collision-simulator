@@ -25,7 +25,7 @@
     padding: 64px;
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: flex-start;
     height: 100%;
 }
 
@@ -49,10 +49,10 @@
 
 .title {
     font-size: 60px;
-    font-weight: bold;
     color: rgb(0, 200, 255);
     margin: 0;
     padding: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/Orbitron-Regular.ttf?fileID=12800000&guid=8d9b146c6ee6241558a82ea5922c5327&type=3#Orbitron-Regular");
 }
 
 .navbar {

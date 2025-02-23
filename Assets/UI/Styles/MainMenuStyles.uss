@@ -31,6 +31,7 @@
     font-size: 32px;
     margin: 8px 0;
     color: rgb(0, 200, 255);
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
 }
 
 .nav-icon {
@@ -48,4 +49,5 @@
     color: rgb(230, 230, 230);
     margin: 0;
     padding: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
 }
