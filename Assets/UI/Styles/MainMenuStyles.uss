@@ -15,6 +15,7 @@
     padding-right: 32px;
     padding-bottom: 32px;
     padding-left: 32px;
+    align-items: flex-start;
 }
 
 .nav-link {

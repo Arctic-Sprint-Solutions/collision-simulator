@@ -83,6 +83,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void HideNavBar()
     {
+        Debug.Log("Hiding NavBar");
         if(_navBar != null)
         {
             _navBar.style.display = DisplayStyle.None;
