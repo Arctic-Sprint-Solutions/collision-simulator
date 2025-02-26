@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   satellites:
   - {fileID: 11400000, guid: 3c3850471513142dabf08e1095988c60, type: 2}
+  - {fileID: 11400000, guid: db70391b4259b46be87db7982e75de02, type: 2}
+  - {fileID: 11400000, guid: 7da465570401a496098058d920f8034e, type: 2}

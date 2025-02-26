@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed99cfd493044bfa8726c6920c92683, type: 3}
   m_Name: AcrimSatData
   m_EditorClassIdentifier: 
-  satelliteName: 
-  type: 
-  leoInfo: 
-  weight: 0
-  launchYear: 0
-  satelliteSceneName: 
-  previewImage: {fileID: 0}
+  satelliteName: Acrim Satellite
+  type: Communication
+  leoInfo: 320
+  weight: 400
+  launchYear: 1989
+  satelliteSceneName: AcrimSatScene
+  previewImage: {fileID: 21300000, guid: 24c9f8ec1a6c64cdba66d78de62e6611, type: 3}

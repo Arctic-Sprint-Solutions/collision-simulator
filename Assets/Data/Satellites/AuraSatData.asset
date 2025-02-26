@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed99cfd493044bfa8726c6920c92683, type: 3}
   m_Name: AuraSatData
   m_EditorClassIdentifier: 
-  satelliteName: 
-  type: 
-  leoInfo: 
-  weight: 0
-  launchYear: 0
-  satelliteSceneName: 
-  previewImage: {fileID: 0}
+  satelliteName: Aura Satellite
+  type: Weather
+  leoInfo: 260
+  weight: 210
+  launchYear: 2018
+  satelliteSceneName: AuraSatScene
+  previewImage: {fileID: 21300000, guid: f318fd78aedb940eda05b19b74d343c7, type: 3}
