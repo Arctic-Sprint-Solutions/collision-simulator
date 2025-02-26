@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 411d78ae3d7ed44bea13bab4efe321ae, type: 3}
-  m_Name: SatelliteCatalog
+  m_Script: {fileID: 11500000, guid: 6ed99cfd493044bfa8726c6920c92683, type: 3}
+  m_Name: AcrimSatData
   m_EditorClassIdentifier: 
-  satellites:
-  - {fileID: 11400000, guid: 3c3850471513142dabf08e1095988c60, type: 2}
+  satelliteName: 
+  type: 
+  leoInfo: 
+  weight: 0
+  launchYear: 0
+  satelliteSceneName: 
+  previewImage: {fileID: 0}

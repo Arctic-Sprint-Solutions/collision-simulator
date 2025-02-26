@@ -46,7 +46,6 @@ public class UIManager : MonoBehaviour
         {   
             // Get the NavBar element from the shared UI document
             _navBar = _root.Q<VisualElement>("NavBar");
-            HideNavBar();
         }
 
         if(_backToMenuButton == null)
@@ -56,6 +55,9 @@ public class UIManager : MonoBehaviour
             // Register a callback for the button's click event
             _backToMenuButton.RegisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
         }
+
+        // Hide the NavBar by default
+        HideNavBar();
     }
 
     /// <summary>
@@ -83,12 +85,28 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void HideNavBar()
     {
-        Debug.Log("Hiding NavBar");
         if(_navBar != null)
         {
             _navBar.style.display = DisplayStyle.None;
         }
 
+    }
+
+    private void OnDestroy()
+    {
+
+        // Unregister the callback to avoid memory leaks
+        if (_backToMenuButton != null)
+        {
+            _backToMenuButton.UnregisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
+        }
+
+        // Clean up references to avoid memory leaks
+        _instance = null;
+        _root = null;
+        _navBar = null;
+        _backToMenuButton = null;
+        _sharedUIDocument = null;
     }
 
     

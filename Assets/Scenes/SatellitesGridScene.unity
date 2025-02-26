@@ -436,6 +436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1441784344}
   - component: {fileID: 1441784345}
+  - component: {fileID: 1441784346}
   m_Layer: 0
   m_Name: SatelliteGridUI
   m_TagString: Untagged
@@ -477,6 +478,19 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &1441784346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441784343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8704d3093f1e044f89b795cf63ee37ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  satelliteCatalog: {fileID: 11400000, guid: 3dfc0c4c609da444999900723536fc11, type: 2}
 --- !u!1 &1891565523
 GameObject:
   m_ObjectHideFlags: 0

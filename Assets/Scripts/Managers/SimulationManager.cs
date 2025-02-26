@@ -10,6 +10,7 @@ public enum SimulationState
 {
   MainMenu,
   SelectSatellite,
+  SatelliteSelected
 }
 
 /// <summary>
@@ -60,6 +61,10 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
         break;
+      case "CubeSatScene":
+        currentState = SimulationState.SatelliteSelected;
+        UIManager.Instance.ShowNavBar();
+        break;
       case "Init":
         break;
       default:
@@ -78,6 +83,12 @@ public class SimulationManager : MonoBehaviour
   /// </summary>
   private void OnDestroy()
   {
-      SceneManager.sceneLoaded -= OnSceneLoaded;
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    // Clean up the singleton instance
+    if (Instance == this)
+    {
+      Instance = null;
+    }
   }
 }
