@@ -2,34 +2,55 @@ using UnityEngine;
 
 public class SatelliteCollision : MonoBehaviour
 {
-    public GameObject fracturedVersion;
-    public GameObject intactVersion;
-    public float explosionForce = 500f;
-    public float explosionRadius = 10f;
+    public GameObject intactModel;
+    public GameObject fracturedModel;
+    public float explosionForce = 200f;
+    public float explosionRadius = 4f;
+    public float velocityInheritanceFactor = 0.8f;
+    public float torqueStrength = 10f;
+    public float separationForce = 0.5f;
+
+    private Vector3 originalVelocity;
 
     void Start()
     {
-        fracturedVersion.SetActive(false);
+        fracturedModel.SetActive(false);
+
+        Rigidbody rb = intactModel.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            originalVelocity = rb.linearVelocity;
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Satellite"))
         {
-            intactVersion.SetActive(false);
+            intactModel.SetActive(false);
 
-            fracturedVersion.SetActive(true);
+            fracturedModel.SetActive(true);
 
-            foreach (Transform piece in fracturedVersion.transform)
+            foreach (Rigidbody rb in fracturedModel.GetComponentsInChildren<Rigidbody>())
             {
-                Rigidbody rb = piece.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    rb.isKinematic = false;
-                    rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+                    rb.interpolation = RigidbodyInterpolation.Interpolate; 
+                    rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+                    Vector3 breakDirection = (rb.transform.position - transform.position).normalized;
+
+                    rb.linearVelocity = (originalVelocity * velocityInheritanceFactor) + (breakDirection * explosionForce * 0.1f);
+                    rb.AddForce(breakDirection * separationForce, ForceMode.Impulse);
+
+                    Vector3 randomTorque = new Vector3(
+                        Random.Range(-1f, 1f), 
+                        Random.Range(-1f, 1f), 
+                        Random.Range(-1f, 1f)
+                    ) * torqueStrength;
+                    rb.AddTorque(randomTorque, ForceMode.Impulse);
                 }
             }
         }
     }
 }
-
