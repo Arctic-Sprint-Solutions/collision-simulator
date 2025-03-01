@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
     <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
     <engine:VisualElement name="NavBar" class="navbar" style="flex-grow: 0; max-height: none; flex-direction: row; justify-content: space-between;">
-        <engine:VisualElement name="BackToMenuButton" class="flex-row-center" style="flex-grow: 0; flex-shrink: 1; align-items: center;">
+        <engine:VisualElement name="BackToMenuButton" class="flex-row-center link-hover" style="flex-grow: 0; flex-shrink: 1; align-items: center;">
             <engine:Label text="Main Menu&#10;" class="navbar-link-text nav-link-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         </engine:VisualElement>
     </engine:VisualElement>

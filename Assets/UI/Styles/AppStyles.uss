@@ -75,3 +75,10 @@
     margin-left: 0;
     align-items: center;
 }
+
+.link-hover {
+}
+
+.link-hover:hover .nav-link-text{
+    color: rgb(48, 250, 136);
+}
