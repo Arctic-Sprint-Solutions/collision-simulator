@@ -66,9 +66,13 @@ public class MainMenuController : MonoBehaviour
   {
       // Handle the click event for the navigation link
       Debug.Log($"Navigation link clicked: {navLink.name}");
-      // TODO: Implement navigation logic
-      // For now, just load the SatellitesGridScene
-      SimulationManager.Instance.LoadScene("SatellitesGridScene");
+      if(navLink.name == "ReturnToEarth") {
+        SimulationManager.Instance.QuitApplication();
+      } else {
+        // TODO: Implement navigation logic
+        // For now, just load the SatellitesGridScene
+        SimulationManager.Instance.LoadScene("SatellitesGridScene");
+      }
   }
 
 }

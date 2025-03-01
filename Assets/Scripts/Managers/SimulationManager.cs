@@ -3,6 +3,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// Enum representing the different states of the simulation
 /// </summary>
@@ -76,6 +80,19 @@ public class SimulationManager : MonoBehaviour
   public void LoadScene(string sceneName)
   {
     SceneManager.LoadScene(sceneName);
+  }
+
+  /// <summary>
+  /// Quits the application or stops play mode in the Unity Editor
+  /// </summary>
+  public void QuitApplication()
+  {
+    Debug.Log("Quitting application...");
+    #if UNITY_EDITOR
+        // Stop play mode in the Unity Editor
+        EditorApplication.isPlaying = false;
+    #endif
+    Application.Quit();
   }
 
   /// <summary>
