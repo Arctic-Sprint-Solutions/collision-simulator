@@ -1,0 +1,53 @@
+.menu {
+    padding: 32px 32px 32px 32px;
+    transition: all 0.2s;
+    border-width: 3px;
+    border-color: rgb(0, 200, 255);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: auto;
+    height: auto;
+    min-height: 500px;
+    max-width: 500px;
+    padding-top: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
+    padding-left: 32px;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-link-text {
+    cursor: pointer;
+    font-size: 32px;
+    margin: 8px 0;
+    color: rgb(0, 200, 255);
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+}
+
+.nav-icon {
+    width: 30px;
+    height: 30px;
+    padding-right: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+}
+
+.subtitle {
+    font-size: 28px;
+    color: rgb(230, 230, 230);
+    margin: 0;
+    padding: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+}
