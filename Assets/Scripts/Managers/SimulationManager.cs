@@ -3,6 +3,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// Enum representing the different states of the simulation
 /// </summary>
@@ -10,6 +14,7 @@ public enum SimulationState
 {
   MainMenu,
   SelectSatellite,
+  SatelliteSelected
 }
 
 /// <summary>
@@ -60,6 +65,10 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
         break;
+      case "CubeSatScene":
+        currentState = SimulationState.SatelliteSelected;
+        UIManager.Instance.ShowNavBar();
+        break;
       case "Init":
         break;
       default:
@@ -74,10 +83,29 @@ public class SimulationManager : MonoBehaviour
   }
 
   /// <summary>
+  /// Quits the application or stops play mode in the Unity Editor
+  /// </summary>
+  public void QuitApplication()
+  {
+    Debug.Log("Quitting application...");
+    #if UNITY_EDITOR
+        // Stop play mode in the Unity Editor
+        EditorApplication.isPlaying = false;
+    #endif
+    Application.Quit();
+  }
+
+  /// <summary>
   /// Unsubscribes from the scene loaded event when the object is destroyed
   /// </summary>
   private void OnDestroy()
   {
-      SceneManager.sceneLoaded -= OnSceneLoaded;
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    // Clean up the singleton instance
+    if (Instance == this)
+    {
+      Instance = null;
+    }
   }
 }

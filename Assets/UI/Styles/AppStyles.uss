@@ -62,5 +62,23 @@
     padding-left: 48px;
     width: 100%;
     height: auto;
-    display: none;
+    display: flex;
+    flex-direction: row;
+    align-self: auto;
+    align-items: auto;
+}
+
+.scene-title {
+    margin-top: 60px;
+    margin-right: 0;
+    margin-bottom: 32px;
+    margin-left: 0;
+    align-items: center;
+}
+
+.link-hover {
+}
+
+.link-hover:hover .nav-link-text{
+    color: rgb(48, 250, 136);
 }
