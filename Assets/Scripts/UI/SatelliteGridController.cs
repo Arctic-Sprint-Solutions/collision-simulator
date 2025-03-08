@@ -12,33 +12,61 @@ public class SatelliteGridController : MonoBehaviour
 {
     // Reference to the satellite catalog ScriptableObject
     [SerializeField] private SatelliteCatalog satelliteCatalog;
-
+    [SerializeField] private AppSettings appSettings;
     // Reference to the UI Document
     private UIDocument uiDocument;
     // Container for the satellite grid
     private VisualElement satelliteGridContainer;
-
-    /// <summary>
-    /// Get the UIDocument component on the GameObject.
-    /// </summary>
-    private void Awake()
-    {
-        // Get the UI Document component
-        uiDocument = GetComponent<UIDocument>();
-
-        if (uiDocument == null)
-        {
-            Debug.LogError("UIDocument component not found on the GameObject.");
-            return;
-        }
-    }
+    private VisualElement _rootElement;
 
     /// <summary>
     /// Setup the satellite grid when the script is enabled.
     /// </summary>
     private void OnEnable()
     {
-        SetupSatelliteGrid();       
+      // Get the UI Document component
+      uiDocument = GetComponent<UIDocument>();
+
+      if (uiDocument == null)
+      {
+          Debug.LogError("UIDocument component not found on the GameObject.");
+          return;
+      }
+
+      // Get the root visual element of the UI document
+      _rootElement = uiDocument.rootVisualElement;
+      if (_rootElement == null)
+      {
+          Debug.LogError("Root element is null. Ensure the UIDocument is properly set up.");
+          return;
+      }
+
+      SetSceneTitle();
+      SetupSatelliteGrid();       
+    }
+
+    /// <summary>
+    /// Set the title and subtitle of the scene.
+    /// </summary>
+    private void SetSceneTitle()
+    {
+      if(appSettings == null)
+      {
+          Debug.LogError("AppSettings is not assigned.");
+          return;
+      }
+
+      try
+      {
+        // Find the title element and set its text
+        _rootElement.Q<Label>("SceneTitle").text = appSettings.satelliteGridTitle;
+        // Find the subtitle element and set its text
+        _rootElement.Q<Label>("SceneSubtitle").text = appSettings.satelliteGridSubtitle;
+      }
+      catch (System.Exception e)
+      {
+          Debug.LogError($"Error setting scene title: {e.Message}");
+      }
     }
 
     /// <summary>
@@ -47,31 +75,28 @@ public class SatelliteGridController : MonoBehaviour
     /// </summary>
     private void SetupSatelliteGrid()
     {
-        // Get the root element of the UI
-        var root = uiDocument.rootVisualElement;
+      // Find the satellite grid container in the UI
+      satelliteGridContainer = _rootElement.Q<VisualElement>("SatelliteGridContainer");
+      if (satelliteGridContainer == null)
+      {
+          Debug.LogError("SatelliteGridContainer not found in the UI.");
+          return;
+      }
 
-        // Find the satellite grid container in the UI
-        satelliteGridContainer = root.Q<VisualElement>("SatelliteGridContainer");
-        if (satelliteGridContainer == null)
-        {
-            Debug.LogError("SatelliteGridContainer not found in the UI.");
-            return;
-        }
+      // Clear the existing content in the container
+      satelliteGridContainer.Clear();
 
-        // Clear the existing content in the container
-        satelliteGridContainer.Clear();
+      if(satelliteCatalog == null)
+      {
+          Debug.LogError("SatelliteCatalog is not assigned.");
+          return;
+      }
 
-        if(satelliteCatalog == null)
-        {
-            Debug.LogError("SatelliteCatalog is not assigned.");
-            return;
-        }
-
-        // Loop through each satellite in the catalog and create a card for it
-        foreach(var satellite in satelliteCatalog.satellites)
-        {
-            CreateSatelliteCard(satellite);
-        }
+      // Loop through each satellite in the catalog and create a card for it
+      foreach(var satellite in satelliteCatalog.satellites)
+      {
+          CreateSatelliteCard(satellite);
+      }
     }
 
     /// <summary>

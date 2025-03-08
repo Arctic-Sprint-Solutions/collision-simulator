@@ -4,8 +4,8 @@
     <engine:VisualElement name="Container" class="full-width-container" style="flex-grow: 1; align-items: flex-start; max-width: 1600px;">
         <engine:VisualElement name="Menu" class="menu" style="flex-grow: 1; padding-bottom: 32px; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; padding-top: 32px; padding-right: 32px; padding-left: 32px;">
             <engine:VisualElement name="TitleContainer" class="flex-col-start" style="flex-grow: 0; flex-wrap: nowrap;">
-                <engine:Label text="Main Title" class="title my-2" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
-                <engine:Label text="3D Space Debris Collision Simulator" class="subtitle my-2" style="white-space: normal; font-size: 28px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <engine:Label text="Main Title" name="MainTitle" class="title my-2" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <engine:Label text="3D Space Debris Collision Simulator" name="Subtitle" class="subtitle my-2" style="white-space: normal; font-size: 28px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
             </engine:VisualElement>
             <engine:VisualElement name="NavLinks" style="flex-grow: 0; align-items: flex-start; justify-content: center; padding-top: 48px; padding-right: 0;">
                 <engine:VisualElement name="LoadSatellites" class="nav-link" style="flex-grow: 0; align-items: center;">
