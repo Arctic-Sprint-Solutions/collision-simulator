@@ -90,3 +90,7 @@
 .link-hover:hover .nav-link-text{
     color: rgb(48, 250, 136);
 }
+
+.link-hover:hover .nav-icon {
+    -unity-background-image-tint-color: rgb(48, 250, 136);
+}
