@@ -48,11 +48,19 @@
 }
 
 .title {
-    font-size: 60px;
+    font-size: 56px;
     color: rgb(0, 200, 255);
     margin: 0;
     padding: 0;
     -unity-font-definition: url("project://database/Assets/Fonts/Orbitron-Regular.ttf?fileID=12800000&guid=8d9b146c6ee6241558a82ea5922c5327&type=3#Orbitron-Regular");
+}
+
+.subtitle {
+    font-size: 28px;
+    color: rgb(230, 230, 230);
+    margin: 0;
+    padding: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
 }
 
 .navbar {
@@ -81,4 +89,8 @@
 
 .link-hover:hover .nav-link-text{
     color: rgb(48, 250, 136);
+}
+
+.link-hover:hover .nav-icon {
+    -unity-background-image-tint-color: rgb(48, 250, 136);
 }
