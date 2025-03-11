@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   satelliteCatalog: {fileID: 11400000, guid: 3dfc0c4c609da444999900723536fc11, type: 2}
+  appSettings: {fileID: 11400000, guid: 4bda55805763740f5b037964496f10a4, type: 2}
 --- !u!1 &1891565523
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +524,63 @@ Transform:
   - {fileID: 1441784344}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1095393249137238958
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.569777
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.054323316
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.29601
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217456227142209045, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613880688465639967, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
+      propertyPath: m_Name
+      value: SkyboxRotator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d7160b4058c4d407cb255aa4bb4edf0c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -531,3 +589,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1891565524}
+  - {fileID: 1095393249137238958}
