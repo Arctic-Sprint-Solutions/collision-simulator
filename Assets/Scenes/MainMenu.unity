@@ -612,6 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuUIDocument: {fileID: 1246374308}
+  appSettings: {fileID: 11400000, guid: 4bda55805763740f5b037964496f10a4, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
