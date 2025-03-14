@@ -1,16 +1,26 @@
+// Description: This script is used to detonate a RayfireBomb and apply linear and angular velocity to the fragments.
 using UnityEngine;
 using RayFire;
 
+// <summary>
+// This script is used to detonate a
+// RayfireBomb and apply linear and angular velocity to the fragments.
+// </summary>
 public class SatelliteExplosion : MonoBehaviour
 {
+    // Reference to the RayfireBomb and RayfireRigid components
     [SerializeField] RayfireBomb bomb;
     [SerializeField] RayfireRigid rb;
 
+    // Velocity to be applied to the fragments after explosion
     [SerializeField] Vector3 linearVelocity = new Vector3(15, 0, 0);
     [SerializeField] Vector3 angularVelocity = new Vector3(0, 15f, 0);
     
     private bool isDetonated = false;
 
+    // <summary>
+    // Check if the bomb and rigidbody are assigned
+    // </summary>
     void Start()
     {
         // Check if the bomb is assigned
@@ -29,19 +39,9 @@ public class SatelliteExplosion : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (bomb == null || rb == null)
-        {
-            return;
-        }
-        // Check for space bar press to detonate
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DetonateBomb();
-        }
-    }
-
+    // <summary>
+    // Detotonate te bomb and apply velocity to fragments
+    // </summary>
     public void DetonateBomb()
     {
         if (bomb != null && rb != null && !isDetonated)
@@ -50,14 +50,16 @@ public class SatelliteExplosion : MonoBehaviour
             
             // Detonate the bomb
             bomb.Explode(0f); // Provide a delay of 0 seconds
+            // Apply the velocity to the fragments
             ApplyVelocityToFragments();
-
 
             Debug.Log("Bomb detonated");
         }
     }
 
-    // Function to apply velocity to the fragments after the explosion
+    // <summary>
+    // Apply linear and angular velocity to the fragments
+    // </summary>
     void ApplyVelocityToFragments()
     {
         // Check if Rayfire Rigid is present
@@ -87,6 +89,4 @@ public class SatelliteExplosion : MonoBehaviour
             Debug.LogWarning("No fragments found or Rayfire Rigid is null!");
         }
     }
-
-
 }

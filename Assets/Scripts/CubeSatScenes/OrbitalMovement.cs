@@ -1,22 +1,37 @@
+// Description: This script controls the orbital movement of a satellite around a planet object.
 using UnityEngine;
 
+// <summary>
+// This script controls the orbital movement of a satellite around a planet object.
+// </summary>
 public class OrbitalMovement : MonoBehaviour
 {
+    // The planet object to orbit around
     [SerializeField] private Transform planet;
-    [SerializeField] private float orbitRadius = 120f; // Default to 1.2 units from center (0.7 units above surface)
+    // Radius of the orbit
+    [SerializeField] private float orbitRadius = 120f; 
+    // Speed of the orbit in degrees per second
     [SerializeField] private float orbitSpeed = 2f;
-    [SerializeField] private float inclination = 95f; // 0 = equatorial, 90 = polar
-    
-    [SerializeField] private float startAngle = 225f; // Default starting angle
+    // Inclination of the orbit in degrees (0 = equatorial, 90 = polar)
+    [SerializeField] private float inclination = 95f;
+    // Starting angle of the orbit in degrees
+    [SerializeField] private float startAngle = 225f;
     private float currentAngle;
     
+    /// <summary>
+    /// Initializes the satellite's position and angle.
+    /// </summary>
     void Start()
     {
+        // Set the initial angle to the specified start angle
         currentAngle = startAngle;
         // Set initial position
         UpdatePosition();
     }
     
+    /// <summary>
+    /// Updates the satellite's position and rotation each frame.
+    /// </summary>
     void Update()
     {
         // Update orbit angle
@@ -27,14 +42,17 @@ public class OrbitalMovement : MonoBehaviour
         UpdatePosition();
     }
     
+    /// <summary>
+    /// Calculates and sets the satellite's position based on the current angle and inclination.
+    /// </summary>
     void UpdatePosition()
     {
-        // First, create a position as if in equatorial orbit
+        // Calculate the position in the equatorial plane
         float x = orbitRadius * Mathf.Cos(currentAngle * Mathf.Deg2Rad);
         float z = orbitRadius * Mathf.Sin(currentAngle * Mathf.Deg2Rad);
         Vector3 equatorialPosition = new Vector3(x, 0, z);
         
-        // Now rotate this position based on the inclination
+        // Rotate the position by the inclination angle
         Quaternion inclinationRotation = Quaternion.Euler(inclination, 0, 0);
         Vector3 finalPosition = inclinationRotation * equatorialPosition;
         
@@ -50,20 +68,5 @@ public class OrbitalMovement : MonoBehaviour
         
         // Make satellite look in the direction of travel
         transform.LookAt(planet.position + nextFinalPosition);
-    }
-
-    
-    public void SetStartAngle(float angle)
-    {
-        currentAngle = angle;
-        UpdatePosition();
-    }
-    
-    // Update the orbit visualization when parameters change
-    
-    // This ensures the orbit line updates when parameters are changed in the editor
-    void OnValidate()
-    {
-        UpdatePosition();
     }
 }

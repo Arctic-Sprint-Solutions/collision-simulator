@@ -54,6 +54,7 @@ public class SimulationManager : MonoBehaviour
   /// </summary>
   private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
   {
+    Debug.Log("Scene loaded: " + scene.name);
     // Handle scene-specific logic here
     switch (scene.name)
     {
@@ -65,7 +66,7 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
         break;
-      case "CubeSatScene":
+      case "CubeSatCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
         break;
