@@ -118,6 +118,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NightLightStrength: 0.5
     - _NormalStrength: 4.99
     - _OcclusionStrength: 1
     - _Parallax: 0.005
