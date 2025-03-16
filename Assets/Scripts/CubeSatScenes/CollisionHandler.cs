@@ -11,6 +11,7 @@ public class CollisionHandler : MonoBehaviour
     /// Reference to the SatelliteExplosion script on the parent object.
     /// </summary>
     private SatelliteExplosion explosionScript;
+    private FragmentMovement fragmentMovementScript;
 
     /// <summary>
     /// Called when the script instance is being loaded.
@@ -21,10 +22,8 @@ public class CollisionHandler : MonoBehaviour
         // Find the parent object and get the SatelliteExplosion script
         explosionScript = GetComponentInParent<SatelliteExplosion>();
 
-        if (explosionScript == null)
-        {
-            Debug.LogError("SatelliteExplosion script not found on parent object!");
-        }
+        // Find the parent object and get the FragmentMovement script
+        fragmentMovementScript = GetComponentInParent<FragmentMovement>();
     }
 
     /// <summary>
@@ -33,11 +32,20 @@ public class CollisionHandler : MonoBehaviour
     /// </summary>
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Debris")
+        Debug.Log("Collision detected with: " + collision.gameObject.name);
+        if(collision.gameObject.tag == "Debris" || collision.gameObject.tag == "Satellite")
         {
-            Debug.Log("Collision with satellite detected");
-            // Trigger the detonation of the bomb
-            explosionScript?.DetonateBomb(); 
+            if(explosionScript != null)
+            {
+                // Trigger the detonation of the bomb
+                explosionScript?.DetonateBomb(); 
+            }
+
+            if(fragmentMovementScript != null)
+            {
+                // Apply velocity to fragments
+                fragmentMovementScript?.ApplyVelocityToFragments();
+            }
         }
         
     
