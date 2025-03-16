@@ -1,3 +1,9 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <Style src="project://database/Assets/UI/Styles/SatelliteGridStyles.uss?fileID=7433441132597879392&amp;guid=7853e81a7e86644149489f14e3439826&amp;type=3#SatelliteGridStyles" />
+    <engine:VisualElement name="SatelliteGridSceneTitle" class="my-2 scene-title" style="flex-grow: 0;">
+        <engine:Label text="Scene Title" name="SceneTitle" class="title" style="-unity-text-align: upper-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        <engine:Label text="Scene Subtitle" name="SceneSubtitle" class="subtitle" />
+    </engine:VisualElement>
+    <engine:VisualElement name="SatelliteGridContainer" class="satellite-container" style="flex-grow: 0;" />
 </engine:UXML>

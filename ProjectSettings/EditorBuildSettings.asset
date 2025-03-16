@@ -14,6 +14,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SatellitesGridScene.unity
     guid: 9dc3d998440c64e7786d79fbb6c4b067
+  - enabled: 1
+    path: Assets/Scenes/CubeSatScene.unity
+    guid: 1696683ee6d964597851445d2d54043b
+  - enabled: 1
+    path: Assets/Scenes/AcrimSatScene.unity
+    guid: cf557412d9dc7a34f8c613da873f1599
+  - enabled: 1
+    path: Assets/Scenes/AuraSatScene.unity
+    guid: 1e3af90b9706a1343abf42112aef5c2a
+  - enabled: 1
+    path: Assets/Scenes/CubeSatCollisionScene.unity
+    guid: 28b86bc7bd6504d62bef42ada4f33a2d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
