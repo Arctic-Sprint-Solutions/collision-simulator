@@ -1,22 +1,48 @@
 using UnityEngine;
 
-//Script to move box collider for solar panel to register objects hitting the solar panel
-public class SolarPanelBoxColliderScript : MonoBehaviour
+//Script for creating a shatter effect on the Cyllinder debris when the particle hits the solar panel.
+
+using UnityEngine;
+
+public class ShatterOnCollision : MonoBehaviour
 {
+    public GameObject Cyllinder_root;  // Pre-shattered Cylinder_root
+    private bool isShattered = false; 
+
     void Start()
     {
-        BoxCollider[] colliders = GetComponents<BoxCollider>();
-
-        if (colliders.Length > 0) 
+        // Ensure Cylinder_root is hidden initially
+        if (Cyllinder_root != null)
         {
-            BoxCollider targetCollider = colliders[0]; 
-            targetCollider.center = new Vector3(1.0f, 0.5f, 0.0f);
-        }
-        else
-        {
-            Debug.LogWarning("No BoxCollider found on " + gameObject.name);
+            Cyllinder_root.SetActive(false); 
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Check if the colliding object is "Particle"
+        if (collision.gameObject.CompareTag("Particle") && collision.gameObject.GetComponent<Rigidbody>())
+        {
+
+            if (!isShattered)
+            {
+                TriggerShattering();
+                isShattered = true; 
+            }
+        }
+    }
+
+    void TriggerShattering()
+    {
+        // Activate pre-shattered cylinder upon collision
+        if (Cyllinder_root != null)
+        {
+            Cyllinder_root.SetActive(true);  
+        }
+
+        // Optionally, you can apply forces or do more effects here.
+        // For example, apply physics to the shattered parts, if required.
+
+        // You can also trigger particle effects or sounds here.
+    }
 }
-
-

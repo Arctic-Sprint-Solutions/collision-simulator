@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/AcrimSatScene.unity
     guid: cf557412d9dc7a34f8c613da873f1599
   - enabled: 1
-    path: Assets/Scenes/AuraSatScene.unity
+    path: Assets/Scenes/AuraSat Scenes/Archive-AuraSatScene.unity
     guid: 1e3af90b9706a1343abf42112aef5c2a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
