@@ -16,4 +16,8 @@ public class Satellite : ScriptableObject
     public string satelliteSceneName;
     [Tooltip("The 2D preview image to display in the UI")]
     public Sprite previewImage;
+    [Tooltip("The 3D model prefab")]
+    public GameObject satellitePrefab;
+    [Tooltip("Scale factor to apply to the prefab when instantiated")]
+    [Range(0.1f, 10f)] public float displayScale = 1.0f;
 }

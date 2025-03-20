@@ -180,7 +180,8 @@ public class SatelliteGridController : MonoBehaviour
     private void OnSatelliteSelected(Satellite satellite)
     {
         Debug.Log($"Satellite selected: {satellite.satelliteName}");
-        SimulationManager.Instance.LoadScene(satellite.satelliteSceneName);
+        // SimulationManager.Instance.LoadScene(satellite.satelliteSceneName);
+        SimulationManager.Instance.SelectSatellite(satellite);
     }
 
 }

@@ -26,6 +26,10 @@ public class SimulationManager : MonoBehaviour
   private SimulationState currentState;
   public SimulationState CurrentState => currentState;
 
+  // Reference to the selected satellite (from the satellites grid scene)
+  private Satellite _selectedSatellite;
+  public Satellite SelectedSatellite => _selectedSatellite;
+
   /// <summary>
   /// Initializes the singleton instance and subscribes to the scene loaded event
   /// </summary>
@@ -70,6 +74,10 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
         break;
+      case "SatellitePreviewScene":
+        currentState = SimulationState.SatelliteSelected;
+        UIManager.Instance.ShowNavBar(); // TODO: Make this go back to the previous scene
+        break;
       case "Init":
         break;
       default:
@@ -81,6 +89,15 @@ public class SimulationManager : MonoBehaviour
   public void LoadScene(string sceneName)
   {
     SceneManager.LoadScene(sceneName);
+  }
+
+  /// <summary>
+  /// Sets the selected satellite and loads the satellite preview scene
+  /// </summary>
+  public void SelectSatellite(Satellite satellite)
+  {
+    _selectedSatellite = satellite;
+    LoadScene("SatellitePreviewScene");
   }
 
   /// <summary>
