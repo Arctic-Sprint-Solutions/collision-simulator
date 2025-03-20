@@ -28,14 +28,8 @@ public class SatellitePreviewController : MonoBehaviour
             return;
         }
 
-        // Instantiate the satellite prefab
+        // Instantiate the satellite prefab into the satellite container
         instantiatedSatellite = Instantiate(selectedSatellite.satellitePrefab, satelliteContainer);
-
-        // Apply scaling to the satellite prefab
-        instantiatedSatellite.transform.localScale *= selectedSatellite.displayScale;
-
-        // Apply rotation to the satellite prefab
-        // instantiatedSatellite.transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     private void OnDestroy()

@@ -19,5 +19,4 @@ MonoBehaviour:
   launchYear: 1989
   satelliteSceneName: AcrimSatScene
   previewImage: {fileID: 21300000, guid: 24c9f8ec1a6c64cdba66d78de62e6611, type: 3}
-  satellitePrefab: {fileID: 6516135472883931666, guid: 84ebd4b8b43a9e9488a5f5af6db1e97c, type: 3}
-  displayScale: 2
+  satellitePrefab: {fileID: 2552857680814796125, guid: 8ce947a78f1374a329705da8f17a29ec, type: 3}
