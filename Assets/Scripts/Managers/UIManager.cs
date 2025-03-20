@@ -76,6 +76,7 @@ public class UIManager : MonoBehaviour
         if(_navBar != null)
         {
             _navBar.style.display = DisplayStyle.Flex;
+            _navBar.BringToFront();
         }
 
     }
