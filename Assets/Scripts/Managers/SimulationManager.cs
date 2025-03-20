@@ -77,6 +77,10 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
         break;
+      case "RosettaCollisionScene":
+        currentState = SimulationState.SatelliteSelected;
+        UIManager.Instance.ShowNavBar();
+        break;
       case "SatellitePreviewScene":
         Debug.Log("Previous scene: " + _previousScene);
         currentState = SimulationState.SatelliteSelected;
