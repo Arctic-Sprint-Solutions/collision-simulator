@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 348329180}
   - component: {fileID: 348329181}
+  - component: {fileID: 348329182}
   m_Layer: 0
   m_Name: SatelliteContainer
   m_TagString: Untagged
@@ -301,6 +302,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   satelliteContainer: {fileID: 348329180}
+--- !u!114 &348329182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348329179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e818bdde1aa4c4c1c92d910714ea8650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _action: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  _speed: 150
+  _inverted: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
