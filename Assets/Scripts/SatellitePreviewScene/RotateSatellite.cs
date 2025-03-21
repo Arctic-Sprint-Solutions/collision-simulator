@@ -49,7 +49,7 @@ public class RotateSatellite : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        _camera = Camera.main;
+        // _camera = Camera.main;
     }
 
     /// <summary>

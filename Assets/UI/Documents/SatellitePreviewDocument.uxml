@@ -1,0 +1,10 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <engine:VisualElement name="SatellitePreviewTitle" class="scene-title" style="flex-grow: 0;">
+        <engine:Label text="Choose collision type" name="SceneTitle" class="title" style="-unity-text-align: upper-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+    </engine:VisualElement>
+    <engine:VisualElement name="ButtonContainer" style="flex-grow: 1; position: absolute; left: 50%; bottom: 25%; flex-direction: row; justify-content: space-between; translate: -50% 0;">
+        <engine:Button text="Space Debris" name="Button1" class="btn btn-lg mr-4" />
+        <engine:Button text="Satellite" name="Button2" class="btn btn-lg ml-4" />
+    </engine:VisualElement>
+</engine:UXML>
