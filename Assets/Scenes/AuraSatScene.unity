@@ -1998,18 +1998,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 961739752}
     - target: {fileID: 3549365501389425366, guid: 2e054edb157fba641ba9263445056b0b, type: 3}
-      propertyPath: camera2
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3549365501389425366, guid: 2e054edb157fba641ba9263445056b0b, type: 3}
-      propertyPath: camera3
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3549365501389425366, guid: 2e054edb157fba641ba9263445056b0b, type: 3}
-      propertyPath: camera4
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3549365501389425366, guid: 2e054edb157fba641ba9263445056b0b, type: 3}
       propertyPath: satellite
       value: 
       objectReference: {fileID: 1752308242}

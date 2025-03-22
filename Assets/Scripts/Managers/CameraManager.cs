@@ -52,14 +52,14 @@ public class CameraManager : MonoBehaviour
 
         // Default Position Camera 1
         camera1 = new GameObject("Camera 1").AddComponent<Camera>();
-        camera1.transform.position = new Vector3(0, 10, -5); // Set Position
-        camera1.transform.rotation = Quaternion.Euler(30, 45, 0); // Set Rotation
+        camera1.transform.position = new Vector3(0, 10, -5); 
+        camera1.transform.rotation = Quaternion.Euler(30, 45, 0); 
         camera1.transform.LookAt(satellite.transform);
 
         // Default Position Camera 2
         camera2 = new GameObject("Camera 2").AddComponent<Camera>();
         camera2.transform.position = satellite.transform.position + new Vector3(1, 1, 1);
-        camera2.transform.rotation = Quaternion.Euler(30, 45, 0); // Set Rotation
+        camera2.transform.rotation = Quaternion.Euler(30, 45, 0); 
         camera2.transform.LookAt(satellite.transform);
 
         // Default Position Camera 3
