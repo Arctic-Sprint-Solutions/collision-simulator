@@ -9,6 +9,7 @@ public class SatellitePreviewController : MonoBehaviour
 {
     [SerializeField] private Transform satelliteContainer;
     [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private AppSettings appSettings;
     private GameObject satellitePrefab;
     private VisualElement _rootElement;
     private Satellite _selectedSatellite;
@@ -46,9 +47,15 @@ public class SatellitePreviewController : MonoBehaviour
             return;
         }
 
+        // Reset the buttons to hide them initially
+        ResetButtons(buttonContainer);
+
         // Iterate through the collision scenes of the selected satellite        
         foreach (var scene in _selectedSatellite.collisionScenes)
         {
+            Debug.Log($"Setting up button for scene: {scene.sceneType}");
+            var collisionTitle = GetCollisionTitle(scene.sceneType);
+
             // Find the button for the scene
             var button = buttonContainer.Q<Button>(scene.sceneType.ToString());
             if(button == null)
@@ -60,12 +67,55 @@ public class SatellitePreviewController : MonoBehaviour
             button.RemoveFromClassList("unity-text-element");
             button.RemoveFromClassList("d-none");
 
+            // Set the button text to the collision title if it exists
+            if(collisionTitle != null)
+            {
+                Debug.Log($"Title for button: {collisionTitle}");
+                button.text = collisionTitle;
+            }
+
             // Add a click event listener to the button
             button.clicked += () => {
                 Debug.Log($"Button for scene {scene.sceneAsset.name} clicked.");
                 SimulationManager.Instance.LoadScene(scene.sceneAsset.name);
             };
         }
+    }
+
+    /// <summary>
+    /// Resets the buttons in the button container by hiding them.
+    /// <param name="buttonContainer">The container holding the buttons to reset.</param>
+    /// </summary>
+    private void ResetButtons(VisualElement buttonContainer)
+    {
+        // Iterate through all buttons in the button container
+        foreach (var button in buttonContainer.Children())
+        {
+            if(button is Button btn)
+            {
+                // Add the "d-none" class to hide the button
+                btn.AddToClassList("d-none");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets the collision title for a given scene type from the app settings.
+    /// </summary>
+    /// <param name="sceneType">The type of the collision scene.</param>
+    /// <returns>The title for the collision scene, or null if not found.</returns>
+    private string GetCollisionTitle(CollisionSceneType sceneType)
+    {
+        if(appSettings == null)
+        {
+            return null;
+        }
+        
+        // Look for the scene type in the app settings
+        var collisionTitle = appSettings.collisionTitles.Find(title => title.sceneType == sceneType);
+        return collisionTitle?.collisionTitle ?? null;
+            
+
     }
 
     /// <summary>

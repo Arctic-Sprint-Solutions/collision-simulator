@@ -303,6 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   satelliteContainer: {fileID: 348329180}
   uiDocument: {fileID: 2044810717}
+  appSettings: {fileID: 11400000, guid: 4bda55805763740f5b037964496f10a4, type: 2}
 --- !u!114 &348329182
 MonoBehaviour:
   m_ObjectHideFlags: 0

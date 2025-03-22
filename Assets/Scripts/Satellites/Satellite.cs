@@ -42,3 +42,4 @@ public class Satellite : ScriptableObject
     [Tooltip("Collision scenes available for this satellite")]
     public List<CollisionScene> collisionScenes = new List<CollisionScene>();
 }
+
