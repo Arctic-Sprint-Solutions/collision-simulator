@@ -1,6 +1,7 @@
 // Description: Manages persistent UI elements across scenes
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 /// <summary>
@@ -13,9 +14,13 @@ public class UIManager : MonoBehaviour
 
     // Persistent UI elements
     [SerializeField] private UIDocument _sharedUIDocument;
+    [SerializeField] private VisualTreeAsset _SceneUIDocument;
     private VisualElement _root;
     private VisualElement _navBar;
     private VisualElement _backToMenuButton;
+    private VisualElement collisionUI;
+
+    private bool isPaused = false;
 
     /// <summary>
     /// Initializes the singleton instance and ensures that it persists across scenes
@@ -30,8 +35,46 @@ public class UIManager : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
-        
+
         InitializePersistentUI();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Fjern tidligere UI hvis det finnes
+        if (collisionUI != null)
+        {
+            collisionUI.RemoveFromHierarchy();
+            collisionUI = null;
+        }
+
+        // Sjekk om den nye scenen er merket som kollisjonsscene
+        if (GameObject.FindWithTag("CollisionScene") != null)
+        {
+            // Instansier og vis knappene fra UXML
+            var root = _sharedUIDocument.rootVisualElement;
+            collisionUI = _SceneUIDocument.Instantiate();
+            root.Add(collisionUI);
+
+            // Finn knappene i det instansierte UI-et
+            Button playPauseBtn = collisionUI.Q<Button>("playPauseButton");
+            Button restartBtn = collisionUI.Q<Button>("restartButton");
+
+            // Koble opp klikk-event til håndteringsfunksjoner
+            playPauseBtn.clicked += TogglePause;
+            restartBtn.clicked += RestartScene;
+        }
+        // (Hvis scenen ikke er kollisjonsscene, gjør vi ingenting – knappene forblir fjernet/skjult)
     }
 
     /// <summary>
@@ -43,7 +86,7 @@ public class UIManager : MonoBehaviour
         _root = _sharedUIDocument.rootVisualElement;
         // Get the NavBar and BackToMenuButton elements
         if(_navBar == null)
-        {   
+        {
             // Get the NavBar element from the shared UI document
             _navBar = _root.Q<VisualElement>("NavBar");
         }
@@ -93,6 +136,26 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private void TogglePause()
+    {
+        // Toggle pause-status
+        isPaused = !isPaused;
+        // Sett simulering på pause eller kjør
+        Time.timeScale = isPaused ? 0f : 1f;
+
+        var playPauseBtn = collisionUI.Q<Button>("playPauseButton");
+        playPauseBtn.text = isPaused ? "Resume" : "Pause";
+    }
+
+    private void RestartScene()
+    {
+        // Restart gjeldende scene
+        isPaused = false;
+        Time.timeScale = 1f;
+        Scene activeScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(activeScene.name);
+    }
+
     private void OnDestroy()
     {
 
@@ -110,5 +173,5 @@ public class UIManager : MonoBehaviour
         _sharedUIDocument = null;
     }
 
-    
+
 }

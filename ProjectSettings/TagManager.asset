@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Debris
   - Satellite
+  - CollisionScene
   layers:
   - Default
   - TransparentFX
