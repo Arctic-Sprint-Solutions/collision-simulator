@@ -7,4 +7,12 @@
             <engine:Label text="Main Menu&#10;" class="navbar-link-text nav-link-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         </engine:VisualElement>
     </engine:VisualElement>
+
+    <!-- Collision UI -->
+    <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 1; position: absolute; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row;">
+        <engine:VisualElement name="ButtonContainer" class="flex-row-center">
+            <engine:Button text="Pause" name="playPauseButton" class="btn scene-control-btn" />
+            <engine:Button text="Restart" name="restartButton" class="btn scene-control-btn" />
+        </engine:VisualElement>
+    </engine:VisualElement>
 </engine:UXML>
