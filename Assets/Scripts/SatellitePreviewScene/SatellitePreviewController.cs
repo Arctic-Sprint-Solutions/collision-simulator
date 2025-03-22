@@ -1,14 +1,21 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Controller for the satellite preview scene. 
+/// Handles loading the selected satellite and setting up the UI buttons for collision scenes.
+/// </summary>
 public class SatellitePreviewController : MonoBehaviour
 {
     [SerializeField] private Transform satelliteContainer;
     [SerializeField] private UIDocument uiDocument;
-    private GameObject instantiatedSatellite;
+    private GameObject satellitePrefab;
     private VisualElement _rootElement;
+    private Satellite _selectedSatellite;
 
+    /// <summary>
+    /// Initializes the root visual element from the UIDocument.
+    /// </summary>
     private void OnEnable()
     {
         if(uiDocument == null)
@@ -24,13 +31,14 @@ public class SatellitePreviewController : MonoBehaviour
             Debug.LogError("Root element is null. Ensure the UIDocument is properly set up.");
             return;
         }
-
-        SetupButtons();
     }
 
+    /// <summary>
+    /// Sets up the buttons in the UI based on the selected satellite's collision scenes.
+    /// </summary>
     private void SetupButtons()
     {
-        // Finf the button contaier
+        // Find the button contaier
         VisualElement buttonContainer = _rootElement.Q<VisualElement>("ButtonContainer");
         if(buttonContainer == null)
         {
@@ -38,58 +46,74 @@ public class SatellitePreviewController : MonoBehaviour
             return;
         }
 
-        // Get the buttons
-        Button button1 = buttonContainer.Q<Button>("Button1");
-        if(button1 != null)
+        // Iterate through the collision scenes of the selected satellite        
+        foreach (var scene in _selectedSatellite.collisionScenes)
         {
-            // Remove Unity classes
-            button1.RemoveFromClassList("unity-button");
-            button1.RemoveFromClassList("unity-text-element");
-            Debug.Log("Button1 found and classes removed.");
-        }
+            // Find the button for the scene
+            var button = buttonContainer.Q<Button>(scene.sceneType.ToString());
+            if(button == null)
+            {
+                Debug.LogError($"Button for {scene.sceneType} not found in the UI.");
+                continue;
+            }
+            button.RemoveFromClassList("unity-button");
+            button.RemoveFromClassList("unity-text-element");
+            button.RemoveFromClassList("d-none");
 
-        Button button2 = buttonContainer.Q<Button>("Button2");
-        if(button2 != null)
-        {
-            // Remove Unity classes
-            button2.RemoveFromClassList("unity-button");
-            button2.RemoveFromClassList("unity-text-element");
-            Debug.Log("Button2 found and classes removed.");
+            // Add a click event listener to the button
+            button.clicked += () => {
+                Debug.Log($"Button for scene {scene.sceneAsset.name} clicked.");
+                SimulationManager.Instance.LoadScene(scene.sceneAsset.name);
+            };
         }
     }
 
-
+    /// <summary>
+    /// Loads the selected satellite and sets up the buttons in the UI if the satellite exists.
+    /// </summary>
     private void Start()
     {
         LoadSelectedSatellite();   
+        if(_selectedSatellite == null)
+        {
+            Debug.LogError("Selected satellite is not assigned.");
+            return;
+        }
+        SetupButtons();
     }
 
+    /// <summary>
+    /// Loads the selected satellite from the SimulationManager and instantiates its prefab.
+    /// </summary>
     private void LoadSelectedSatellite()
     {
         // Get the selected satellite from the SimulationManager
-        Satellite selectedSatellite = SimulationManager.Instance.SelectedSatellite;
+        _selectedSatellite = SimulationManager.Instance.SelectedSatellite;
         
-        if (selectedSatellite == null)
+        if (_selectedSatellite == null)
         {
             Debug.LogError("Selected satellite is null.");
             return;
         }
 
-        if(selectedSatellite.satellitePrefab == null)
+        if(_selectedSatellite.satellitePrefab == null)
         {
             Debug.LogError("Satellite prefab is null.");
             return;
         }
 
         // Instantiate the satellite prefab into the satellite container
-        instantiatedSatellite = Instantiate(selectedSatellite.satellitePrefab, satelliteContainer);
+        satellitePrefab = Instantiate(_selectedSatellite.satellitePrefab, satelliteContainer);
     }
 
+    /// <summary>
+    /// Cleans up the instantiated satellite prefab when the object is destroyed.
+    /// </summary>
     private void OnDestroy()
     {
-        if (instantiatedSatellite != null)
+        if (satellitePrefab != null)
         {
-            Destroy(instantiatedSatellite);
+            Destroy(satellitePrefab);
         }
     }
 }

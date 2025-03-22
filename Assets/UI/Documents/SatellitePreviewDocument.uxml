@@ -3,8 +3,10 @@
     <engine:VisualElement name="SatellitePreviewTitle" class="scene-title" style="flex-grow: 0;">
         <engine:Label text="Choose collision type" name="SceneTitle" class="title" style="-unity-text-align: upper-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
     </engine:VisualElement>
-    <engine:VisualElement name="ButtonContainer" style="flex-grow: 1; position: absolute; left: 50%; bottom: 25%; flex-direction: row; justify-content: space-between; translate: -50% 0;">
-        <engine:Button text="Space Debris" name="Button1" class="btn btn-lg mr-4" />
-        <engine:Button text="Satellite" name="Button2" class="btn btn-lg ml-4" />
+    <engine:VisualElement name="AbsoluteContainer" style="flex-grow: 1; position: absolute; left: 0; bottom: 25%; width: 100%; justify-content: center; flex-direction: row;">
+        <engine:VisualElement name="ButtonContainer" class="flex-row-center" style="width: 50%; justify-content: space-evenly; max-width: 500px;">
+            <engine:Button text="Space Debris" name="SpaceDebrisCollision" class="btn btn-lg d-none" style="width: 48%;" />
+            <engine:Button text="Satellite" name="SatelliteCollision" class="btn btn-lg d-none" style="width: 48%;" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

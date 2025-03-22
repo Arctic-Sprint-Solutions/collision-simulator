@@ -106,7 +106,6 @@
     flex-direction: row;
     align-self: auto;
     align-items: auto;
-    z-index: 100;
 }
 
 .scene-title {
@@ -153,4 +152,9 @@
     border-right-width: 2px;
     border-top-width: 2px;
     border-bottom-width: 2px;
+    -unity-text-align: upper-center;
+}
+
+.d-none {
+    display: none;
 }

@@ -1,4 +1,27 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEditor;
+
+/// <summary>
+/// Enum representing different types of collision scenes.
+/// </summary>
+public enum CollisionSceneType
+{
+    SpaceDebrisCollision,
+    SatelliteCollision
+}
+
+/// <summary>
+/// Represents a collision scene for a satellite.
+/// Contains information about the scene asset and its type.
+/// </summary>
+[System.Serializable]
+public class CollisionScene
+{
+    // public string sceneName;
+    public SceneAsset sceneAsset;
+    public CollisionSceneType sceneType;
+}
 
 /// <summary>
 /// This class represents a satellite and its properties.
@@ -12,10 +35,10 @@ public class Satellite : ScriptableObject
     public string leoInfo;
     public float weight;
     public int launchYear;
-    [Tooltip("The name of the scene that contains this satellite's visualization")]
-    public string satelliteSceneName;
     [Tooltip("The 2D preview image to display in the UI")]
     public Sprite previewImage;
-    [Tooltip("The 3D model prefab")]
+    [Tooltip("The 3D model preview prefab")]
     public GameObject satellitePrefab;
+    [Tooltip("Collision scenes available for this satellite")]
+    public List<CollisionScene> collisionScenes = new List<CollisionScene>();
 }

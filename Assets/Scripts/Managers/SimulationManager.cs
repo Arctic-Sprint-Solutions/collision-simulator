@@ -84,7 +84,7 @@ public class SimulationManager : MonoBehaviour
       case "SatellitePreviewScene":
         Debug.Log("Previous scene: " + _previousScene);
         currentState = SimulationState.SatelliteSelected;
-        UIManager.Instance.ShowNavBar(backButtonText: "Go Back"); // TODO: Make this go back to the previous scene
+        UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
         break;
       case "Init":
         break;
@@ -95,6 +95,9 @@ public class SimulationManager : MonoBehaviour
 
   }
 
+  /// <summary>
+  /// Loads a new scene by name and updates the previous scene
+  /// </summary>
   public void LoadScene(string sceneName)
   {
     _previousScene = SceneManager.GetActiveScene().name;
@@ -108,6 +111,7 @@ public class SimulationManager : MonoBehaviour
   public void SelectSatellite(Satellite satellite)
   {
     _selectedSatellite = satellite;
+    // Debug.Log($"Selected satellite: {_selectedSatellite.collisionScenes[0].sceneAsset.name}");
     LoadScene("SatellitePreviewScene");
   }
 
