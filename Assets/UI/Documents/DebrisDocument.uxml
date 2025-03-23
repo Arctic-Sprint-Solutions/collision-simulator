@@ -1,0 +1,27 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <engine:VisualElement name="Container" class="full-width-container" style="position: absolute; bottom: -457px; right: -61px; max-width: 400px;">
+        <engine:VisualElement name="Menu" class="menu" style="padding: 16px; width: 271px; background-color: rgba(0, 0, 0, 0.8); border-radius: 8px; height: 308px;">
+            <engine:VisualElement name="TitleContainer" class="flex-col-start">
+                <engine:Label text="Debris Control Panel" name="MainTitle" class="title my-2" style="font-size: 19px;" />
+                <engine:Label text="Manage Space Debris" name="Subtitle" class="subtitle my-2" style="font-size: 21px;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="LargeDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 16px;">
+                <engine:Toggle name="ToggleDebrisA" class="nav-link-text my-2">
+                    <engine:Label text="Large Debris" class="nav-link-text my-2" style="font-size: 25px;" />
+                </engine:Toggle>
+            </engine:VisualElement>
+            <engine:VisualElement name="MediumDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 8px;">
+                <engine:Toggle name="ToggleDebrisB" class="nav-link-text my-2">
+                    <engine:Label text="Medium Debris" class="nav-link-text my-2" style="font-size: 25px;" />
+                </engine:Toggle>
+            </engine:VisualElement>
+            <engine:VisualElement name="SmallDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 8px;">
+                <engine:Toggle name="ToggleDebrisC" class="nav-link-text my-2">
+                    <engine:Label text="Small Debris" class="nav-link-text my-2" style="font-size: 25px;" />
+                </engine:Toggle>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
