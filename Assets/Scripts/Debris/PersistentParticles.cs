@@ -8,7 +8,7 @@ public class PersistentParticles : MonoBehaviour
 
     public float sphereRadius = 5f;
     public float randomOffset = 0.5f;
-    public float particleSize = 0.015f;
+    public float particleSize;
     
     private bool isActive = false;
     private Coroutine fadeCoroutine;
@@ -49,21 +49,22 @@ public class PersistentParticles : MonoBehaviour
     }
 
     public void SetParticlesActive(bool active)
-{
-    isActive = active;
-    var emission = ps.emission;
-    emission.enabled = active;
+    {
+        isActive = active;
+        var emission = ps.emission;
+        emission.enabled = active;
 
-    if (!active)
-    {
-        ps.Clear(); 
-        ps.Stop(); 
+        if (!active)
+        {
+            ps.Clear(); 
+            ps.Stop(); 
+        }
+        else
+        {
+            InitializeParticles();
+            ps.Play();
+        }
     }
-    else
-    {
-        ps.Play();
-    }
-}
 
 
     public void FadeParticles(bool activate)

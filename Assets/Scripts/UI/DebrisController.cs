@@ -30,17 +30,14 @@ public class DebrisController : MonoBehaviour
             return;
         }
 
-        // Assign UI elements
         toggleA = root.Q<Toggle>("ToggleDebrisA");
         toggleB = root.Q<Toggle>("ToggleDebrisB");
         toggleC = root.Q<Toggle>("ToggleDebrisC");
 
-        // ✅ Add toggle listeners
         if (toggleA != null) toggleA.RegisterValueChangedCallback(evt => BigParticleSystem.SetParticlesActive(evt.newValue));
         if (toggleB != null) toggleB.RegisterValueChangedCallback(evt => MediumParticleSystem.SetParticlesActive(evt.newValue));
         if (toggleC != null) toggleC.RegisterValueChangedCallback(evt => SmallParticleSystem.SetParticlesActive(evt.newValue));
 
-        // ✅ Set initial state
         BigParticleSystem.SetParticlesActive(false);
         MediumParticleSystem.SetParticlesActive(false);
         SmallParticleSystem.SetParticlesActive(false);

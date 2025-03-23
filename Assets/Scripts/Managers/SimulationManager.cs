@@ -61,6 +61,9 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.MainMenu;
         UIManager.Instance.HideNavBar();
         break;
+      case "SpaceDebrisScene":
+        UIManager.Instance.ShowNavBar();
+        break;
       case "SatellitesGridScene":
         currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
