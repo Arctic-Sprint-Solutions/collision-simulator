@@ -26,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AuraSatScene.unity
     guid: 1e3af90b9706a1343abf42112aef5c2a
+  - enabled: 1
+    path: Assets/Scenes/CubeSatCollisionScene.unity
+    guid: 28b86bc7bd6504d62bef42ada4f33a2d
+  - enabled: 1
+    path: Assets/Scenes/RosettaCollisionScene.unity
+    guid: 4f891eb126a5441e7987ff9445b4e3ea
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

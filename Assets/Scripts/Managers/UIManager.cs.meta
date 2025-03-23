@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 1c3bdf1c9296d462f9e761ff5447b612
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _sharedUIDocument: {instanceID: 0}
+  - _SceneUIDocument: {fileID: 9197481963319205126, guid: 8f31ec3621a047a40a9bee0b38b0c0b6, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

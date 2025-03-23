@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sharedUIDocument: {fileID: 190957098}
+  _SceneUIDocument: {fileID: 9197481963319205126, guid: 8f31ec3621a047a40a9bee0b38b0c0b6, type: 3}
 --- !u!1 &1963283057
 GameObject:
   m_ObjectHideFlags: 0

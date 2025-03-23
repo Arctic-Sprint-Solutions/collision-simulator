@@ -118,7 +118,8 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NormalStrength: 4.99
+    - _NightLightStrength: 0.17
+    - _NormalStrength: 1.5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -127,7 +128,7 @@ Material:
     - _Smoothness: 8.3
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularStrength: 0.17
+    - _SpecularStrength: 2.22
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0

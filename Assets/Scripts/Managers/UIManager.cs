@@ -1,6 +1,7 @@
 // Description: Manages persistent UI elements across scenes
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 /// <summary>
@@ -13,9 +14,15 @@ public class UIManager : MonoBehaviour
 
     // Persistent UI elements
     [SerializeField] private UIDocument _sharedUIDocument;
+    [SerializeField] private VisualTreeAsset _SceneUIDocument;
     private VisualElement _root;
     private VisualElement _navBar;
     private VisualElement _backToMenuButton;
+    private VisualElement _collisionUI;
+    private Button _playPauseBtn;
+    private Button _restartBtn;
+
+    private bool isPaused = false;
 
     /// <summary>
     /// Initializes the singleton instance and ensures that it persists across scenes
@@ -30,8 +37,32 @@ public class UIManager : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
-        
+
         InitializePersistentUI();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _collisionUI?.AddToClassList("d-none");
+        isPaused = false;
+        Time.timeScale = 1f;
+
+        // Sjekk om den nye scenen er merket som kollisjonsscene
+        if (GameObject.FindWithTag("CollisionScene") != null)
+        {
+            _collisionUI?.RemoveFromClassList("d-none");
+            _playPauseBtn.text = "Pause";
+        }
     }
 
     /// <summary>
@@ -43,7 +74,7 @@ public class UIManager : MonoBehaviour
         _root = _sharedUIDocument.rootVisualElement;
         // Get the NavBar and BackToMenuButton elements
         if(_navBar == null)
-        {   
+        {
             // Get the NavBar element from the shared UI document
             _navBar = _root.Q<VisualElement>("NavBar");
         }
@@ -56,8 +87,33 @@ public class UIManager : MonoBehaviour
             _backToMenuButton.RegisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
         }
 
+        if(_collisionUI == null)
+        {
+            InitializeCollisionUI();
+        }
+
         // Hide the NavBar by default
         HideNavBar();
+    }
+
+    private void InitializeCollisionUI()
+    {
+        _collisionUI = _root.Q<VisualElement>("CollisionUI");
+        _collisionUI.RemoveFromClassList("d-none");
+        // Finn knappene i det instansierte UI-et
+        _playPauseBtn = _collisionUI.Q<Button>("playPauseButton");
+        _restartBtn = _collisionUI.Q<Button>("restartButton");
+        _playPauseBtn.text = "Pause";
+
+        // Hide Unity default classes
+        _playPauseBtn.RemoveFromClassList("unity-button");
+        _playPauseBtn.RemoveFromClassList("unity-text-element");
+        _restartBtn.RemoveFromClassList("unity-button");
+        _restartBtn.RemoveFromClassList("unity-text-element");
+
+        // Koble opp klikk-event til h�ndteringsfunksjoner
+        _playPauseBtn.clicked += TogglePause;
+        _restartBtn.clicked += RestartScene;
     }
 
     /// <summary>
@@ -76,6 +132,7 @@ public class UIManager : MonoBehaviour
         if(_navBar != null)
         {
             _navBar.style.display = DisplayStyle.Flex;
+            _navBar.BringToFront();
         }
 
     }
@@ -90,6 +147,24 @@ public class UIManager : MonoBehaviour
             _navBar.style.display = DisplayStyle.None;
         }
 
+    }
+
+    private void TogglePause()
+    {
+        // Toggle pause-status
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
+
+        _playPauseBtn.text = isPaused ? "Resume" : "Pause";
+    }
+
+    private void RestartScene()
+    {
+        // Restart gjeldende scene
+        isPaused = false;
+        Time.timeScale = 1f;
+        Scene activeScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(activeScene.name);
     }
 
     private void OnDestroy()
@@ -109,5 +184,5 @@ public class UIManager : MonoBehaviour
         _sharedUIDocument = null;
     }
 
-    
+
 }
