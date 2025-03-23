@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -509, y: 189}
+  m_AnchoredPosition: {x: -80, y: 175}
   m_SizeDelta: {x: 120, y: 25}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &10433113
@@ -490,8 +490,8 @@ GameObject:
   - component: {fileID: 281062789}
   - component: {fileID: 281062788}
   m_Layer: 5
-  m_Name: Arrow
-  m_TagString: CameraDropDownMenu-Arrow
+  m_Name: CameraArrow
+  m_TagString: CameraArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1523,9 +1523,10 @@ GameObject:
   - component: {fileID: 1656309936}
   - component: {fileID: 1656309938}
   - component: {fileID: 1656309937}
+  - component: {fileID: 1656309939}
   m_Layer: 5
-  m_Name: Label
-  m_TagString: CameraDropDownMenu-Label
+  m_Name: CameraLabel
+  m_TagString: CameraLabel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1596,8 +1597,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11
-  m_fontSizeBase: 11
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -1648,6 +1649,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656309935}
   m_CullTransparentMesh: 0
+--- !u!114 &1656309939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656309935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b310e0da0ab1f4794bc22236c7455f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1790447569}
 --- !u!1 &1752308242 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 92482b7b4ad7ea44e8b9386eb4cee449, type: 3}
@@ -1665,9 +1679,10 @@ GameObject:
   - component: {fileID: 1790447567}
   - component: {fileID: 1790447566}
   - component: {fileID: 1790447565}
+  - component: {fileID: 1790447569}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: CameraManagerCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1755,6 +1770,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1790447569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790447564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: b708b7c571c9142de9bf3dc18ebb7997, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 0f04a870a5cbeee469d37d855d3af9ef, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
 --- !u!1 &1894901266
 GameObject:
   m_ObjectHideFlags: 0

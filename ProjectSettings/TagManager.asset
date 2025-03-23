@@ -13,8 +13,9 @@ TagManager:
   - Camera 3
   - Camera 4
   - AuraSat
-  - CameraDropDownMenu-Label
-  - CameraDropDownMenu-Arrow
+  - CameraManagerCanvas
+  - CameraLabel
+  - CameraArrow
   layers:
   - Default
   - TransparentFX
