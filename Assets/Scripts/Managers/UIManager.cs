@@ -53,12 +53,6 @@ public class UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Fjern tidligere UI hvis det finnes
-        // if (collisionUI != null)
-        // {
-        //     collisionUI.RemoveFromHierarchy();
-        //     collisionUI = null;
-        // }
         _collisionUI?.AddToClassList("d-none");
         isPaused = false;
         Time.timeScale = 1f;
@@ -66,22 +60,9 @@ public class UIManager : MonoBehaviour
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
         {
-            // Instansier og vis knappene fra UXML
-            // var root = _sharedUIDocument.rootVisualElement;
-            // collisionUI = _SceneUIDocument.Instantiate();
-            // root.Add(collisionUI);
-
-            // // Finn knappene i det instansierte UI-et
-            // Button playPauseBtn = collisionUI.Q<Button>("playPauseButton");
-            // Button restartBtn = collisionUI.Q<Button>("restartButton");
-
-            // // Koble opp klikk-event til h�ndteringsfunksjoner
-            // playPauseBtn.clicked += TogglePause;
-            // restartBtn.clicked += RestartScene;
             _collisionUI?.RemoveFromClassList("d-none");
             _playPauseBtn.text = "Pause";
         }
-        // (Hvis scenen ikke er kollisjonsscene, gj�r vi ingenting � knappene forblir fjernet/skjult)
     }
 
     /// <summary>
@@ -118,7 +99,6 @@ public class UIManager : MonoBehaviour
     private void InitializeCollisionUI()
     {
         _collisionUI = _root.Q<VisualElement>("CollisionUI");
-    
         _collisionUI.RemoveFromClassList("d-none");
         // Finn knappene i det instansierte UI-et
         _playPauseBtn = _collisionUI.Q<Button>("playPauseButton");
@@ -173,11 +153,8 @@ public class UIManager : MonoBehaviour
     {
         // Toggle pause-status
         isPaused = !isPaused;
-        // Sett simulering p� pause eller kj�r
         Time.timeScale = isPaused ? 0f : 1f;
 
-        // var playPauseBtn = collisionUI.Q<Button>("playPauseButton");
-        // playPauseBtn.text = isPaused ? "Resume" : "Pause";
         _playPauseBtn.text = isPaused ? "Resume" : "Pause";
     }
 
