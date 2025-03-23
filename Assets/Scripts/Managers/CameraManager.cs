@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;  // Built in tool to use drop down menu/ TMP_Dropdown
-
+using UnityEngine.UIElements; 
+using System.Collections.Generic;
 
 // Description: Camera manager for controlling camera angles using a drop-down menu
 public class CameraManager : MonoBehaviour
@@ -12,8 +13,9 @@ public class CameraManager : MonoBehaviour
     public Camera camera3;  // First preset camera - hover left function?
     public Camera camera4;  // Second preset camera - hover right function?
     public GameObject satellite;  
-
-    public TMP_Dropdown cameraDropdown;  
+    [SerializeField] private UIDocument uiDocument;
+    private DropdownField cameraDropdown; 
+    // public TMP_Dropdown cameraDropdown;  
 
     private void Awake()
     {
@@ -35,9 +37,28 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
-        if (cameraDropdown)
-            cameraDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+        // if (cameraDropdown)
+        //     cameraDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+        // Get the DropdownField from the UI Document
+        var root = uiDocument.rootVisualElement;
+        cameraDropdown = root.Q<DropdownField>("CameraDropdown");
 
+        if (cameraDropdown != null)
+        {
+            // Populate the dropdown options
+            cameraDropdown.choices = new List<string> { "Camera 1", "Camera 2", "Camera 3", "Camera 4" };
+            cameraDropdown.RemoveFromClassList("unity-base-field");
+
+            // Set default value and label
+            cameraDropdown.value = "Camera 1";
+            cameraDropdown.label = "Select Camera";
+
+            // Register callback for value changes
+            cameraDropdown.RegisterValueChangedCallback(evt =>
+            {
+                OnDropdownValueChanged(cameraDropdown.choices.IndexOf(evt.newValue));
+            });
+        }
         // Setting up Camera 1 as the default camera
         SetActiveCamera(1);
     }
