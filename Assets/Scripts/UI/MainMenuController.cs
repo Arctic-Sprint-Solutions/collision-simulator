@@ -91,10 +91,13 @@ public class MainMenuController : MonoBehaviour
     if(navLink.name == "ReturnToEarth") {
       SimulationManager.Instance.QuitApplication();
     } else {
-      // TODO: Implement navigation logic
-      // For now, just load the SatellitesGridScene
-      SimulationManager.Instance.LoadScene("SatellitesGridScene");
+      // TODO: Finish logic for every scene
+      if(navLink.name == "LoadSatellites"){
+        SimulationManager.Instance.LoadScene("SatellitesGridScene");
+      }
+      else if(navLink.name == "ViewSpaceDebris"){
+        SimulationManager.Instance.LoadScene("SpaceDebrisScene");
+      }
     }
   }
-
 }
