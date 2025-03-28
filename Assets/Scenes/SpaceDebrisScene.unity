@@ -564,7 +564,7 @@ Transform:
   m_GameObject: {fileID: 1808831859}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4.59}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -584,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1091701110176118551, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1091701110176118551, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -618,17 +618,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1188601316782721213, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688202276036468581, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: ShapeModule.arc.speed.scalar
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1688202276036468581, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 12000
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688202276036468581, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2498945138662316737, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3843015199869411972, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: randomSeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: stopAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: cullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: autoRandomSeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: ShapeModule.arc.mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 6000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332174633893226177, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854367486524374136, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
+      propertyPath: ShapeModule.arc.mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9062149903464364150, guid: 3e52052d06b952640b71377490a2cac8, type: 3}
       propertyPath: m_Name
