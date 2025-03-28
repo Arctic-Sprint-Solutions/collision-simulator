@@ -129,7 +129,43 @@ public class SatellitePreviewController : MonoBehaviour
             Debug.LogError("Selected satellite is not assigned.");
             return;
         }
+        SetupInfoCard();
         SetupButtons();
+    }
+
+    /// <summary>
+    /// Sets up the info card in the UI with the selected satellite's information.
+    /// </summary>
+    private void SetupInfoCard()
+    {
+        // Find the info card in the UI
+        VisualElement infoCard = _rootElement.Q<VisualElement>("SatelliteCard");
+        if(infoCard == null)
+        {
+            Debug.LogError("Info card not found in the UI.");
+            return;
+        }
+
+        // Set the title and subtitle of the info card
+        SetLabel(infoCard, "Title", _selectedSatellite.satelliteName);
+        SetLabel(infoCard, "Subtitle", _selectedSatellite.type);
+
+        // Set the satellite infor text
+        SetLabel(infoCard, "LEOText", _selectedSatellite.leoInfo);
+        SetLabel(infoCard, "WeightText", _selectedSatellite.weight.ToString());
+        SetLabel(infoCard, "YearText", _selectedSatellite.launchYear.ToString());
+    }
+
+    /// <summary>
+    /// Sets the text of a label in a visual element.
+    /// </summary>
+    private void SetLabel(VisualElement parent, string labelName, string text)
+    {
+        var label = parent.Q<Label>(labelName);
+        if(label != null)
+        {
+            label.text = text;
+        }
     }
 
     /// <summary>

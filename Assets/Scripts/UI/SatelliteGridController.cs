@@ -148,13 +148,13 @@ public class SatelliteGridController : MonoBehaviour
       // Satellite info elements
       var infoContainer = new VisualElement();
       infoContainer.AddToClassList("satellite-info-container");
-      var leoLabel = new Label($"LEO: {satellite.leoInfo} km");
+      var leoLabel = new Label($"LEO: {satellite.leoInfo}");
       leoLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(leoLabel);
       var weightLabel = new Label($"Weight: {satellite.weight} kg");
       weightLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(weightLabel);
-      var launchYearLabel = new Label($"Launch Year: {satellite.launchYear} - present");
+      var launchYearLabel = new Label($"Launch Year: {satellite.launchYear}");
       launchYearLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(launchYearLabel);
       infoAndButtonContainer.Add(infoContainer);

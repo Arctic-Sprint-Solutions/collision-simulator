@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   satelliteName: CubeSat
   type: Cube
-  leoInfo: 200
+  leoInfo: 200 km
   weight: 10
   launchYear: 2020
-  satelliteSceneName: CubeSatCollisionScene
   previewImage: {fileID: 21300000, guid: 1ee81f616ec9445c6910bea9cb92a881, type: 3}
   satellitePrefab: {fileID: 8658075826946103973, guid: fe18ed9cacede43089bfe7a28951ae40, type: 3}
   collisionScenes:
