@@ -12,15 +12,18 @@
                 <engine:Label text="Satellite Type" name="Subtitle" class="satellite-subtitle" />
             </engine:VisualElement>
             <engine:VisualElement name="SatelliteInfo" style="flex-grow: 0; margin-top: 30px;">
-                <engine:VisualElement name="LEO" class="my-1" style="flex-grow: 0; flex-direction: row;">
+                <engine:VisualElement name="LEO" class="my-1" style="flex-grow: 0; flex-direction: row; align-items: center;">
+                    <engine:VisualElement name="Icon" class="preview-icon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/orbit-icon.png?fileID=2800000&amp;guid=80d10100267924b0da56d740fa7bb8a0&amp;type=3#orbit-icon&quot;);" />
                     <engine:Label text="LEO:" class="preview-info-text" style="margin-right: 8px;" />
                     <engine:Label text="&#10;" name="LEOText" class="preview-info-text" />
                 </engine:VisualElement>
-                <engine:VisualElement name="Weight" class="my-1" style="flex-grow: 0; flex-direction: row;">
+                <engine:VisualElement name="Weight" class="my-1" style="flex-grow: 0; flex-direction: row; align-items: center;">
+                    <engine:VisualElement name="Icon" class="preview-icon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/weight-icon.png?fileID=2800000&amp;guid=fb3877c642c9a4338b25100c77f059d3&amp;type=3#weight-icon&quot;);" />
                     <engine:Label text="Weight:" class="preview-info-text" style="margin-right: 8px;" />
                     <engine:Label text="260kg" name="WeightText" class="preview-info-text" />
                 </engine:VisualElement>
-                <engine:VisualElement name="Year" class="my-1" style="flex-grow: 0; flex-direction: row;">
+                <engine:VisualElement name="Year" class="my-1" style="flex-grow: 0; flex-direction: row; align-items: center;">
+                    <engine:VisualElement name="Icon" class="preview-icon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/time-icon.png?fileID=2800000&amp;guid=a874b007063f8453f82fdafbfb19d51c&amp;type=3#time-icon&quot;);" />
                     <engine:Label text="Year" class="preview-info-text" style="margin-right: 8px;" />
                     <engine:Label text="2020 - present" name="YearText" class="preview-info-text" />
                 </engine:VisualElement>

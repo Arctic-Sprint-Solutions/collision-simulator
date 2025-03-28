@@ -18,10 +18,21 @@
 
 .preview-info-text {
     color: rgb(226, 232, 240);
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 2px;
     margin-bottom: 2px;
     margin-left: 0;
     margin-right: 8px;
     padding: 0;
+}
+
+.preview-icon {
+    width: 20px;
+    height: 20px;
+    padding-right: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    transition: color 0.2s ease-in-out;
 }
