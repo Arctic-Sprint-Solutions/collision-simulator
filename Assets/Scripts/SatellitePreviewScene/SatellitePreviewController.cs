@@ -21,6 +21,7 @@ public class SatellitePreviewController : MonoBehaviour
     #region Variables
     [SerializeField] private UIDocument uiDocument;
     [SerializeField] private AppSettings appSettings;
+    private GameObject[] _satellitePrefabs;
     private VisualElement _rootElement;
     private Satellite _selectedSatellite;
     private VisualElement _loadSimulationButton;
@@ -71,6 +72,9 @@ public class SatellitePreviewController : MonoBehaviour
             Debug.LogError("SatelliteCollision button not found in the UI.");
             return;
         }
+
+        // Find all satellite prefabs (tag satellite)
+        _satellitePrefabs = GameObject.FindGameObjectsWithTag("Satellite");
     }
 
     /// <summary>
@@ -78,6 +82,7 @@ public class SatellitePreviewController : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        DeactivateAllPrefabs();
         LoadSelectedSatellite();   
         if(_selectedSatellite == null)
         {
@@ -87,6 +92,23 @@ public class SatellitePreviewController : MonoBehaviour
         SetupInfoCard();
         ResetButtons();
         SetupButtons();
+    }
+
+    private void DeactivateAllPrefabs()
+    {
+        Debug.Log("Deactivating all satellite prefabs.");
+        // Look for all game objects with the Satellite tag
+        if(_satellitePrefabs == null || _satellitePrefabs.Length == 0)
+        {
+            Debug.LogError("No satellite prefabs found.");
+            return;
+        }
+
+        // Deactivate all satellite prefabs
+        foreach (GameObject prefab in _satellitePrefabs)
+        {
+            prefab.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -101,6 +123,16 @@ public class SatellitePreviewController : MonoBehaviour
         {
             Debug.LogError("Selected satellite is null.");
             return;
+        }
+
+        // Find the prefab for the selected satellite and activate it
+        foreach (GameObject prefab in _satellitePrefabs)
+        {
+            if (prefab.name == _selectedSatellite.prefabName)
+            {
+                prefab.SetActive(true);
+                break;
+            }
         }
     }
 

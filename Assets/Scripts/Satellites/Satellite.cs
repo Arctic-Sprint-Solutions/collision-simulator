@@ -13,6 +13,8 @@ public class Satellite : ScriptableObject
     public string leoInfo;
     public float weight;
     public int launchYear;
+    [Tooltip("The prefab name used for the preview scene")]
+    public string prefabName;
     [Tooltip("The 2D preview image to display in the UI")]
     public Sprite previewImage;
     [Header("Collision Scenes")]

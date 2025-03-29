@@ -17,6 +17,7 @@ MonoBehaviour:
   leoInfo: 200
   weight: 10
   launchYear: 2020
+  prefabName: Cubesat
+  previewImage: {fileID: 21300000, guid: 1ee81f616ec9445c6910bea9cb92a881, type: 3}
   debrisSceneName: CubeSatCollisionScene
   satelliteSceneName: 
-  previewImage: {fileID: 21300000, guid: 1ee81f616ec9445c6910bea9cb92a881, type: 3}
