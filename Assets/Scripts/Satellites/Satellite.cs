@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 /// <summary>
 /// This class represents a satellite and its properties.
 /// </summary>
@@ -12,8 +13,11 @@ public class Satellite : ScriptableObject
     public string leoInfo;
     public float weight;
     public int launchYear;
-    [Tooltip("The name of the scene that contains this satellite's visualization")]
-    public string satelliteSceneName;
     [Tooltip("The 2D preview image to display in the UI")]
     public Sprite previewImage;
+    [Header("Collision Scenes")]
+    [Tooltip("Space debris scene name")]
+    public string debrisSceneName;
+    [Tooltip("Satellite collision scene name")]
+    public string satelliteSceneName;
 }
