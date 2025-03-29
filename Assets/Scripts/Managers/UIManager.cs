@@ -63,6 +63,7 @@ public class UIManager : MonoBehaviour
             _collisionUI?.RemoveFromClassList("d-none");
             _playPauseBtn.text = "Pause";
         }
+
     }
 
     /// <summary>

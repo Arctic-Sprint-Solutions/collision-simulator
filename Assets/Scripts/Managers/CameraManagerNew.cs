@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.UIElements; 
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 
-// Description: Camera manager for selecting camera angles using a drop-down menu
+
+// Description: Camera manager for selecting cameras
 public class CameraManagerNew : MonoBehaviour
 {
 
@@ -15,9 +14,9 @@ public class CameraManagerNew : MonoBehaviour
     // Current active camera
     private Camera currentCamera; 
     public GameObject satellite;
-    [SerializeField] private UIDocument uiDocument;
-    private DropdownField cameraDropdown;
 
+    public delegate void CamerasUpdated(List<string> cameraNames);
+    public static event CamerasUpdated OnCamerasUpdated;
 
 
     private void Awake()
@@ -39,65 +38,21 @@ public class CameraManagerNew : MonoBehaviour
         FindCamerasInScene();
 
     }
+
     private void Start()
     {
-        // Get the DropdownField from the UI Document
-        var root = uiDocument.rootVisualElement;
-        cameraDropdown = root.Q<DropdownField>("CameraDropdown");
-
-        if (cameraDropdown != null)
-        {
-            // Check if there are more than one camera in the scene and add cameras to drop down
-            if (cameras.Count > 1)
-            {
-                List<string> cameraNames = new List<string>();
-                for (int i = 0; i < cameras.Count; i++)
-                {
-                    cameraNames.Add("Camera " + (i + 1));
-                }
-
-                cameraDropdown.choices = cameraNames;
-                cameraDropdown.RemoveFromClassList("unity-base-field");
-
-
-                cameraDropdown.value = cameraNames[0]; 
-                cameraDropdown.label = "Select Camera";
-
-                // Register callback for value changes
-                cameraDropdown.RegisterValueChangedCallback(evt =>
-                {
-                    OnDropdownValueChanged(cameraNames.IndexOf(evt.newValue));
-                });
-
-                // Show dropdown if cameras are present
-                cameraDropdown.style.display = DisplayStyle.Flex;  
-            }
-            else
-            {
-                // Hide dropdown if less than 2 cameras (no need for drop down)
-                cameraDropdown.style.display = DisplayStyle.None;  
-            }
-        }
-
-        // Set the first camera as the default active camera
+        FindCamerasInScene();
+        NotifyUI();
         SetActiveCamera(0);
     }
 
 
 
-    //Checks how many cameras are in the scene
-    private int GetNumberOfCamerasInScene()
-    {
-        Camera[] camerasInScene = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
-        return camerasInScene.Length;
-    }
 
-
-    // Function for finding cameras in each scene
+    // Finds cameras dynamically in the scene
     private void FindCamerasInScene()
     {
-        // Find all cameras in the scene using the updated method
-        cameras.Clear(); // Clear any previous cameras in the list
+        cameras.Clear(); 
         cameras.AddRange(Object.FindObjectsByType<Camera>(FindObjectsSortMode.None));
     }
 
@@ -118,10 +73,29 @@ public class CameraManagerNew : MonoBehaviour
         currentCamera.gameObject.SetActive(true);
     }
 
-    // UI dropdown menu for camera selection
-    private void OnDropdownValueChanged(int index)
+
+
+    // Function for notifying UI dropdown of list update
+    private void NotifyUI()
     {
-        // Change the active camera based on selection in dropdown menu
-        SetActiveCamera(index);
+        if (cameras.Count > 0)
+        {
+            List<string> cameraNames = new List<string>();
+            for (int i = 0; i < cameras.Count; i++)
+            {
+                cameraNames.Add("Camera " + (i + 1));
+            }
+
+            OnCamerasUpdated?.Invoke(cameraNames);
+        }
+    }
+    private void OnEnable()
+    {
+        CameraDropdownUI.OnCameraSelected += SetActiveCamera;
+    }
+
+    private void OnDisable()
+    {
+        CameraDropdownUI.OnCameraSelected -= SetActiveCamera;
     }
 }
