@@ -32,9 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RosettaCollisionScene.unity
     guid: 4f891eb126a5441e7987ff9445b4e3ea
-  - enabled: 1
-    path: Assets/Scenes/SatellitePreviewScene.unity
-    guid: d796a1eb1ef0a411d91e99ff96fdd500
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

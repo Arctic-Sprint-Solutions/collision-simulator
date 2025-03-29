@@ -148,13 +148,13 @@ public class SatelliteGridController : MonoBehaviour
       // Satellite info elements
       var infoContainer = new VisualElement();
       infoContainer.AddToClassList("satellite-info-container");
-      var leoLabel = new Label($"LEO: {satellite.leoInfo}");
+      var leoLabel = new Label($"LEO: {satellite.leoInfo} km");
       leoLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(leoLabel);
       var weightLabel = new Label($"Weight: {satellite.weight} kg");
       weightLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(weightLabel);
-      var launchYearLabel = new Label($"Launch Year: {satellite.launchYear}");
+      var launchYearLabel = new Label($"Launch Year: {satellite.launchYear} - present");
       launchYearLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(launchYearLabel);
       infoAndButtonContainer.Add(infoContainer);
@@ -180,8 +180,7 @@ public class SatelliteGridController : MonoBehaviour
     private void OnSatelliteSelected(Satellite satellite)
     {
         Debug.Log($"Satellite selected: {satellite.satelliteName}");
-        // SimulationManager.Instance.LoadScene(satellite.satelliteSceneName);
-        SimulationManager.Instance.SelectSatellite(satellite);
+        SimulationManager.Instance.LoadScene(satellite.satelliteSceneName);
     }
 
 }

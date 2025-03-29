@@ -16,8 +16,3 @@ MonoBehaviour:
   appSubtitle: 3D Space Debris Collision Simulator
   satelliteGridTitle: Loaded Satellites
   satelliteGridSubtitle: Select a satellite for the simulation
-  collisionTitles:
-  - sceneType: 0
-    collisionTitle: Space Debris
-  - sceneType: 1
-    collisionTitle: Satellite

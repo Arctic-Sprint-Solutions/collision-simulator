@@ -121,33 +121,20 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnBackToMainMenuClicked()
     {
-        string buttonText = _backToMenuButton.Q<Label>().text;
-        if(buttonText == "Go Back")
-        {
-            // Go back to the previous scene
-            SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
-        } else 
-        {
-            // Load the main menu scene
-            SimulationManager.Instance.LoadScene("MainMenu");
-        }
+        SimulationManager.Instance.LoadScene("MainMenu");
     }
 
     /// <summary>
     /// Shows the NavBar element
     /// </summary>
-    public void ShowNavBar(string backButtonText = "Main Menu")
+    public void ShowNavBar()
     {
         if(_navBar != null)
         {
             _navBar.style.display = DisplayStyle.Flex;
-
-            // Set the text of the BackToMenuButton
-            if(_backToMenuButton != null)
-            {
-                _backToMenuButton.Q<Label>().text = backButtonText;
-            }
+            _navBar.BringToFront();
         }
+
     }
 
     /// <summary>
