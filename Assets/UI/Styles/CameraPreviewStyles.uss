@@ -36,3 +36,47 @@
     margin-right: 8px;
     transition: color 0.2s ease-in-out;
 }
+
+.text-btn {
+    cursor: pointer;
+    font-size: 32px;
+    margin: 8px 0;
+    color: rgb(0, 200, 255);
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+    -unity-background-image-tint-color: rgb(0, 200, 255);
+    transition: -unity-background-image-tint-color 0.2s ease-in-out;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    padding-right: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    transition: color 0.2s ease-in-out;
+}
+
+.load-simulation {
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    padding-top: 32px;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.show-load-simulation {
+    opacity: 1;
+}
+
+.load-simulation:hover .text-btn {
+    color: rgb(48, 250, 136);
+}
+
+.load-simulation:hover .icon {
+    -unity-background-image-tint-color: rgb(48, 250, 136);
+}

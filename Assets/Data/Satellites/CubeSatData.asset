@@ -19,6 +19,9 @@ MonoBehaviour:
   launchYear: 2020
   previewImage: {fileID: 21300000, guid: 1ee81f616ec9445c6910bea9cb92a881, type: 3}
   satellitePrefab: {fileID: 8658075826946103973, guid: fe18ed9cacede43089bfe7a28951ae40, type: 3}
-  collisionScenes:
-  - sceneAsset: {fileID: 102900000, guid: 28b86bc7bd6504d62bef42ada4f33a2d, type: 3}
+  debrisCollision:
+    sceneAsset: {fileID: 102900000, guid: 28b86bc7bd6504d62bef42ada4f33a2d, type: 3}
     sceneType: 0
+  satelliteCollision:
+    sceneAsset: {fileID: 0}
+    sceneType: 1

@@ -39,7 +39,10 @@ public class Satellite : ScriptableObject
     public Sprite previewImage;
     [Tooltip("The 3D model preview prefab")]
     public GameObject satellitePrefab;
-    [Tooltip("Collision scenes available for this satellite")]
-    public List<CollisionScene> collisionScenes = new List<CollisionScene>();
+    [Header("Collision Scenes")]
+    [Tooltip("Scene for space debris collision")]
+    public CollisionScene debrisCollision = new CollisionScene { sceneType = CollisionSceneType.SpaceDebrisCollision };
+    [Tooltip("Scene for satellite collision")]
+    public CollisionScene satelliteCollision = new CollisionScene { sceneType = CollisionSceneType.SatelliteCollision };
 }
 

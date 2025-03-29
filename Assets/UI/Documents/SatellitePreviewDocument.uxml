@@ -30,10 +30,16 @@
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
-    <engine:VisualElement name="AbsoluteContainer" style="flex-grow: 1; position: absolute; left: 0; bottom: 25%; width: 100%; justify-content: center; flex-direction: row;">
-        <engine:VisualElement name="ButtonContainer" class="flex-row-center" style="width: 50%; justify-content: space-evenly; max-width: 500px;">
-            <engine:Button text="Space Debris" name="SpaceDebrisCollision" class="btn btn-lg d-none" style="width: 48%;" />
-            <engine:Button text="Satellite" name="SatelliteCollision" class="btn btn-lg d-none" style="width: 48%;" />
+    <engine:VisualElement name="AbsoluteContainer" style="flex-grow: 1; position: absolute; left: 0; bottom: 20%; width: 100%; justify-content: center; flex-direction: row;">
+        <engine:VisualElement style="flex-grow: 1; align-items: center;">
+            <engine:VisualElement name="ButtonContainer" class="flex-row-center" style="width: 50%; justify-content: space-evenly; max-width: 500px;">
+                <engine:Button text="Space Debris" name="SpaceDebrisCollision" class="btn btn-lg" style="width: 48%; margin-right: 8px;" />
+                <engine:Button text="Satellite" name="SatelliteCollision" class="btn btn-lg" style="width: 48%; margin-left: 8px;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="LoadSimulationButton" class="load-simulation">
+                <engine:VisualElement name="VisualElement" class="icon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/play-icon.png?fileID=2800000&amp;guid=eb0c492d86e3d4943919d46584179c86&amp;type=3#play-icon&quot;);" />
+                <engine:Label text="Load Simulation" class="text-btn" />
+            </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

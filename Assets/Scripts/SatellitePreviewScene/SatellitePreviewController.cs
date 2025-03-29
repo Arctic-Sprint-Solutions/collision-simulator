@@ -1,3 +1,6 @@
+// Description: Controller for the satellite preview scene.
+// Handles loading the selected satellite and setting up the UI buttons for collision scenes
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,15 +10,21 @@ using UnityEngine.UIElements;
 /// </summary>
 public class SatellitePreviewController : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private Transform satelliteContainer;
     [SerializeField] private UIDocument uiDocument;
     [SerializeField] private AppSettings appSettings;
     private GameObject satellitePrefab;
     private VisualElement _rootElement;
     private Satellite _selectedSatellite;
+    private VisualElement _loadSimulationButton;
+    private Button _spaceDebrisButton;
+    private Button _satelliteCollisionButton;
+    private SceneAsset _selectedScene;
+    #endregion
 
     /// <summary>
-    /// Initializes the root visual element from the UIDocument.
+    /// Initializes the visual elements
     /// </summary>
     private void OnEnable()
     {
@@ -32,90 +41,30 @@ public class SatellitePreviewController : MonoBehaviour
             Debug.LogError("Root element is null. Ensure the UIDocument is properly set up.");
             return;
         }
-    }
 
-    /// <summary>
-    /// Sets up the buttons in the UI based on the selected satellite's collision scenes.
-    /// </summary>
-    private void SetupButtons()
-    {
-        // Find the button contaier
-        VisualElement buttonContainer = _rootElement.Q<VisualElement>("ButtonContainer");
-        if(buttonContainer == null)
+        // Find the load simulation button in the UI
+        _loadSimulationButton = _rootElement.Q<VisualElement>("LoadSimulationButton");
+        if(_loadSimulationButton == null)
         {
-            Debug.LogError("ButtonContainer not found in the UI.");
+            Debug.LogError("LoadSimulationButton not found in the UI.");
             return;
         }
 
-        // Reset the buttons to hide them initially
-        ResetButtons(buttonContainer);
-
-        // Iterate through the collision scenes of the selected satellite        
-        foreach (var scene in _selectedSatellite.collisionScenes)
+        // Find the space debris button in the UI
+        _spaceDebrisButton = _rootElement.Q<Button>("SpaceDebrisCollision");
+        if(_spaceDebrisButton == null)
         {
-            Debug.Log($"Setting up button for scene: {scene.sceneType}");
-            var collisionTitle = GetCollisionTitle(scene.sceneType);
-
-            // Find the button for the scene
-            var button = buttonContainer.Q<Button>(scene.sceneType.ToString());
-            if(button == null)
-            {
-                Debug.LogError($"Button for {scene.sceneType} not found in the UI.");
-                continue;
-            }
-            button.RemoveFromClassList("unity-button");
-            button.RemoveFromClassList("unity-text-element");
-            button.RemoveFromClassList("d-none");
-
-            // Set the button text to the collision title if it exists
-            if(collisionTitle != null)
-            {
-                Debug.Log($"Title for button: {collisionTitle}");
-                button.text = collisionTitle;
-            }
-
-            // Add a click event listener to the button
-            button.clicked += () => {
-                Debug.Log($"Button for scene {scene.sceneAsset.name} clicked.");
-                SimulationManager.Instance.LoadScene(scene.sceneAsset.name);
-            };
+            Debug.LogError("SpaceDebrisCollision button not found in the UI.");
+            return;
         }
-    }
 
-    /// <summary>
-    /// Resets the buttons in the button container by hiding them.
-    /// <param name="buttonContainer">The container holding the buttons to reset.</param>
-    /// </summary>
-    private void ResetButtons(VisualElement buttonContainer)
-    {
-        // Iterate through all buttons in the button container
-        foreach (var button in buttonContainer.Children())
+        // Find the satellite collision button in the UI
+        _satelliteCollisionButton = _rootElement.Q<Button>("SatelliteCollision");
+        if(_satelliteCollisionButton == null)
         {
-            if(button is Button btn)
-            {
-                // Add the "d-none" class to hide the button
-                btn.AddToClassList("d-none");
-            }
+            Debug.LogError("SatelliteCollision button not found in the UI.");
+            return;
         }
-    }
-
-    /// <summary>
-    /// Gets the collision title for a given scene type from the app settings.
-    /// </summary>
-    /// <param name="sceneType">The type of the collision scene.</param>
-    /// <returns>The title for the collision scene, or null if not found.</returns>
-    private string GetCollisionTitle(CollisionSceneType sceneType)
-    {
-        if(appSettings == null)
-        {
-            return null;
-        }
-        
-        // Look for the scene type in the app settings
-        var collisionTitle = appSettings.collisionTitles.Find(title => title.sceneType == sceneType);
-        return collisionTitle?.collisionTitle ?? null;
-            
-
     }
 
     /// <summary>
@@ -130,7 +79,32 @@ public class SatellitePreviewController : MonoBehaviour
             return;
         }
         SetupInfoCard();
+        ResetButtons();
         SetupButtons();
+    }
+
+    /// <summary>
+    /// Loads the selected satellite from the SimulationManager and instantiates its prefab.
+    /// </summary>
+    private void LoadSelectedSatellite()
+    {
+        // Get the selected satellite from the SimulationManager
+        _selectedSatellite = SimulationManager.Instance.SelectedSatellite;
+        
+        if (_selectedSatellite == null)
+        {
+            Debug.LogError("Selected satellite is null.");
+            return;
+        }
+
+        if(_selectedSatellite.satellitePrefab == null)
+        {
+            Debug.LogError("Satellite prefab is null.");
+            return;
+        }
+
+        // Instantiate the satellite prefab into the satellite container
+        satellitePrefab = Instantiate(_selectedSatellite.satellitePrefab, satelliteContainer);
     }
 
     /// <summary>
@@ -156,6 +130,109 @@ public class SatellitePreviewController : MonoBehaviour
         SetLabel(infoCard, "YearText", _selectedSatellite.launchYear.ToString());
     }
 
+     /// <summary>
+    /// Resets the buttons by disabling them and hiding the load simulation button.
+    /// </summary>
+    private void ResetButtons()
+    {
+        // Remove unity classes
+        _spaceDebrisButton.RemoveFromClassList("unity-button");
+        _spaceDebrisButton.RemoveFromClassList("unity-text-element");
+        _satelliteCollisionButton.RemoveFromClassList("unity-button");
+        _satelliteCollisionButton.RemoveFromClassList("unity-text-element");
+
+        // Update button titles based on the app settings
+        var spaceDebrisTitle = GetCollisionTitle(CollisionSceneType.SpaceDebrisCollision);
+        var satelliteCollisionTitle = GetCollisionTitle(CollisionSceneType.SatelliteCollision);
+        if(spaceDebrisTitle != null)
+        {
+            _spaceDebrisButton.text = spaceDebrisTitle;
+        }
+        if(satelliteCollisionTitle != null)
+        {
+            _satelliteCollisionButton.text = satelliteCollisionTitle;
+        }
+
+        // Disable all buttons in the button container
+        _spaceDebrisButton.SetEnabled(false);
+        _satelliteCollisionButton.SetEnabled(false);
+        _loadSimulationButton.RemoveFromClassList("show-load-simulation");
+    }
+
+    /// <summary>
+    /// Sets up the buttons in the UI based on the selected satellite's collision scenes.
+    /// </summary>
+    private void SetupButtons()
+    {
+        // Enable debri collision button if the scene asset is available
+        if(_selectedSatellite.debrisCollision.sceneAsset)
+        {
+            _spaceDebrisButton.SetEnabled(true);
+            _spaceDebrisButton.clicked += () => OnSelectCollisionClick(CollisionSceneType.SpaceDebrisCollision);
+        }
+
+        // Enable satellite collision button if the scene asset is available
+        if(_selectedSatellite.satelliteCollision.sceneAsset)
+        {
+            _satelliteCollisionButton.SetEnabled(true);
+            _satelliteCollisionButton.clicked += () => OnSelectCollisionClick(CollisionSceneType.SatelliteCollision);   
+        }
+
+        // Hide the load simulation button by default
+        _loadSimulationButton.RemoveFromClassList("show-load-simulation");
+        // Register a callback for the load simulation button's click event
+        _loadSimulationButton.RegisterCallback<ClickEvent>(e => OnLoadSimulationButtonClicked());
+    }
+
+    /// <summary>
+    /// Handles the click event for the selected collision button.
+    /// </summary>
+    private void OnSelectCollisionClick(CollisionSceneType sceneType)
+    {    
+        // Display the load simulation button
+        _loadSimulationButton.AddToClassList("show-load-simulation");
+
+        // Set the selected scene based on the button clicked
+        if(sceneType == CollisionSceneType.SpaceDebrisCollision)
+        {
+            _spaceDebrisButton.AddToClassList("selected");
+            _satelliteCollisionButton.RemoveFromClassList("selected");
+            _selectedScene = _selectedSatellite.debrisCollision.sceneAsset;
+        } else {
+            _satelliteCollisionButton.AddToClassList("selected");
+            _spaceDebrisButton.RemoveFromClassList("selected");
+            _selectedScene = _selectedSatellite.satelliteCollision.sceneAsset;
+        }
+    }
+
+    /// <summary>
+    /// Handles the click event for the load simulation button. Calls the SimulationManager to load the selected scene.
+    /// </summary>
+    private void OnLoadSimulationButtonClicked()
+    {
+        if(_selectedScene != null)
+        {
+            SimulationManager.Instance.LoadScene(_selectedScene.name);
+        }
+    }
+
+    /// <summary>
+    /// Gets the collision title for a given scene type from the app settings.
+    /// </summary>
+    /// <param name="sceneType">The type of the collision scene.</param>
+    /// <returns>The title for the collision scene, or null if not found.</returns>
+    private string GetCollisionTitle(CollisionSceneType sceneType)
+    {
+        if(appSettings == null)
+        {
+            return null;
+        }
+        
+        // Look for the scene type in the app settings
+        var collisionTitle = appSettings.collisionTitles.Find(title => title.sceneType == sceneType);
+        return collisionTitle?.collisionTitle ?? null;
+    }
+
     /// <summary>
     /// Sets the text of a label in a visual element.
     /// </summary>
@@ -166,30 +243,6 @@ public class SatellitePreviewController : MonoBehaviour
         {
             label.text = text;
         }
-    }
-
-    /// <summary>
-    /// Loads the selected satellite from the SimulationManager and instantiates its prefab.
-    /// </summary>
-    private void LoadSelectedSatellite()
-    {
-        // Get the selected satellite from the SimulationManager
-        _selectedSatellite = SimulationManager.Instance.SelectedSatellite;
-        
-        if (_selectedSatellite == null)
-        {
-            Debug.LogError("Selected satellite is null.");
-            return;
-        }
-
-        if(_selectedSatellite.satellitePrefab == null)
-        {
-            Debug.LogError("Satellite prefab is null.");
-            return;
-        }
-
-        // Instantiate the satellite prefab into the satellite container
-        satellitePrefab = Instantiate(_selectedSatellite.satellitePrefab, satelliteContainer);
     }
 
     /// <summary>

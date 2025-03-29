@@ -1,4 +1,4 @@
-// https://www.youtube.com/watch?v=CiZvMc8aI3U
+// Reference: https://www.youtube.com/watch?v=CiZvMc8aI3U
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,7 +26,6 @@ public class RotateSatellite : MonoBehaviour
 
     // Private variables to control rotation and camera reference
     private bool _rotateAllowed;
-    private Camera _camera;
 
     [Header("Rotation Speed")]
     [SerializeField] private float _speed;
