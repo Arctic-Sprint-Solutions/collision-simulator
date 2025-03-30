@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 137613764}
   - component: {fileID: 137613763}
   - component: {fileID: 137613762}
+  - component: {fileID: 137613766}
   m_Layer: 0
   m_Name: DebrisTestObject
   m_TagString: Untagged
@@ -227,6 +228,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &137613766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137613761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0230dc55adce0f438392e7b695d4c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet: {fileID: 1199847188}
+  orbitRadius: 100
+  moveSpeed: 5
+  startAngle: 0
+  angleRange: 90
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +431,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6791398815446488595, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+    - {fileID: 6455834967418510978, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
@@ -570,7 +590,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 31
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -596,13 +616,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.04682877, y: -0.5352551, z: 0.07350644, w: 0.8401821}
+  m_LocalPosition: {x: 150, y: 100, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -65, z: 10}
 --- !u!1001 &1199847187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -660,6 +680,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 250e220b9a04a4a08b408f9a6960c594, type: 3}
+--- !u!4 &1199847188 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6834500479450516507, guid: 250e220b9a04a4a08b408f9a6960c594, type: 3}
+  m_PrefabInstance: {fileID: 1199847187}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
