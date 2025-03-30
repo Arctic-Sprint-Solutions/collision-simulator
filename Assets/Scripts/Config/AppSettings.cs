@@ -1,16 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-
-/// <summary>
-/// This enum represents the type of collision titles to be displayed.
-/// </summary>
-[System.Serializable]
-public class CollisionTitle
-{
-    public CollisionSceneType sceneType;
-    public string collisionTitle;
-}
-
 
 /// <summary>
 /// This class represents the application settings. 
@@ -23,6 +11,8 @@ public class AppSettings : ScriptableObject
   public string appSubtitle;   
   public string satelliteGridTitle;
   public string satelliteGridSubtitle;
-  [Tooltip("The title for collision types")]
-  public List<CollisionTitle> collisionTitles = new List<CollisionTitle>();
+  [Tooltip("Space Debris Scene Title")]
+  public string debrisSceneTitle;
+  [Tooltip("Satellite Collision Scene Title")]
+  public string satelliteSceneTitle;
 }

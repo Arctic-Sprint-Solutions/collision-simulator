@@ -993,12 +993,12 @@
         },
         {
             "name": "SatellitePreview",
-            "id": "978994c4-5b83-4144-a79f-40a2f1f16b16",
+            "id": "bfe384ac-c5b8-4ebb-9789-f20aac3a473a",
             "actions": [
                 {
                     "name": "Left Click",
                     "type": "Button",
-                    "id": "8fb19a97-9e70-4e00-bbb8-31046ff37905",
+                    "id": "6b4e573c-2e7c-4226-a004-779a5cfc4931",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
@@ -1007,7 +1007,7 @@
                 {
                     "name": "Mouse Look",
                     "type": "Value",
-                    "id": "71abbef4-e2d4-4601-a933-0ae170b6d59c",
+                    "id": "83b252c1-f643-4dd6-b8fd-c5af503a72d7",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -1017,7 +1017,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "89d0870c-14ac-4585-994f-5662d98b4ad4",
+                    "id": "e6c0b1a4-c574-4976-a26f-2854c939c1cb",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -1028,7 +1028,7 @@
                 },
                 {
                     "name": "",
-                    "id": "e7ee10cc-3a86-425e-a271-1b786e65d01e",
+                    "id": "df17bea7-569c-48a5-b978-df27a8c5c1bd",
                     "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
@@ -1039,7 +1039,7 @@
                 },
                 {
                     "name": "",
-                    "id": "4aca5105-76c2-420f-a354-7968e09e9b79",
+                    "id": "4348418c-ac17-4b7e-a82f-84aea7a583a1",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
@@ -1050,7 +1050,7 @@
                 },
                 {
                     "name": "",
-                    "id": "18031dfc-5224-4ee8-a7ea-ccd010c24d71",
+                    "id": "b5a90ece-cd13-4d05-9fd6-2ab1f3808e07",
                     "path": "<Touchscreen>/primaryTouch/delta",
                     "interactions": "",
                     "processors": "",

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   satelliteName: Aura Satellite
   type: Weather
-  leoInfo: 260 km
+  leoInfo: 260
   weight: 210
   launchYear: 2018
+  prefabName: Aura
   previewImage: {fileID: 21300000, guid: f318fd78aedb940eda05b19b74d343c7, type: 3}
-  satellitePrefab: {fileID: 5915444018452167982, guid: c34f0f2f01d994b4e91c33ecfaf16ab4, type: 3}
-  collisionScenes: []
+  debrisSceneName: 
+  satelliteSceneName: 

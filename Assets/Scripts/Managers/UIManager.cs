@@ -115,7 +115,7 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
     }
-
+    
     /// <summary>
     /// Callback for the BackToMenuButton click event that loads the main menu scene
     /// </summary>

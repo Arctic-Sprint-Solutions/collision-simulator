@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   satelliteName: Acrim Satellite
   type: Communication
-  leoInfo: 320 km
+  leoInfo: 320
   weight: 400
   launchYear: 1989
+  prefabName: Acrim
   previewImage: {fileID: 21300000, guid: 24c9f8ec1a6c64cdba66d78de62e6611, type: 3}
-  satellitePrefab: {fileID: 2552857680814796125, guid: 8ce947a78f1374a329705da8f17a29ec, type: 3}
-  collisionScenes: []
+  debrisSceneName: 
+  satelliteSceneName: 
