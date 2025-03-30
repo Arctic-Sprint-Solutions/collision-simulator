@@ -9,7 +9,6 @@
     justify-content: flex-start;
     width: auto;
     height: auto;
-    min-height: 500px;
     max-width: 500px;
     padding-top: 32px;
     padding-right: 32px;
