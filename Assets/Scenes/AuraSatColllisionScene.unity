@@ -386,6 +386,38 @@ PrefabInstance:
       propertyPath: m_TagString
       value: AuraSatBody1
       objectReference: {fileID: 0}
+    - target: {fileID: 2468237249345826952, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: damage.en
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468237249345826952, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: damage.max
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468237249345826952, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: physics.dm
+      value: 0.436
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468237249345826952, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: physics.gr
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468237249345826952, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: physics.mb
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468237249345826952, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: mshDemol.am
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468237249345826952, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: mshDemol.var
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468237249345826952, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: mshDemol.bias
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3261507849330604148, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
       propertyPath: m_Name
       value: AuraSatBody2
@@ -462,6 +494,38 @@ PrefabInstance:
       propertyPath: simTp
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: damage.en
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: damage.max
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: physics.dm
+      value: 0.436
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: physics.gr
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: physics.mb
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: mshDemol.am
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: mshDemol.var
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: mshDemol.bias
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7319006821785710737, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
       propertyPath: m_Name
       value: Layer 2
@@ -470,7 +534,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 6791398815446488595, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
     - {fileID: 6455834967418510978, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5821932647472385307, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1933351241}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5915444018452167982, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
       insertIndex: -1
@@ -478,6 +545,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5915444018452167982, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
       insertIndex: -1
       addedObject: {fileID: 959214778}
+    - targetCorrespondingSourceObject: {fileID: 3659950113692703281, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1550061531}
     - targetCorrespondingSourceObject: {fileID: 1736287715992112643, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
       insertIndex: -1
       addedObject: {fileID: 637575622}
@@ -488,6 +558,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 637575624}
   m_SourcePrefab: {fileID: 100100000, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+--- !u!4 &637575614 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5821932647472385307, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+  m_PrefabInstance: {fileID: 637575613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &637575615 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3261507849330604148, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
@@ -878,6 +953,141 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6834500479450516507, guid: 250e220b9a04a4a08b408f9a6960c594, type: 3}
   m_PrefabInstance: {fileID: 1199847187}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1550061529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3659950113692703281, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+  m_PrefabInstance: {fileID: 637575613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1550061531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550061529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d61580b98e8dd438c973516170e8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet: {fileID: 1199847188}
+  orbitRadius: 100
+  moveSpeed: 5
+  startAngle: 20
+  angleRange: 90
+--- !u!1 &1933351240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1933351241}
+  - component: {fileID: 1933351242}
+  m_Layer: 0
+  m_Name: AuraSatBomb1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1933351241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933351240}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.004380035, y: -0.002522354, z: -0.082741484}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 637575614}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1933351242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933351240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafd0a8e9ee856a49bf432688899df59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmo: 1
+  rangeType: 0
+  range: 10
+  boxSize: {x: 6, y: 2}
+  deletion: 0
+  fadeType: 0
+  strength: 1
+  variation: 50
+  chaos: 30
+  forceByMass: 1
+  affectInactive: 0
+  affectKinematic: 0
+  heightOffset: 0
+  delay: 0
+  atStart: 0
+  destroy: 0
+  obst_enable: 0
+  obst_static: 0
+  obst_kinematik: 0
+  obst_list: []
+  applyDamage: 1
+  damageValue: 100
+  play: 0
+  volume: 1
+  clip: {fileID: 0}
+  mask: -1
+  tagFilter: Untagged
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
