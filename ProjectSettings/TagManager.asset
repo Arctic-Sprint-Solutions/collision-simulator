@@ -18,6 +18,9 @@ TagManager:
   - CameraManagerCanvas
   - CameraLabel
   - CameraArrow
+  - AuraSatBody1
+  - AuraSatBody2
+  - DebrisTestObject
   layers:
   - Default
   - TransparentFX

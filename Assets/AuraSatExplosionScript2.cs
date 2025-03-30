@@ -2,14 +2,14 @@ using RayFire;
 using UnityEngine;
 
 
-public class AuraSatExplosionScript : MonoBehaviour
+public class AuraSatExplosionScript2 : MonoBehaviour
 {
     [SerializeField] private RayfireBomb bomb; 
 
     private void OnCollisionEnter(Collision collision)
     {
         // Check collision with Debris
-        if (collision.gameObject.CompareTag("DebrisTestObject"))
+        if (collision.gameObject.tag == "DebrisTestObject" || collision.gameObject.tag == "AuraSatBody2")
         {
             Debug.Log("AuraSatBody has collided with Debris! ");
 
