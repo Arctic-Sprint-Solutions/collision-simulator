@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SatellitesGridScene.unity
     guid: 9dc3d998440c64e7786d79fbb6c4b067
   - enabled: 1
+    path: Assets/Scenes/SatellitePreviewScene.unity
+    guid: b61fbe65102844e6dbfc29b74ca1da21
+  - enabled: 1
     path: Assets/Scenes/CubeSatScene.unity
     guid: 1696683ee6d964597851445d2d54043b
   - enabled: 1
