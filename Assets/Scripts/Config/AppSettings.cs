@@ -11,4 +11,8 @@ public class AppSettings : ScriptableObject
   public string appSubtitle;   
   public string satelliteGridTitle;
   public string satelliteGridSubtitle;
+  [Tooltip("Space Debris Scene Title")]
+  public string debrisSceneTitle;
+  [Tooltip("Satellite Collision Scene Title")]
+  public string satelliteSceneTitle;
 }
