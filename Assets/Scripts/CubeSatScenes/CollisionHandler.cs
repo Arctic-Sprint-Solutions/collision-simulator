@@ -3,15 +3,13 @@ using UnityEngine;
 
 /// <summary>
 /// Handles collision detection for the satellite.
-/// When a collision with debris is detected, it triggers the detonation of the satellite's bomb.
+/// When a collision with debris is detected, it activates the fragments.
 /// </summary>
 public class CollisionHandler : MonoBehaviour
 {
-    /// <summary>
-    /// Reference to the SatelliteExplosion script on the parent object.
-    /// </summary>
-    private SatelliteExplosion explosionScript;
-    private FragmentMovement fragmentMovementScript;
+    [SerializeField] private GameObject originalObject;
+    [SerializeField] private GameObject fragmentObject;
+    private bool collisionDetected = false;
 
     /// <summary>
     /// Called when the script instance is being loaded.
@@ -19,35 +17,59 @@ public class CollisionHandler : MonoBehaviour
     /// </summary>
     void Start()
     {
-        // Find the parent object and get the SatelliteExplosion script
-        explosionScript = GetComponentInParent<SatelliteExplosion>();
 
-        // Find the parent object and get the FragmentMovement script
-        fragmentMovementScript = GetComponentInParent<FragmentMovement>();
+        if(fragmentObject != null)
+        {
+            Debug.Log("Fragment object found: " + fragmentObject.name);
+            fragmentObject.SetActive(false);
+        }
+
+        if(originalObject != null)
+        {
+            Debug.Log("Original object found: " + originalObject.name);
+        }
     }
 
     /// <summary>
     /// Called when the satellite collides with another object.
-    /// If the object is tagged as "Debris", it triggers the detonation of the satellite's bomb.
     /// </summary>
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
-        if(collision.gameObject.tag == "Debris" || collision.gameObject.tag == "Satellite")
+        if(!collisionDetected)
         {
-            if(explosionScript != null)
-            {
-                // Trigger the detonation of the bomb
-                explosionScript?.DetonateBomb(); 
-            }
+            Debug.Log("Collision detected with: " + collision.gameObject.name);
+            ActivateFragments();
 
-            if(fragmentMovementScript != null)
+            // If the fragment object has a MoveSatellite script, start moving it
+            MoveSatellite moveScript = gameObject.GetComponent<MoveSatellite>();
+            if (moveScript != null)
             {
-                // Apply velocity to fragments
-                fragmentMovementScript?.ApplyVelocityToFragments();
+                moveScript.StartMoving();
             }
         }
-        
-    
     }
+
+    /// <summary>
+    /// Activates the fragments and disables the original object.
+    /// </summary>
+    public void ActivateFragments()
+    {
+        if (originalObject != null && fragmentObject != null)
+        {
+            collisionDetected = true;
+            // Disable the original cube
+            originalObject.SetActive(false);
+            
+            // Enable the fragmented version
+            fragmentObject.SetActive(true);
+            
+            // If your Cube_root has a Rayfire Rigid component and you want to activate it
+            RayFire.RayfireRigid rigidComponent = fragmentObject.GetComponent<RayFire.RayfireRigid>();
+            if (rigidComponent != null)
+            {
+                rigidComponent.Activate();
+            }
+        }
+    }
+
 }
