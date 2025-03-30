@@ -12,7 +12,7 @@ public class DebrisMovementAuraSatScene : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 5f;   
 
-    [SerializeField] private float startAngle = 0f;  
+    [SerializeField] private float startAngle = 20f;  
 
     // Angle trajectory
     [SerializeField] private float angleRange = 90f; 

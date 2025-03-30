@@ -8,9 +8,9 @@ public class AuraSatMovement : MonoBehaviour
     [SerializeField] private Transform planet;
 
     // Distance from planet
-    [SerializeField] private float orbitRadius = 106f;
+    [SerializeField] private float orbitRadius = 100;
 
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 10f;
 
     [SerializeField] private float startAngle = 0f;
 
@@ -30,11 +30,12 @@ public class AuraSatMovement : MonoBehaviour
         // Increase the angle over time based on speed
         currentAngle += moveSpeed * Time.deltaTime;
 
-        // Movement between startAngle and startAngle + angleRange
+        // Moving in the opposite direction of debris in scene
+
         float angleOffset = Mathf.PingPong(currentAngle - startAngle, angleRange);
 
         // Conversion to radians
-        float angleRad = (startAngle + angleOffset) * Mathf.Deg2Rad;
+        float angleRad = (startAngle - angleOffset) * Mathf.Deg2Rad;
 
         // Calculate new position
         float x = planet.position.x + Mathf.Cos(angleRad) * orbitRadius;
@@ -43,3 +44,5 @@ public class AuraSatMovement : MonoBehaviour
         transform.position = new Vector3(x, transform.position.y, z);
     }
 }
+
+
