@@ -48,12 +48,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4121355140939362692, guid: 92482b7b4ad7ea44e8b9386eb4cee449, type: 3}
+      propertyPath: m_Name
+      value: AuraSatRoot1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 92482b7b4ad7ea44e8b9386eb4cee449, type: 3}
       propertyPath: m_Name
-      value: AuraSat
+      value: AuraSatPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790180701932624462, guid: 92482b7b4ad7ea44e8b9386eb4cee449, type: 3}
+      propertyPath: m_Name
+      value: AuraSatRoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328771118605170699, guid: 92482b7b4ad7ea44e8b9386eb4cee449, type: 3}
+      propertyPath: m_Name
+      value: AuraSatRoot2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8700617353114198275, guid: 92482b7b4ad7ea44e8b9386eb4cee449, type: 3}
+    - {fileID: 65702495048144492, guid: 92482b7b4ad7ea44e8b9386eb4cee449, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92482b7b4ad7ea44e8b9386eb4cee449, type: 3}
