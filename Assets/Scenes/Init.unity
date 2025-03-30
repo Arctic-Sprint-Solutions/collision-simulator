@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 58e601a12058f4b998c92d53affc6f71, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a82a37fb03b994c8b8a1415af5de7933, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -35,7 +35,7 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_UseRadianceAmbientProbe: 0
@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sharedUIDocument: {fileID: 190957098}
+  _SceneUIDocument: {fileID: 9197481963319205126, guid: 8f31ec3621a047a40a9bee0b38b0c0b6, type: 3}
 --- !u!1 &1963283057
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,13 @@ public class SimulationManager : MonoBehaviour
   private SimulationState currentState;
   public SimulationState CurrentState => currentState;
 
+  // Reference to the selected satellite (from the satellites grid scene)
+  private Satellite _selectedSatellite;
+  public Satellite SelectedSatellite => _selectedSatellite;
+
+  private string _previousScene;
+  public string PreviousScene => _previousScene;
+
   /// <summary>
   /// Initializes the singleton instance and subscribes to the scene loaded event
   /// </summary>
@@ -54,6 +61,7 @@ public class SimulationManager : MonoBehaviour
   /// </summary>
   private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
   {
+    Debug.Log("Scene loaded: " + scene.name);
     // Handle scene-specific logic here
     switch (scene.name)
     {
@@ -61,11 +69,23 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.MainMenu;
         UIManager.Instance.HideNavBar();
         break;
+      case "SpaceDebrisScene":
+        UIManager.Instance.ShowNavBar();
+        break;
       case "SatellitesGridScene":
         currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
         break;
-      case "CubeSatScene":
+      case "SatellitePreviewScene":
+        Debug.Log("Previous scene: " + _previousScene);
+        currentState = SimulationState.SatelliteSelected;
+        UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
+        break;
+      case "CubeSatCollisionScene":
+        currentState = SimulationState.SatelliteSelected;
+        UIManager.Instance.ShowNavBar();
+        break;
+      case "RosettaCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
         break;
@@ -79,7 +99,18 @@ public class SimulationManager : MonoBehaviour
 
   public void LoadScene(string sceneName)
   {
+    _previousScene = SceneManager.GetActiveScene().name;
     SceneManager.LoadScene(sceneName);
+  }
+
+  /// <summary>
+  /// Sets the selected satellite and loads the satellite preview scene
+  /// </summary>
+  public void SelectSatellite(Satellite satellite)
+  {
+    _selectedSatellite = satellite;
+    // Debug.Log($"Selected satellite: {_selectedSatellite.collisionScenes[0].sceneAsset.name}");
+    LoadScene("SatellitePreviewScene");
   }
 
   /// <summary>

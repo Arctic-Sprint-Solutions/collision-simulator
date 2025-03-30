@@ -1,0 +1,31 @@
+
+.camera-label {
+    font-size: 20px;
+    color: rgb(0, 200, 255);
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+    padding: 5px;
+    border-width: 2px;
+    border-color: rgb(0, 200, 255);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: color 0.2s ease-in-out;
+}
+
+.camera-label .unity-popup-field__input {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.camera-label .unity-base-popup-field__text {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.camera-label .unity-base-field__input {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.camera-label:hover .unity-popup-field__input,
+.camera-label:hover .unity-base-popup-field__text,
+.camera-label:hover .unity-base-field__input {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(48, 250, 136);
+}
