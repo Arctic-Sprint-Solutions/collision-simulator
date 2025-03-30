@@ -115,26 +115,39 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
     }
-
+    
     /// <summary>
     /// Callback for the BackToMenuButton click event that loads the main menu scene
     /// </summary>
     private void OnBackToMainMenuClicked()
     {
-        SimulationManager.Instance.LoadScene("MainMenu");
+        string buttonText = _backToMenuButton.Q<Label>().text;
+        if(buttonText == "Go Back")
+        {
+            // Go back to the previous scene
+            SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
+        } else 
+        {
+            // Load the main menu scene
+            SimulationManager.Instance.LoadScene("MainMenu");
+        }
     }
 
     /// <summary>
     /// Shows the NavBar element
     /// </summary>
-    public void ShowNavBar()
+    public void ShowNavBar(string backButtonText = "Main Menu")
     {
         if(_navBar != null)
         {
             _navBar.style.display = DisplayStyle.Flex;
-            _navBar.BringToFront();
-        }
 
+            // Set the text of the BackToMenuButton
+            if(_backToMenuButton != null)
+            {
+                _backToMenuButton.Q<Label>().text = backButtonText;
+            }
+        }
     }
 
     /// <summary>
