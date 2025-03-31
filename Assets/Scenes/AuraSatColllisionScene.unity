@@ -526,6 +526,10 @@ PrefabInstance:
       propertyPath: mshDemol.bias
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 7282353679541805022, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
+      propertyPath: initialization
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7319006821785710737, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
       propertyPath: m_Name
       value: Layer 2
