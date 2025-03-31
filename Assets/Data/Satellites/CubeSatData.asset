@@ -20,4 +20,4 @@ MonoBehaviour:
   prefabName: Cubesat1
   previewImage: {fileID: 21300000, guid: 1ee81f616ec9445c6910bea9cb92a881, type: 3}
   debrisSceneName: CubeSatCollisionScene
-  satelliteSceneName: 
+  satelliteSceneName: RosettaCollisionScene
