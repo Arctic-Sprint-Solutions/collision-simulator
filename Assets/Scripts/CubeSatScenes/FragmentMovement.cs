@@ -33,6 +33,7 @@ public class FragmentMovement : MonoBehaviour
         // Check if Rayfire Rigid is present
         if (rb != null && rb.fragments != null)
         {
+            Debug.Log("Applying velocity to fragments of: " + rb.gameObject.name);
             // Loop through all fragments created after the explosion
             foreach (RayfireRigid fragment in rb.fragments)
             {
