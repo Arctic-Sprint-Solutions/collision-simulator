@@ -77,7 +77,6 @@ public class SimulationManager : MonoBehaviour
         UIManager.Instance.ShowNavBar();
         break;
       case "SatellitePreviewScene":
-        Debug.Log("Previous scene: " + _previousScene);
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
         break;
@@ -86,6 +85,11 @@ public class SimulationManager : MonoBehaviour
         UIManager.Instance.ShowNavBar();
         break;
       case "RosettaCollisionScene":
+        currentState = SimulationState.SatelliteSelected;
+        UIManager.Instance.ShowNavBar();
+        break;
+      case "AuraSatColllisionScene":
+        Debug.Log("AuraSatCollisionScene loaded");
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
         break;
@@ -99,6 +103,7 @@ public class SimulationManager : MonoBehaviour
 
   public void LoadScene(string sceneName)
   {
+    Debug.Log($"Loading scene: {sceneName}");
     _previousScene = SceneManager.GetActiveScene().name;
     SceneManager.LoadScene(sceneName);
   }
