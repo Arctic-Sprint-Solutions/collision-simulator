@@ -1,8 +1,9 @@
-// Description: Manages persistent UI elements across scenes
+// Description: Manages persistent UI elementsOnCameraSelected across scenes
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 /// <summary>
 /// Singleton class to manage persistent UI elements across scenes
@@ -24,6 +25,12 @@ public class UIManager : MonoBehaviour
 
     private bool isPaused = false;
 
+    // Camera UI elements
+    [SerializeField] private UIDocument uiDocument;
+    private DropdownField cameraDropdown;
+    public delegate void CameraSelected(int index);
+    public static event CameraSelected OnCameraSelected;
+
     /// <summary>
     /// Initializes the singleton instance and ensures that it persists across scenes
     /// </summary>
@@ -44,13 +51,22 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        CameraManager.OnCamerasUpdated += PopulateDropdown;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        CameraManager.OnCamerasUpdated -= PopulateDropdown;
     }
 
+
+
+    /// <summary>
+    /// A function for selecting which UI elements to display in each scene
+    /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _collisionUI?.AddToClassList("d-none");
@@ -64,6 +80,7 @@ public class UIManager : MonoBehaviour
             _playPauseBtn.text = "Pause";
         }
     }
+
 
     /// <summary>
     /// Initializes the persistent UI elements
@@ -94,6 +111,7 @@ public class UIManager : MonoBehaviour
 
         // Hide the NavBar by default
         HideNavBar();
+        HideDropdown();
     }
 
     private void InitializeCollisionUI()
@@ -150,6 +168,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
     /// <summary>
     /// Hides the NavBar element
     /// </summary>
@@ -162,6 +181,22 @@ public class UIManager : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    // A Function for hiding drop down for camera selection
+    /// </summary>
+    private void HideDropdown()
+    {
+        if (cameraDropdown != null)
+        {
+            cameraDropdown.style.display = DisplayStyle.None;
+        }
+    }
+
+
+    /// <summary>
+    /// A function for pausing time in scene
+    /// </summary>
     private void TogglePause()
     {
         // Toggle pause-status
@@ -171,6 +206,9 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.text = isPaused ? "Resume" : "Pause";
     }
 
+    /// <summary>
+    /// A function for restart/reloading scene
+    /// </summary>
     private void RestartScene()
     {
         // Restart gjeldende scene
@@ -180,6 +218,9 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(activeScene.name);
     }
 
+    /// <summary>
+    /// A function for destroying scene
+    /// </summary>
     private void OnDestroy()
     {
 
@@ -197,5 +238,20 @@ public class UIManager : MonoBehaviour
         _sharedUIDocument = null;
     }
 
+
+
+
+    /// <summary>
+    /// A function for adding cameras in scene to dropdown selection
+    /// </summary>
+    private void PopulateDropdown(List<string> cameraNames)
+    {
+        if (cameraDropdown == null) return;
+
+        cameraDropdown.choices = cameraNames;
+        cameraDropdown.value = cameraNames[0];
+        cameraDropdown.label = "Select Camera";
+        cameraDropdown.style.display = DisplayStyle.Flex;
+    }
 
 }
