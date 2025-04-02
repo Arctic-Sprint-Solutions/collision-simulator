@@ -1,9 +1,8 @@
-// Description: Manages persistent UI elementsOnCameraSelected across scenes
+// Description: Manages persistent UI elements across scenes
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using System.Collections.Generic;
 
 /// <summary>
 /// Singleton class to manage persistent UI elements across scenes
@@ -25,17 +24,6 @@ public class UIManager : MonoBehaviour
 
     private bool isPaused = false;
 
-
-    // Camera UI elements
-    [SerializeField] private UIDocument _cameraManagerDocument;
-    private VisualElement _rootCam;
-
-    private DropdownField _cameraDropdown;
-    private VisualElement _cameraDropdownUI;
-
-    public delegate void CameraSelected(int index);
-    public static event CameraSelected OnCameraSelected;
-
     /// <summary>
     /// Initializes the singleton instance and ensures that it persists across scenes
     /// </summary>
@@ -56,29 +44,18 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
-        CameraManager.OnCamerasUpdated += PopulateDropdown;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-
-        CameraManager.OnCamerasUpdated -= PopulateDropdown;
     }
 
-
-
-    /// <summary>
-    /// A function for selecting which UI elements to display in each scene
-    /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _collisionUI?.AddToClassList("d-none");
-        _cameraDropdown?.AddToClassList("d-none");
         isPaused = false;
         Time.timeScale = 1f;
-
 
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
@@ -86,17 +63,7 @@ public class UIManager : MonoBehaviour
             _collisionUI?.RemoveFromClassList("d-none");
             _playPauseBtn.text = "Pause";
         }
-        else
-        {
-            // Hide the dropdown in other scenes
-            _cameraDropdown?.AddToClassList("d-none"); 
-        }
-
     }
-
-
-
-
 
     /// <summary>
     /// Initializes the persistent UI elements
@@ -105,16 +72,6 @@ public class UIManager : MonoBehaviour
     {
         // Get the root visual element of the shared UI document
         _root = _sharedUIDocument.rootVisualElement;
-
-        // Root for visual element of camera dropdown
-        _rootCam = _cameraManagerDocument.rootVisualElement;
-
-
-
-
-
-
-
         // Get the NavBar and BackToMenuButton elements
         if (_navBar == null)
         {
@@ -133,15 +90,10 @@ public class UIManager : MonoBehaviour
         if (_collisionUI == null)
         {
             InitializeCollisionUI();
-            InitializeCameraDropDownUI();
         }
-
-   
-
 
         // Hide the NavBar by default
         HideNavBar();
-        HideDropdown();
     }
 
     private void InitializeCollisionUI()
@@ -165,41 +117,17 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// A function for initializing UI Dropdown element for camera
-    /// </summary>
-
-
-    private void InitializeCameraDropDownUI()
-    {
-        _cameraDropdownUI = _rootCam.Q<DropdownField>("CameraDropdown");
-        _cameraDropdownUI.RemoveFromClassList("d-none");
-
-    }
-
-    /// <summary>
-    /// A function for adding cameras in scene to dropdown selection
-    /// </summary>
-    private void PopulateDropdown(List<string> cameraNames)
-    {
-        if (_cameraDropdown == null) return;
-
-        _cameraDropdown.choices = cameraNames;
-        _cameraDropdown.value = cameraNames[0];
-        _cameraDropdown.label = "Select Camera";
-        _cameraDropdown.style.display = DisplayStyle.Flex;
-    }
-
-    /// <summary>
     /// Callback for the BackToMenuButton click event that loads the main menu scene
     /// </summary>
     private void OnBackToMainMenuClicked()
     {
         string buttonText = _backToMenuButton.Q<Label>().text;
-        if(buttonText == "Go Back")
+        if (buttonText == "Go Back")
         {
             // Go back to the previous scene
             SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
-        } else 
+        }
+        else
         {
             // Load the main menu scene
             SimulationManager.Instance.LoadScene("MainMenu");
@@ -211,58 +139,30 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ShowNavBar(string backButtonText = "Main Menu")
     {
-        if(_navBar != null)
+        if (_navBar != null)
         {
             _navBar.style.display = DisplayStyle.Flex;
 
             // Set the text of the BackToMenuButton
-            if(_backToMenuButton != null)
+            if (_backToMenuButton != null)
             {
                 _backToMenuButton.Q<Label>().text = backButtonText;
             }
         }
     }
 
-
     /// <summary>
     /// Hides the NavBar element
     /// </summary>
     public void HideNavBar()
     {
-        if(_navBar != null)
+        if (_navBar != null)
         {
             _navBar.style.display = DisplayStyle.None;
         }
 
     }
 
-
-    /// <summary>
-    /// Shows the Drodown element
-    /// </summary>
-    public void ShowDropDown()
-    {
-        if (_cameraDropdown != null)
-        {
-            _cameraDropdown.style.display = DisplayStyle.Flex;
-        }
-    }
-
-    /// <summary>
-    // A Function for hiding drop down for camera selection
-    /// </summary>
-    public void HideDropdown()
-    {
-        if (_cameraDropdown != null)
-        {
-            _cameraDropdown.style.display = DisplayStyle.None;
-        }
-    }
-
-
-    /// <summary>
-    /// A function for pausing time in scene
-    /// </summary>
     private void TogglePause()
     {
         // Toggle pause-status
@@ -272,9 +172,6 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.text = isPaused ? "Resume" : "Pause";
     }
 
-    /// <summary>
-    /// A function for restart/reloading scene
-    /// </summary>
     private void RestartScene()
     {
         // Restart gjeldende scene
@@ -284,9 +181,6 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(activeScene.name);
     }
 
-    /// <summary>
-    /// A function for destroying scene
-    /// </summary>
     private void OnDestroy()
     {
 
@@ -302,8 +196,7 @@ public class UIManager : MonoBehaviour
         _navBar = null;
         _backToMenuButton = null;
         _sharedUIDocument = null;
-        _cameraManagerDocument = null;
-
     }
+
 
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
+// Description: Manager for handling camera selection
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
@@ -11,6 +12,7 @@ public class CameraManager : MonoBehaviour
 
     public delegate void CamerasUpdated(List<string> cameraNames);
     public static event CamerasUpdated OnCamerasUpdated;
+
 
     private void Awake()
     {
@@ -22,10 +24,7 @@ public class CameraManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
-
-        FindCamerasInScene();
     }
 
     private void Start()
@@ -37,22 +36,26 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
-        UIManager.OnCameraSelected += SetActiveCamera;
+        CameraController.OnCameraSelected += SetActiveCamera;
     }
 
     private void OnDisable()
     {
-        UIManager.OnCameraSelected -= SetActiveCamera;
+        CameraController.OnCameraSelected -= SetActiveCamera;
     }
 
-    // Finds all cameras in the scene dynamically
+    /// <summary>
+    /// Finds all cameras in the scene dynamically
+    /// </summary>
     private void FindCamerasInScene()
     {
         cameras.Clear();
-        cameras.AddRange(FindObjectsOfType<Camera>());
+        cameras.AddRange(FindObjectsByType<Camera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
     }
 
-    // Notifies UIManager with the list of camera names
+    /// <summary>
+    /// Notifies the dropdown UI with the list of available camera names
+    /// </summary>
     private void NotifyUI()
     {
         if (OnCamerasUpdated != null)
@@ -62,7 +65,9 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    // Sets the active camera based on index
+    /// <summary>
+    /// Sets the active camera based on index
+    /// </summary>
     public void SetActiveCamera(int index)
     {
         if (index < 0 || index >= cameras.Count) return;

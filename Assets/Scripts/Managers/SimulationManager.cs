@@ -68,7 +68,7 @@ public class SimulationManager : MonoBehaviour
       case "MainMenu":
         currentState = SimulationState.MainMenu;
         UIManager.Instance.HideNavBar();
-        UIManager.Instance.HideDropdown();
+
         break;
       case "SpaceDebrisScene":
         UIManager.Instance.ShowNavBar();
@@ -80,26 +80,26 @@ public class SimulationManager : MonoBehaviour
       case "SatellitePreviewScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
-        UIManager.Instance.HideDropdown();
+
         break;
       case "CubeSatCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
-        UIManager.Instance.ShowDropDown();
+
         break;
       case "RosettaCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
-        UIManager.Instance.ShowDropDown();
+
         break;
       case "AuraSatColllisionScene":
         Debug.Log("AuraSatCollisionScene loaded");
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
-        UIManager.Instance.ShowDropDown();
+
         break;
       case "Init":
-        UIManager.Instance.HideDropdown();
+
         break;
       default:
         Debug.LogWarning("Unknown scene loaded: " + scene.name);
