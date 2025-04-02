@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-// Camera Controller for camera UI elements
+
+/// <summary>
+/// Initializes the singleton instance and ensures that it persists across scenes
+/// </summary>
 public class CameraController : MonoBehaviour
 {
+
     [SerializeField] private UIDocument _cameraManagerDocument;
     private VisualElement _rootCam;
     private DropdownField _cameraDropdown;
@@ -15,11 +19,7 @@ public class CameraController : MonoBehaviour
     public delegate void CameraSelected(int index);
     public static event CameraSelected OnCameraSelected;
 
-    //Instansiated as Singleton
-    private void Awake()
-    {
-        InitializeCameraDropDownUI();
-    }
+
 
     //When enabled - populates dropdown ÙI
     private void OnEnable()

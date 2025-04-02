@@ -81,12 +81,12 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
 
+
         break;
       case "CubeSatCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
-
-        break;
+                break;
       case "RosettaCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();

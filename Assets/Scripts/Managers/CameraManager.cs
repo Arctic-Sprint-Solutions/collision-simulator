@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
+
 // Description: Manager for handling camera selection
 public class CameraManager : MonoBehaviour
 {

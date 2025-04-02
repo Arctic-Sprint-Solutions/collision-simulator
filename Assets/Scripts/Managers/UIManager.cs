@@ -24,9 +24,7 @@ public class UIManager : MonoBehaviour
 
     private bool isPaused = false;
 
-    /// <summary>
-    /// Initializes the singleton instance and ensures that it persists across scenes
-    /// </summary>
+
     private void Awake()
     {
         // Ensure singleton instance
