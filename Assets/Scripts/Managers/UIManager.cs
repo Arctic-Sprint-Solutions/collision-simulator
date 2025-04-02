@@ -26,8 +26,8 @@ public class UIManager : MonoBehaviour
     private bool isPaused = false;
 
     // Camera UI elements
-    [SerializeField] private UIDocument uiDocument;
-    private DropdownField cameraDropdown;
+    [SerializeField] private UIDocument _cameraManagerDocument;
+    private DropdownField _cameraDropdown;
     public delegate void CameraSelected(int index);
     public static event CameraSelected OnCameraSelected;
 
@@ -70,8 +70,10 @@ public class UIManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _collisionUI?.AddToClassList("d-none");
+        _cameraDropdown?.AddToClassList("d-none");
         isPaused = false;
         Time.timeScale = 1f;
+
 
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
@@ -79,7 +81,16 @@ public class UIManager : MonoBehaviour
             _collisionUI?.RemoveFromClassList("d-none");
             _playPauseBtn.text = "Pause";
         }
+        else
+        {
+            // Hide the dropdown in other scenes
+            _cameraDropdown?.AddToClassList("d-none"); 
+        }
+
     }
+
+
+
 
 
     /// <summary>
@@ -89,8 +100,12 @@ public class UIManager : MonoBehaviour
     {
         // Get the root visual element of the shared UI document
         _root = _sharedUIDocument.rootVisualElement;
+
+        // Root for visual element of camera dropdown
+        VisualElement _rootCam = _cameraManagerDocument.rootVisualElement;
+
         // Get the NavBar and BackToMenuButton elements
-        if(_navBar == null)
+        if (_navBar == null)
         {
             // Get the NavBar element from the shared UI document
             _navBar = _root.Q<VisualElement>("NavBar");
@@ -108,6 +123,12 @@ public class UIManager : MonoBehaviour
         {
             InitializeCollisionUI();
         }
+
+        if (_cameraDropdown == null)
+        {
+            InitializeCameraDropDownUI();
+        }
+
 
         // Hide the NavBar by default
         HideNavBar();
@@ -133,7 +154,39 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
     }
-    
+
+    /// <summary>
+    /// A function for initializing UI Dropdown element for camera
+    /// </summary>
+
+
+    private void InitializeCameraDropDownUI()
+    {
+        var _rootDropdown = _cameraManagerDocument.rootVisualElement; 
+        _cameraDropdown = _rootDropdown.Q<DropdownField>("CameraDropdown");
+
+        if (_cameraDropdown == null)
+        {
+            Debug.LogError("CameraDropdown not found");
+            return;
+        }
+
+        _cameraDropdown.RemoveFromClassList("d-none"); 
+    }
+
+    /// <summary>
+    /// A function for adding cameras in scene to dropdown selection
+    /// </summary>
+    private void PopulateDropdown(List<string> cameraNames)
+    {
+        if (_cameraDropdown == null) return;
+
+        _cameraDropdown.choices = cameraNames;
+        _cameraDropdown.value = cameraNames[0];
+        _cameraDropdown.label = "Select Camera";
+
+    }
+
     /// <summary>
     /// Callback for the BackToMenuButton click event that loads the main menu scene
     /// </summary>
@@ -183,13 +236,24 @@ public class UIManager : MonoBehaviour
 
 
     /// <summary>
+    /// Shows the Drodown element
+    /// </summary>
+    public void ShowDropDown()
+    {
+        if (_cameraDropdown != null)
+        {
+            _cameraDropdown.style.display = DisplayStyle.Flex;
+        }
+    }
+
+    /// <summary>
     // A Function for hiding drop down for camera selection
     /// </summary>
-    private void HideDropdown()
+    public void HideDropdown()
     {
-        if (cameraDropdown != null)
+        if (_cameraDropdown != null)
         {
-            cameraDropdown.style.display = DisplayStyle.None;
+            _cameraDropdown.style.display = DisplayStyle.None;
         }
     }
 
@@ -236,22 +300,8 @@ public class UIManager : MonoBehaviour
         _navBar = null;
         _backToMenuButton = null;
         _sharedUIDocument = null;
-    }
+        _cameraManagerDocument = null;
 
-
-
-
-    /// <summary>
-    /// A function for adding cameras in scene to dropdown selection
-    /// </summary>
-    private void PopulateDropdown(List<string> cameraNames)
-    {
-        if (cameraDropdown == null) return;
-
-        cameraDropdown.choices = cameraNames;
-        cameraDropdown.value = cameraNames[0];
-        cameraDropdown.label = "Select Camera";
-        cameraDropdown.style.display = DisplayStyle.Flex;
     }
 
 }

@@ -170,7 +170,7 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
---- !u!1 &265043031
+--- !u!1 &292019237
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,37 +178,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 265043032}
-  - component: {fileID: 265043033}
+  - component: {fileID: 292019238}
+  - component: {fileID: 292019239}
   m_Layer: 0
-  m_Name: CameraUIDocument
+  m_Name: CameraManagerDocument
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &265043032
+--- !u!4 &292019238
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265043031}
+  m_GameObject: {fileID: 292019237}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 100, y: 106, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1258371969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &265043033
+--- !u!114 &292019239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265043031}
+  m_GameObject: {fileID: 292019237}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
@@ -252,7 +252,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 190957097}
-  - {fileID: 265043032}
+  - {fileID: 292019238}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1258371970
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sharedUIDocument: {fileID: 190957098}
   _SceneUIDocument: {fileID: 9197481963319205126, guid: 8f31ec3621a047a40a9bee0b38b0c0b6, type: 3}
-  uiDocument: {fileID: 0}
+  _cameraManagerDocument: {fileID: 0}
 --- !u!1 &1963283057
 GameObject:
   m_ObjectHideFlags: 0

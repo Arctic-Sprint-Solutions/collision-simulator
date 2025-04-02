@@ -68,6 +68,7 @@ public class SimulationManager : MonoBehaviour
       case "MainMenu":
         currentState = SimulationState.MainMenu;
         UIManager.Instance.HideNavBar();
+        UIManager.Instance.HideDropdown();
         break;
       case "SpaceDebrisScene":
         UIManager.Instance.ShowNavBar();
@@ -83,6 +84,7 @@ public class SimulationManager : MonoBehaviour
       case "CubeSatCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
+        UIManager.Instance.ShowDropDown();
         break;
       case "RosettaCollisionScene":
         currentState = SimulationState.SatelliteSelected;
