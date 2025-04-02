@@ -16,6 +16,7 @@ TagManager:
   - AuraSat
   - CameraManagerCanvas
   - CameraArrow
+  - CameraManagerDocument
   layers:
   - Default
   - TransparentFX

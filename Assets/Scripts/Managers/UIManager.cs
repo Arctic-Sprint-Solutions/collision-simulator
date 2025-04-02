@@ -25,9 +25,14 @@ public class UIManager : MonoBehaviour
 
     private bool isPaused = false;
 
+
     // Camera UI elements
     [SerializeField] private UIDocument _cameraManagerDocument;
+    private VisualElement _rootCam;
+
     private DropdownField _cameraDropdown;
+    private VisualElement _cameraDropdownUI;
+
     public delegate void CameraSelected(int index);
     public static event CameraSelected OnCameraSelected;
 
@@ -102,7 +107,13 @@ public class UIManager : MonoBehaviour
         _root = _sharedUIDocument.rootVisualElement;
 
         // Root for visual element of camera dropdown
-        VisualElement _rootCam = _cameraManagerDocument.rootVisualElement;
+        _rootCam = _cameraManagerDocument.rootVisualElement;
+
+
+
+
+
+
 
         // Get the NavBar and BackToMenuButton elements
         if (_navBar == null)
@@ -111,7 +122,7 @@ public class UIManager : MonoBehaviour
             _navBar = _root.Q<VisualElement>("NavBar");
         }
 
-        if(_backToMenuButton == null)
+        if (_backToMenuButton == null)
         {
             // Get the BackToMenuButton element from the shared UI document
             _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
@@ -119,15 +130,13 @@ public class UIManager : MonoBehaviour
             _backToMenuButton.RegisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
         }
 
-        if(_collisionUI == null)
+        if (_collisionUI == null)
         {
             InitializeCollisionUI();
-        }
-
-        if (_cameraDropdown == null)
-        {
             InitializeCameraDropDownUI();
         }
+
+   
 
 
         // Hide the NavBar by default
@@ -162,16 +171,9 @@ public class UIManager : MonoBehaviour
 
     private void InitializeCameraDropDownUI()
     {
-        var _rootDropdown = _cameraManagerDocument.rootVisualElement; 
-        _cameraDropdown = _rootDropdown.Q<DropdownField>("CameraDropdown");
+        _cameraDropdownUI = _rootCam.Q<DropdownField>("CameraDropdown");
+        _cameraDropdownUI.RemoveFromClassList("d-none");
 
-        if (_cameraDropdown == null)
-        {
-            Debug.LogError("CameraDropdown not found");
-            return;
-        }
-
-        _cameraDropdown.RemoveFromClassList("d-none"); 
     }
 
     /// <summary>
@@ -184,7 +186,7 @@ public class UIManager : MonoBehaviour
         _cameraDropdown.choices = cameraNames;
         _cameraDropdown.value = cameraNames[0];
         _cameraDropdown.label = "Select Camera";
-
+        _cameraDropdown.style.display = DisplayStyle.Flex;
     }
 
     /// <summary>
