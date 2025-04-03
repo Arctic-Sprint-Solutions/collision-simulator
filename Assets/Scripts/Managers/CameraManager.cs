@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 
 // Description: Manager for handling camera selection
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
+    [SerializeField] CameraController cameraController;
 
     private List<Camera> cameras = new List<Camera>();
     private int activeCameraIndex = 0;
@@ -28,23 +30,34 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        FindCamerasInScene();
-        NotifyUI();
-        SetActiveCamera(0);
-    }
+    // private void Start()
+    // {
+    //     FindCamerasInScene();
+    //     NotifyUI();
+    //     SetActiveCamera(0);
+    // }
 
     private void OnEnable()
     {
-        CameraController.OnCameraSelected += SetActiveCamera;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        CameraController.OnCameraSelected -= SetActiveCamera;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Hide camera dropdown initially
+        cameraController?.HideDropdown();
+        
+        FindCamerasInScene();
+        if(cameras.Count > 1)
+        {
+            NotifyUI();
+        } 
+    }
     /// <summary>
     /// Finds all cameras in the scene dynamically
     /// </summary>
@@ -52,6 +65,7 @@ public class CameraManager : MonoBehaviour
     {
         cameras.Clear();
         cameras.AddRange(FindObjectsByType<Camera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+        Debug.Log($"Found {cameras.Count} cameras in the scene.");
     }
 
     /// <summary>

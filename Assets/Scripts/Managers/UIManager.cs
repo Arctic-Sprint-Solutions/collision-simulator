@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     // Persistent UI elements
     [SerializeField] private UIDocument _sharedUIDocument;
     [SerializeField] private VisualTreeAsset _SceneUIDocument;
+
     private VisualElement _root;
     private VisualElement _navBar;
     private VisualElement _backToMenuButton;
