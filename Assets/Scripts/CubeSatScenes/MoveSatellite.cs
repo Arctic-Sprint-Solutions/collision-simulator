@@ -7,7 +7,16 @@ public class MoveSatellite : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private Vector3 direction = Vector3.forward;
+    [SerializeField] private bool moveOnStart = false;
     private bool isMoving = false;
+
+    private void Start()
+    {
+        if (moveOnStart)
+        {
+            StartMoving();
+        }
+    }
 
     void Update()
     {
