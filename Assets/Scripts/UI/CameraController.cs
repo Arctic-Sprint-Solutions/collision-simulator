@@ -20,19 +20,31 @@ public class CameraController : MonoBehaviour
     public static event CameraSelected OnCameraSelected;
 
 
+    private void Awake()
+    {
+        if (_cameraManagerDocument == null)
+        {
+            Debug.LogError("CameraController: UIDocument is not assigned.");
+            return;
+        }
 
-    //When enabled - populates dropdown ÙI
+        InitializeCameraDropDownUI();
+    }
+
+    //When enabled - populates dropdown ï¿½I
     private void OnEnable()
     {
+        Debug.Log("CameraController: OnEnable called. Initializing Camera Dropdown UI.");
         CameraManager.OnCamerasUpdated += PopulateDropdown;
 
         if (_cameraDropdown != null)
         {
+            Debug.Log("CameraController: Registering value changed callback for Camera Dropdown.");
             _cameraDropdown.RegisterValueChangedCallback(evt => OnCameraChanged(evt.newValue));
         }
     }
 
-    //When enabled - removes elements from dropdown ÙI
+    //When enabled - removes elements from dropdown ï¿½I
     private void OnDisable()
     {
         CameraManager.OnCamerasUpdated -= PopulateDropdown;
@@ -44,12 +56,32 @@ public class CameraController : MonoBehaviour
     private void InitializeCameraDropDownUI()
     {
         _rootCam = _cameraManagerDocument.rootVisualElement;
+        if (_rootCam == null)
+        {
+            Debug.LogError("CameraController: Root VisualElement is null.");
+            return;
+        }
+
 
         // Get the camera dropdown and make it visible
-        _cameraDropdownUI = _rootCam.Q<VisualElement>("CameraDropdown");
-        _cameraDropdownUI.RemoveFromClassList("d-none");
+        _cameraDropdownUI = _rootCam.Q<VisualElement>("CameraDropdownContainer");
+        // _cameraDropdownUI.RemoveFromClassList("d-none");
+
+        if (_cameraDropdownUI == null)
+        {
+            Debug.LogError("CameraController: cameraDropdownUI not found in the UI.");
+            return;
+        }
 
         _cameraDropdown = _cameraDropdownUI.Q<DropdownField>("CameraDropdown");
+        if (_cameraDropdown == null)
+        {
+            Debug.LogError("CameraController: Camera DropdownField is null.");
+            return;
+        }
+        
+        Debug.Log("CameraController: Camera Dropdown UI initialized successfully.");
+
     }
 
     /// <summary>
@@ -57,12 +89,14 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void PopulateDropdown(List<string> cameraNames)
     {
+        Debug.Log("CameraController: PopulateDropdown called with camera names: " + string.Join(", ", cameraNames));
         if (_cameraDropdown == null) return;
 
         _cameraDropdown.choices = cameraNames;
         _cameraDropdown.value = cameraNames[0]; // Default to the first camera
         _cameraDropdown.label = "Select Camera";
-        _cameraDropdown.style.display = DisplayStyle.Flex;
+        // _cameraDropdown.style.display = DisplayStyle.Flex;
+        ShowDropdown();
     }
 
     /// <summary>
@@ -70,8 +104,10 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void OnCameraChanged(string selectedCameraName)
     {
+        Debug.Log($"CameraController: OnCameraChanged called with selectedCameraName: {selectedCameraName}");
         int selectedIndex = _cameraDropdown.choices.IndexOf(selectedCameraName);
-        OnCameraSelected?.Invoke(selectedIndex);
+        // OnCameraSelected?.Invoke(selectedIndex);
+        CameraManager.Instance.SetActiveCamera(selectedIndex);
     }
 
     /// <summary>
@@ -79,9 +115,10 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public void HideDropdown()
     {
-        if (_cameraDropdown != null)
+        if (_cameraDropdownUI != null)
         {
-            _cameraDropdown.style.display = DisplayStyle.None;
+            // _cameraDropdown.style.display = DisplayStyle.None;
+            _cameraDropdownUI.AddToClassList("d-none");
         }
     }
 
@@ -90,9 +127,10 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public void ShowDropdown()
     {
-        if (_cameraDropdown != null)
+        if (_cameraDropdownUI != null)
         {
-            _cameraDropdown.style.display = DisplayStyle.Flex;
+            // _cameraDropdown.style.display = DisplayStyle.Flex;
+            _cameraDropdownUI.RemoveFromClassList("d-none");
         }
     }
 }
