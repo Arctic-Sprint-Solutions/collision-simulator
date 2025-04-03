@@ -9,6 +9,7 @@ public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] private GameObject originalObject;
     [SerializeField] private GameObject fragmentObject;
+    [SerializeField] private bool destroyRigidbody = false;
     private bool collisionDetected = false;
 
     /// <summary>
@@ -35,17 +36,19 @@ public class CollisionHandler : MonoBehaviour
     /// </summary>
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision detected with: " + collision.gameObject.name);
         if(!collisionDetected)
         {
             Debug.Log("Collision detected with: " + collision.gameObject.name);
-            ActivateFragments();
 
-            // If the fragment object has a MoveSatellite script, start moving it
-            MoveSatellite moveScript = gameObject.GetComponent<MoveSatellite>();
-            if (moveScript != null)
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if(rb != null && destroyRigidbody)
             {
-                moveScript.StartMoving();
+                // Remove the rigidbody component
+                Destroy(rb);
             }
+
+            ActivateFragments();
         }
     }
 
@@ -63,7 +66,7 @@ public class CollisionHandler : MonoBehaviour
             // Enable the fragmented version
             fragmentObject.SetActive(true);
             
-            // If your Cube_root has a Rayfire Rigid component and you want to activate it
+            // If the fragment object has a Rayfire Rigid component and you want to activate it
             RayFire.RayfireRigid rigidComponent = fragmentObject.GetComponent<RayFire.RayfireRigid>();
             if (rigidComponent != null)
             {
