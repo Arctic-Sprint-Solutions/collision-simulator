@@ -9,6 +9,7 @@ public class SatelliteExplosion : MonoBehaviour
 {
     // Reference to the RayfireBomb and RayfireRigid components
     [SerializeField] RayfireBomb bomb;
+    [SerializeField] RayfireRigid rayfireRigid;
 
     private bool isDetonated = false;
 
@@ -24,6 +25,37 @@ public class SatelliteExplosion : MonoBehaviour
             Debug.LogError("Bomb component is not assigned!");
             return;
         }
+
+        // Check if the RayfireRigid component is assigned
+        if (rayfireRigid == null)
+        {
+            Debug.LogError("RayfireRigid component is not assigned!");
+            return;
+        }
+    }
+
+
+    // <summary>
+    // Listen for the spacebar key press to detonate the bomb
+    // </summary>
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DetonateBomb();
+        }
+    }
+
+    // <summary>
+    // Detect collision and detonate the bomb
+    // </summary>
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Debris" || collision.gameObject.tag == "Satellite")
+        {
+            Invoke(nameof(DetonateBomb), 0.2f); 
+            Debug.Log("Collision detected with: " + collision.gameObject.name);
+        }
     }
 
     // <summary>
@@ -31,6 +63,8 @@ public class SatelliteExplosion : MonoBehaviour
     // </summary>
     public void DetonateBomb()
     {
+        InitializeRayfireRigid();
+
         if (bomb != null && !isDetonated)
         {
             isDetonated = true;
@@ -41,4 +75,16 @@ public class SatelliteExplosion : MonoBehaviour
             Debug.Log("Bomb detonated");
         }
     }
+
+    // You can also create a custom method to trigger initialization
+    private void InitializeRayfireRigid()
+    {
+        if (rayfireRigid != null)
+        {
+            Debug.Log("Activating RayfireRigid: " + rayfireRigid.name);
+            rayfireRigid.Initialize();
+        }
+            
+    }
 }
+
