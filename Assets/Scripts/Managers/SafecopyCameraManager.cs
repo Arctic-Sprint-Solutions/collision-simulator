@@ -1,27 +1,20 @@
+/* ---- CameraManager Safe copy - before implementing Cinemachine testing
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
-using Cinemachine;
-using Unity.Cinemachine;
-using UnityEditor.Rendering;
-
 
 // Description: Manager for handling camera selection
-// Added Cinemachine for improved camera control and functionality
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
     [SerializeField] CameraController cameraController;
 
-    private List<CinemachineCamera> cameras = new List<CinemachineCamera>();
-
-    //private List<Camera> cameras = new List<Camera>();
+    private List<Camera> cameras = new List<Camera>();
     private int activeCameraIndex = 0;
 
     public delegate void CamerasUpdated(List<string> cameraNames);
     public static event CamerasUpdated OnCamerasUpdated;
-
 
     private void Awake()
     {
@@ -35,13 +28,6 @@ public class CameraManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    // private void Start()
-    // {
-    //     FindCamerasInScene();
-    //     NotifyUI();
-    //     SetActiveCamera(0);
-    // }
 
     private void OnEnable()
     {
@@ -57,30 +43,22 @@ public class CameraManager : MonoBehaviour
     {
         // Hide camera dropdown initially
         cameraController?.HideDropdown();
-        
+
         FindCamerasInScene();
-        if(cameras.Count > 1)
+        if (cameras.Count > 1)
         {
             NotifyUI();
-        } 
+        }
     }
+
     /// <summary>
     /// Finds all cameras in the scene dynamically
-    /// </summary>
-
-
-    /// <summary>
-    /// Finds all Cinemachine cameras in the scene dynamically
     /// </summary>
     private void FindCamerasInScene()
     {
         cameras.Clear();
-        cameras.AddRange(FindObjectsByType<CinemachineCamera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
-
-        // Sort cameras by priority from lowest to highest
-        cameras = cameras.OrderBy(c => c.Priority).ToList();
-
-        Debug.Log($"Found {cameras.Count} Cinemachine cameras in the scene.");
+        cameras.AddRange(FindObjectsByType<Camera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+        Debug.Log($"Found {cameras.Count} cameras in the scene.");
     }
 
     /// <summary>
@@ -95,26 +73,21 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-
     /// <summary>
-    /// Sets the active camera based on priority
+    /// Sets the active camera based on index
     /// </summary>
-
     public void SetActiveCamera(int index)
     {
         if (index < 0 || index >= cameras.Count) return;
 
-        foreach (var camera in cameras)
+        for (int i = 0; i < cameras.Count; i++)
         {
-            camera.Priority = 10; // Default priority
+            cameras[i].enabled = (i == index);
         }
-
-        // Set the selected camera's priority higher to make it active
-        cameras[index].Priority = 11;
 
         activeCameraIndex = index;
         Debug.Log($"Active Camera: {cameras[activeCameraIndex].name}");
     }
-
 }
+*/
 
