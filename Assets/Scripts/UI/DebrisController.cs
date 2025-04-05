@@ -11,6 +11,9 @@ public class DebrisController : MonoBehaviour
     private Toggle toggleA;
     private Toggle toggleB;
     private Toggle toggleC;
+    private Button showInfoButton;
+    private Button closeInfoButton;
+    private VisualElement infoContainer;
 
     private void OnEnable()
     { 
@@ -30,6 +33,7 @@ public class DebrisController : MonoBehaviour
             return;
         }
 
+        // Get toggles
         toggleA = root.Q<Toggle>("ToggleDebrisA");
         toggleB = root.Q<Toggle>("ToggleDebrisB");
         toggleC = root.Q<Toggle>("ToggleDebrisC");
@@ -38,16 +42,37 @@ public class DebrisController : MonoBehaviour
         if (toggleB != null) toggleB.RegisterValueChangedCallback(evt => MediumParticleSystem.SetParticlesActive(evt.newValue));
         if (toggleC != null) toggleC.RegisterValueChangedCallback(evt => SmallParticleSystem.SetParticlesActive(evt.newValue));
 
-        BigParticleSystem.SetParticlesActive(false);
+        // Get Info elements
+        showInfoButton = root.Q<Button>("ShowInfoButton");
+        closeInfoButton = root.Q<Button>("CloseInfoButton");
+        infoContainer = root.Q<VisualElement>("InfoContainer");
+
+        if (infoContainer != null)
+        {
+            infoContainer.style.display = DisplayStyle.None; // Initially hide the info panel
+        }
+
+        if (showInfoButton != null)
+        {
+            showInfoButton.clicked += () => ToggleInfoPanel(true);
+        }
+
+        if (closeInfoButton != null)
+        {
+            closeInfoButton.clicked += () => ToggleInfoPanel(false);
+        }
+
+        // Control the initial state of the particle systems
+        BigParticleSystem.SetParticlesActive(true);
         MediumParticleSystem.SetParticlesActive(false);
         SmallParticleSystem.SetParticlesActive(false);
     }
 
-    private void ToggleDebris(PersistentParticles particleSystem, bool isOn)
+    private void ToggleInfoPanel(bool show)
     {
-        if (particleSystem != null)
+        if (infoContainer != null)
         {
-            particleSystem.FadeParticles(isOn);
+            infoContainer.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
         }
     }
 }
