@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     // Persistent UI elements
     [SerializeField] private UIDocument _sharedUIDocument;
     [SerializeField] private VisualTreeAsset _SceneUIDocument;
+
     private VisualElement _root;
     private VisualElement _navBar;
     private VisualElement _backToMenuButton;
@@ -24,9 +25,7 @@ public class UIManager : MonoBehaviour
 
     private bool isPaused = false;
 
-    /// <summary>
-    /// Initializes the singleton instance and ensures that it persists across scenes
-    /// </summary>
+
     private void Awake()
     {
         // Ensure singleton instance
@@ -73,13 +72,13 @@ public class UIManager : MonoBehaviour
         // Get the root visual element of the shared UI document
         _root = _sharedUIDocument.rootVisualElement;
         // Get the NavBar and BackToMenuButton elements
-        if(_navBar == null)
+        if (_navBar == null)
         {
             // Get the NavBar element from the shared UI document
             _navBar = _root.Q<VisualElement>("NavBar");
         }
 
-        if(_backToMenuButton == null)
+        if (_backToMenuButton == null)
         {
             // Get the BackToMenuButton element from the shared UI document
             _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
@@ -87,7 +86,7 @@ public class UIManager : MonoBehaviour
             _backToMenuButton.RegisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
         }
 
-        if(_collisionUI == null)
+        if (_collisionUI == null)
         {
             InitializeCollisionUI();
         }
@@ -115,18 +114,19 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
     }
-    
+
     /// <summary>
     /// Callback for the BackToMenuButton click event that loads the main menu scene
     /// </summary>
     private void OnBackToMainMenuClicked()
     {
         string buttonText = _backToMenuButton.Q<Label>().text;
-        if(buttonText == "Go Back")
+        if (buttonText == "Go Back")
         {
             // Go back to the previous scene
             SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
-        } else 
+        }
+        else
         {
             // Load the main menu scene
             SimulationManager.Instance.LoadScene("MainMenu");
@@ -138,12 +138,12 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ShowNavBar(string backButtonText = "Main Menu")
     {
-        if(_navBar != null)
+        if (_navBar != null)
         {
             _navBar.style.display = DisplayStyle.Flex;
 
             // Set the text of the BackToMenuButton
-            if(_backToMenuButton != null)
+            if (_backToMenuButton != null)
             {
                 _backToMenuButton.Q<Label>().text = backButtonText;
             }
@@ -155,7 +155,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void HideNavBar()
     {
-        if(_navBar != null)
+        if (_navBar != null)
         {
             _navBar.style.display = DisplayStyle.None;
         }
