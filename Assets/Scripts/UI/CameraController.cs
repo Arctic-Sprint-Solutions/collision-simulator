@@ -70,7 +70,6 @@ public class CameraController : MonoBehaviour
 
         // Get the camera dropdown and make it visible
         _cameraDropdownUI = _rootCam.Q<VisualElement>("CameraDropdownContainer");
-        // _cameraDropdownUI.RemoveFromClassList("d-none");
 
         if (_cameraDropdownUI == null)
         {

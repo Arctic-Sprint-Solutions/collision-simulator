@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Unity.Cinemachine;
-using UnityEditor.Rendering;
+
 
 
 // Description: Manager for handling camera selection
-// Added Cinemachine for improved camera control and functionality
+// Uses Cinemachine library for improved camera functionality and angles
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
@@ -37,26 +37,28 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    // private void Start()
-    // {
-    //     FindCamerasInScene();
-    //     NotifyUI();
-    //     SetActiveCamera(0);
-    // }
-
+    /// <summary>
+    /// Enables Scenemanager to load scene
+    /// </summary>
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    /// <summary>
+    /// Enables Scenemanager to offload scene
+    /// </summary>
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    /// <summary>
+    /// Loads scene and notifies CameraController UI of cameras
+    /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Hide camera dropdown initially
+
         cameraController?.HideDropdown();
         
         FindCamerasInScene();
@@ -65,9 +67,6 @@ public class CameraManager : MonoBehaviour
             NotifyUI();
         } 
     }
-    /// <summary>
-    /// Finds all cameras in the scene dynamically
-    /// </summary>
 
 
     /// <summary>
@@ -98,39 +97,23 @@ public class CameraManager : MonoBehaviour
 
 
     /// <summary>
-    /// Sets the active camera based on setting priority higher than default
+    /// Sets the active camera based on index
     /// </summary>
 
-    public void SetActiveCamera(int index)
+public void SetActiveCamera(int index)
+{
+    if (index < 0 || index >= cameras.Count) return;
+
+    for (int i = 0; i < cameras.Count; i++)
     {
-        if (index < 0 || index >= cameras.Count) return;
+        cameras[i].enabled = (i == index);
+    }
 
-
-        foreach (var cam in cameras)
-        {
-            cam.Priority = 10; // Default priority
-        }
-
-        // Set  selected camera's priority higher to make it active
-        cameras[index].Priority = 20; 
-
-        activeCameraIndex = index;
-        Debug.Log($"Active Camera: {cameras[activeCameraIndex].name}");
+    activeCameraIndex = index;
+    Debug.Log($"Active Camera: {cameras[activeCameraIndex].name}");
     }
 
 
-    /// <summary>
-    /// Sorts cameras based on priority in descending order to help CameraController UI
-    /// </summary>
-    public List<CinemachineCamera> SortCamerasByPriority()
-    {
-        
-        return cameras
-            .OrderByDescending(cam => cam.Priority)
-            .Select(cam => cam.GetComponent<CinemachineCamera>())
-            .Where(cam => cam != null)
-            .ToList();
-    }
 
 }
 
