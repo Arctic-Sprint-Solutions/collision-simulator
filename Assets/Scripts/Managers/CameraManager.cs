@@ -79,9 +79,9 @@ public class CameraManager : MonoBehaviour
         cameras.AddRange(FindObjectsByType<CinemachineCamera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
 
         // Sort cameras by priority from lowest to highest
-        cameras = cameras.OrderBy(c => c.Priority).ToList();
+        cameras = cameras.ToList();
 
-        Debug.Log($"Found {cameras.Count} Cinemachine cameras in the scene.");
+        Debug.Log($"Found {cameras.Count} Second check afterr list - Cinemachine cameras in the scene.");
     }
 
     /// <summary>
@@ -119,6 +119,18 @@ public class CameraManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Sorts cameras based on priority in descending order to help CameraController UI
+    /// </summary>
+    public List<CinemachineCamera> SortCamerasByPriority()
+    {
+        
+        return cameras
+            .OrderByDescending(cam => cam.Priority)
+            .Select(cam => cam.GetComponent<CinemachineCamera>())
+            .Where(cam => cam != null)
+            .ToList();
+    }
 
 }
 

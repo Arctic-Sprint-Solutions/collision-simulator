@@ -779,7 +779,7 @@ GameObject:
   - component: {fileID: 681562186}
   m_Layer: 0
   m_Name: Cinemachine Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1304,7 +1304,7 @@ MonoBehaviour:
   ShowCameraFrustum: 0
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
-  ChannelMask: -1
+  ChannelMask: 1
   UpdateMethod: 2
   BlendUpdateMethod: 1
   LensModeOverride:

@@ -97,18 +97,10 @@ public class CameraController : MonoBehaviour
         Debug.Log("CameraController: PopulateDropdown called with camera names: " + string.Join(", ", cameraNames));
         if (_cameraDropdown == null) return;
 
-        _cameraDropdown.choices.Clear();
-
-
-        foreach (string cameraName in cameraNames)
-        {
-            _cameraDropdown.choices.Add(cameraName);
-        }
-
         _cameraDropdown.choices = cameraNames;
-        _cameraDropdown.value = cameraNames[0]; // Default to the first camera
+        _cameraDropdown.value = cameraNames[0]; 
         _cameraDropdown.label = "Select Camera";
-        _cameraDropdown.style.display = DisplayStyle.Flex;
+        // _cameraDropdown.style.display = DisplayStyle.Flex;
         ShowDropdown();
 
     }
