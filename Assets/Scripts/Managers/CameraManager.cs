@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 using Unity.Cinemachine;
 using UnityEditor.Rendering;
 
@@ -14,7 +13,8 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance { get; private set; }
     [SerializeField] CameraController cameraController;
 
-    private List<CinemachineCamera> cameras = new List<CinemachineCamera>();
+
+    private List<CinemachineCamera> cameras;
 
     //private List<Camera> cameras = new List<Camera>();
     private int activeCameraIndex = 0;
@@ -75,7 +75,7 @@ public class CameraManager : MonoBehaviour
     private void FindCamerasInScene()
     {
         cameras.Clear();
-        cameras.AddRange(FindObjectsByType<CinemachineCamera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+        cameras.AddRange(FindObjectsByType<CinemachineCamera>(FindObjectsSortMode.None));
 
         // Sort cameras by priority from lowest to highest
         cameras = cameras.OrderBy(c => c.Priority).ToList();
@@ -97,24 +97,24 @@ public class CameraManager : MonoBehaviour
 
 
     /// <summary>
-    /// Sets the active camera based on priority
+    /// Sets the active camera based on cameras in scene
     /// </summary>
 
     public void SetActiveCamera(int index)
     {
         if (index < 0 || index >= cameras.Count) return;
 
-        foreach (var camera in cameras)
+        for (int i = 0; i < cameras.Count; i++)
         {
-            camera.Priority = 10; // Default priority
+            cameras[i].enabled = (i == index);
+            //cameras[i].gameObject.SetActive(i == index);
         }
-
-        // Set the selected camera's priority higher to make it active
-        cameras[index].Priority = 11;
 
         activeCameraIndex = index;
         Debug.Log($"Active Camera: {cameras[activeCameraIndex].name}");
     }
+
+
 
 }
 
