@@ -1,7 +1,6 @@
-// Description: Handles the camera dropdown UI logic
+﻿/* ---- // Description: Handles the camera dropdown UI logic
 
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -84,36 +83,25 @@ public class CameraController : MonoBehaviour
             Debug.LogError("CameraController: Camera DropdownField is null.");
             return;
         }
-        
+
         Debug.Log("CameraController: Camera Dropdown UI initialized successfully.");
 
     }
 
     /// <summary>
-    /// Populates the dropdown based on priority
+    /// Populates the dropdown with available camera names
     /// </summary>
     private void PopulateDropdown(List<string> cameraNames)
     {
         Debug.Log("CameraController: PopulateDropdown called with camera names: " + string.Join(", ", cameraNames));
         if (_cameraDropdown == null) return;
 
-        _cameraDropdown.choices.Clear();
-
-
-        foreach (string cameraName in cameraNames)
-        {
-            _cameraDropdown.choices.Add(cameraName);
-        }
-
         _cameraDropdown.choices = cameraNames;
         _cameraDropdown.value = cameraNames[0]; // Default to the first camera
         _cameraDropdown.label = "Select Camera";
-        _cameraDropdown.style.display = DisplayStyle.Flex;
+        // _cameraDropdown.style.display = DisplayStyle.Flex;
         ShowDropdown();
-
     }
-
-
 
     /// <summary>
     /// Handles camera selection from the dropdown
@@ -150,3 +138,4 @@ public class CameraController : MonoBehaviour
         }
     }
 }
+*/

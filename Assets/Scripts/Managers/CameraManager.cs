@@ -14,9 +14,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField] CameraController cameraController;
 
 
-    private List<CinemachineCamera> cameras;
-
-    //private List<Camera> cameras = new List<Camera>();
+    // Cameras - Cinemachine
+    //private List<CinemachineCamera> cameras;
+    private List<CinemachineCamera> cameras = new List<CinemachineCamera>();
     private int activeCameraIndex = 0;
 
     public delegate void CamerasUpdated(List<string> cameraNames);
@@ -25,6 +25,7 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
+
         if (Instance == null)
         {
             Instance = this;
@@ -75,7 +76,7 @@ public class CameraManager : MonoBehaviour
     private void FindCamerasInScene()
     {
         cameras.Clear();
-        cameras.AddRange(FindObjectsByType<CinemachineCamera>(FindObjectsSortMode.None));
+        cameras.AddRange(FindObjectsByType<CinemachineCamera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
 
         // Sort cameras by priority from lowest to highest
         cameras = cameras.OrderBy(c => c.Priority).ToList();
@@ -97,18 +98,21 @@ public class CameraManager : MonoBehaviour
 
 
     /// <summary>
-    /// Sets the active camera based on cameras in scene
+    /// Sets the active camera based on setting priority higher than default
     /// </summary>
 
     public void SetActiveCamera(int index)
     {
         if (index < 0 || index >= cameras.Count) return;
 
-        for (int i = 0; i < cameras.Count; i++)
+
+        foreach (var cam in cameras)
         {
-            cameras[i].enabled = (i == index);
-            //cameras[i].gameObject.SetActive(i == index);
+            cam.Priority = 10; // Default priority
         }
+
+        // Set  selected camera's priority higher to make it active
+        cameras[index].Priority = 20; 
 
         activeCameraIndex = index;
         Debug.Log($"Active Camera: {cameras[activeCameraIndex].name}");
