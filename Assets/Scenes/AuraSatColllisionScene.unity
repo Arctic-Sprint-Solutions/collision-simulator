@@ -1381,7 +1381,6 @@ GameObject:
   - component: {fileID: 1405668259}
   - component: {fileID: 1405668262}
   - component: {fileID: 1405668264}
-  - component: {fileID: 1405668265}
   - component: {fileID: 1405668263}
   m_Layer: 0
   m_Name: Free Look Camera
@@ -1520,7 +1519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetOffset: {x: 0, y: 0, z: 0}
   TrackerSettings:
-    BindingMode: 1
+    BindingMode: 3
     PositionDamping: {x: 1, y: 1, z: 1}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
@@ -1552,8 +1551,8 @@ MonoBehaviour:
   VerticalAxis:
     Value: 17.5
     Center: 17.5
-    Range: {x: -10, y: 45}
-    Wrap: 0
+    Range: {x: -180, y: 180}
+    Wrap: 1
     Recentering:
       Enabled: 0
       Wait: 1
@@ -1569,29 +1568,6 @@ MonoBehaviour:
       Wait: 1
       Time: 2
     Restrictions: 0
---- !u!114 &1405668265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405668258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a076c17fe76165e4f8ed21498b877bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Modifiers:
-  - rid: 8342970129777950786
-  references:
-    version: 2
-    RefIds:
-    - rid: 8342970129777950786
-      type: {class: CinemachineFreeLookModifier/DistanceModifier, ns: Unity.Cinemachine, asm: Unity.Cinemachine}
-      data:
-        Distance:
-          Top: 10
-          Bottom: 10
 --- !u!1 &1550061529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3659950113692703281, guid: a0a7077f5a2b7b442829e39bcc1c8c39, type: 3}
