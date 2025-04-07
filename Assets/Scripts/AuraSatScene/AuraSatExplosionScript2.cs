@@ -9,7 +9,7 @@ public class AuraSatExplosionScript2 : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Check collision with Debris
-        if (collision.gameObject.tag == "DebrisTestObject" || collision.gameObject.tag == "AuraSatBody2")
+        if (collision.gameObject.tag == "Debris" || collision.gameObject.tag == "AuraSatBody2")
         {
             Debug.Log("AuraSatBody has collided with Debris! ");
 
