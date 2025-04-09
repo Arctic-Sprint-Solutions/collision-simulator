@@ -81,23 +81,35 @@ public class MainMenuController : MonoBehaviour
     }
   }
 
-  /// <summary>
-  /// Handles the click event for the navigation link
-  /// </summary>
-  private void OnNavLinkClicked(VisualElement navLink)
-  {
-    // Handle the click event for the navigation link
-    Debug.Log($"Navigation link clicked: {navLink.name}");
-    if(navLink.name == "ReturnToEarth") {
-      SimulationManager.Instance.QuitApplication();
-    } else {
-      // TODO: Finish logic for every scene
-      if(navLink.name == "LoadSatellites"){
-        SimulationManager.Instance.LoadScene("SatellitesGridScene");
-      }
-      else if(navLink.name == "ViewSpaceDebris"){
-        SimulationManager.Instance.LoadScene("SpaceDebrisScene");
-      }
+    /// <summary>
+    /// Handles the click event for navigation links to scenes
+    /// </summary>
+    private readonly Dictionary<string, string> sceneMap = new Dictionary<string, string>
+{
+     //Scene map dictionrary - maps nav links to scene names
+    { "LoadSatellites", "SatellitesGridScene" },
+    { "ViewSpaceDebris", "SpaceDebrisScene" },
+    { "About", "AboutScene" }
+};
+
+    private void OnNavLinkClicked(VisualElement navLink)
+    {
+        Debug.Log($"Navigation link clicked: {navLink.name}");
+
+        if (navLink.name == "ReturnToEarth")
+        {
+            SimulationManager.Instance.QuitApplication();
+            return;
+        }
+
+        if (sceneMap.TryGetValue(navLink.name, out string sceneName))
+        {
+            SimulationManager.Instance.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogWarning($"No scene mapped for nav link: {navLink.name}");
+        }
     }
-  }
+
 }
