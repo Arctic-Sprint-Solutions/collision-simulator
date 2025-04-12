@@ -11639,7 +11639,7 @@ GameObject:
   - component: {fileID: 761459427}
   - component: {fileID: 761459426}
   m_Layer: 0
-  m_Name: DebrisCamera
+  m_Name: Debris Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11697,11 +11697,11 @@ Transform:
   m_GameObject: {fileID: 761459418}
   serializedVersion: 2
   m_LocalRotation: {x: 0.045665305, y: 0.3602488, z: -0.008293546, w: 0.931701}
-  m_LocalPosition: {x: 121.795204, y: 2.560465, z: -2.8557353}
+  m_LocalPosition: {x: -3.43853, y: 0.7520127, z: -4.492273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 764183620}
   m_LocalEulerAnglesHint: {x: 7.44, y: -109.652, z: -1.094}
 --- !u!114 &761459426
 MonoBehaviour:
@@ -11735,6 +11735,40 @@ MonoBehaviour:
     RotationDamping: {x: 0.1, y: 0.1, z: 0.1}
     QuaternionDamping: 1
   FollowOffset: {x: -2.63, y: 1.03, z: 5.05}
+--- !u!1 &764183619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 764183620}
+  m_Layer: 0
+  m_Name: Cinemachine Cameras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &764183620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764183619}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 125.233734, y: 1.8084524, z: 1.6365377}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1995906850}
+  - {fileID: 761459420}
+  - {fileID: 1776449152}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &765915083
 GameObject:
   m_ObjectHideFlags: 0
@@ -30258,7 +30292,7 @@ GameObject:
   - component: {fileID: 1776449150}
   - component: {fileID: 1776449149}
   m_Layer: 0
-  m_Name: SatelliteCamera
+  m_Name: Satellite Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30348,11 +30382,11 @@ Transform:
   m_GameObject: {fileID: 1776449148}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13238408, y: 0.50768995, z: -0.0792939, w: 0.84760714}
-  m_LocalPosition: {x: 112.810005, y: 3.52, z: -3.9899998}
+  m_LocalPosition: {x: -12.423729, y: 1.7115476, z: -5.6265373}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 764183620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1778427840
 GameObject:
@@ -34714,7 +34748,7 @@ GameObject:
   - component: {fileID: 1995906850}
   - component: {fileID: 1995906849}
   m_Layer: 0
-  m_Name: MainCamera
+  m_Name: Main Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34772,11 +34806,11 @@ Transform:
   m_GameObject: {fileID: 1995906848}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0006000632, y: -0.99939424, z: -0.014496742, w: -0.031633213}
-  m_LocalPosition: {x: -12.5, y: 112.37, z: 67.68}
+  m_LocalPosition: {x: -137.73373, y: 110.561554, z: 66.043465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 764183620}
   m_LocalEulerAnglesHint: {x: -1.663, y: 176.374, z: -0.016}
 --- !u!1 &2005239013
 GameObject:
@@ -37486,12 +37520,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1015609676}
-  - {fileID: 1776449152}
-  - {fileID: 1995906850}
-  - {fileID: 761459420}
-  - {fileID: 1778427843}
+  - {fileID: 764183620}
   - {fileID: 1098853093}
-  - {fileID: 1381956074}
-  - {fileID: 1893692712}
+  - {fileID: 1778427843}
   - {fileID: 5798529407582466844}
   - {fileID: 1261027335}
+  - {fileID: 1381956074}
+  - {fileID: 1893692712}
