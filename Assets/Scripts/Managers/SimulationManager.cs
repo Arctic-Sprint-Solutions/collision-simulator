@@ -74,13 +74,13 @@ public class SimulationManager : MonoBehaviour
         UIManager.Instance.ShowNavBar();
         break;
         case "AboutScene":
-            UIManager.Instance.ShowNavBar();
+        UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
         break;
         case "SatellitesGridScene":
         currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
         break;
-      case "SatellitePreviewScene":
+        case "SatellitePreviewScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
 

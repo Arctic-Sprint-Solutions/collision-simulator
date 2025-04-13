@@ -1,0 +1,20 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:engine="UnityEngine.UIElements"
+             xmlns:editor="UnityEditor.UIElements"
+             noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
+             editor-extension-mode="False">
+
+    <Style src="project://database/Assets/UI/Styles/AboutStyles.uss" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss" />
+
+    <engine:VisualElement name="AboutContainer" class="full-width-container">
+        <engine:VisualElement name="AboutMenu" class="menu">
+            <engine:VisualElement name="TitleContainer" class="flex-col-start">
+                <engine:Label text="About This Project" name="AboutTitle" class="title my-2" />
+                <engine:Label text="About Orbit Watch" class="subtitle my-2" />
+                <engine:Label text="Your guide to space debris." class="subtitle my-2" style="white-space: normal;" />
+                <engine:Label text="Authors: Arctic Sprint Solutions 2.0" class="subtitle my-2" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
