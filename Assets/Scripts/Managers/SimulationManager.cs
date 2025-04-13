@@ -117,17 +117,26 @@ public class SimulationManager : MonoBehaviour
     LoadScene("SatellitePreviewScene");
   }
 
+
   /// <summary>
   /// Quits the application or stops play mode in the Unity Editor
   /// </summary>
   public void QuitApplication()
   {
     Debug.Log("Quitting application...");
+
     #if UNITY_EDITOR
         // Stop play mode in the Unity Editor
         EditorApplication.isPlaying = false;
+    #elif UNITY_WEBGL
+        // Handle quit action for WebGL builds
+        Debug.Log("Quit action triggered in WebGL build.");
+        // Redirect to the start page
+        Application.ExternalEval("window.location.href='index.html';");
+    #else
+        // Quit the application for standalone builds
+        Application.Quit();
     #endif
-    Application.Quit();
   }
 
   /// <summary>
