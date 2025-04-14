@@ -46,7 +46,6 @@
     justify-content: center;
     margin-right: 16px;
     transition: color 0.2s ease-in-out;
-
 }
 
 .subtitle {
@@ -57,15 +56,13 @@
     -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
 }
 
-/* .nav-link:hover {
-    background-color: rgb(0, 200, 255);
-} */
-
-
 .nav-link:hover .nav-link-text {
     color: rgb(48, 250, 136);
 }
 
 .nav-link:hover .nav-icon {
     -unity-background-image-tint-color: rgb(48, 250, 136);
+}
+
+.unity-button {
 }
