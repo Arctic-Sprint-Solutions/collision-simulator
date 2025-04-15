@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     {
         _collisionUI?.AddToClassList("d-none");
         isPaused = false;
-        Time.timeScale = 1f;
+        Time.timeScale = _speedSlider.value;
 
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
@@ -121,11 +121,12 @@ public class UIManager : MonoBehaviour
         _speedSlider.highValue = 10.0f; // 10x hastighet
         _speedSlider.value = 1f;       // normal hastighet (100%)
 
-        OrbitalMovement.speedMultiplier = 1f;
+        Time.timeScale = _speedSlider.value;
 
         _speedSlider.RegisterValueChangedCallback(evt =>
         {
-            OrbitalMovement.speedMultiplier = evt.newValue;
+            if (!isPaused)
+                Time.timeScale = evt.newValue;
         });
     }
 
@@ -180,8 +181,7 @@ public class UIManager : MonoBehaviour
     {
         // Toggle pause-status
         isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
-
+        Time.timeScale = isPaused ? 0f : _speedSlider.value;
         _playPauseBtn.text = isPaused ? "Resume" : "Pause";
     }
 
@@ -189,7 +189,8 @@ public class UIManager : MonoBehaviour
     {
         // Restart gjeldende scene
         isPaused = false;
-        Time.timeScale = 1f;
+        //Setter timescale lik slider
+        Time.timeScale = _speedSlider.value;
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.name);
     }

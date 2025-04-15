@@ -18,10 +18,6 @@ public class OrbitalMovement : MonoBehaviour
     [SerializeField] private float startAngle = 225f;
     private float currentAngle;
 
-    // for global adjustable speed
-    public static float speedMultiplier = 1f;
-    private bool adjustableSpeed;
-
     /// <summary>
     /// Initializes the satellite's position and angle.
     /// </summary>
@@ -29,8 +25,6 @@ public class OrbitalMovement : MonoBehaviour
     {
         // Set the initial angle to the specified start angle
         currentAngle = startAngle;
-        // get object tag to see if its gonna be adjusted by slider
-        adjustableSpeed = gameObject.CompareTag("Debris");
         // Set initial position
         UpdatePosition();
     }
@@ -40,14 +34,9 @@ public class OrbitalMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
-        float actualSpeed = orbitSpeed;
-        if (adjustableSpeed)
-        {
-            actualSpeed *= speedMultiplier;
-        }
         // Update orbit angle
-        currentAngle += actualSpeed * Time.deltaTime;
-        currentAngle %= 360f;
+        currentAngle += orbitSpeed * Time.deltaTime;
+        if (currentAngle >= 360f) currentAngle -= 360f;
 
         // Update satellite position
         UpdatePosition();
