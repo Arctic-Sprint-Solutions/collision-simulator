@@ -48,7 +48,7 @@ public class SimulationManager : MonoBehaviour
     Instance = this;
     DontDestroyOnLoad(gameObject);
     SceneManager.sceneLoaded += OnSceneLoaded;
-    
+
     // Load the main menu scene
     SceneManager.LoadScene("MainMenu");
   }
@@ -84,6 +84,7 @@ public class SimulationManager : MonoBehaviour
 
         break;
       case "CubeSatCollisionScene":
+      case "Cubesat2RuScene":
       case "RosettaCollisionScene":
       case "AuraSatColllisionScene":
       case "IceSat2CollisionScene":
