@@ -11,6 +11,7 @@
     <!-- Collision UI -->
     <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 1; position: absolute; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row;">
         <engine:VisualElement name="ButtonContainer" class="flex-row-center">
+            <engine:Slider name="speedSlider" class="speed-slider" low-value="0.1" high-value="10.0" value="1.0" />
             <engine:Button text="Pause" name="playPauseButton" class="btn scene-control-btn" />
             <engine:Button text="Restart" name="restartButton" class="btn scene-control-btn" />
         </engine:VisualElement>

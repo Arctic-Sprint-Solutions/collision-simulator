@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     private VisualElement _collisionUI;
     private Button _playPauseBtn;
     private Button _restartBtn;
+    private Slider _speedSlider;
 
     private bool isPaused = false;
 
@@ -100,6 +101,7 @@ public class UIManager : MonoBehaviour
         _collisionUI = _root.Q<VisualElement>("CollisionUI");
         _collisionUI.RemoveFromClassList("d-none");
         // Finn knappene i det instansierte UI-et
+        _speedSlider = _collisionUI.Q<Slider>("speedSlider");
         _playPauseBtn = _collisionUI.Q<Button>("playPauseButton");
         _restartBtn = _collisionUI.Q<Button>("restartButton");
         _playPauseBtn.text = "Pause";
@@ -113,6 +115,18 @@ public class UIManager : MonoBehaviour
         // Koble opp klikk-event til h�ndteringsfunksjoner
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
+
+        // slider logikk
+        _speedSlider.lowValue = 0.1f;  // 0.1x% hastighet
+        _speedSlider.highValue = 10.0f; // 10x hastighet
+        _speedSlider.value = 1f;       // normal hastighet (100%)
+
+        OrbitalMovement.speedMultiplier = 1f;
+
+        _speedSlider.RegisterValueChangedCallback(evt =>
+        {
+            OrbitalMovement.speedMultiplier = evt.newValue;
+        });
     }
 
     /// <summary>

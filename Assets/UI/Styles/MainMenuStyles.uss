@@ -69,3 +69,8 @@
 .nav-link:hover .nav-icon {
     -unity-background-image-tint-color: rgb(48, 250, 136);
 }
+
+.speed-slider {
+    width: 200px;
+    height: 20px;
+    margin-right: 10px;
