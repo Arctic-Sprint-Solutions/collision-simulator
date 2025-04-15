@@ -162,7 +162,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    private void TogglePause()
+    public void TogglePause()
     {
         // Toggle pause-status
         isPaused = !isPaused;
@@ -171,7 +171,7 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.text = isPaused ? "Resume" : "Pause";
     }
 
-    private void RestartScene()
+    public void RestartScene()
     {
         // Restart gjeldende scene
         isPaused = false;
