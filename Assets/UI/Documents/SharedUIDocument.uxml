@@ -11,9 +11,11 @@
     <!-- Collision UI -->
     <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 1; position: absolute; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row;">
         <engine:VisualElement name="ButtonContainer" class="flex-row-center">
-            <engine:Slider name="speedSlider" class="speed-slider" low-value="0.1" high-value="10.0" value="1.0" />
-            <engine:Button text="Pause" name="playPauseButton" class="btn scene-control-btn" />
             <engine:Button text="Restart" name="restartButton" class="btn scene-control-btn" />
+            <engine:Button text="Pause" name="playPauseButton" class="btn scene-control-btn" />
+            <engine:VisualElement name="speedToggleButton" class="btn scene-control-btn" style="padding: 5px; border-width: 1px; border-color: white; border-radius: 5px;">
+                <engine:Label name="speedLabel" text="Speed: 1x" />
+            </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
