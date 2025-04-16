@@ -2,7 +2,7 @@ name: Generate Doxygen Documentation
 
 on:
   push:
-    branches: [ main ]
+    branches: [ develop ]
   # Uncomment this if you want to run on PRs too
   # pull_request:
   #   branches: [ main ]
