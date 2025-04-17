@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System;
 using System.Collections;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
+using System.Collections.Generic;
 
 ///<summary>
 ///Controller for the settingspage.
@@ -11,6 +15,7 @@ public class SettingsController : MonoBehaviour
     public UIDocument uiDocument;
     private Button pauseButton;
     private Button restartButton;
+    private DropdownField languageDropdown;
 
     private bool waitingForKey = false;
     private Action<KeyCode> onKeySelected;
@@ -21,6 +26,7 @@ public class SettingsController : MonoBehaviour
     private void Start()
     {
         StartCoroutine(InitUI());
+        StartCoroutine(LoadSavedLanguage());
     }
 
     ///<summary>
@@ -34,6 +40,7 @@ public class SettingsController : MonoBehaviour
         }
 
         var root = uiDocument.rootVisualElement;
+        InitLanguageDropdown(root);
 
         pauseButton = root.Q<Button>("PauseButton");
         restartButton = root.Q<Button>("RestartButton");
@@ -56,6 +63,23 @@ public class SettingsController : MonoBehaviour
         else
         {
             Debug.LogError("RestartButton not found");
+        }
+    }
+
+    ///<summary>
+    ///
+    ///<summary>
+    private IEnumerator LoadSavedLanguage()
+    {
+        yield return LocalizationSettings.InitializationOperation;
+
+        string savedLang = PlayerPrefs.GetString("Language", "en");
+        var locale = LocalizationSettings.AvailableLocales.Locales
+            .Find(l => l.Identifier.Code == savedLang);
+
+        if (locale != null)
+        {
+            LocalizationSettings.SelectedLocale = locale;
         }
     }
 
@@ -112,5 +136,39 @@ public class SettingsController : MonoBehaviour
         {
             Debug.LogError($"Unknown action '{action}' or button was null.");
         }
+    }
+
+    ///<summary>
+    ///Handles the binding of Localization and the settings UI
+    ///<summary>
+    private void InitLanguageDropdown(VisualElement root)
+    {
+        languageDropdown = root.Q<DropdownField>("LanguageDropdown");
+
+        var locales = LocalizationSettings.AvailableLocales.Locales;
+        List<string> localeNames = new List<string>();
+
+        foreach (var locale in locales)
+        {
+            localeNames.Add(locale.LocaleName); // This is the readable name shown in the dropdown
+        }
+
+        languageDropdown.choices = localeNames;
+
+        // Set current selection
+        var currentLocale = LocalizationSettings.SelectedLocale;
+        languageDropdown.value = currentLocale?.LocaleName ?? localeNames[0];
+
+        // Handle selection changes
+        languageDropdown.RegisterValueChangedCallback(evt =>
+        {
+            var selectedName = evt.newValue;
+            var selectedLocale = locales.Find(l => l.LocaleName == selectedName);
+
+            if (selectedLocale != null)
+            {
+                LocalizationManager.Instance.SetLanguage(selectedLocale.Identifier.Code);
+            }
+        });
     }
 }

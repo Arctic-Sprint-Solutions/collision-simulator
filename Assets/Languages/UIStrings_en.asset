@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UIStrings_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 0ce2c0866ae3c4d6ca04a36b9f9884ed, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1367555956736
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31687747559424
+    m_Localized: 3D Space Debris Collision Simulator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33502727757824
+    m_Localized: Load Satellites
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33768625659904
+    m_Localized: View Space Debris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33771280654336
+    m_Localized: About
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33913744384000
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33918710439936
+    m_Localized: Return to Earth
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
