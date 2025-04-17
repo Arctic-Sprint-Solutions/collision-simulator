@@ -2,7 +2,6 @@
 
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.Recorder.OutputPath;
 
 /// <summary>
 /// Controller for the About UI
@@ -10,31 +9,57 @@ using static UnityEditor.Recorder.OutputPath;
 public class AboutController : MonoBehaviour
 {
     private UIDocument AboutUIDocument;
-    private VisualElement _rootElement;
+
     private VisualElement aboutContainer;
-
-
+    private Label introText;
     /// <summary>
     /// Called when the script instance is being loaded.
     /// </summary>
     private void OnEnable()
     {
-        // Get the root visual element of the UI document
-        _rootElement = AboutUIDocument.rootVisualElement;
+        // Get the UI document
+        AboutUIDocument = GetComponent<UIDocument>();
 
-        if (_rootElement == null)
+        if (AboutUIDocument == null)
         {
-            Debug.LogError("Root element is null. Ensure the UIDocument is properly set up.");
+            Debug.LogError("AboutUIDocument not found.");
             return;
         }
 
+        //Get the UI root
         var root = AboutUIDocument.rootVisualElement;
+
+        if (root == null)
+        {
+            Debug.LogError("Root VisualElement not found.");
+            return;
+        }
+
         aboutContainer = root.Q<VisualElement>("AboutContainer");
+
+        introText = root.Q<Label>("introText");
 
 
         if (aboutContainer != null)
         {
-            aboutContainer.style.display = DisplayStyle.Flex; 
+            aboutContainer.style.display = DisplayStyle.Flex;
+        }
+
+        if (introText != null)
+        {
+            introText.style.display = DisplayStyle.Flex;
+            Debug.LogError("introText is null");
+            introText.text =@"New technology and the commercialization of satellite technology 
+has caused more and more satellites to be sent into space...
+
+Test 1...
+
+Test 1...
+
+Test 1...
+
+
+Ect";
         }
     }
 

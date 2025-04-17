@@ -27,6 +27,7 @@ public class DebrisController : MonoBehaviour
 
         // Get UI Root
         var root = uiDocument.rootVisualElement;
+
         if (root == null)
         {
             Debug.LogError("Root VisualElement not found.");
