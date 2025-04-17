@@ -7,14 +7,28 @@
     <Style src="project://database/Assets/UI/Styles/AboutStyles.uss" />
     <Style src="project://database/Assets/UI/Styles/AppStyles.uss" />
 
-    <engine:VisualElement name="AboutContainer" class="full-width-container">
-        <engine:VisualElement name="AboutMenu" class="menu">
-            <engine:VisualElement name="TitleContainer" class="flex-col-start">
-                <engine:Label text="About This Project" name="AboutTitle" class="title my-2" />
-                <engine:Label text="About Orbit Watch" class="subtitle my-2" />
-                <engine:Label text="Your guide to space debris." class="subtitle my-2" style="white-space: normal;" />
-                <engine:Label text="Authors: Arctic Sprint Solutions 2.0" class="subtitle my-2" />
-            </engine:VisualElement>
-        </engine:VisualElement>
+
+    <engine:VisualElement name="AboutContainer" class="container menu full-width-container" style="width: 70%; height: 80%; align-self: center; align-items: flex-start; justify-content: flex-start; align-content: center; background-color: rgba(0, 0, 0, 0.8); margin-top: 237px; margin-right: 100px; margin-bottom: 30px; margin-left: 100px; max-width: 1465px; top: -100px;">
+        <engine:Label text="About Orbital Watch" name="AboutHeadline" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
+        <engine:VisualElement style="height: 40px;" />
+
+        <engine:VisualElement name="about-text-container" class="subtitle" style="width: 1200px; height: 575px; flex-direction: column;">
+
+    <engine:Label text="Introduction" name="AboutHeadline" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
+    <engine:Label text="New technology and the commercialization of satellite technology has caused more and more satellites to be sent into space..." style="white-space: normal; font-size: 18px;" />
+    <engine:VisualElement style="height: 40px;" />
+
+    <engine:Label text="The purpose of this project" name="AboutHeadline" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
+    <engine:Label text="Welcome to Orbit Guard - your guide to space debris." style="white-space: normal; font-size: 18px;" />
+    <engine:VisualElement style="height: 40px;" />
+
+    <engine:Label text="The Road Ahead" name="AboutHeadline" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
+    <engine:Label text="With growing awareness and more research we can begin to determine the effects..." style="white-space: normal; font-size: 18px;" />
+    <engine:VisualElement style="height: 40px;" />
+
+</engine:VisualElement>
+
+
     </engine:VisualElement>
+
 </engine:UXML>
