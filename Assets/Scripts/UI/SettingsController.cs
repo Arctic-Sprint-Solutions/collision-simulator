@@ -3,7 +3,9 @@ using UnityEngine.UIElements;
 using System;
 using System.Collections;
 
-// Controller for handling settings UI and key rebinding
+///<summary>
+///Controller for the settingspage.
+///<summary>
 public class SettingsController : MonoBehaviour
 {
     public UIDocument uiDocument;
@@ -13,26 +15,29 @@ public class SettingsController : MonoBehaviour
     private bool waitingForKey = false;
     private Action<KeyCode> onKeySelected;
 
+    ///<summary>
+    ///Offset start timing to ensure UI is ready.
+    ///<summary>
     private void Start()
     {
-        // Offset start timing to ensure UI is ready
         StartCoroutine(InitUI());
     }
 
+    ///<summary>
+    ///Delay until InputManager is ready, fetches root UI, and handles the rebind button presses.
+    ///<summary>
     private IEnumerator InitUI()
     {
-        // Wait for InputManager to be ready
         while (InputManager.Instance == null || InputManager.Instance.keybinds == null)
         {
             yield return null;
         }
-        // Fetch UI elements
+
         var root = uiDocument.rootVisualElement;
 
         pauseButton = root.Q<Button>("PauseButton");
         restartButton = root.Q<Button>("RestartButton");
 
-        // Button presses triggers a rebind (key update) and UI update
         if (pauseButton != null)
         {
             pauseButton.clicked += () => StartKeyRebind("Pause");
@@ -54,6 +59,9 @@ public class SettingsController : MonoBehaviour
         }
     }
 
+    ///<summary>
+    ///Registers the pressed key.
+    ///<summary>
     private void Update()
     {
         if (!waitingForKey) return;
@@ -69,6 +77,9 @@ public class SettingsController : MonoBehaviour
         }
     }
 
+    ///<summary>
+    ///Handles new binds according to the button pressed.
+    ///<summary>
     private void StartKeyRebind(string action)
     {
         if (InputManager.Instance == null || InputManager.Instance.keybinds == null)
