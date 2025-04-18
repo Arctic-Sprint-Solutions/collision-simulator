@@ -32,6 +32,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AuraSatColllisionScene.unity
     guid: 7b9c80eb55f830f4f9d8e3a95114f44d
+  - enabled: 1
+    path: Assets/Scenes/Cubesat2RuScene.unity
+    guid: b1e9ed4da454cbf45939270a52689e36
+  - enabled: 1
+    path: Assets/Scenes/SettingsScene.unity
+    guid: 5c0ea0910f8c17d4082f2bd8a87273c2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
