@@ -77,8 +77,8 @@ public class CameraManager : MonoBehaviour
         cameras.Clear();
         cameras.AddRange(FindObjectsByType<CinemachineCamera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
 
-        // Sort cameras by priority from lowest to highest
-        cameras = cameras.OrderBy(c => c.Priority.Value).ToList();
+        // Sort cameras by priority from highest to lowest
+        cameras = cameras.OrderByDescending(c => c.Priority.Value).ToList();
         // Set active camera to the first one in the list
         SetActiveCamera(0);
 
