@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1367555956736
-    m_Localized: Main Menu
+    m_Localized: Orbital Watch
     m_Metadata:
       m_Items: []
   - m_Id: 31687747559424
@@ -44,6 +44,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 33918710439936
     m_Localized: Return to Earth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322973603979264
+    m_Localized: Main Menu&#10;
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322975487221760
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323794827730944
+    m_Localized: Restart
     m_Metadata:
       m_Items: []
   references:

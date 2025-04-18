@@ -43,6 +43,18 @@ MonoBehaviour:
     m_Key: LinkReturn
     m_Metadata:
       m_Items: []
+  - m_Id: 322973603979264
+    m_Key: BackToMenuLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322975487221760
+    m_Key: playPauseButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323794827730944
+    m_Key: restartButton
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

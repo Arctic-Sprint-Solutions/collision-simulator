@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1367555956736
-    m_Localized: Hovedmeny
+    m_Localized: Orbital Watch
     m_Metadata:
       m_Items: []
   - m_Id: 31687747559424
@@ -44,6 +44,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 33918710439936
     m_Localized: "G\xE5 tilbake til Jorden"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322973603979264
+    m_Localized: Hovedmeny&#10;
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323794827730944
+    m_Localized: "Start p\xE5 nytt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322975487221760
+    m_Localized: Pause
     m_Metadata:
       m_Items: []
   references:
