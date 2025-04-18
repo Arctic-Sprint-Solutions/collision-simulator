@@ -1,34 +1,22 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:engine="UnityEngine.UIElements"
-             xmlns:editor="UnityEditor.UIElements"
-             noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
-             editor-extension-mode="False">
-
-    <Style src="project://database/Assets/UI/Styles/AboutStyles.uss" />
-    <Style src="project://database/Assets/UI/Styles/AppStyles.uss" />
-
-
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/AboutStyles.uss?fileID=7433441132597879392&amp;guid=c9138bb2da4d4fd4eb4f92eaba6a0393&amp;type=3#AboutStyles" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
     <engine:VisualElement name="AboutContainer" class="container menu full-width-container" style="width: 70%; height: 80%; align-self: center; align-items: flex-start; justify-content: flex-start; align-content: center; background-color: rgba(0, 0, 0, 0.8); margin-top: 237px; margin-right: 100px; margin-bottom: 30px; margin-left: 100px; max-width: 1465px; top: -100px;">
-        <engine:Label text="About Orbital Watch" name="AboutHeadline" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
+        <engine:VisualElement name="about-text-container" class="text-container">
+            
+            <engine:Label name="AboutHeadline" text="About Orbital Watch" class="subtitle" />
+            <engine:Label name="introText" class="body-text" />
+            <engine:VisualElement class="line-break" />
 
+            <engine:Label text="The purpose of this project" name="AboutSubtitle2" class="subtitle" />
+            <engine:Label text="Welcome to Orbit Guard - your guide to space debris." class="body-text" />
+            <engine:VisualElement class="line-break" />
 
-        <engine:VisualElement name="about-text-container" class="subtitle" style="width: 1200px; height: 575px; flex-direction: column;">
+            <engine:Label text="The Road Ahead" name="AboutSubtitle3" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 12px;" />
+            <engine:VisualElement class="line-break" />
 
-    <engine:Label name="introTitle" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
-    <engine:Label name="introText" class="subtitle" style="white-space: normal; font-size: 18px; flex-grow: 1; min-height: 100px;" />
-
-
-    <engine:Label text="The purpose of this project" name="AboutSubtitle2" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
-    <engine:Label text="Welcome to Orbit Guard - your guide to space debris." style="white-space: normal; font-size: 18px;" />
-
-
-    <engine:Label text="The Road Ahead" name="AboutSubtitle3" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
-    <engine:Label text="With growing awareness and more research we can begin to determine the effects..." style="white-space: normal; font-size: 18px;" />
-
-
-</engine:VisualElement>
-
-
+            <engine:Label text="With growing awareness and more research we can begin to determine the effects..." class="body-text" />
+        </engine:VisualElement>
     </engine:VisualElement>
-
 </engine:UXML>
+

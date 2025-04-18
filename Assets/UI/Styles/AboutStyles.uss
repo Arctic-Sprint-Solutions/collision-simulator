@@ -16,23 +16,63 @@
 .title {
     font-size: 40px;
     font-weight: bold;
-    color: rgb(0, 200, 255);
-    margin: 0 0 16px 0;
+    color: rgb(7, 156, 197); /* overriding old rgb(230, 230, 230) */
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 12px;
+    border-left-color: rgba(0, 200, 255, 0);
+    border-right-color: rgba(0, 200, 255, 0);
+    border-top-color: rgba(0, 200, 255, 0);
+    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
     -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Bold.ttf?fileID=12800000&guid=1234567890abcdef1234567890abcdef&type=3#ChakraPetch-Bold");
 }
 
 .subtitle {
     font-size: 20px;
-    color: rgb(230, 230, 230);
-    margin: 8px 0;
+    color: rgb(7, 156, 197); /* overriding old rgb(230, 230, 230) */
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 12px;
+    border-left-color: rgba(0, 200, 255, 0);
+    border-right-color: rgba(0, 200, 255, 0);
+    border-top-color: rgba(0, 200, 255, 0);
+    border-bottom-color: rgba(0, 200, 255, 0);
+    background-color: rgba(0, 0, 0, 0);
     -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
 }
+
+
+.body-text {
+    font-size: 20px;
+    color: rgb(230, 230, 230);
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 20px;
+    min-height: 100px;
+    white-space: normal;
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+}
+
 
 .full-width-container {
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 64px 0;
+}
+
+.text-container {
+    width: 1200px;
+    height: 575px;
+    flex-direction: column;
+    padding: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: flex-start;
 }
 
 .flex-col-start {
@@ -46,3 +86,7 @@
     margin-bottom: 8px;
 }
 
+.line-break {
+    height: 20px;
+    width: 100%;
+}

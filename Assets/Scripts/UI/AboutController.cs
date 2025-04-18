@@ -49,17 +49,13 @@ public class AboutController : MonoBehaviour
         {
             introText.style.display = DisplayStyle.Flex;
             Debug.LogError("introText is null");
-            introText.text =@"New technology and the commercialization of satellite technology 
-has caused more and more satellites to be sent into space...
+            introText.text =@"New technology and the commercialization of satellite technology has 
+caused more and more satellites to be sent into space.
+When objects break apart or collide in space they create what is known 
+as space debris. More research is needed to find the effects space debris
+has on satellites, and spreading awareness is where it starts.
 
-Test 1...
-
-Test 1...
-
-Test 1...
-
-
-Ect";
+";
         }
     }
 
