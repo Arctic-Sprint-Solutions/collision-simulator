@@ -98,6 +98,9 @@ public class MainMenuController : MonoBehaviour
       else if(navLink.name == "ViewSpaceDebris"){
         SimulationManager.Instance.LoadScene("SpaceDebrisScene");
       }
+      else if(navLink.name == "Settings"){
+        SimulationManager.Instance.LoadScene("SettingsScene");
+      }
     }
   }
 }

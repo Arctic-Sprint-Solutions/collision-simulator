@@ -70,6 +70,9 @@ public class SimulationManager : MonoBehaviour
         UIManager.Instance.HideNavBar();
 
         break;
+      case "SettingsScene":
+        UIManager.Instance.ShowNavBar();
+        break;
       case "SpaceDebrisScene":
         UIManager.Instance.ShowNavBar();
         break;
