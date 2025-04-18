@@ -6,10 +6,11 @@
     <engine:VisualElement name="about-text-container" class="text-container">
         <engine:ScrollView style="width: 1200px; height: 575px;">
             <engine:Label name="AboutTitle" text="About Orbital Watch" class="title" />
+            <engine:Label text="Background" name="background" class="subtitle" />
             <engine:Label name="textBlock1" class="body-text" />
             <engine:VisualElement class="line-break" />
 
-            <engine:Label text="The purpose of this project" name="AboutSubtitle2" class="subtitle" />
+            <engine:Label text="About this project" name="AboutSubtitle2" class="subtitle" />
             <engine:Label name="textBlock2" class="body-text" />
             <engine:VisualElement class="line-break" />
 

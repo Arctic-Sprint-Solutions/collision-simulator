@@ -54,12 +54,8 @@ public class AboutController : MonoBehaviour
         if (textBlock1 != null)
         {
             textBlock1.style.display = DisplayStyle.Flex;
-            Debug.LogError("textBlock1 is null");
-            textBlock1.text =@"New technology and the commercialization of satellite technology has 
-caused more and more satellites to be sent into space.
-When objects break apart or collide in space they create what is known 
-as space debris. More research is needed to find the effects space debris
-has on satellites, and spreading awareness is where it starts.
+            textBlock1.text =@"New technology and the commercialization of satellite technology has caused more and more satellites to be sent into space.
+When objects break apart or collide in space they create what is known as space debris. More research is needed to find the effects space debris has on satellites, and spreading awareness is where it starts.
 
 ";
         }
@@ -68,12 +64,12 @@ has on satellites, and spreading awareness is where it starts.
         if (textBlock2 != null)
         {
             textBlock2.style.display = DisplayStyle.Flex;
-            Debug.LogError("textBlock1 is null");
-            textBlock2.text = @"More text here 
+            textBlock2.text = @"During the spring of 2025 a project was added to the Bachelor of Computer Science at UiT The Arctic University of Norway called “Visualization of collisions between satellites and space debris”. The project’s main requirements were to create a visual tool which could simulate simple collisions between satellites and space debris. The tool was to be used during teaching so that more students (and other potential stakeholders) can learn more about the effects of space debris. 
 
-Ect
+The head advisor the project was Frode Nesje, Assistant Professor at the Department of Computer Science and Computational Engineering at UiT.
 
-Ect
+The project was taken on by the dev team of Arctic Sprint Solutions 2.0, consisting of four graduating students in the field of Bachelor of Computer Science (Datateknikk): Madeleine Woodbury, Ola Giæver, Gabriel Hallstensen and Ingrid Ledingham. 
+
 
 ";
         }
@@ -81,7 +77,6 @@ Ect
         if (textBlock3 != null)
         {
             textBlock3.style.display = DisplayStyle.Flex;
-            Debug.LogError("textBlock1 is null");
             textBlock3.text = @"And even more text here 
 
 Ect
