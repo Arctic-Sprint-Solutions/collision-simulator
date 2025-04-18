@@ -4,18 +4,17 @@
     <engine:VisualElement name="AboutContainer" class="container menu full-width-container" style="width: 70%; height: 80%; align-self: center; align-items: flex-start; justify-content: flex-start; align-content: center; background-color: rgba(0, 0, 0, 0.8); margin-top: 237px; margin-right: 100px; margin-bottom: 30px; margin-left: 100px; max-width: 1465px; top: -100px;">
         <engine:VisualElement name="about-text-container" class="text-container">
             
-            <engine:Label name="AboutHeadline" text="About Orbital Watch" class="subtitle" />
-            <engine:Label name="introText" class="body-text" />
+            <engine:Label name="AboutTitle" text="About Orbital Watch" class="title" />
+            <engine:Label name="textBlock1" class="body-text" />
             <engine:VisualElement class="line-break" />
 
             <engine:Label text="The purpose of this project" name="AboutSubtitle2" class="subtitle" />
-            <engine:Label text="Welcome to Orbit Guard - your guide to space debris." class="body-text" />
+            <engine:Label name="textBlock2" class="body-text" />
             <engine:VisualElement class="line-break" />
 
-            <engine:Label text="The Road Ahead" name="AboutSubtitle3" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(7, 156, 197); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 12px;" />
+            <engine:Label text="The Road Ahead" name="AboutSubtitle3" class="subtitle"/>
+            <engine:Label name="textBlock3" class="body-text" />
             <engine:VisualElement class="line-break" />
-
-            <engine:Label text="With growing awareness and more research we can begin to determine the effects..." class="body-text" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
