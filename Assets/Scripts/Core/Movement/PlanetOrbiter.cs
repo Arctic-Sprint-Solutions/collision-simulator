@@ -4,7 +4,7 @@ using UnityEngine;
 // <summary>
 // This script controls the orbital movement of a satellite around a planet object.
 // </summary>
-public class OrbitalMovement : MonoBehaviour
+public class PlanetOrbiter : MonoBehaviour
 {
     // The planet object to orbit around
     [SerializeField] private Transform planet;

@@ -36,11 +36,8 @@ public class CollisionHandler : MonoBehaviour
     /// </summary>
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
         if(!collisionDetected)
         {
-            Debug.Log("Collision detected with: " + collision.gameObject.name);
-
             Rigidbody rb = GetComponent<Rigidbody>();
             if(rb != null && destroyRigidbody)
             {
@@ -49,6 +46,8 @@ public class CollisionHandler : MonoBehaviour
             }
 
             ActivateFragments();
+
+            collisionDetected = true;
         }
     }
 
@@ -59,7 +58,6 @@ public class CollisionHandler : MonoBehaviour
     {
         if (originalObject != null && fragmentObject != null)
         {
-            collisionDetected = true;
             // Disable the original cube
             originalObject.SetActive(false);
             
