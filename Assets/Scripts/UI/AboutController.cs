@@ -11,9 +11,13 @@ public class AboutController : MonoBehaviour
     private UIDocument AboutUIDocument;
 
     private VisualElement aboutContainer;
+
+    private Label textBlock0;
     private Label textBlock1;
     private Label textBlock2;
     private Label textBlock3;
+    private Label textBlock4;
+    private Label textBlock5;
 
 
     /// <summary>
@@ -41,14 +45,28 @@ public class AboutController : MonoBehaviour
 
         aboutContainer = root.Q<VisualElement>("AboutContainer");
 
+        textBlock0 = root.Q<Label>("textBlock0");
         textBlock1 = root.Q<Label>("textBlock1");
         textBlock2 = root.Q<Label>("textBlock2");
         textBlock3 = root.Q<Label>("textBlock3");
+        textBlock4 = root.Q<Label>("textBlock4");
+        textBlock5 = root.Q<Label>("textBlock5");
+        
 
 
         if (aboutContainer != null)
         {
             aboutContainer.style.display = DisplayStyle.Flex;
+        }
+
+        
+        if (textBlock0 != null)
+        {
+            textBlock0.style.display = DisplayStyle.Flex;
+            textBlock0.text = @"Context
+
+
+";
         }
 
         if (textBlock1 != null)
@@ -78,6 +96,24 @@ The project was taken on by the dev team of Arctic Sprint Solutions 2.0, consist
         {
             textBlock3.style.display = DisplayStyle.Flex;
             textBlock3.text = @"The main challenge of simulating collisons between space debris is the lack of research on how collisions make objects behave in space. Objects moving through orbit typically travel at extremely high speeds - as much as 7 kilometers per second (25 000 kilomters/hour). Comparatively a rifle bullet moves at the speed of 1.2 kilomters/second, a mere fraction of this. When two objects collide in orbit at such velocities, the realtive collision speed might reach as much as 15 kilomters/second (54 000 kilometers/hour). Simulating such high speed collisions can therefore be difficult. Both when simulating objects through physical experiments, as well as when visualizing collisions with tools such as Orbit Watch. It is hard to mimic collision effects that there is little to no real-world data available.
+
+
+";
+        }
+
+        if (textBlock4 != null)
+        {
+            textBlock4.style.display = DisplayStyle.Flex;
+            textBlock4.text = @"In order to create a visual tool for space debris collisions, it has been important to set aside attempts to capture how objects actually behave in space. The project has been commissionedto simulate simple collisions, not to provide accurate representations of how objects physically behave in orbit when colliding. 
+
+
+";
+        }
+
+        if (textBlock5 != null)
+        {
+            textBlock5.style.display = DisplayStyle.Flex;
+            textBlock5.text = @"In order to create a visual tool for space debris collisions, it has been important to set aside attempting to capture how objects actually behave in space. The project has been comissioned to simulate simple collisions, not accurate representations of how objects physically behave in orbit when colliding.
 
 
 ";

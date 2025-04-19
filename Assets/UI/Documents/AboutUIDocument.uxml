@@ -6,7 +6,9 @@
     <engine:VisualElement name="about-text-container" class="text-container">
         <engine:ScrollView style="width: 1200px; height: 575px;">
             <engine:Label name="AboutTitle" text="About Orbital Watch" class="title" />
-            <engine:Label text="Background" name="background" class="subtitle" />
+            <engine:Label name="textBlock0" class="body-text" />
+
+            <engine:Label text="About Orbital Watch" name="background" class="subtitle" />
             <engine:Label name="textBlock1" class="body-text" />
             <engine:VisualElement class="line-break" />
 
@@ -17,6 +19,15 @@
             <engine:Label text="The Challenge of Simulating Space Debris Collisions" name="AboutSubtitle3" class="subtitle"/>
             <engine:Label name="textBlock3" class="body-text" />
             <engine:VisualElement class="line-break" />
+
+            <engine:Label text="The Delimitations of this project" name="AboutSubtitle4" class="subtitle"/>
+            <engine:Label name="textBlock4" class="body-text" />
+            <engine:VisualElement class="line-break" />
+
+            <engine:Label text="The Road Ahead" name="AboutSubtitle5" class="subtitle"/>
+            <engine:Label name="textBlock5" class="body-text" />
+            <engine:VisualElement class="line-break" />
+
         </engine:ScrollView>
         </engine:VisualElement>
     </engine:VisualElement>
