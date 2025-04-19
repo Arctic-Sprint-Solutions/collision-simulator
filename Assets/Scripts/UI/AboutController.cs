@@ -86,10 +86,11 @@ public class AboutController : MonoBehaviour
         {
             textBlock2.style.display = DisplayStyle.Flex;
             textBlock2.text = @"During the spring of 2025 a project was added to the Bachelor of Computer Science at UiT The Arctic University of Norway called “Visualization of collisions between satellites and space debris”. The project’s main requirements were to create a visual tool which could simulate simple collisions between satellites and space debris. The tool was to be used during teaching so that more students (and other potential stakeholders) can learn more about the effects of space debris. 
+ 
+The client requesting the project was Pål Gunnar Ellingsen, an Associate professor within satelite technology and remote sensing at the Department of Electrical Engineering at UiT. The head advisor the project was Frode Nesje, Assistant Professor at the Department of Computer Science and Computational Engineering at UiT.
 
-The head advisor the project was Frode Nesje, Assistant Professor at the Department of Computer Science and Computational Engineering at UiT.
+The project was taken on by the dev team of Arctic Sprint Solutions 2.0, consisting of four graduating students in the field of Bachelor of Computer Science (Datateknikk) at UiT: Madeleine Woodbury, Ola Giæver, Gabriel Halstensen and Ingrid Ledingham. 
 
-The project was taken on by the dev team of Arctic Sprint Solutions 2.0, consisting of four graduating students in the field of Bachelor of Computer Science (Datateknikk): Madeleine Woodbury, Ola Giæver, Gabriel Hallstensen and Ingrid Ledingham. 
 
 
 ";
