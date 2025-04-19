@@ -63,8 +63,7 @@ public class AboutController : MonoBehaviour
         if (textBlock0 != null)
         {
             textBlock0.style.display = DisplayStyle.Flex;
-            textBlock0.text = @"Context
-
+            textBlock0.text = @"New technology and the commercialization of satellite systems have led to an increasing number of satellites being launched into space. When objects break apart or collide in orbit, they create what is known as space debris. More research is needed to understand the effects space debris has on satellites, but raising awareness is where it begins.
 
 ";
         }
@@ -72,8 +71,12 @@ public class AboutController : MonoBehaviour
         if (textBlock1 != null)
         {
             textBlock1.style.display = DisplayStyle.Flex;
-            textBlock1.text =@"New technology and the commercialization of satellite technology has caused more and more satellites to be sent into space.
-When objects break apart or collide in space they create what is known as space debris. More research is needed to find the effects space debris has on satellites, and spreading awareness is where it starts.
+            textBlock1.text = @"Orbital Watch is a visual tool created to simulate simple collisions between satellites and space debris. Developed using the Unity game engine and Blender for 3D modeling, Orbital Watch provides a visual representation of collisions in space. Satellite models have been imported from NASA’s publicly available 3D model library.
+
+• Show students the growing challenge of space debris 
+• Observe collisions from different angles and how they affect various satellites  
+• Learn how space debris is a growing concern and why further research is needed"";
+
 
 ";
         }
@@ -113,7 +116,9 @@ The project was taken on by the dev team of Arctic Sprint Solutions 2.0, consist
         if (textBlock5 != null)
         {
             textBlock5.style.display = DisplayStyle.Flex;
-            textBlock5.text = @"In order to create a visual tool for space debris collisions, it has been important to set aside attempting to capture how objects actually behave in space. The project has been comissioned to simulate simple collisions, not accurate representations of how objects physically behave in orbit when colliding.
+            textBlock5.text = @"Although Orbital Watch was created to simulate simple collisions, it holds potential for further development — possibly as part of a Master of Applied Science assignment. Future improvements could include more research into real space physics, enabling more accurate depictions of collisions in orbit. One might also consider experimenting with more advanced game engines, such as Unreal, to enhance the graphical quality and allow for greater customization.
+
+Further development would likely require additional time and resources to reach a higher level of simulation fidelity. But much like in the world of video games, there’s always room for a sequel — one with higher resolution and even more content.
 
 
 ";
