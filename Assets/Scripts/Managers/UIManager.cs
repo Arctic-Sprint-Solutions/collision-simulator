@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     private Button _restartBtn;
     private VisualElement _speedToggleButton;
     private Label _speedLabel;
+    private Label _speedLeftArrow;
+    private Label _speedRightArrow;
 
     private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
     private int _currentTimescaleIndex = 2;
@@ -109,6 +111,8 @@ public class UIManager : MonoBehaviour
         _restartBtn = _collisionUI.Q<Button>("restartButton");
         _speedToggleButton = _collisionUI.Q<VisualElement>("speedToggleButton");
         _speedLabel = _speedToggleButton.Q<Label>("speedLabel");
+        _speedLeftArrow = _speedToggleButton.Q<Label>("speedLeftArrow");
+        _speedRightArrow = _speedToggleButton.Q<Label>("speedRightArrow");
 
         // Hide Unity default classes
         _playPauseBtn.RemoveFromClassList("unity-button");
@@ -120,21 +124,12 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
 
-        UpdateSpeedButtonText();
+        _speedLeftArrow.RegisterCallback<ClickEvent>(_ => DecreaseTimescale());
+        _speedRightArrow.RegisterCallback<ClickEvent>((_ => IncreaseTimescale()));
         _speedToggleButton.RegisterCallback<PointerDownEvent>(evt =>
         {
-            switch (evt.button)
-            {
-                case (int)MouseButton.LeftMouse:
-                    IncreaseTimescale();
-                    break;
-                case (int)MouseButton.RightMouse:
-                    DecreaseTimescale();
-                    break;
-                case (int)MouseButton.MiddleMouse:
-                    ResetTimescale();
-                    break;
-            }
+            if (evt.button == (int)MouseButton.MiddleMouse)
+                ResetTimescale();
         });
     }
 
