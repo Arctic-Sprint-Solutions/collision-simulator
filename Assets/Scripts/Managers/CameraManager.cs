@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Unity.Cinemachine;
+using UnityEngine.Playables;
 
 
 
@@ -12,6 +13,10 @@ public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
     [SerializeField] CameraController cameraController;
+    /// <summary>
+    /// Reference to the PlayableDirector component for timeline control
+    /// </summary>
+    private PlayableDirector playableDirector;
 
 
     // Cameras - Cinemachine
@@ -60,6 +65,9 @@ public class CameraManager : MonoBehaviour
     {
 
         cameraController?.HideDropdown();
+
+        // Find the PlayableDirector component in the scene
+        playableDirector = FindFirstObjectByType<PlayableDirector>();
         
         FindCamerasInScene();
         if(cameras.Count > 1)
@@ -97,25 +105,35 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Disables the PlayableDirector component
+    /// </summary>
+    private void DisablePlayableDirector()
+    {
+        if (playableDirector != null && playableDirector.enabled)
+        {
+            playableDirector.enabled = false;
+        }
+    }
 
     /// <summary>
     /// Sets the active camera based on index
     /// </summary>
-
-public void SetActiveCamera(int index)
-{
-    if (index < 0 || index >= cameras.Count) return;
-
-    for (int i = 0; i < cameras.Count; i++)
+    public void SetActiveCamera(int index)
     {
-        cameras[i].enabled = (i == index);
+        // Disable the PlayableDirector if it exists
+        DisablePlayableDirector();
+
+        if (index < 0 || index >= cameras.Count) return;
+
+        for (int i = 0; i < cameras.Count; i++)
+        {
+            cameras[i].enabled = (i == index);
+        }
+
+        activeCameraIndex = index;
+        Debug.Log($"Active Camera: {cameras[activeCameraIndex].name}");
     }
-
-    activeCameraIndex = index;
-    Debug.Log($"Active Camera: {cameras[activeCameraIndex].name}");
-    }
-
-
 
 }
 

@@ -4017,6 +4017,62 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &308638137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 308638139}
+  - component: {fileID: 308638138}
+  m_Layer: 0
+  m_Name: Camera Director
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!320 &308638138
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308638137}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 196249e2920a546339a3ea881cfe0ca2, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 3469217198451323899, guid: 196249e2920a546339a3ea881cfe0ca2, type: 2}
+    value: {fileID: 1015609678}
+  m_ExposedReferences:
+    m_References:
+    - c1f6e161fa8354779aff0e2c327edf43: {fileID: 761459419}
+    - e9c517916277444f788e7a27d0683491: {fileID: 1776449151}
+    - 19d1f163a590448b0b3cc3ee88da6a3f: {fileID: 1995906849}
+    - dd6f4e79668a94027aaa2158ccb22a75: {fileID: 1776449151}
+    - 1c29964921136451a9fae4fcacf1aece: {fileID: 1995906849}
+--- !u!4 &308638139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308638137}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 118.62, y: 1.4145827, z: -0.8840519}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &328417745
 Mesh:
   m_ObjectHideFlags: 0
@@ -11659,7 +11715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 1
+    m_Value: 2
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -17806,7 +17862,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 45
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -17832,8 +17888,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015609673}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0006000632, y: -0.99939424, z: -0.014496742, w: -0.031633213}
-  m_LocalPosition: {x: -12.5, y: 112.37, z: 67.68}
+  m_LocalRotation: {x: 0.13238408, y: 0.50768995, z: -0.0792939, w: 0.84760714}
+  m_LocalPosition: {x: 112.810005, y: 3.52, z: -3.9899998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30344,7 +30400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 2
+    m_Value: 3
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -34768,7 +34824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 3
+    m_Value: 1
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -37527,3 +37583,4 @@ SceneRoots:
   - {fileID: 1261027335}
   - {fileID: 1381956074}
   - {fileID: 1893692712}
+  - {fileID: 308638139}
