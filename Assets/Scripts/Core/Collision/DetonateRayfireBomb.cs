@@ -5,9 +5,9 @@ using RayFire;
 // <summary>
 // This script is used to detonate a RayfireBomb
 // </summary>
-public class SatelliteExplosion : MonoBehaviour
+public class DetonateRayfireBomb : MonoBehaviour
 {
-    // Reference to the RayfireBomb and RayfireRigid components
+    // Reference to the RayfireBomb component
     [SerializeField] RayfireBomb bomb;
 
     private bool isDetonated = false;

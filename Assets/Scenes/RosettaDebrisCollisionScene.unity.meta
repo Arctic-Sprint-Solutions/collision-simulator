@@ -1,8 +1,9 @@
 fileFormatVersion: 2
-guid: 8c148a5aa2551458ca73f14f71609f05
-NativeFormatImporter:
+guid: faa3f19549d944d8f8833e1e10da2b07
+labels:
+- CollisionScene
+DefaultImporter:
   externalObjects: {}
-  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

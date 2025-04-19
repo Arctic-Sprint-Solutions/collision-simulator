@@ -19,5 +19,5 @@ MonoBehaviour:
   launchYear: 2004
   prefabName: Rosetta
   previewImage: {fileID: 21300000, guid: 6c9f5c6a8b9d34e2e9026bff535badf5, type: 3}
-  debrisSceneName: 
+  debrisSceneName: RosettaDebrisCollisionScene
   satelliteSceneName: RosettaCollisionScene
