@@ -14,7 +14,7 @@
             <engine:Label name="textBlock2" class="body-text" />
             <engine:VisualElement class="line-break" />
 
-            <engine:Label text="The Road Ahead" name="AboutSubtitle3" class="subtitle"/>
+            <engine:Label text="The Challenge of Simulating Space Debris Collisions" name="AboutSubtitle3" class="subtitle"/>
             <engine:Label name="textBlock3" class="body-text" />
             <engine:VisualElement class="line-break" />
         </engine:ScrollView>

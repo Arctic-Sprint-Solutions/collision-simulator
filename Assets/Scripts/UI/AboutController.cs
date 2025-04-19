@@ -77,11 +77,8 @@ The project was taken on by the dev team of Arctic Sprint Solutions 2.0, consist
         if (textBlock3 != null)
         {
             textBlock3.style.display = DisplayStyle.Flex;
-            textBlock3.text = @"And even more text here 
+            textBlock3.text = @"The main challenge of simulating collisons between space debris is the lack of research on how collisions make objects behave in space. Objects moving through orbit typically travel at extremely high speeds - as much as 7 kilometers per second (25 000 kilomters/hour). Comparatively a rifle bullet moves at the speed of 1.2 kilomters/second, a mere fraction of this. When two objects collide in orbit at such velocities, the realtive collision speed might reach as much as 15 kilomters/second (54 000 kilometers/hour). Simulating such high speed collisions can therefore be difficult. Both when simulating objects through physical experiments, as well as when visualizing collisions with tools such as Orbit Watch. It is hard to mimic collision effects that there is little to no real-world data available.
 
-Ect
-
-Ect
 
 ";
         }
