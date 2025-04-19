@@ -17,7 +17,7 @@ MonoBehaviour:
   leoInfo: 320
   weight: 400
   launchYear: 1989
-  prefabName: Acrim
-  previewImage: {fileID: 21300000, guid: 24c9f8ec1a6c64cdba66d78de62e6611, type: 3}
+  prefabName: acrimsat_LP
+  previewImage: {fileID: 21300000, guid: 6b0a8a271aa4342029a1f732a2bdb368, type: 3}
   debrisSceneName: 
   satelliteSceneName: 

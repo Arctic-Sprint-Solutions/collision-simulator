@@ -89,7 +89,8 @@ public class MainMenuController : MonoBehaviour
      //Scene map dictionrary - maps nav links to scene names
     { "LoadSatellites", "SatellitesGridScene" },
     { "ViewSpaceDebris", "SpaceDebrisScene" },
-    { "About", "AboutScene" }
+    { "About", "AboutScene" },
+    {"Settings", "SettingsScene"}
 };
 
     private void OnNavLinkClicked(VisualElement navLink)
