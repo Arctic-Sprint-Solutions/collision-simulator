@@ -68,8 +68,13 @@ public class CameraManager : MonoBehaviour
 
         // Find the PlayableDirector component in the scene
         playableDirector = FindFirstObjectByType<PlayableDirector>();
-        
+
         FindCamerasInScene();
+        if(playableDirector == null)
+        {
+            // Set active camera to the first one in the list
+            SetActiveCamera(0);
+        }
         if(cameras.Count > 1)
         {
             NotifyUI();
@@ -87,8 +92,6 @@ public class CameraManager : MonoBehaviour
 
         // Sort cameras by priority from highest to lowest
         cameras = cameras.OrderByDescending(c => c.Priority.Value).ToList();
-        // Set active camera to the first one in the list
-        SetActiveCamera(0);
 
         Debug.Log($"Found {cameras.Count} Second check afterr list - Cinemachine cameras in the scene.");
     }
@@ -108,11 +111,12 @@ public class CameraManager : MonoBehaviour
     /// <summary>
     /// Disables the PlayableDirector component
     /// </summary>
-    private void DisablePlayableDirector()
+    public void DisablePlayableDirector()
     {
         if (playableDirector != null && playableDirector.enabled)
         {
             playableDirector.enabled = false;
+            Debug.Log("PlayableDirector disabled.");
         }
     }
 
@@ -121,9 +125,6 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     public void SetActiveCamera(int index)
     {
-        // Disable the PlayableDirector if it exists
-        DisablePlayableDirector();
-
         if (index < 0 || index >= cameras.Count) return;
 
         for (int i = 0; i < cameras.Count; i++)
