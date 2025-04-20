@@ -1,0 +1,104 @@
+.menu {
+    padding: 32px;
+    transition: all 0.2s;
+    border-width: 3px;
+    border-color: rgb(0, 200, 255);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: auto;
+    height: auto;
+    max-width: 600px;
+    align-items: flex-start;
+}
+
+.title {
+    font-size: 30px;
+    color: rgb(7, 156, 197); /* overriding old rgb(230, 230, 230) */
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 12px;
+    border-left-color: rgba(0, 200, 255, 0);
+    border-right-color: rgba(0, 200, 255, 0);
+    border-top-color: rgba(0, 200, 255, 0);
+    border-bottom-color: rgba(0, 200, 255, 0);
+    background-color: rgba(0, 0, 0, 0);
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+}
+
+.subtitle {
+    font-size: 20px;
+    color: rgb(7, 156, 197); /* overriding old rgb(230, 230, 230) */
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 12px;
+    border-left-color: rgba(0, 200, 255, 0);
+    border-right-color: rgba(0, 200, 255, 0);
+    border-top-color: rgba(0, 200, 255, 0);
+    border-bottom-color: rgba(0, 200, 255, 0);
+    background-color: rgba(0, 0, 0, 0);
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+}
+
+
+.body-text {
+    font-size: 20px;
+    color: rgb(230, 230, 230);
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 20px;
+    min-height: 100px;
+    white-space: normal;
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+}
+
+
+
+.full-width-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 64px 0;
+}
+
+.text-container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.flex-col-start {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.my-2 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.line-break {
+    height: 20px;
+    width: 100%;
+}
+
+.scroll {
+    height: 90%;
+    width: 90%;
+    color: rgba(0, 0, 0, 0); /* overriding old rgb(230, 230, 230) */
+}
+
+.scroll-scrollbar unity-scrollbar {
+    width: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.scroll-sctollbar-thumb unity-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+}
