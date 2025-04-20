@@ -1,0 +1,27 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/AboutStyles.uss?fileID=7433441132597879392&amp;guid=c9138bb2da4d4fd4eb4f92eaba6a0393&amp;type=3#AboutStyles" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <engine:VisualElement name="AboutContainer" class="container menu full-width-container" style="width: 70%; height: 80%; align-self: center; align-items: flex-start; justify-content: flex-start; align-content: center; background-color: rgba(0, 0, 0, 0.8); margin-top: 237px; margin-right: 100px; margin-bottom: 30px; margin-left: 100px; max-width: 1465px; top: -100px;">
+        <engine:VisualElement name="about-text-container" class="text-container" style="padding-top: 32px; padding-right: 32px; padding-bottom: 32px; padding-left: 32px;">
+            <engine:ScrollView style="width: 100%; height: 100%;">
+                <engine:Label name="AboutTitle" text="About Orbital Watch" class="title" />
+                <engine:Label name="textBlock0" class="body-text" />
+                <engine:Label text="About Orbital Watch" name="background" class="subtitle" />
+                <engine:Label name="textBlock1" class="body-text" />
+                <engine:VisualElement class="line-break" />
+                <engine:Label text="About this project" name="AboutSubtitle2" class="subtitle" />
+                <engine:Label name="textBlock2" class="body-text" />
+                <engine:VisualElement class="line-break" />
+                <engine:Label text="The Challenge of Simulating Space Debris Collisions" name="AboutSubtitle3" class="subtitle" />
+                <engine:Label name="textBlock3" class="body-text" />
+                <engine:VisualElement class="line-break" />
+                <engine:Label text="The Delimitations of this project" name="AboutSubtitle4" class="subtitle" />
+                <engine:Label name="textBlock4" class="body-text" />
+                <engine:VisualElement class="line-break" />
+                <engine:Label text="The Road Ahead" name="AboutSubtitle5" class="subtitle" />
+                <engine:Label name="textBlock5" class="body-text" />
+                <engine:VisualElement class="line-break" />
+            </engine:ScrollView>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
