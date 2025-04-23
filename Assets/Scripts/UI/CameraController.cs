@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 
 /// <summary>
-/// Initializes the singleton instance and ensures that it persists across scenes
+/// Singleton class for camera dropdown UI and ensures that it persists across scenes
 /// </summary>
 public class CameraController : MonoBehaviour
 {
@@ -95,6 +95,7 @@ public class CameraController : MonoBehaviour
 
     /// <summary>
     /// Populates the dropdown based on priority
+    /// <param name="cameraNames">A list of camera names to populate the dropdown with.</param>
     /// </summary>
     private void PopulateDropdown(List<string> cameraNames)
     {
@@ -116,6 +117,7 @@ public class CameraController : MonoBehaviour
 
     /// <summary>
     /// Handles camera selection from the dropdown
+    ///  <param name="selectedCameraName">The selected camera name in the camera dropdown UI.</param>
     /// </summary>
     private void OnCameraChanged(string selectedCameraName)
     {
