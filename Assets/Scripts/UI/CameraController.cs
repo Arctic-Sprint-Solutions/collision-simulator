@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 
 /// <summary>
-/// Initializes the singleton instance and ensures that it persists across scenes
+/// Singleton class for camera dropdown UI and ensures that it persists across scenes
 /// </summary>
 public class CameraController : MonoBehaviour
 {
@@ -23,6 +23,11 @@ public class CameraController : MonoBehaviour
     //Camera priorities enabling switch
     private int defaultPriority = 10;
     private int activePriority = 20;
+
+    /// <summary>
+    /// Flag to check if the initial value is set and prevent disabling the playable director
+    /// </summary>
+    private bool _isInititalValue = true;
 
 
     private void Awake()
@@ -90,6 +95,7 @@ public class CameraController : MonoBehaviour
 
     /// <summary>
     /// Populates the dropdown based on priority
+    /// <param name="cameraNames">A list of camera names to populate the dropdown with.</param>
     /// </summary>
     private void PopulateDropdown(List<string> cameraNames)
     {
@@ -99,6 +105,9 @@ public class CameraController : MonoBehaviour
         _cameraDropdown.choices = cameraNames;
         _cameraDropdown.value = cameraNames[0]; 
         _cameraDropdown.label = "Select Camera";
+
+        // Updat the flag to allow disabling the playable director
+        _isInititalValue = false;
         // _cameraDropdown.style.display = DisplayStyle.Flex;
         ShowDropdown();
 
@@ -108,12 +117,17 @@ public class CameraController : MonoBehaviour
 
     /// <summary>
     /// Handles camera selection from the dropdown
+    ///  <param name="selectedCameraName">The selected camera name in the camera dropdown UI.</param>
     /// </summary>
     private void OnCameraChanged(string selectedCameraName)
     {
         Debug.Log($"CameraController: OnCameraChanged called with selectedCameraName: {selectedCameraName}");
         int selectedIndex = _cameraDropdown.choices.IndexOf(selectedCameraName);
         // OnCameraSelected?.Invoke(selectedIndex);
+        if(!_isInititalValue) 
+        {
+            CameraManager.Instance.DisablePlayableDirector();
+        }
         CameraManager.Instance.SetActiveCamera(selectedIndex);
     }
 

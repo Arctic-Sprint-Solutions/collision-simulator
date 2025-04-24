@@ -20,7 +20,7 @@ public class PersistEarth : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name != "MainMenu" && scene.name != "SpaceDebrisScene")
+        if (scene.name != "MainMenu" && scene.name != "SpaceDebrisScene" && scene.name != "SettingsScene")
         {
             Destroy(gameObject);
         }
