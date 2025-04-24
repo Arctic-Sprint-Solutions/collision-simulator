@@ -4,12 +4,11 @@ using System;
 using System.Collections;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.Tables;
 using System.Collections.Generic;
 
-///<summary>
-///Controller for the settingspage.
-///<summary>
+/// <summary>
+/// Controller for the settings page, handling key rebinding and language selection.
+/// </summary>
 public class SettingsController : MonoBehaviour
 {
     public UIDocument uiDocument;
@@ -20,19 +19,17 @@ public class SettingsController : MonoBehaviour
     private bool waitingForKey = false;
     private Action<KeyCode> onKeySelected;
 
-    ///<summary>
-    ///Offset start timing to ensure UI is ready.
-    ///<summary>
     private void Start()
     {
-        StartCoroutine(InitUI());
-        StartCoroutine(LoadSavedLanguage());
+        // Start two coroutines: one for UI (keybinds) and one for ensuring localization is ready.
+        StartCoroutine(WaitForInputManager());
+        StartCoroutine(WaitForLocalization());
     }
 
-    ///<summary>
-    ///Delay until InputManager is ready, fetches root UI, and handles the rebind button presses.
-    ///<summary>
-    private IEnumerator InitUI()
+    /// <summary>
+    /// Wait until the InputManager and its keybinds are initialized, then set up UI elements.
+    /// </summary>
+    private IEnumerator WaitForInputManager()
     {
         while (InputManager.Instance == null || InputManager.Instance.keybinds == null)
         {
@@ -66,26 +63,18 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    ///<summary>
-    ///
-    ///<summary>
-    private IEnumerator LoadSavedLanguage()
+    /// <summary>
+    /// Wait until the localization system and LocalizationManager are ready.
+    /// </summary>
+    private IEnumerator WaitForLocalization()
     {
         yield return LocalizationSettings.InitializationOperation;
-
-        string savedLang = PlayerPrefs.GetString("Language", "en");
-        var locale = LocalizationSettings.AvailableLocales.Locales
-            .Find(l => l.Identifier.Code == savedLang);
-
-        if (locale != null)
+        if (LocalizationManager.Instance != null)
         {
-            LocalizationSettings.SelectedLocale = locale;
+            yield return new WaitUntil(() => LocalizationManager.Instance.IsLocalizationReady);
         }
     }
 
-    ///<summary>
-    ///Registers the pressed key.
-    ///<summary>
     private void Update()
     {
         if (!waitingForKey) return;
@@ -101,9 +90,9 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    ///<summary>
-    ///Handles new binds according to the button pressed.
-    ///<summary>
+    /// <summary>
+    /// Starts the key rebinding procedure for a given action.
+    /// </summary>
     private void StartKeyRebind(string action)
     {
         if (InputManager.Instance == null || InputManager.Instance.keybinds == null)
@@ -138,34 +127,39 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    ///<summary>
-    ///Handles the binding of Localization and the settings UI
-    ///<summary>
+    /// <summary>
+    /// Configure the language dropdown to display all available languages and handle selection.
+    /// </summary>
     private void InitLanguageDropdown(VisualElement root)
     {
         languageDropdown = root.Q<DropdownField>("LanguageDropdown");
+        if (languageDropdown == null)
+        {
+            Debug.LogError("LanguageDropdown not found!");
+            return;
+        }
 
         var locales = LocalizationSettings.AvailableLocales.Locales;
         List<string> localeNames = new List<string>();
 
         foreach (var locale in locales)
         {
-            localeNames.Add(locale.LocaleName); // This is the readable name shown in the dropdown
+            // Use the human-friendly LocaleName in the dropdown.
+            localeNames.Add(locale.LocaleName);
         }
 
         languageDropdown.choices = localeNames;
 
-        // Set current selection
+        // Set the dropdown's current value based on the currently selected locale.
         var currentLocale = LocalizationSettings.SelectedLocale;
-        languageDropdown.value = currentLocale?.LocaleName ?? localeNames[0];
+        languageDropdown.value = currentLocale != null ? currentLocale.LocaleName : localeNames[0];
 
-        // Handle selection changes
+        // When the user selects a new language, update via the LocalizationManager.
         languageDropdown.RegisterValueChangedCallback(evt =>
         {
             var selectedName = evt.newValue;
             var selectedLocale = locales.Find(l => l.LocaleName == selectedName);
-
-            if (selectedLocale != null)
+            if (selectedLocale != null && LocalizationManager.Instance != null)
             {
                 LocalizationManager.Instance.SetLanguage(selectedLocale.Identifier.Code);
             }

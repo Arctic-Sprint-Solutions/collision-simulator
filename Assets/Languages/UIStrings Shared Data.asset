@@ -44,15 +44,79 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 322973603979264
-    m_Key: BackToMenuLabel
+    m_Key: SettingsTitle
     m_Metadata:
       m_Items: []
   - m_Id: 322975487221760
-    m_Key: playPauseButton
+    m_Key: KeybindSubtitle
     m_Metadata:
       m_Items: []
   - m_Id: 323794827730944
+    m_Key: PauseKeybindLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637173462392832
+    m_Key: RestartKeybindLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637435669307392
+    m_Key: LanguageSubtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639493038333952
+    m_Key: BackToMenuLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639631513280512
     m_Key: restartButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645022120861696
+    m_Key: AboutTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645027531513856
+    m_Key: textBlock0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645028361986048
+    m_Key: background
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645558383599616
+    m_Key: textBlock1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645560266842112
+    m_Key: AboutSubtitle2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645562233970688
+    m_Key: textBlock2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645564045910016
+    m_Key: AboutSubtitle3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645565866237952
+    m_Key: textBlock3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645567686565888
+    m_Key: AboutSubtitle4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645569347510272
+    m_Key: textBlock4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645571188809728
+    m_Key: AboutSubtitle5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645941407440896
+    m_Key: textBlock5
     m_Metadata:
       m_Items: []
   m_Metadata:

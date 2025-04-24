@@ -47,15 +47,90 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 322973603979264
-    m_Localized: Hovedmeny&#10;
+    m_Localized: Innstillinger
     m_Metadata:
       m_Items: []
   - m_Id: 323794827730944
-    m_Localized: "Start p\xE5 nytt"
+    m_Localized: Pause av kollisjoner
     m_Metadata:
       m_Items: []
   - m_Id: 322975487221760
-    m_Localized: Pause
+    m_Localized: "Tastevalg for kollisjoner (Trykk for \xE5 endre)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637173462392832
+    m_Localized: Omstart av kollisjoner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637435669307392
+    m_Localized: "Spr\xE5k"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639493038333952
+    m_Localized: Hovedmeny
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639631513280512
+    m_Localized: Omstart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645571188809728
+    m_Localized: Veien Videre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645558383599616
+    m_Localized: "Orbital Watch er et visuelt verkt\xF8y laget for \xE5 simulere
+      enkle kollisjoner mellom satellitter og roms\xF8ppel. Utviklet med Unity-spillmotoren
+      og Blender for 3D-modellering, gir Orbital Watch en visuell fremstilling av
+      kollisjoner i verdensrommet. Satellittmodeller er importert fra NASAs offentlig
+      tilgjengelige 3D-modellbibliotek.\n\n\uFFFD Vis studenter den \xF8kende utfordringen
+      med roms\xF8ppel\n\uFFFD Observer kollisjoner fra forskjellige vinkler og hvordan
+      de p\xE5virker ulike satellitter\n\uFFFD L\xE6r hvorfor roms\xF8ppel er en
+      voksende bekymring og hvorfor videre forskning er n\xF8dvendig"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645022120861696
+    m_Localized: Om Orbital Watch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645028361986048
+    m_Localized: Om Orbital Watch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645027531513856
+    m_Localized: "Ny teknologi og kommersialiseringen av satellittsystemer har f\xF8rt
+      til at et \xF8kende antall satellitter blir skutt opp i verdensrommet. N\xE5r
+      objekter brytes opp eller kolliderer i bane, skaper de det som kalles roms\xF8ppel.
+      Mer forskning er n\xF8dvendig for \xE5 forst\xE5 hvordan roms\xF8ppel p\xE5virker
+      satellitter, men \xF8kt bevissthet er det f\xF8rste steget."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645560266842112
+    m_Localized: Om prosjektet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645564045910016
+    m_Localized: "Utfordringen med \xE5 simulere kollisjoner"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645562233970688
+    m_Localized: Oversett
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645565866237952
+    m_Localized: Oversett
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645569347510272
+    m_Localized: Oversett
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645567686565888
+    m_Localized: Prosjektets avgrensninger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645941407440896
+    m_Localized: Oversett
     m_Metadata:
       m_Items: []
   references:

@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.Components;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Localization.Tables;
 using System.Collections;
+using System.Linq;
 
-///<summary>
-///
-///<summary>
+/// <summary>
+/// Applies localized text to UI elements using the assigned UIDocument.
+/// </summary>
 public class UILocalizer : MonoBehaviour
 {
     public UIDocument uiDocument;
@@ -20,9 +20,6 @@ public class UILocalizer : MonoBehaviour
         StartCoroutine(ApplyLocalization());
     }
 
-    ///<summary>
-    ///
-    ///<summary>
     private IEnumerator ApplyLocalization()
     {
         if (uiDocument == null)
@@ -31,10 +28,14 @@ public class UILocalizer : MonoBehaviour
             yield break;
         }
 
-        // Wait for Localization system to finish initializing
+        // Ensure the localization system and our saved language are ready.
         yield return LocalizationSettings.InitializationOperation;
+        if (LocalizationManager.Instance != null)
+        {
+            yield return new WaitUntil(() => LocalizationManager.Instance.IsLocalizationReady);
+        }
 
-        // Load the string table
+        // Load the string table for the current locale.
         var tableOp = LocalizationSettings.StringDatabase.GetTableAsync(tableName);
         yield return tableOp;
 
@@ -47,7 +48,7 @@ public class UILocalizer : MonoBehaviour
         StringTable table = tableOp.Result;
         var root = uiDocument.rootVisualElement;
 
-        // Traverse all Labels and update based on their name as key
+        // Traverse all Label elements using their 'name' field as the key.
         foreach (var element in root.Query<Label>().ToList())
         {
             if (string.IsNullOrEmpty(element.name))
@@ -63,5 +64,22 @@ public class UILocalizer : MonoBehaviour
                 Debug.LogWarning($"No localization entry found for key: {element.name}");
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        // Subscribe to changes so that any language updates refresh the UI.
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+    }
+
+    private void OnDisable()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+    }
+
+    private void OnLocaleChanged(UnityEngine.Localization.Locale locale)
+    {
+        // Reapply localization when the locale is changed.
+        StartCoroutine(ApplyLocalization());
     }
 }
