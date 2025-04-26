@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 58e601a12058f4b998c92d53affc6f71, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a82a37fb03b994c8b8a1415af5de7933, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -603,7 +603,7 @@ MonoBehaviour:
     suffix: _frags
   showCenter: 0
   centerPosition: {x: 0.00010722275, y: -0.00015403493, z: -0.000093653}
-  centerDirection: {x: -0.0000015916733, y: -0.0000018003112, z: -0.0000012493791, w: 0.99988544}
+  centerDirection: {x: -0.0000015948567, y: -0.0000018014034, z: -0.0000012631604, w: 0.99988574}
   transForm: {fileID: 41364010}
   meshFilter: {fileID: 41364009}
   meshRenderer: {fileID: 41364008}
@@ -1306,7 +1306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5ac85281c504c4088ba6ed9b779ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planet: {fileID: 0}
+  planet: {fileID: 1296477638}
   orbitRadius: 120
   orbitSpeed: -5
   inclination: 95

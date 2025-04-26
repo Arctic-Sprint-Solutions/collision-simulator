@@ -19,5 +19,5 @@ MonoBehaviour:
   launchYear: 2018
   prefabName: Aura
   previewImage: {fileID: 21300000, guid: f318fd78aedb940eda05b19b74d343c7, type: 3}
-  debrisSceneName: AuraSatColllisionScene
+  debrisSceneName: AuraSatColllisionSceneParticle
   satelliteSceneName: 

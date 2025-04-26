@@ -44,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RosettaDebrisCollisionScene.unity
     guid: faa3f19549d944d8f8833e1e10da2b07
+  - enabled: 1
+    path: Assets/Scenes/AuraSatColllisionSceneParticle.unity
+    guid: f9ce5b38f36858e4a978fab44a64f8df
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
