@@ -1,3 +1,6 @@
+// Description: Manager for handling camera selection
+// Uses Cinemachine library for improved camera functionality and angles
+
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +9,14 @@ using Unity.Cinemachine;
 using UnityEngine.Playables;
 
 
-
-// Description: Manager for handling camera selection
-// Uses Cinemachine library for improved camera functionality and angles
+/// <summary>
+/// Singleton class to handle camera selections
+/// <summary>
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
     [SerializeField] CameraController cameraController;
+
     /// <summary>
     /// Reference to the PlayableDirector component for timeline control
     /// </summary>
