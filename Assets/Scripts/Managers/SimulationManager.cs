@@ -92,7 +92,7 @@ public class SimulationManager : MonoBehaviour
       case "CubeSatCollisionScene":
       case "Cubesat2RuScene":
       case "RosettaCollisionScene":
-      case "AuraSatColllisionScene":
+      case "AuraSatColllisionSceneParticle":
       case "RosettaDebrisCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
