@@ -259,6 +259,18 @@ MonoBehaviour:
     m_Localized: Go Back
     m_Metadata:
       m_Items: []
+  - m_Id: 3297705134972928
+    m_Localized: 'Speed: {0}x'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645802310590464
+    m_Localized: "\u2039"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645804265136128
+    m_Localized: "\u203A"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

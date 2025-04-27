@@ -84,7 +84,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3297705134972928
-    m_Key: New Entry 3
+    m_Key: Speed_Label
     m_Metadata:
       m_Items: []
   - m_Id: 2645022120861696
@@ -201,6 +201,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3276659979771904
     m_Key: Select_Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645802310590464
+    m_Key: SpeedLeftArrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645804265136128
+    m_Key: SpeedRightArrow
     m_Metadata:
       m_Items: []
   m_Metadata:

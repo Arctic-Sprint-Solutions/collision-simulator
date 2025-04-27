@@ -144,7 +144,7 @@ public class SettingsController : MonoBehaviour
 
         foreach (var locale in locales)
         {
-            // Use the human-friendly LocaleName in the dropdown.
+            // Uses the LocaleName in the dropdown.
             localeNames.Add(locale.LocaleName);
         }
 
@@ -154,7 +154,7 @@ public class SettingsController : MonoBehaviour
         var currentLocale = LocalizationSettings.SelectedLocale;
         languageDropdown.value = currentLocale != null ? currentLocale.LocaleName : localeNames[0];
 
-        // When the user selects a new language, update via the LocalizationManager.
+        // When the user selects a new language, updates via the LocalizationManager.
         languageDropdown.RegisterValueChangedCallback(evt =>
         {
             var selectedName = evt.newValue;
