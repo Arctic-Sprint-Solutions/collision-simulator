@@ -78,7 +78,7 @@ public class SimulationManager : MonoBehaviour
         UIManager.Instance.ShowNavBar();
         break;
         case "AboutScene":
-        UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
+        UIManager.Instance.ShowNavBar(backButtonKey: "Go Back");
         break;
         case "SatellitesGridScene":
         currentState = SimulationState.SelectSatellite;
@@ -89,6 +89,7 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
         Time.timeScale = 1f;
+
         break;
       case "CubeSatCollisionScene":
       case "Cubesat2RuScene":

@@ -19,12 +19,12 @@
                 </engine:VisualElement>
                 <engine:VisualElement name="Weight" class="my-1" style="flex-grow: 0; flex-direction: row; align-items: center;">
                     <engine:VisualElement name="Icon" class="preview-icon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/weight-icon.png?fileID=2800000&amp;guid=4fee8d2d519474184a00e051391876ed&amp;type=3#weight-icon&quot;);" />
-                    <engine:Label text="Weight:" class="preview-info-text" style="margin-right: 8px;" />
+                    <engine:Label name="WeightLabel" text="Weight:" class="preview-info-text" style="margin-right: 8px;" />
                     <engine:Label text="260kg" name="WeightText" class="preview-info-text" />
                 </engine:VisualElement>
                 <engine:VisualElement name="Year" class="my-1" style="flex-grow: 0; flex-direction: row; align-items: center;">
                     <engine:VisualElement name="Icon" class="preview-icon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/time-icon.png?fileID=2800000&amp;guid=87d0892825d984fa8a434ebc2f87c85e&amp;type=3#time-icon&quot;);" />
-                    <engine:Label text="Year" class="preview-info-text" style="margin-right: 8px;" />
+                    <engine:Label name="YearLabel" text="Year" class="preview-info-text" style="margin-right: 8px;" />
                     <engine:Label text="2020 - present" name="YearText" class="preview-info-text" />
                 </engine:VisualElement>
             </engine:VisualElement>
@@ -38,7 +38,7 @@
             </engine:VisualElement>
             <engine:VisualElement name="LoadSimulationButton" class="load-simulation">
                 <engine:VisualElement name="VisualElement" class="icon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/play-icon.png?fileID=2800000&amp;guid=530f4d179e00d4f3aa8cdca55d38a0e8&amp;type=3#play-icon&quot;);" />
-                <engine:Label text="Load Simulation" class="text-btn" />
+                <engine:Label name="LoadSimulationLabel" text="Load Simulation" class="text-btn" />
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>

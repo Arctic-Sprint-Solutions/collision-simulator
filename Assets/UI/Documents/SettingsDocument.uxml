@@ -1,31 +1,31 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
     <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <Style src="project://database/Assets/UI/Styles/SettingsStyles.uss?fileID=7433441132597879392&amp;guid=6a5443de73e4f48b7af729b4e7a45ecb&amp;type=3#SettingsStyles" />
     <engine:VisualElement name="SettingsContainer" class="menu" style="flex-grow: 1; height: 900px; width: 1600px; max-width: 1600px; max-height: 900px; background-color: rgba(0, 0, 0, 0.75); -unity-text-align: upper-left; align-items: flex-start; align-self: center; align-content: auto; top: 85px;">
         <engine:VisualElement name="TitleContainer" style="flex-grow: 1; width: 1590px; height: 629px; max-height: 93px; align-self: center; background-color: rgb(0, 0, 0); align-content: flex-start; margin-top: -29px;">
-            <engine:Label text="Settings" name="Title" class="my-2 title" style="padding-left: 45px; margin-top: 9px;" />
+            <engine:Label name="SettingsTitle" class="my-2 title" style="padding-left: 45px; margin-top: 9px;" />
         </engine:VisualElement>
         <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-width: 1522px; max-height: 446px; width: 1600px; padding-top: 0; margin-top: 34px;">
             <engine:VisualElement name="KeybindSubtitleContainer" style="flex-grow: 1; height: 60px; max-height: 60px; margin-top: 2px; margin-right: 0; margin-bottom: 12px;">
-                <engine:Label text="Keybinds for collisions (Press to change)" name="KeybindSubtitle" class="nav-link-text" style="margin-top: 2px; margin-left: 15px;" />
+                <engine:Label name="KeybindSubtitle" class="nav-link-text" style="margin-top: 2px; margin-left: 15px;" />
             </engine:VisualElement>
             <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-height: 333px; max-width: 1524px; align-content: auto; align-items: stretch; justify-content: flex-end; align-self: stretch; flex-direction: row-reverse;">
                 <engine:VisualElement name="PauseButtonContainer" class="menu" style="flex-grow: 1; align-items: flex-start; align-self: flex-start; width: 300px; height: 300px; max-height: 300px; max-width: 300px; align-content: stretch; justify-content: flex-start; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;">
-                    <engine:Label text="Pause Collision" name="PauseLabel" class="subtitle" style="align-items: flex-start; align-self: center; justify-content: flex-start; padding-bottom: 20px;" />
-                    <engine:Button text="Button" name="PauseButton" class="btn menu my-1 subtitle" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgb(0, 200, 255); border-right-color: rgb(0, 200, 255); border-top-color: rgb(0, 200, 255); border-bottom-color: rgb(0, 200, 255); max-width: 200px; max-height: 200px; height: 150px; width: 190px; align-self: center; -unity-text-align: middle-center;" />
+                    <engine:Label name="PauseKeybindLabel" class="subtitle" style="align-items: flex-start; align-self: center; justify-content: flex-start; padding-bottom: 20px;" />
+                    <engine:Button name="PauseButton" class="btn menu my-1 subtitle" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgb(0, 200, 255); border-right-color: rgb(0, 200, 255); border-top-color: rgb(0, 200, 255); border-bottom-color: rgb(0, 200, 255); max-width: 200px; max-height: 200px; height: 150px; width: 190px; align-self: center; -unity-text-align: middle-center;" />
                 </engine:VisualElement>
                 <engine:VisualElement name="RestartButtonContainer" class="menu" style="flex-grow: 1; align-items: flex-start; align-self: auto; width: 300px; height: 300px; max-height: 300px; max-width: 300px; justify-content: flex-start; background-color: rgba(0, 0, 0, 0); padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;">
-                    <engine:Label text="Restart Collision" name="RestartLabel" class="subtitle" style="align-items: flex-start; align-self: center; padding-bottom: 20px;" />
+                    <engine:Label name="RestartKeybindLabel" class="subtitle" style="align-items: flex-start; align-self: center; padding-bottom: 20px;" />
                     <engine:Button text="Button" name="RestartButton" class="btn menu my-1 subtitle" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgb(0, 200, 255); border-right-color: rgb(0, 200, 255); border-top-color: rgb(0, 200, 255); border-bottom-color: rgb(0, 200, 255); max-width: 200px; max-height: 200px; height: 150px; width: 190px; align-self: center; -unity-text-align: middle-center;" />
                 </engine:VisualElement>
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement name="LanguageContainer" style="flex-grow: 1; max-height: 446px; height: 180px; max-width: 1522px; width: 1598px;">
             <engine:VisualElement name="LanguageSubtitleContainer" style="flex-grow: 1; height: 60px; max-height: 60px; margin-top: 2px; margin-right: 0; margin-bottom: 12px;">
-                <engine:Label text="Language&#10;" name="LanguageSubtitle" class="nav-link-text" style="margin-top: 2px; margin-left: 15px;" />
+                <engine:Label name="LanguageSubtitle" class="nav-link-text" style="margin-top: 2px; margin-left: 15px;" />
             </engine:VisualElement>
-            <engine:RadioButton label="English" name="EnglishButton" toggle-on-label-click="false" style="flex-direction: row-reverse; align-items: center; justify-content: space-between; align-self: stretch; padding-top: 4px; padding-right: 0; padding-bottom: 0; padding-left: 4px; max-height: 271px; height: 53px; width: 340px; max-width: 332px;" />
-            <engine:RadioButton label="Norsk" name="NorskButton" toggle-on-label-click="false" enabled="true" style="flex-direction: row-reverse; align-items: center; justify-content: space-between; align-self: stretch; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 4px; max-height: 310px; height: 53px; width: 340px; max-width: 313px;" />
+            <engine:DropdownField name="LanguageDropdown" style="align-items: center; justify-content: flex-start; flex-direction: row; align-self: stretch; width: 640px; height: 60px; background-color: rgba(32, 32, 32, 0); margin-left: 8px; padding-left: 0; border-top-width: 3px; border-right-width: 3px; border-bottom-width: -21px; border-left-width: 3px; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0; color: rgb(0, 200, 255); border-left-color: rgba(255, 0, 0, 0); border-right-color: rgba(255, 0, 0, 0); border-top-color: rgba(255, 0, 0, 0); border-bottom-color: rgba(255, 0, 0, 0); -unity-text-align: upper-right; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&amp;guid=31ef9af198e904200ade4523ce535842&amp;type=3#ChakraPetch-Regular&quot;); opacity: 1;" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
