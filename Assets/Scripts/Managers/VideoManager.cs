@@ -55,6 +55,8 @@ public class VideoManager : MonoBehaviour
         #endif
 
         _isRecording = true;
+        UIManager.Instance?.HideDownloadButton();
+        UIManager.Instance?.UpdateRecordButtonText("Stop Recording");
     }
     
     private void StopRecording()
@@ -71,6 +73,8 @@ public class VideoManager : MonoBehaviour
         #endif
 
         _isRecording = false;
+        UIManager.Instance?.ShowDownloadButton();
+        UIManager.Instance?.UpdateRecordButtonText("Start Recording");
     }
 
     private void SaveRecording()
@@ -80,6 +84,8 @@ public class VideoManager : MonoBehaviour
         #if !UNITY_EDITOR && UNITY_WEBGL
         SaveVideoRecording();
         #endif
+
+        UIManager.Instance?.HideDownloadButton();
     }
 
     public void ToggleRecording()

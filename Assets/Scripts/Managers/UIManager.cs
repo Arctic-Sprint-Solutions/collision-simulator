@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     private VisualElement _collisionUI;
     private Button _playPauseBtn;
     private Button _restartBtn;
+    private Button _recordBtn;
+    private Button _downloadBtn;
 
     private bool isPaused = false;
 
@@ -52,6 +54,7 @@ public class UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        HideRecordButton();
         _collisionUI?.AddToClassList("d-none");
         isPaused = false;
         Time.timeScale = 1f;
@@ -61,6 +64,8 @@ public class UIManager : MonoBehaviour
         {
             _collisionUI?.RemoveFromClassList("d-none");
             _playPauseBtn.text = "Pause";
+
+            ShowRecordButton();
         }
     }
 
@@ -76,6 +81,7 @@ public class UIManager : MonoBehaviour
         {
             // Get the NavBar element from the shared UI document
             _navBar = _root.Q<VisualElement>("NavBar");
+            InitializeRecordButtons();
         }
 
         if (_backToMenuButton == null)
@@ -115,6 +121,22 @@ public class UIManager : MonoBehaviour
         _restartBtn.clicked += RestartScene;
     }
 
+    private void InitializeRecordButtons()
+    {
+        _recordBtn = _navBar.Q<Button>("RecordButton");
+        if(_recordBtn != null)
+        {
+            _recordBtn.clicked += ToggleRecording;
+        }
+
+        _downloadBtn = _navBar.Q<Button>("DownloadButton");
+        if(_downloadBtn != null) 
+        {
+            _downloadBtn.clicked += DownloadRecording;
+            _downloadBtn.AddToClassList("d-none");
+        }
+    }
+
     /// <summary>
     /// Callback for the BackToMenuButton click event that loads the main menu scene
     /// </summary>
@@ -150,6 +172,57 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void ShowRecordButton()
+    {
+        if(_recordBtn != null)
+        {
+            _recordBtn.RemoveFromClassList("d-none");
+            _recordBtn.text = "Start Recording";
+        }
+
+        if (_downloadBtn != null)
+        {
+            _downloadBtn.AddToClassList("d-none");
+        }
+    }
+
+    private void HideRecordButton()
+    {
+        if(_recordBtn != null)
+        {
+            _recordBtn.AddToClassList("d-none");
+        }
+
+        if (_downloadBtn != null)
+        {
+            _downloadBtn.AddToClassList("d-none");
+        }
+    }
+
+    public void ShowDownloadButton()
+    {
+        if (_downloadBtn != null)
+        {
+            _downloadBtn.RemoveFromClassList("d-none");
+        }
+    }
+
+    public void HideDownloadButton()
+    {
+        if (_downloadBtn != null)
+        {
+            _downloadBtn.AddToClassList("d-none");
+        }
+    }
+
+    public void UpdateRecordButtonText(string text)
+    {
+        if (_recordBtn != null)
+        {
+            _recordBtn.text = text;
+        }
+    }
+
     /// <summary>
     /// Hides the NavBar element
     /// </summary>
@@ -178,6 +251,16 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.name);
+    }
+
+    private void ToggleRecording()
+    {
+        VideoManager.Instance?.ToggleRecording();
+    }
+
+    private void DownloadRecording()
+    {
+        VideoManager.Instance?.SaveCurrentRecording();
     }
 
     private void OnDestroy()

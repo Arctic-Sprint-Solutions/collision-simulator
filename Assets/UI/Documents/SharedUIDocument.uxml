@@ -6,6 +6,10 @@
             <engine:VisualElement name="BackIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/circle-back-icon.png?fileID=2800000&amp;guid=ecac4b2a0e7174a82b0f3c2712c05619&amp;type=3#circle-back-icon&quot;);" />
             <engine:Label text="Main Menu&#10;" class="navbar-link-text nav-link-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         </engine:VisualElement>
+        <engine:VisualElement name="RecordButtons" class="flex-row-center" style="flex-grow: 0;">
+            <engine:Button text="Start Recording" name="RecordButton" class="d-none" />
+            <engine:Button text="Download Recording" name="DownloadButton" class="d-none" />
+        </engine:VisualElement>
     </engine:VisualElement>
     <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 1; position: absolute; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row;">
         <engine:VisualElement name="ButtonContainer" class="flex-row-center">
