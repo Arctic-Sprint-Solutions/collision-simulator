@@ -168,16 +168,18 @@ public class UIManager : MonoBehaviour
 
         // Get localized key
         string currentKey = LocalizedUIHelper.GetKeyForText(label.text);
-        Debug.LogError($"Current key: {currentKey}");
+        Debug.Log($"Current key: {currentKey}");
         
         if (currentKey  == "MainMenu")
         {
             // Load the main menu scene
+            Debug.Log("Loading MainMenu scene");
             SimulationManager.Instance.LoadScene("MainMenu");
         }
         else
         {
             // Go back to the previous scene
+            Debug.Log($"Loading previous scene: {SimulationManager.Instance.PreviousScene}");
             SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
         }
     }

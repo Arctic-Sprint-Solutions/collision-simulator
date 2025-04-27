@@ -94,6 +94,8 @@ public class SimulationManager : MonoBehaviour
       case "CubeSatCollisionScene":
       case "Cubesat2RuScene":
       case "RosettaCollisionScene":
+      case "AuraSatColllisionScene":
+      case "IceSat2CollisionScene":
       case "AuraSatColllisionSceneParticle":
       case "RosettaDebrisCollisionScene":
         currentState = SimulationState.SatelliteSelected;
