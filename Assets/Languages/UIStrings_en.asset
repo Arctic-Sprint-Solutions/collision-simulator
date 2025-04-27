@@ -1,0 +1,264 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UIStrings_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 0ce2c0866ae3c4d6ca04a36b9f9884ed, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1367555956736
+    m_Localized: Orbital Watch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31687747559424
+    m_Localized: 3D Space Debris Collision Simulator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33502727757824
+    m_Localized: Load Satellites
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33768625659904
+    m_Localized: View Space Debris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33771280654336
+    m_Localized: About
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33913744384000
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33918710439936
+    m_Localized: Return to Earth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322973603979264
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322975487221760
+    m_Localized: Keybinds for collisions (Press to change)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323794827730944
+    m_Localized: Pause Collision
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637173462392832
+    m_Localized: Restart Collision
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637435669307392
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639493038333952
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639631513280512
+    m_Localized: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645022120861696
+    m_Localized: About Orbital Watch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645028361986048
+    m_Localized: About Orbital Watch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645560266842112
+    m_Localized: About this project
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645564045910016
+    m_Localized: The Challenge of Simulating Space Debris Collisions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645567686565888
+    m_Localized: The Delimitations of this project
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645571188809728
+    m_Localized: The Road Ahead
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645558383599616
+    m_Localized: "Orbital Watch is a visual tool created to simulate simple collisions
+      between satellites and space debris. Developed using the Unity game engine
+      and Blender for 3D modeling, Orbital Watch provides a visual representation
+      of collisions in space. Satellite models have been imported from NASAs publicly
+      available 3D model library.\n\n\uFFFD Show students the growing challenge of
+      space debris \n\uFFFD Observe collisions from different angles and how they
+      affect various satellites  \n\uFFFD Learn how space debris is a growing concern
+      and why further research is needed"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645027531513856
+    m_Localized: New technology and the commercialization of satellite systems have
+      led to an increasing number of satellites being launched into space. When objects
+      break apart or collide in orbit, they create what is known as space debris.
+      More research is needed to understand the effects space debris has on satellites,
+      but raising awareness is where it begins.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645562233970688
+    m_Localized: "During the spring of 2025 a project was added to the Bachelor of
+      Computer Science at UiT The Arctic University of Norway called \"Visualization
+      of collisions between satellites and space debris.\" The projects main requirements
+      were to create a visual tool which could simulate simple collisions between
+      satellites and space debris. The tool was to be used during teaching so that
+      more students (and other potential stakeholders) can learn more about the effects
+      of space debris. \n \nThe client requesting the project was P\xE5l Gunnar Ellingsen,
+      an Associate professor within satelite technology and remote sensing at the
+      Department of Electrical Engineering at UiT. The head advisor the project was
+      Frode Nesje, Assistant Professor at the Department of Computer Science and
+      Computational Engineering at UiT.\n\nThe project was taken on by the dev team
+      of Arctic Sprint Solutions 2.0, consisting of four graduating students in the
+      field of Bachelor of Computer Science (Datateknikk) at UiT: Madeleine Woodbury,
+      Ola Gi\xE6ver, Gabriel Halstensen and Ingrid Ledingham. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645565866237952
+    m_Localized: 'The main challenge of simulating collisons between space debris
+      is the lack of research on how collisions make objects behave in space. Objects
+      moving through orbit typically travel at extremely high speeds - as much as
+      7 kilometers per second (25 000 kilomters/hour). Comparatively a rifle bullet
+      moves at the speed of 1.2 kilomters/second, a mere fraction of this. When two
+      objects collide in orbit at such velocities, the realtive collision speed might
+      reach as much as 15 kilomters/second (54 000 kilometers/hour). Simulating such
+      high speed collisions can therefore be difficult. Both when simulating objects
+      through physical experiments, as well as when visualizing collisions with tools
+      such as Orbit Watch. It is hard to mimic collision effects that there is little
+      to no real-world data available.
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645569347510272
+    m_Localized: 'In order to create a visual tool for space debris collisions, it
+      has been important to set aside attempts to capture how objects actually behave
+      in space. The project has been commissioned to simulate simple collisions,
+      not to provide accurate representations of how objects physically behave in
+      orbit when colliding. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645941407440896
+    m_Localized: 'Although Orbital Watch was created to simulate simple collisions,
+      it holds potential for further development possibly as part of a Master of
+      Applied Science assignment. Future improvements could include more research
+      into real space physics, enabling more accurate depictions of collisions in
+      orbit. One might also consider experimenting with more advanced game engines,
+      such as Unreal, to enhance the graphical quality and allow for greater customization.
+
+
+      Further
+      development would likely require additional time and resources to reach a higher
+      level of simulation fidelity. But much like in the world of video games, there
+      is always room for a sequel; one with higher resolution and even more content.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908210342453248
+    m_Localized: ' Large Debris'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908785276674048
+    m_Localized: ' Small Debris'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908547145064448
+    m_Localized: ' Medium Debris'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908803484147712
+    m_Localized: Show information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909021575372800
+    m_Localized: About space debris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2910835972562944
+    m_Localized: "The European Space Agency (ESA) provide information about the current
+      amount of space debris in Lower Earth Orbit (L.E.O) \nthrough statistical models.
+      Visual debris shown here represents a fraction (0.0001538) of the total amount
+      of debris. \n\nThe debris system is based on the following \n\n- Large Debris
+      (Objects greater than 10 cm) - 40 500 objects\n\n- Medium Debris (Objects from
+      greater than 1 cm to 10 cm) - 1 100 000 objects\n\n- Small Debris (Objects
+      from greater than 1 cm to 1 mm) - 130 000 000 objects\n\nSource: https://www.esa.int/Space_Safety/Space_Debris/Space_debris_by_the_numbers"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914638683758592
+    m_Localized: Debris Control Panel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914662360604672
+    m_Localized: Manage Space Debris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918922615840768
+    m_Localized: 'Weight:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918924448751616
+    m_Localized: 'Year:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918925962895360
+    m_Localized: Load Simulation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2923432138563584
+    m_Localized: Choose collision type
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3273923129303040
+    m_Localized: Select a satellite for the simulation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276659979771904
+    m_Localized: SELECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276473974972416
+    m_Localized: 'Launch Year: {0} - present'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276472918007808
+    m_Localized: 'Weight: {0} kg'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276468857921536
+    m_Localized: 'LEO: {0} km'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3296750440079360
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297700483489792
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297702366732288
+    m_Localized: Go Back
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

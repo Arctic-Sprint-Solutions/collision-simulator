@@ -1,20 +1,22 @@
 // Description: Manages persistent UI elements across scenes
 
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.Localization.Settings;
 
 /// <summary>
-/// Singleton class to manage persistent UI elements across scenes
+/// Singleton class to manage persistent UI elements across scenes,
+/// ensuring localized text is applied after the localization system is ready.
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-    private static UIManager _instance;
-    public static UIManager Instance => _instance;
+    public static UIManager Instance { get; private set; }
 
     // Persistent UI elements
     [SerializeField] private UIDocument _sharedUIDocument;
-    [SerializeField] private VisualTreeAsset _SceneUIDocument;
 
     private VisualElement _root;
     private VisualElement _navBar;
@@ -24,30 +26,58 @@ public class UIManager : MonoBehaviour
     private Button _restartBtn;
 
     private bool isPaused = false;
+    private bool _isInitialized = false;
 
 
-    private void Awake()
+    private async void Awake()
     {
         // Ensure singleton instance
-        if (_instance != null && _instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        _instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        // UI references
+        _root = _sharedUIDocument.rootVisualElement;
+        _navBar = _root.Q<VisualElement>("NavBar");
+        _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
+        _collisionUI = _root.Q<VisualElement>("CollisionUI");
+
         InitializePersistentUI();
+
+        // Delay localization-dependent setup
+        await SetupAsync();
     }
 
-    private void OnEnable()
+    private async Task SetupAsync()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        if (_isInitialized) return;
+
+        // Wait for Unity's localization system
+        await LocalizationSettings.InitializationOperation.Task;
+        // Wait for any additional language loading
+        if (LocalizationManager.Instance != null)
+            await LocalizationManager.Instance.WaitForReady();
+
+        // Load UIStrings table
+        await LocalizedUIHelper.InitializeAsync();
+
+        // Apply initial localized texts
+        ApplyLocalization();
+        LocalizationSettings.SelectedLocaleChanged += _ => ApplyLocalization();
+
+        _isInitialized = true;
     }
+
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        LocalizationSettings.SelectedLocaleChanged -= _ => ApplyLocalization();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -69,29 +99,20 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void InitializePersistentUI()
     {
-        // Get the root visual element of the shared UI document
-        _root = _sharedUIDocument.rootVisualElement;
-        // Get the NavBar and BackToMenuButton elements
-        if (_navBar == null)
+        // Back-to-menu callback
+        if (_backToMenuButton != null)
+            _backToMenuButton.RegisterCallback<ClickEvent>(_ => OnBackToMainMenuClicked());
+
+        // Collision UI buttons
+        if (_collisionUI != null)
         {
-            // Get the NavBar element from the shared UI document
-            _navBar = _root.Q<VisualElement>("NavBar");
+            _playPauseBtn = _collisionUI.Q<Button>("playPauseButton");
+            _restartBtn = _collisionUI.Q<Button>("restartButton");
+            _playPauseBtn.text = "Pause";
+            _playPauseBtn.clicked += TogglePause;
+            _restartBtn.clicked += RestartScene;
         }
 
-        if (_backToMenuButton == null)
-        {
-            // Get the BackToMenuButton element from the shared UI document
-            _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
-            // Register a callback for the button's click event
-            _backToMenuButton.RegisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
-        }
-
-        if (_collisionUI == null)
-        {
-            InitializeCollisionUI();
-        }
-
-        // Hide the NavBar by default
         HideNavBar();
     }
 
@@ -115,13 +136,36 @@ public class UIManager : MonoBehaviour
         _restartBtn.clicked += RestartScene;
     }
 
+    private void ApplyLocalization()
+    {
+        // Localize play/pause
+        if (_playPauseBtn != null)
+        {
+            LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
+        }
+        if (_restartBtn != null)
+        {
+            LocalizedUIHelper.Apply(_restartBtn, "RestartButton");
+        }
+        if (_backToMenuButton != null)
+        {
+            var label = _backToMenuButton.Q<Label>();
+            if (label != null)
+                LocalizedUIHelper.Apply(label, "MainMenu"); // KEY must match exactly
+        }
+    }
+
     /// <summary>
     /// Callback for the BackToMenuButton click event that loads the main menu scene
     /// </summary>
     private void OnBackToMainMenuClicked()
     {
-        string buttonText = _backToMenuButton.Q<Label>().text;
-        if (buttonText == "Go Back")
+        var label = _backToMenuButton?.Q<Label>();
+        if (label == null) return;
+
+        // Get localized key
+        string currentKey = LocalizedUIHelper.GetKeyForText(label.text);
+        if (currentKey  == "Go Back")
         {
             // Go back to the previous scene
             SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
@@ -136,7 +180,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// Shows the NavBar element
     /// </summary>
-    public void ShowNavBar(string backButtonText = "Main Menu")
+    public void ShowNavBar(string backButtonKey = "MainMenu")
     {
         if (_navBar != null)
         {
@@ -145,7 +189,9 @@ public class UIManager : MonoBehaviour
             // Set the text of the BackToMenuButton
             if (_backToMenuButton != null)
             {
-                _backToMenuButton.Q<Label>().text = backButtonText;
+                var label = _backToMenuButton.Q<Label>();
+                if (label != null)
+                    LocalizedUIHelper.Apply(label, backButtonKey);
             }
         }
     }
@@ -168,7 +214,10 @@ public class UIManager : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0f : 1f;
 
-        _playPauseBtn.text = isPaused ? "Resume" : "Pause";
+        if (_playPauseBtn != null)
+        {
+            LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
+        }
     }
 
     public void RestartScene()
@@ -190,7 +239,7 @@ public class UIManager : MonoBehaviour
         }
 
         // Clean up references to avoid memory leaks
-        _instance = null;
+        Instance = null;
         _root = null;
         _navBar = null;
         _backToMenuButton = null;
