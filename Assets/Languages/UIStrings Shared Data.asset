@@ -1,0 +1,224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UIStrings Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UIStrings
+  m_TableCollectionNameGuidString: 0ce2c0866ae3c4d6ca04a36b9f9884ed
+  m_Entries:
+  - m_Id: 1367555956736
+    m_Key: MainTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31687747559424
+    m_Key: MainMenuSubtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33502727757824
+    m_Key: LinkLoadSatellites
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33768625659904
+    m_Key: LinkViewDebris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33771280654336
+    m_Key: LinkAbout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33913744384000
+    m_Key: LinkSettings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33918710439936
+    m_Key: LinkReturn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322973603979264
+    m_Key: SettingsTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322975487221760
+    m_Key: KeybindSubtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323794827730944
+    m_Key: PauseKeybindLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637173462392832
+    m_Key: RestartKeybindLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637435669307392
+    m_Key: LanguageSubtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639493038333952
+    m_Key: MainMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639631513280512
+    m_Key: RestartButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3296750440079360
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297700483489792
+    m_Key: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297702366732288
+    m_Key: GoBack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297705134972928
+    m_Key: Speed_Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645022120861696
+    m_Key: AboutTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645027531513856
+    m_Key: textBlock0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645028361986048
+    m_Key: background
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645558383599616
+    m_Key: textBlock1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645560266842112
+    m_Key: AboutSubtitle2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645562233970688
+    m_Key: textBlock2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645564045910016
+    m_Key: AboutSubtitle3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645565866237952
+    m_Key: textBlock3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645567686565888
+    m_Key: AboutSubtitle4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645569347510272
+    m_Key: textBlock4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645571188809728
+    m_Key: AboutSubtitle5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645941407440896
+    m_Key: textBlock5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914638683758592
+    m_Key: DebrisMainTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914662360604672
+    m_Key: DebrisSubtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908210342453248
+    m_Key: LargeDebrisText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908547145064448
+    m_Key: MediumDebrisText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908785276674048
+    m_Key: SmallDebrisText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908803484147712
+    m_Key: ShowInfoButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909021575372800
+    m_Key: AboutHeadline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2910835972562944
+    m_Key: DebrisInfo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918922615840768
+    m_Key: WeightLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918924448751616
+    m_Key: YearLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918925962895360
+    m_Key: LoadSimulationLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2923432138563584
+    m_Key: SceneTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3273923129303040
+    m_Key: SceneSubtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276468857921536
+    m_Key: LEO_Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276472918007808
+    m_Key: Weight_Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276473974972416
+    m_Key: LaunchYear_Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276659979771904
+    m_Key: Select_Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645802310590464
+    m_Key: SpeedLeftArrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645804265136128
+    m_Key: SpeedRightArrow
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6260683352725520651
+  references:
+    version: 2
+    RefIds:
+    - rid: 6260683352725520651
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1744889473883

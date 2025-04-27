@@ -4,7 +4,7 @@
     <engine:VisualElement name="NavBar" class="navbar" style="flex-grow: 0; max-height: none; flex-direction: row; justify-content: space-between;">
         <engine:VisualElement name="BackToMenuButton" class="flex-row-center link-hover" style="flex-grow: 0; flex-shrink: 1; align-items: center;">
             <engine:VisualElement name="BackIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/circle-back-icon.png?fileID=2800000&amp;guid=ecac4b2a0e7174a82b0f3c2712c05619&amp;type=3#circle-back-icon&quot;);" />
-            <engine:Label text="Main Menu&#10;" class="navbar-link-text nav-link-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <engine:Label name="BackToMenuLabel" text="Main Menu&#10;" class="navbar-link-text nav-link-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         </engine:VisualElement>
         <engine:VisualElement name="RecordButtons" class="flex-row-center" style="flex-grow: 0;">
             <engine:Button text="Start Recording" name="RecordButton" class="d-none" />
@@ -13,8 +13,13 @@
     </engine:VisualElement>
     <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 1; position: absolute; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row;">
         <engine:VisualElement name="ButtonContainer" class="flex-row-center">
-            <engine:Button text="Pause" name="playPauseButton" class="btn scene-control-btn" />
             <engine:Button text="Restart" name="restartButton" class="btn scene-control-btn" />
+            <engine:Button text="Pause" name="playPauseButton" class="btn scene-control-btn" />
+            <engine:VisualElement name="speedToggleButton" class="btn scene-control-btn speed-toggle" style="padding: 5px; border-width: 1px; border-color: white; border-radius: 5px; flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
+                <engine:Label name="speedLeftArrow" text="◀" class="arrow-label" />
+                <engine:Label name="speedLabel" text="Speed: 1x" class="center-label" />
+                <engine:Label name="speedRightArrow" text="▶" class="arrow-label" />
+            </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

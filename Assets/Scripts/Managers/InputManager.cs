@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
+///<summary>
+///Handles inputs based on the SceneTag.
+///<summary>
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
@@ -9,6 +12,9 @@ public class InputManager : MonoBehaviour
     private UIManager uiManager;
     private bool isCollisionScene = false;
 
+    /// <summary>
+    ///Locates UIManager, and subscribes to the scene loaded event.
+    /// <summary>
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -33,11 +39,18 @@ public class InputManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    /// <summary>
+    ///Unsubscribes from the scene loaded event when the object is destroyed.
+    /// <summary>
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    /// <summary>
+    ///When scene is loaded, collect SceneTag and handles which keybinds are availible. 
+    ///Handles scene-specific logic when a new scene is loaded.
+    /// <summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GameObject tagObj = GameObject.Find("SceneTag");
@@ -53,6 +66,9 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///Monitors keypresses according to scene, and manages logic.
+    /// <summary>
     private void Update()
     {
         if (!isCollisionScene || keybinds == null) return;
