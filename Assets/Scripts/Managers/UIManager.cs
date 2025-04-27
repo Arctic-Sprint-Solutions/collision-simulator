@@ -24,6 +24,13 @@ public class UIManager : MonoBehaviour
     private VisualElement _collisionUI;
     private Button _playPauseBtn;
     private Button _restartBtn;
+    private VisualElement _speedToggleButton;
+    private Label _speedLabel;
+    private Label _speedLeftArrow;
+    private Label _speedRightArrow;
+
+    private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
+    private int _currentTimescaleIndex = 2;
 
     private bool isPaused = false;
     private bool _isInitialized = false;
@@ -84,7 +91,7 @@ public class UIManager : MonoBehaviour
     {
         _collisionUI?.AddToClassList("d-none");
         isPaused = false;
-        Time.timeScale = 1f;
+        Time.timeScale = _timeScales[_currentTimescaleIndex];
 
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
@@ -123,7 +130,10 @@ public class UIManager : MonoBehaviour
         // Finn knappene i det instansierte UI-et
         _playPauseBtn = _collisionUI.Q<Button>("playPauseButton");
         _restartBtn = _collisionUI.Q<Button>("restartButton");
-        _playPauseBtn.text = "Pause";
+        _speedToggleButton = _collisionUI.Q<VisualElement>("speedToggleButton");
+        _speedLabel = _speedToggleButton.Q<Label>("speedLabel");
+        _speedLeftArrow = _speedToggleButton.Q<Label>("speedLeftArrow");
+        _speedRightArrow = _speedToggleButton.Q<Label>("speedRightArrow");
 
         // Hide Unity default classes
         _playPauseBtn.RemoveFromClassList("unity-button");
@@ -134,6 +144,14 @@ public class UIManager : MonoBehaviour
         // Koble opp klikk-event til h�ndteringsfunksjoner
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
+
+        _speedLeftArrow.RegisterCallback<ClickEvent>(_ => DecreaseTimescale());
+        _speedRightArrow.RegisterCallback<ClickEvent>((_ => IncreaseTimescale()));
+        _speedToggleButton.RegisterCallback<PointerDownEvent>(evt =>
+        {
+            if (evt.button == (int)MouseButton.MiddleMouse)
+                ResetTimescale();
+        });
     }
 
     private void ApplyLocalization()
@@ -212,7 +230,8 @@ public class UIManager : MonoBehaviour
     {
         // Toggle pause-status
         isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
+
+        Time.timeScale = isPaused ? 0f : _timeScales[_currentTimescaleIndex];
 
         if (_playPauseBtn != null)
         {
@@ -224,9 +243,40 @@ public class UIManager : MonoBehaviour
     {
         // Restart gjeldende scene
         isPaused = false;
-        Time.timeScale = 1f;
+        //Setter timescale lik slider
+        Time.timeScale = _timeScales[_currentTimescaleIndex];
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.name);
+    }
+
+    private void IncreaseTimescale()
+    {
+        _currentTimescaleIndex = (_currentTimescaleIndex + 1) % _timeScales.Length;
+        Time.timeScale = _timeScales[_currentTimescaleIndex];
+        UpdateSpeedButtonText();
+    }
+
+    private void DecreaseTimescale()
+    {
+        _currentTimescaleIndex--;
+        if (_currentTimescaleIndex < 0) _currentTimescaleIndex = _timeScales.Length - 1;
+
+        Time.timeScale = _timeScales[_currentTimescaleIndex];
+        UpdateSpeedButtonText();
+    }
+
+    private void ResetTimescale()
+    {
+        _currentTimescaleIndex = System.Array.IndexOf(_timeScales, 1f);
+        Time.timeScale = 1f;
+        UpdateSpeedButtonText();
+
+    }
+
+    private void UpdateSpeedButtonText()
+    {
+        float scale = _timeScales[_currentTimescaleIndex];
+        _speedLabel.text = $"Speed: {scale}x";
     }
 
     private void OnDestroy()
