@@ -31,8 +31,8 @@ public class UIManager : MonoBehaviour
 
     private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
     private int _currentTimescaleIndex = 2;
-    private Button _recordBtn;
-    private Button _downloadBtn;
+    private VisualElement _recordBtn;
+    private VisualElement _downloadBtn;
 
     private bool isPaused = false;
     private bool _isInitialized = false;
@@ -170,16 +170,23 @@ public class UIManager : MonoBehaviour
     /// </summary> 
     private void InitializeRecordButtons()
     {
-        _recordBtn = _navBar.Q<Button>("RecordButton");
+        _recordBtn = _navBar.Q<VisualElement>("RecordButton2");
         if(_recordBtn != null)
         {
-            _recordBtn.clicked += ToggleRecording;
+            var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
+            var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
+            stopIcon?.AddToClassList("d-none"); // Hide stop icon initially
+            cameraIcon?.RemoveFromClassList("d-none"); // Show camera icon initially
+
+            // Register the click event for the record button
+            _recordBtn.RegisterCallback<ClickEvent>(evt => ToggleRecording());
         }
 
-        _downloadBtn = _navBar.Q<Button>("DownloadButton");
+        _downloadBtn = _navBar.Q<VisualElement>("DownloadButton2");
         if(_downloadBtn != null) 
-        {
-            _downloadBtn.clicked += DownloadRecording;
+        {   
+            Debug.Log("Download button found in NavBar");
+            _downloadBtn.RegisterCallback<ClickEvent>(evt => DownloadRecording());
             // Hide the download button initially
             _downloadBtn.AddToClassList("d-none");
         }
@@ -236,7 +243,6 @@ public class UIManager : MonoBehaviour
         if(_recordBtn != null)
         {
             _recordBtn.RemoveFromClassList("d-none");
-            _recordBtn.text = "Start Recording";
         }
 
         if (_downloadBtn != null)
@@ -284,13 +290,32 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the text of the record button based on the recording state
+    /// Updates the icon and the tect of the record button based on the recording state
     /// </summary>
-    public void UpdateRecordButtonText(string text)
+    public void UpdateRecordButton(string iconName, string buttonText)
     {
         if (_recordBtn != null)
         {
-            _recordBtn.text = text;
+            var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
+            var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
+
+            if (iconName == "StopIcon")
+            {
+                stopIcon?.RemoveFromClassList("d-none");
+                cameraIcon?.AddToClassList("d-none");
+            }
+            else
+            {
+                stopIcon?.AddToClassList("d-none");
+                cameraIcon?.RemoveFromClassList("d-none");
+            }
+
+            // Update the text of the record button
+            var label = _recordBtn.Q<Label>();
+            if (label != null)
+            {
+                label.text = buttonText;
+            }
         }
     }
 
@@ -367,6 +392,14 @@ public class UIManager : MonoBehaviour
         {
             _backToMenuButton.UnregisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
         }
+        if(_recordBtn != null)
+        {
+            _recordBtn.UnregisterCallback<ClickEvent>(e => ToggleRecording());
+        }
+        if(_downloadBtn != null)
+        {
+            _downloadBtn.UnregisterCallback<ClickEvent>(e => DownloadRecording());
+        }
 
         // Clean up references to avoid memory leaks
         Instance = null;
@@ -374,6 +407,8 @@ public class UIManager : MonoBehaviour
         _navBar = null;
         _backToMenuButton = null;
         _sharedUIDocument = null;
+        _recordBtn = null;
+        _downloadBtn = null;
     }
 
 
