@@ -62,13 +62,14 @@ public class SimulationManager : MonoBehaviour
   private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
   {
     Debug.Log("Scene loaded: " + scene.name);
+
     // Handle scene-specific logic here
     switch (scene.name)
     {
       case "MainMenu":
         currentState = SimulationState.MainMenu;
         UIManager.Instance.HideNavBar();
-
+        Time.timeScale = 1f;
         break;
       case "SettingsScene":
         UIManager.Instance.ShowNavBar();
@@ -77,16 +78,17 @@ public class SimulationManager : MonoBehaviour
         UIManager.Instance.ShowNavBar();
         break;
         case "AboutScene":
-        UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
+        UIManager.Instance.ShowNavBar(backButtonKey: "Go Back");
         break;
         case "SatellitesGridScene":
         currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
+        Time.timeScale = 1f;
         break;
         case "SatellitePreviewScene":
         currentState = SimulationState.SatelliteSelected;
-        UIManager.Instance.ShowNavBar(backButtonText: "Go Back");
-
+        UIManager.Instance.ShowNavBar(backButtonKey: "Go Back");
+        Time.timeScale = 1f;
 
         break;
       case "CubeSatCollisionScene":
@@ -94,6 +96,7 @@ public class SimulationManager : MonoBehaviour
       case "RosettaCollisionScene":
       case "AuraSatColllisionScene":
       case "IceSat2CollisionScene":
+      case "AuraSatColllisionSceneParticle":
       case "RosettaDebrisCollisionScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();

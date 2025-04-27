@@ -2,6 +2,12 @@
 
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Tables;
+using UnityEngine.Localization.Settings;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 /// <summary>
 /// Controller for the satellite grid UI.
@@ -15,6 +21,8 @@ public class SatelliteGridController : MonoBehaviour
     [SerializeField] private AppSettings appSettings;
     // Reference to the UI Document
     private UIDocument uiDocument;
+    // Reference to the StringTable for localization
+    private StringTable _stringTable;
     // Container for the satellite grid
     private VisualElement satelliteGridContainer;
     private VisualElement _rootElement;
@@ -24,25 +32,38 @@ public class SatelliteGridController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-      // Get the UI Document component
-      uiDocument = GetComponent<UIDocument>();
+        SetupAsync();
+    } 
 
-      if (uiDocument == null)
-      {
-          Debug.LogError("UIDocument component not found on the GameObject.");
-          return;
-      }
+    private async void SetupAsync()
+    {
+        // Normal startup logic here
+        uiDocument = GetComponent<UIDocument>();
+        if (uiDocument == null)
+        {
+            Debug.LogError("UIDocument component not found on the GameObject.");
+            return;
+        }
 
-      // Get the root visual element of the UI document
-      _rootElement = uiDocument.rootVisualElement;
-      if (_rootElement == null)
-      {
-          Debug.LogError("Root element is null. Ensure the UIDocument is properly set up.");
-          return;
-      }
+        _rootElement = uiDocument.rootVisualElement;
+        if (_rootElement == null)
+        {
+            Debug.LogError("Root element is null. Ensure the UIDocument is properly set up.");
+            return;
+        }
 
-      SetSceneTitle();
-      SetupSatelliteGrid();       
+        SetSceneTitle();
+
+        // WAIT for localization to be ready BEFORE setting up grid
+        await LocalizationSettings.InitializationOperation.Task;
+        if (LocalizationManager.Instance != null)
+        {
+            await LocalizationManager.Instance.WaitForReady();
+        }
+
+        await LoadStringTableAsync();
+
+        SetupSatelliteGrid();
     }
 
     /// <summary>
@@ -67,6 +88,13 @@ public class SatelliteGridController : MonoBehaviour
       {
           Debug.LogError($"Error setting scene title: {e.Message}");
       }
+    }
+
+    private async Task LoadStringTableAsync()
+    {
+        var handle = LocalizationSettings.StringDatabase.GetTableAsync("UIStrings");
+        await handle.Task;
+        _stringTable = handle.Result;
     }
 
     /// <summary>
@@ -148,15 +176,19 @@ public class SatelliteGridController : MonoBehaviour
       // Satellite info elements
       var infoContainer = new VisualElement();
       infoContainer.AddToClassList("satellite-info-container");
-      var leoLabel = new Label($"LEO: {satellite.leoInfo} km");
+
+      var leoLabel = new Label(LocalizedFormat("LEO_Label", satellite.leoInfo));
       leoLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(leoLabel);
-      var weightLabel = new Label($"Weight: {satellite.weight} kg");
+
+      var weightLabel = new Label(LocalizedFormat("Weight_Label", satellite.weight));
       weightLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(weightLabel);
-      var launchYearLabel = new Label($"Launch Year: {satellite.launchYear} - present");
+
+      var launchYearLabel = new Label(LocalizedFormat("LaunchYear_Label", satellite.launchYear));
       launchYearLabel.AddToClassList("satellite-info-text");
       infoContainer.Add(launchYearLabel);
+
       infoAndButtonContainer.Add(infoContainer);
 
 
@@ -185,4 +217,20 @@ public class SatelliteGridController : MonoBehaviour
         SimulationManager.Instance.SelectSatellite(satellite);
     }
 
+    private string Localized(string key)
+    {
+        return _stringTable?.GetEntry(key)?.GetLocalizedString() ?? key;
+    }
+
+    private string LocalizedFormat(string key, params object[] args)
+    {
+        var entry = _stringTable?.GetEntry(key);
+        if (entry == null)
+        {
+            Debug.LogWarning($"Missing localization for key: {key}");
+            return $"{key}: {string.Join(", ", args)}";
+        }
+
+        return entry.GetLocalizedString(args);
+    }
 }

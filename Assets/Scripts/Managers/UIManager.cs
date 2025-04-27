@@ -1,20 +1,22 @@
 // Description: Manages persistent UI elements across scenes
 
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.Localization.Settings;
 
 /// <summary>
-/// Singleton class to manage persistent UI elements across scenes
+/// Singleton class to manage persistent UI elements across scenes,
+/// ensuring localized text is applied after the localization system is ready.
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-    private static UIManager _instance;
-    public static UIManager Instance => _instance;
+    public static UIManager Instance { get; private set; }
 
     // Persistent UI elements
     [SerializeField] private UIDocument _sharedUIDocument;
-    [SerializeField] private VisualTreeAsset _SceneUIDocument;
 
     private VisualElement _root;
     private VisualElement _navBar;
@@ -22,39 +24,75 @@ public class UIManager : MonoBehaviour
     private VisualElement _collisionUI;
     private Button _playPauseBtn;
     private Button _restartBtn;
+    private VisualElement _speedToggleButton;
+    private Label _speedLabel;
+    private Label _speedLeftArrow;
+    private Label _speedRightArrow;
+
+    private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
+    private int _currentTimescaleIndex = 2;
 
     private bool isPaused = false;
+    private bool _isInitialized = false;
 
 
-    private void Awake()
+    private async void Awake()
     {
         // Ensure singleton instance
-        if (_instance != null && _instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        _instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        // UI references
+        _root = _sharedUIDocument.rootVisualElement;
+        _navBar = _root.Q<VisualElement>("NavBar");
+        _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
+        _collisionUI = _root.Q<VisualElement>("CollisionUI");
+
         InitializePersistentUI();
+        InitializeCollisionUI();
+
+        // Delay localization-dependent setup
+        await SetupAsync();
     }
 
-    private void OnEnable()
+    private async Task SetupAsync()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        if (_isInitialized) return;
+
+        // Wait for Unity's localization system
+        await LocalizationSettings.InitializationOperation.Task;
+        // Wait for any additional language loading
+        if (LocalizationManager.Instance != null)
+            await LocalizationManager.Instance.WaitForReady();
+
+        // Load UIStrings table
+        await LocalizedUIHelper.InitializeAsync();
+
+        // Apply initial localized texts
+        ApplyLocalization();
+        LocalizationSettings.SelectedLocaleChanged += _ => ApplyLocalization();
+
+        _isInitialized = true;
     }
+
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        LocalizationSettings.SelectedLocaleChanged -= _ => ApplyLocalization();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _collisionUI?.AddToClassList("d-none");
         isPaused = false;
-        Time.timeScale = 1f;
+        Time.timeScale = _timeScales[_currentTimescaleIndex];
 
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
@@ -69,50 +107,55 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void InitializePersistentUI()
     {
-        // Get the root visual element of the shared UI document
-        _root = _sharedUIDocument.rootVisualElement;
-        // Get the NavBar and BackToMenuButton elements
-        if (_navBar == null)
-        {
-            // Get the NavBar element from the shared UI document
-            _navBar = _root.Q<VisualElement>("NavBar");
-        }
+        // Back-to-menu callback
+        if (_backToMenuButton != null)
+            _backToMenuButton.RegisterCallback<ClickEvent>(_ => OnBackToMainMenuClicked());
 
-        if (_backToMenuButton == null)
-        {
-            // Get the BackToMenuButton element from the shared UI document
-            _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
-            // Register a callback for the button's click event
-            _backToMenuButton.RegisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
-        }
-
-        if (_collisionUI == null)
-        {
-            InitializeCollisionUI();
-        }
-
-        // Hide the NavBar by default
         HideNavBar();
     }
 
     private void InitializeCollisionUI()
     {
-        _collisionUI = _root.Q<VisualElement>("CollisionUI");
-        _collisionUI.RemoveFromClassList("d-none");
-        // Finn knappene i det instansierte UI-et
-        _playPauseBtn = _collisionUI.Q<Button>("playPauseButton");
-        _restartBtn = _collisionUI.Q<Button>("restartButton");
-        _playPauseBtn.text = "Pause";
+        if (_collisionUI == null) return;
 
-        // Hide Unity default classes
-        _playPauseBtn.RemoveFromClassList("unity-button");
-        _playPauseBtn.RemoveFromClassList("unity-text-element");
-        _restartBtn.RemoveFromClassList("unity-button");
-        _restartBtn.RemoveFromClassList("unity-text-element");
+        // Play / Restart
+        _playPauseBtn  = _collisionUI.Q<Button>("playPauseButton");
+        _restartBtn    = _collisionUI.Q<Button>("restartButton");
 
-        // Koble opp klikk-event til h�ndteringsfunksjoner
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
+
+        // Speed toggle
+        _speedToggleButton = _collisionUI.Q<VisualElement>("speedToggleButton");
+        _speedLabel        = _speedToggleButton.Q<Label>("speedLabel");
+        _speedLeftArrow    = _speedToggleButton.Q<Label>("speedLeftArrow");
+        _speedRightArrow   = _speedToggleButton.Q<Label>("speedRightArrow");
+
+        _speedLeftArrow.RegisterCallback<ClickEvent>(_ => DecreaseTimescale());
+        _speedRightArrow.RegisterCallback<ClickEvent>(_ => IncreaseTimescale());
+        _speedToggleButton.RegisterCallback<PointerDownEvent>(evt =>
+        {
+            if (evt.button == (int)MouseButton.MiddleMouse)
+                ResetTimescale();
+        });
+    }
+
+    private void ApplyLocalization()
+    {
+        // Play/Pause
+        LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
+        // Restart
+        LocalizedUIHelper.Apply(_restartBtn, "RestartButton");
+        // Back-to-menu
+        LocalizedUIHelper.Apply(_backToMenuButton.Q<Label>(), "MainMenu");
+        // Speed label
+        LocalizedUIHelper.Apply(_speedLabel, "Speed_Label");
+        // Optionally arrows if they have keys, e.g. "<" / ">"
+        LocalizedUIHelper.Apply(_speedLeftArrow, "SpeedLeftArrow");
+        LocalizedUIHelper.Apply(_speedRightArrow, "SpeedRightArrow");
+
+        // Update the numeric speed portion
+        UpdateSpeedButtonText();
     }
 
     /// <summary>
@@ -120,34 +163,32 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnBackToMainMenuClicked()
     {
-        string buttonText = _backToMenuButton.Q<Label>().text;
-        if (buttonText == "Go Back")
-        {
-            // Go back to the previous scene
-            SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
-        }
-        else
+        var label = _backToMenuButton?.Q<Label>();
+        if (label == null) return;
+
+        // Get localized key
+        string currentKey = LocalizedUIHelper.GetKeyForText(label.text);
+        Debug.LogError($"Current key: {currentKey}");
+        
+        if (currentKey  == "MainMenu")
         {
             // Load the main menu scene
             SimulationManager.Instance.LoadScene("MainMenu");
+        }
+        else
+        {
+            // Go back to the previous scene
+            SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
         }
     }
 
     /// <summary>
     /// Shows the NavBar element
     /// </summary>
-    public void ShowNavBar(string backButtonText = "Main Menu")
+    public void ShowNavBar(string backButtonKey = "MainMenu")
     {
-        if (_navBar != null)
-        {
-            _navBar.style.display = DisplayStyle.Flex;
-
-            // Set the text of the BackToMenuButton
-            if (_backToMenuButton != null)
-            {
-                _backToMenuButton.Q<Label>().text = backButtonText;
-            }
-        }
+        _navBar.style.display = DisplayStyle.Flex;
+        LocalizedUIHelper.Apply(_backToMenuButton.Q<Label>(), backButtonKey);
     }
 
     /// <summary>
@@ -155,29 +196,56 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void HideNavBar()
     {
-        if (_navBar != null)
-        {
-            _navBar.style.display = DisplayStyle.None;
-        }
-
+        _navBar.style.display = DisplayStyle.None;
     }
 
     public void TogglePause()
     {
         // Toggle pause-status
         isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
-
-        _playPauseBtn.text = isPaused ? "Resume" : "Pause";
+        Time.timeScale = isPaused ? 0f : _timeScales[_currentTimescaleIndex];
+        LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
     }
 
     public void RestartScene()
     {
         // Restart gjeldende scene
         isPaused = false;
-        Time.timeScale = 1f;
+        //Setter timescale lik slider
+        Time.timeScale = _timeScales[_currentTimescaleIndex];
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.name);
+    }
+
+    private void IncreaseTimescale()
+    {
+        _currentTimescaleIndex = (_currentTimescaleIndex + 1) % _timeScales.Length;
+        Time.timeScale = _timeScales[_currentTimescaleIndex];
+        UpdateSpeedButtonText();
+    }
+
+    private void DecreaseTimescale()
+    {
+        _currentTimescaleIndex--;
+        if (_currentTimescaleIndex < 0) _currentTimescaleIndex = _timeScales.Length - 1;
+
+        Time.timeScale = _timeScales[_currentTimescaleIndex];
+        UpdateSpeedButtonText();
+    }
+
+    private void ResetTimescale()
+    {
+        _currentTimescaleIndex = System.Array.IndexOf(_timeScales, 1f);
+        Time.timeScale = 1f;
+        UpdateSpeedButtonText();
+
+    }
+
+    private void UpdateSpeedButtonText()
+    {
+        // "{0}x" portion comes from localization entry "Speed_Label"
+        float scale = _timeScales[_currentTimescaleIndex];
+        _speedLabel.text = string.Format(LocalizedUIHelper.Get("Speed_Label"), scale);
     }
 
     private void OnDestroy()
@@ -190,7 +258,7 @@ public class UIManager : MonoBehaviour
         }
 
         // Clean up references to avoid memory leaks
-        _instance = null;
+        Instance = null;
         _root = null;
         _navBar = null;
         _backToMenuButton = null;
