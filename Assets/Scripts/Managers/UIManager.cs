@@ -164,6 +164,10 @@ public class UIManager : MonoBehaviour
         UpdateSpeedButtonText();
     }
 
+    /// <summary>
+    /// Initializes the record and download buttons in the NavBar and sets up theri click events
+    /// The record button toggles recording state, and the download button saves the current recording
+    /// </summary> 
     private void InitializeRecordButtons()
     {
         _recordBtn = _navBar.Q<Button>("RecordButton");
@@ -176,6 +180,7 @@ public class UIManager : MonoBehaviour
         if(_downloadBtn != null) 
         {
             _downloadBtn.clicked += DownloadRecording;
+            // Hide the download button initially
             _downloadBtn.AddToClassList("d-none");
         }
     }
@@ -223,6 +228,9 @@ public class UIManager : MonoBehaviour
         _navBar.style.display = DisplayStyle.None;
     }
 
+    /// <summary>
+    /// Show the record button in the UI
+    /// </summary>
     private void ShowRecordButton()
     {
         if(_recordBtn != null)
@@ -237,6 +245,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hides the record button in the UI
+    /// </summary>
     private void HideRecordButton()
     {
         if(_recordBtn != null)
@@ -250,6 +261,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows the download button in the UI
+    /// </summary>
     public void ShowDownloadButton()
     {
         if (_downloadBtn != null)
@@ -258,6 +272,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hides the download button in the UI
+    /// </summary>
     public void HideDownloadButton()
     {
         if (_downloadBtn != null)
@@ -266,6 +283,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the text of the record button based on the recording state
+    /// </summary>
     public void UpdateRecordButtonText(string text)
     {
         if (_recordBtn != null)
@@ -292,11 +312,17 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(activeScene.name);
     }
 
+    /// <summary>
+    /// Toggles the recording state using the VideoManager instance.
+    /// </summary>
     private void ToggleRecording()
     {
         VideoManager.Instance?.ToggleRecording();
     }
 
+    /// <summary>
+    /// Downloads the current recording using the VideoManager instance.
+    /// </summary>
     private void DownloadRecording()
     {
         VideoManager.Instance?.SaveCurrentRecording();

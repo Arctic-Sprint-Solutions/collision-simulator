@@ -1,9 +1,20 @@
 using UnityEngine;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// VideoManager is responsible for managing video recording functionality in a Unity WebGL application.
+/// It provides methods to start, stop, and save video recordings using JavaScript interop.
+/// This class is designed to work specifically with Unity's WebGL platform.
+/// It uses a singleton pattern to ensure only one instance exists throughout the application.
+/// </summary>
 public class VideoManager : MonoBehaviour
 {
+    /// <summary>
+    /// Singleton instance of VideoManager
+    /// </summary>
     public static VideoManager Instance { get; private set; }
+
+    #region WebGL JavaScript Plugin Interop
     [DllImport("__Internal")]
     private static extern bool InitializeVideoRecorder();
     
@@ -15,10 +26,21 @@ public class VideoManager : MonoBehaviour
     
     [DllImport("__Internal")]
     private static extern bool SaveVideoRecording();
-    
+    #endregion
+
+    /// <summary>
+    /// Indicates whether the video recording is currently active
+    /// </summary>
     private bool _isRecording = false;
+
+    /// <summary>
+    /// Public property to check if the video is currently being recorded
+    /// </summary>
     public bool IsRecording => _isRecording;
 
+    /// <summary>
+    /// Initializes the singleton instance and sets up the video recording functionality
+    /// </summary>
     private void Awake()
     {
         // Ensure that there is only one instance of VideoManager
@@ -30,21 +52,24 @@ public class VideoManager : MonoBehaviour
         
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        Debug.Log("VideoRecorderManager initialized");
     }
     
+    /// <summary>
+    /// Called when the script instance is being loaded.
+    /// Initializes the video recorder if running in WebGL.
+    /// </summary>
     private void Start()
     {        
-        Debug.Log("VideoRecorderManager started");
-
         #if !UNITY_EDITOR && UNITY_WEBGL
         InitializeVideoRecorder();
         #endif
     }
     
+    /// <summary>
+    /// Starts the video recording if running in WebGL. Uses the JavaScript plugin to handle the recording.
+    /// </summary>
     private void StartRecording()
     {
-        Debug.Log("Starting video recording");
         if (_isRecording)
         {
             return;
@@ -59,15 +84,16 @@ public class VideoManager : MonoBehaviour
         UIManager.Instance?.UpdateRecordButtonText("Stop Recording");
     }
     
+    /// <summary>
+    /// Stops the video recording if it is currently active. Uses the JavaScript plugin to handle the stopping.
+    /// </summary>
     private void StopRecording()
     {
         if (!_isRecording)
         {
             return;
         }
-            
-        Debug.Log("Stopping video recording");
-        
+                    
         #if !UNITY_EDITOR && UNITY_WEBGL
         StopVideoRecording();
         #endif
@@ -77,10 +103,11 @@ public class VideoManager : MonoBehaviour
         UIManager.Instance?.UpdateRecordButtonText("Start Recording");
     }
 
+    /// <summary>
+    /// Saves the recorded video. Uses the JavaScript plugin to handle the download.
+    /// </summary>
     private void SaveRecording()
-    {
-        Debug.Log("Saving video recording");
-        
+    {        
         #if !UNITY_EDITOR && UNITY_WEBGL
         SaveVideoRecording();
         #endif
@@ -88,6 +115,9 @@ public class VideoManager : MonoBehaviour
         UIManager.Instance?.HideDownloadButton();
     }
 
+    /// <summary>
+    /// Toggles the video recording state. If currently recording, it stops; otherwise, it starts recording.
+    /// </summary>
     public void ToggleRecording()
     {
         if (_isRecording)
@@ -100,6 +130,9 @@ public class VideoManager : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Saves the current recording if not already recording.
+    /// </summary>
     public void SaveCurrentRecording()
     {
         if (_isRecording)
@@ -111,9 +144,12 @@ public class VideoManager : MonoBehaviour
         SaveRecording();
     }
     
-    // This will be called from JavaScript when recording is complete
+    /// <summary>
+    /// Callback method to be called from JavaScript when the recording is finished.
+    /// </summary>
     public void OnRecordingFinished(string videoUrl)
     {
+        // Todo: Update UI once the recording is finished
         Debug.Log("Recording finished: " + videoUrl);
     }
 }
