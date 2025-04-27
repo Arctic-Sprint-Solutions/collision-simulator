@@ -64,6 +64,7 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
+/[Ww]eb[Gg][Ll]-[Dd]ist/
 
 # OS generated
 .DS_Store
