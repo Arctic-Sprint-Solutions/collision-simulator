@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UIElements;
+using System.Threading.Tasks;
 using System.Collections;
 
 /// <summary>
@@ -60,6 +62,14 @@ public class LocalizationManager : MonoBehaviour
             LocalizationSettings.SelectedLocale = locale;
             PlayerPrefs.SetString("Language", localeCode);
             PlayerPrefs.Save();
+        }
+    }
+
+    public async Task WaitForReady()
+    {
+        while (!IsLocalizationReady)
+        {
+            await Task.Yield();
         }
     }
 }

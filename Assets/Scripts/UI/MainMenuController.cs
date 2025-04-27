@@ -51,7 +51,7 @@ public class MainMenuController : MonoBehaviour
     _rootElement.Q<Label>("MainTitle").text = appSettings.appName;
   
     // Find the subtitle element and set its text
-    _rootElement.Q<Label>("Subtitle").text = appSettings.appSubtitle;
+    _rootElement.Q<Label>("MainMenuSubtitle").text = appSettings.appSubtitle;
     
   }
 

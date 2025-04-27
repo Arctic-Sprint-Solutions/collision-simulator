@@ -114,15 +114,42 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2645562233970688
-    m_Localized: Oversett
+    m_Localized: "V\xE5ren 2025 ble et prosjekt lagt til bachelorprogrammet i datateknikk
+      ved UiT \u2013 Norges arktiske universitet, kalt \"Visualisering av kollisjoner
+      mellom satellitter og roms\xF8ppel\". Hovedkravene til prosjektet var \xE5
+      utvikle et visuelt verkt\xF8y som kunne simulere enkle kollisjoner mellom satellitter
+      og roms\xF8ppel. Verkt\xF8yet skulle brukes i undervisning slik at flere studenter
+      (og andre potensielle interessenter) kunne l\xE6re mer om effektene av roms\xF8ppel.\n\nOppdragsgiveren
+      for prosjektet var P\xE5l Gunnar Ellingsen, f\xF8rsteamanuensis innen satellitteknologi
+      og fjernm\xE5ling ved Institutt for elektroteknologi ved UiT. Hovedveilederen
+      for prosjektet var Frode Nesje, universitetslektor ved Institutt for datateknologi
+      og beregningsorientert ingeni\xF8rvitenskap ved UiT.\n\nProsjektet ble gjennomf\xF8rt
+      av utviklingsteamet Arctic Sprint Solutions 2.0, best\xE5ende av fire avgangsstudenter
+      innen bachelorprogrammet i datateknikk ved UiT: Madeleine Woodbury, Ola Gi\xE6ver,
+      Gabriel Halstensen og Ingrid Ledingham."
     m_Metadata:
       m_Items: []
   - m_Id: 2645565866237952
-    m_Localized: Oversett
+    m_Localized: "Den st\xF8rste utfordringen med \xE5 simulere kollisjoner mellom
+      roms\xF8ppel er mangelen p\xE5 forskning om hvordan objekter faktisk oppf\xF8rer
+      seg i rommet etter en kollisjon. Objekter som beveger seg i bane rundt jorden
+      har vanligvis ekstremt h\xF8y hastighet \u2013 opptil 7 kilometer i sekundet
+      (25 000 kilometer i timen). Til sammenligning beveger en rifle-kule seg med
+      en hastighet p\xE5 rundt 1,2 kilometer i sekundet \u2013 en br\xF8kdel av dette.
+      N\xE5r to objekter kolliderer i bane med slike hastigheter, kan den relative
+      kollisjonshastigheten n\xE5 opptil 15 kilometer i sekundet (54 000 kilometer
+      i timen). \xC5 simulere slike kollisjoner er derfor sv\xE6rt utfordrende \u2013
+      b\xE5de n\xE5r man gj\xF8r det fysisk i eksperimenter og n\xE5r man visualiserer
+      det med verkt\xF8y som Orbit Watch. Det er vanskelig \xE5 etterligne kollisjonseffekter
+      n\xE5r det finnes lite eller ingen tilgjengelig data fra virkelige hendelser."
     m_Metadata:
       m_Items: []
   - m_Id: 2645569347510272
-    m_Localized: Oversett
+    m_Localized: "For \xE5 lage et visuelt verkt\xF8y for kollisjoner med roms\xF8ppel
+      har det v\xE6rt viktig \xE5 legge til side fors\xF8k p\xE5 \xE5 gjenskape hvordan
+      objekter faktisk oppf\xF8rer seg i rommet. Prosjektet har f\xE5tt i oppdrag
+      \xE5 simulere enkle kollisjoner, ikke \xE5 gi en n\xF8yaktig fremstilling av
+      hvordan objekter fysisk oppf\xF8rer seg i bane ved sammenst\xF8t."
     m_Metadata:
       m_Items: []
   - m_Id: 2645567686565888
@@ -130,7 +157,103 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2645941407440896
-    m_Localized: Oversett
+    m_Localized: "Selv om Orbital Watch ble laget for \xE5 simulere enkle kollisjoner,
+      har det potensial for videreutvikling \u2013 kanskje som en del av en masteroppgave
+      i anvendt vitenskap. Fremtidige forbedringer kan inkludere mer forskning p\xE5
+      ekte romfysikk, noe som vil muliggj\xF8re mer presise fremstillinger av kollisjoner
+      i bane. Man kan ogs\xE5 vurdere \xE5 eksperimentere med mer avanserte spillmotorer,
+      som Unreal, for \xE5 forbedre den grafiske kvaliteten og \xE5pne for st\xF8rre
+      grad av tilpasning.\n\nVidere utvikling vil sannsynligvis kreve mer tid og
+      ressurser for \xE5 oppn\xE5 h\xF8yere grad av simuleringsn\xF8yaktighet. Men
+      akkurat som i spillverdenen er det alltid plass til en oppf\xF8lger \u2013
+      med h\xF8yere oppl\xF8sning og enda mer innhold."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908803484147712
+    m_Localized: Vis informasjon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909021575372800
+    m_Localized: "Om roms\xF8ppel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908210342453248
+    m_Localized: Store objekter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908547145064448
+    m_Localized: Medium objekter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908785276674048
+    m_Localized: "Sm\xE5 objekter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2910835972562944
+    m_Localized: "Den europeiske romfartsorganisasjonen (ESA) gir informasjon om
+      mengden roms\xF8ppel i lav jordbane (L.E.O) gjennom statistiske \nmodeller.
+      Det visuelle roms\xF8ppelet som vises her representerer kun en br\xF8kdel (0,0001538)
+      av den totale mengden s\xF8ppel. \n\nSystemet for roms\xF8ppel er basert p\xE5
+      f\xF8lgende kategorier:\n\n- Store objekter (st\xF8rre enn 10 cm) \u2013 40
+      500 objekter\n\n- Mellomstore objekter (mellom 1 cm og 10 cm) \u2013 1 100
+      000 objekter\n\n- Sm\xE5 objekter (mellom 1 mm og 1 cm) \u2013 130 000 000
+      objekter\n\nKilde: https://www.esa.int/Space_Safety/Space_Debris/Space_debris_by_the_numbers"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914638683758592
+    m_Localized: "Roms\xF8ppel-kontroller"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914662360604672
+    m_Localized: "Visualiser Roms\xF8ppel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918922615840768
+    m_Localized: 'Vekt:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918924448751616
+    m_Localized: "\xC5r:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918925962895360
+    m_Localized: Last Simulasjon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2923432138563584
+    m_Localized: Velg kollisjonstype
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3273923129303040
+    m_Localized: Velg en satellitt for simulering
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276659979771904
+    m_Localized: VELG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276468857921536
+    m_Localized: 'LEO: {0} km'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276472918007808
+    m_Localized: 'Vekt: {0} kg'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276473974972416
+    m_Localized: "Oppskytings\xE5r: {0} - present"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3296750440079360
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297700483489792
+    m_Localized: Spill av
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297702366732288
+    m_Localized: "G\xE5 tilbake"
     m_Metadata:
       m_Items: []
   references:

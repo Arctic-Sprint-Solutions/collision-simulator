@@ -119,20 +119,19 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2645562233970688
     m_Localized: "During the spring of 2025 a project was added to the Bachelor of
-      Computer Science at UiT The Arctic University of Norway called \uFFFDVisualization
-      of collisions between satellites and space debris\uFFFD. The project\uFFFDs
-      main requirements were to create a visual tool which could simulate simple
-      collisions between satellites and space debris. The tool was to be used during
-      teaching so that more students (and other potential stakeholders) can learn
-      more about the effects of space debris. \n \nThe client requesting the project
-      was P\uFFFDl Gunnar Ellingsen, an Associate professor within satelite technology
-      and remote sensing at the Department of Electrical Engineering at UiT. The
-      head advisor the project was Frode Nesje, Assistant Professor at the Department
-      of Computer Science and Computational Engineering at UiT.\n\nThe project was
-      taken on by the dev team of Arctic Sprint Solutions 2.0, consisting of four
-      graduating students in the field of Bachelor of Computer Science (Datateknikk)
-      at UiT: Madeleine Woodbury, Ola Gi\uFFFDver, Gabriel Halstensen and Ingrid
-      Ledingham. \n\n\n"
+      Computer Science at UiT The Arctic University of Norway called \"Visualization
+      of collisions between satellites and space debris.\" The projects main requirements
+      were to create a visual tool which could simulate simple collisions between
+      satellites and space debris. The tool was to be used during teaching so that
+      more students (and other potential stakeholders) can learn more about the effects
+      of space debris. \n \nThe client requesting the project was P\xE5l Gunnar Ellingsen,
+      an Associate professor within satelite technology and remote sensing at the
+      Department of Electrical Engineering at UiT. The head advisor the project was
+      Frode Nesje, Assistant Professor at the Department of Computer Science and
+      Computational Engineering at UiT.\n\nThe project was taken on by the dev team
+      of Arctic Sprint Solutions 2.0, consisting of four graduating students in the
+      field of Bachelor of Computer Science (Datateknikk) at UiT: Madeleine Woodbury,
+      Ola Gi\xE6ver, Gabriel Halstensen and Ingrid Ledingham. "
     m_Metadata:
       m_Items: []
   - m_Id: 2645565866237952
@@ -152,23 +151,112 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2645569347510272
-    m_Localized: "In order to create a visual tool for space debris collisions, it
+    m_Localized: 'In order to create a visual tool for space debris collisions, it
       has been important to set aside attempts to capture how objects actually behave
-      in space. The project has been commissionedto simulate simple collisions, not
-      to provide accurate representations of how objects physically behave in orbit
-      when colliding. \n\n"
+      in space. The project has been commissioned to simulate simple collisions,
+      not to provide accurate representations of how objects physically behave in
+      orbit when colliding. '
     m_Metadata:
       m_Items: []
   - m_Id: 2645941407440896
-    m_Localized: "Although Orbital Watch was created to simulate simple collisions,
-      it holds potential for further development \uFFFD possibly as part of a Master
-      of Applied Science assignment. Future improvements could include more research
+    m_Localized: 'Although Orbital Watch was created to simulate simple collisions,
+      it holds potential for further development possibly as part of a Master of
+      Applied Science assignment. Future improvements could include more research
       into real space physics, enabling more accurate depictions of collisions in
       orbit. One might also consider experimenting with more advanced game engines,
-      such as Unreal, to enhance the graphical quality and allow for greater customization.\n\nFurther
+      such as Unreal, to enhance the graphical quality and allow for greater customization.
+
+
+      Further
       development would likely require additional time and resources to reach a higher
-      level of simulation fidelity. But much like in the world of video games, there\uFFFDs
-      always room for a sequel \uFFFD one with higher resolution and even more content.\n"
+      level of simulation fidelity. But much like in the world of video games, there
+      is always room for a sequel; one with higher resolution and even more content.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908210342453248
+    m_Localized: ' Large Debris'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908785276674048
+    m_Localized: ' Small Debris'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908547145064448
+    m_Localized: ' Medium Debris'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908803484147712
+    m_Localized: Show information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909021575372800
+    m_Localized: About space debris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2910835972562944
+    m_Localized: "The European Space Agency (ESA) provide information about the current
+      amount of space debris in Lower Earth Orbit (L.E.O) \nthrough statistical models.
+      Visual debris shown here represents a fraction (0.0001538) of the total amount
+      of debris. \n\nThe debris system is based on the following \n\n- Large Debris
+      (Objects greater than 10 cm) - 40 500 objects\n\n- Medium Debris (Objects from
+      greater than 1 cm to 10 cm) - 1 100 000 objects\n\n- Small Debris (Objects
+      from greater than 1 cm to 1 mm) - 130 000 000 objects\n\nSource: https://www.esa.int/Space_Safety/Space_Debris/Space_debris_by_the_numbers"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914638683758592
+    m_Localized: Debris Control Panel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914662360604672
+    m_Localized: Manage Space Debris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918922615840768
+    m_Localized: 'Weight:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918924448751616
+    m_Localized: 'Year:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918925962895360
+    m_Localized: Load Simulation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2923432138563584
+    m_Localized: Choose collision type
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3273923129303040
+    m_Localized: Select a satellite for the simulation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276659979771904
+    m_Localized: SELECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276473974972416
+    m_Localized: 'Launch Year: {0} - present'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276472918007808
+    m_Localized: 'Weight: {0} kg'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276468857921536
+    m_Localized: 'LEO: {0} km'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3296750440079360
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297700483489792
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297702366732288
+    m_Localized: Go Back
     m_Metadata:
       m_Items: []
   references:

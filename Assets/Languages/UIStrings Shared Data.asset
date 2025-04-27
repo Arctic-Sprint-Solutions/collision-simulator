@@ -20,7 +20,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 31687747559424
-    m_Key: Subtitle
+    m_Key: MainMenuSubtitle
     m_Metadata:
       m_Items: []
   - m_Id: 33502727757824
@@ -64,11 +64,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2639493038333952
-    m_Key: BackToMenuLabel
+    m_Key: MainMenu
     m_Metadata:
       m_Items: []
   - m_Id: 2639631513280512
-    m_Key: restartButton
+    m_Key: RestartButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3296750440079360
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297700483489792
+    m_Key: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297702366732288
+    m_Key: GoBack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297705134972928
+    m_Key: New Entry 3
     m_Metadata:
       m_Items: []
   - m_Id: 2645022120861696
@@ -117,6 +133,74 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2645941407440896
     m_Key: textBlock5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914638683758592
+    m_Key: DebrisMainTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914662360604672
+    m_Key: DebrisSubtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908210342453248
+    m_Key: LargeDebrisText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908547145064448
+    m_Key: MediumDebrisText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908785276674048
+    m_Key: SmallDebrisText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908803484147712
+    m_Key: ShowInfoButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909021575372800
+    m_Key: AboutHeadline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2910835972562944
+    m_Key: DebrisInfo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918922615840768
+    m_Key: WeightLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918924448751616
+    m_Key: YearLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918925962895360
+    m_Key: LoadSimulationLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2923432138563584
+    m_Key: SceneTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3273923129303040
+    m_Key: SceneSubtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276468857921536
+    m_Key: LEO_Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276472918007808
+    m_Key: Weight_Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276473974972416
+    m_Key: LaunchYear_Label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276659979771904
+    m_Key: Select_Button
     m_Metadata:
       m_Items: []
   m_Metadata:
