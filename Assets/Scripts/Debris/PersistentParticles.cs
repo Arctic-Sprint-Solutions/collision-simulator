@@ -50,6 +50,7 @@ public class PersistentParticles : MonoBehaviour
 
     public void SetParticlesActive(bool active)
     {
+        if (ps == null) return;
         isActive = active;
         var emission = ps.emission;
         emission.enabled = active;
