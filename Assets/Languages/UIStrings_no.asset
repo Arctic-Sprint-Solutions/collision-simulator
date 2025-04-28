@@ -284,6 +284,14 @@ MonoBehaviour:
     m_Localized: Senk hastighet
     m_Metadata:
       m_Items: []
+  - m_Id: 3763310234165248
+    m_Localized: Start/Stopp Opptak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3764697697345536
+    m_Localized: Last ned opptak
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

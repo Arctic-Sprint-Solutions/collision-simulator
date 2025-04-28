@@ -6,6 +6,19 @@
             <engine:VisualElement name="BackIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/circle-back-icon.png?fileID=2800000&amp;guid=ecac4b2a0e7174a82b0f3c2712c05619&amp;type=3#circle-back-icon&quot;);" />
             <engine:Label name="BackToMenuLabel" text="Main Menu&#10;" class="navbar-link-text nav-link-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         </engine:VisualElement>
+        <engine:VisualElement name="RecordButtons" class="flex-row-center" style="flex-grow: 0;">
+            <engine:VisualElement name="RecordButton2" class="flex-row-center d-none record-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-right: 8px;">
+                <engine:VisualElement name="CameraIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/video-icon.png?fileID=2800000&amp;guid=950fb44b29a5b46878ebb97799fe91b9&amp;type=3#video-icon&quot;); margin-right: 0;" />
+                <engine:VisualElement name="StopIcon" class="d-none btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/stop-icon.png?fileID=2800000&amp;guid=a7033ed839ae943b2acda0f13bf00aed&amp;type=3#stop-icon&quot;); margin-right: 0; color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);" />
+                <engine:Label name="RecordLabel" text="Record" class="navbar-link-text" style="margin-left: 8px;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="DownloadButton2" class="flex-row-center d-none record-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-left: 10px;">
+                <engine:VisualElement name="DownloadIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/download-icon.png?fileID=2800000&amp;guid=06237ef8dfc094b45a35b99ebd22d1f6&amp;type=3#download-icon&quot;); margin-right: 0;" />
+                <engine:Label name="DownloadLabel" text="Download" class="navbar-link-text" style="margin-left: 8px;" />
+            </engine:VisualElement>
+            <engine:Button text="Start Recording" name="RecordButton" class="d-none" />
+            <engine:Button text="Download Recording" name="DownloadButton" class="d-none" />
+        </engine:VisualElement>
     </engine:VisualElement>
     <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 1; position: absolute; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row;">
         <engine:VisualElement name="ButtonContainer" class="flex-row-center">

@@ -41,23 +41,26 @@ public class SettingsController : MonoBehaviour
 
     private void InitializeMappings()
     {
-        // Map action name to corresponding keybind getters/setters
         getKeyMap = new Dictionary<string, Func<KeyCode>>()
         {
-            { "Pause",        () => InputManager.Instance.keybinds.pauseKey },
-            { "Restart",      () => InputManager.Instance.keybinds.restartKey },
-            { "IncreaseSpeed",() => InputManager.Instance.keybinds.increaseSpeedKey },
-            { "DecreaseSpeed",() => InputManager.Instance.keybinds.decreaseSpeedKey },
-            { "ResetSpeed",   () => InputManager.Instance.keybinds.resetSpeedKey }
+            { "Pause",         () => InputManager.Instance.keybinds.pauseKey },
+            { "Restart",       () => InputManager.Instance.keybinds.restartKey },
+            { "Record",        () => InputManager.Instance.keybinds.recordKey },
+            { "Download",      () => InputManager.Instance.keybinds.saveKey },
+            { "IncreaseSpeed", () => InputManager.Instance.keybinds.increaseSpeedKey },
+            { "DecreaseSpeed", () => InputManager.Instance.keybinds.decreaseSpeedKey },
+            { "ResetSpeed",    () => InputManager.Instance.keybinds.resetSpeedKey }
         };
 
         setKeyMap = new Dictionary<string, Action<KeyCode>>()
         {
-            { "Pause",        (key) => InputManager.Instance.keybinds.pauseKey = key },
-            { "Restart",      (key) => InputManager.Instance.keybinds.restartKey = key },
-            { "IncreaseSpeed",(key) => InputManager.Instance.keybinds.increaseSpeedKey = key },
-            { "DecreaseSpeed",(key) => InputManager.Instance.keybinds.decreaseSpeedKey = key },
-            { "ResetSpeed",   (key) => InputManager.Instance.keybinds.resetSpeedKey = key }
+            { "Pause",         (key) => InputManager.Instance.keybinds.pauseKey = key },
+            { "Restart",       (key) => InputManager.Instance.keybinds.restartKey = key },
+            { "Record",        (key) => InputManager.Instance.keybinds.recordKey = key },
+            { "Download",      (key) => InputManager.Instance.keybinds.saveKey = key },
+            { "IncreaseSpeed", (key) => InputManager.Instance.keybinds.increaseSpeedKey = key },
+            { "DecreaseSpeed", (key) => InputManager.Instance.keybinds.decreaseSpeedKey = key },
+            { "ResetSpeed",    (key) => InputManager.Instance.keybinds.resetSpeedKey = key }
         };
     }
 
@@ -67,11 +70,13 @@ public class SettingsController : MonoBehaviour
 
         actionButtonMap = new Dictionary<string, Button>
         {
-            { "Pause",        root.Q<Button>("PauseKeybindButton") },
-            { "Restart",      root.Q<Button>("RestartKeybindButton") },
-            { "IncreaseSpeed",root.Q<Button>("IncreaseSpeedKeybindButton") },
-            { "DecreaseSpeed",root.Q<Button>("DecreaseSpeedKeybindButton") },
-            { "ResetSpeed",   root.Q<Button>("ResetSpeedKeybindButton") }
+            { "Pause",         root.Q<Button>("PauseKeybindButton") },
+            { "Restart",       root.Q<Button>("RestartKeybindButton") },
+            { "Record",        root.Q<Button>("RecordKeybindButton") },
+            { "Download",      root.Q<Button>("DownloadKeybindButton") },
+            { "IncreaseSpeed", root.Q<Button>("IncreaseSpeedKeybindButton") },
+            { "DecreaseSpeed", root.Q<Button>("DecreaseSpeedKeybindButton") },
+            { "ResetSpeed",    root.Q<Button>("ResetSpeedKeybindButton") }
         };
 
         foreach (var pair in actionButtonMap)
@@ -119,7 +124,7 @@ public class SettingsController : MonoBehaviour
         {
             if (IsKeyAlreadyBound(key, action))
             {
-                Debug.LogWarning("[SettingsController] Key already bound to another action.");
+                Debug.LogWarning($"[SettingsController] Key '{key}' already bound to another action.");
                 button.text = getKeyMap[action]().ToString();
                 return;
             }
@@ -144,7 +149,7 @@ public class SettingsController : MonoBehaviour
         languageDropdown = root.Q<DropdownField>("LanguageDropdown");
         if (languageDropdown == null)
         {
-            Debug.LogError("LanguageDropdown not found!");
+            Debug.LogError("[SettingsController] LanguageDropdown not found!");
             return;
         }
 

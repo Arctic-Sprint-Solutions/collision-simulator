@@ -9,7 +9,6 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
     public KeybindSettings keybinds;
-
     private UIManager uiManager;
     private bool isCollisionScene = false;
 
@@ -34,6 +33,8 @@ public class InputManager : MonoBehaviour
             enabled = false;
             return;
         }
+
+
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -115,6 +116,18 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("[InputManager] Reset speed key pressed");
             uiManager?.ResetTimescale();
+        }
+
+        if (Input.GetKeyDown(keybinds.recordKey))
+        {
+            Debug.Log("[InputManager] Record key pressed");
+            VideoManager.Instance?.ToggleRecording();
+        }
+
+        if (Input.GetKeyDown(keybinds.saveKey))
+        {
+            Debug.Log("[InputManager] Save key pressed");
+            VideoManager.Instance?.SaveCurrentRecording();
         }
     }
 }

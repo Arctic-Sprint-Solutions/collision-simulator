@@ -12,4 +12,6 @@ public class KeybindSettings : ScriptableObject
     public KeyCode increaseSpeedKey = KeyCode.M;
     public KeyCode decreaseSpeedKey = KeyCode.B;
     public KeyCode resetSpeedKey = KeyCode.N;
+    public KeyCode recordKey = KeyCode.V;
+    public KeyCode saveKey = KeyCode.S;
 }
