@@ -1,26 +1,42 @@
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.UIElements;
-using System.Threading.Tasks;
+using System;
 using System.Collections;
 
 /// <summary>
-/// Manages language settings and applies saved user preference.
-/// This object is marked as DontDestroyOnLoad so it is available across scenes.
+/// Singleton that manages the app's current language setting
+/// and notifies all subscribers when the language changes.
 /// </summary>
 public class LocalizationManager : MonoBehaviour
 {
+    /// <summary>
+    /// Singleton instance of the LocalizationManager.
+    /// </summary>
     public static LocalizationManager Instance { get; private set; }
+
+    /// <summary>
+    /// Event triggered whenever the localization is updated (e.g. language switch).
+    /// </summary>
+    public static event Action LocalizationUpdated;
+
+    /// <summary>
+    /// Indicates whether the localization system is ready.
+    /// This is set to true after the initial language is loaded.
+    /// Cached values are built at this point.
+    /// </summary>
     public bool IsLocalizationReady { get; private set; } = false;
 
     private void Awake()
     {
-        // Ensure this manager persists and is unique.
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
             StartCoroutine(LoadSavedLanguage());
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+            LocalizedUIHelper.BuildCache();
+
         }
         else
         {
@@ -28,48 +44,51 @@ public class LocalizationManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+    }
+
     /// <summary>
-    /// Wait for the localization system to finish initializing, then load the saved language.
+    /// Loads the saved language from PlayerPrefs or defaults to English.
     /// </summary>
     private IEnumerator LoadSavedLanguage()
     {
-        // Wait until Unity's Localization system is fully initialized.
         yield return LocalizationSettings.InitializationOperation;
 
-        // Retrieve the saved language from PlayerPrefs (defaulting to English "en").
         string savedLang = PlayerPrefs.GetString("Language", "en");
+        var locale = LocalizationSettings.AvailableLocales.Locales.Find(l => l.Identifier.Code == savedLang);
 
-        // Look for the corresponding locale and set it.
-        var locale = LocalizationSettings.AvailableLocales.Locales
-            .Find(l => l.Identifier.Code == savedLang);
         if (locale != null)
         {
             LocalizationSettings.SelectedLocale = locale;
         }
 
-        IsLocalizationReady = true; // Notify that the language is loaded.
+        IsLocalizationReady = true;
+        LocalizationUpdated?.Invoke();
     }
 
     /// <summary>
-    /// Sets a new language: updates the locale, saves the preference, and applies the change immediately.
+    /// Changes the app's language and saves the preference.
     /// </summary>
+    /// <param name="localeCode">Locale code to switch to (e.g., "en", "no").</param>
     public void SetLanguage(string localeCode)
     {
-        var locale = LocalizationSettings.AvailableLocales.Locales
-            .Find(l => l.Identifier.Code == localeCode);
+        var locale = LocalizationSettings.AvailableLocales.Locales.Find(l => l.Identifier.Code == localeCode);
+
         if (locale != null)
         {
             LocalizationSettings.SelectedLocale = locale;
             PlayerPrefs.SetString("Language", localeCode);
             PlayerPrefs.Save();
+            Debug.Log($"[LocalizationManager] Language changed to {localeCode}");
+
+            LocalizationUpdated?.Invoke();
         }
     }
 
-    public async Task WaitForReady()
+    private void OnLocaleChanged(Locale _)
     {
-        while (!IsLocalizationReady)
-        {
-            await Task.Yield();
-        }
+        LocalizationUpdated?.Invoke();
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.Localization.Settings;
+using System.Collections.Generic;
 
 /// <summary>
 /// Singleton class to manage persistent UI elements across scenes,
@@ -35,7 +36,14 @@ public class UIManager : MonoBehaviour
     private bool isPaused = false;
     private bool _isInitialized = false;
 
+    private enum BackButtonMode { MainMenu, PreviousScene }
+    private BackButtonMode _currentBackButtonMode;
 
+    private List<UILocalizer> registeredLocalizers = new List<UILocalizer>();
+
+    /// <summary>
+    /// Singleton instance of the UIManager
+    /// </summary>
     private async void Awake()
     {
         // Ensure singleton instance
@@ -53,6 +61,10 @@ public class UIManager : MonoBehaviour
         _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
         _collisionUI = _root.Q<VisualElement>("CollisionUI");
 
+        // Register for localization updates
+        LocalizationManager.LocalizationUpdated += ApplyLocalization;
+
+        // Initialize UI elements
         InitializePersistentUI();
         InitializeCollisionUI();
 
@@ -60,33 +72,32 @@ public class UIManager : MonoBehaviour
         await SetupAsync();
     }
 
+    /// <summary>
+    /// Sets up the UIManager by waiting for the localization system to be ready
+    /// and applying initial localization.
+    /// </summary>
     private async Task SetupAsync()
     {
         if (_isInitialized) return;
 
         // Wait for Unity's localization system
         await LocalizationSettings.InitializationOperation.Task;
-        // Wait for any additional language loading
         if (LocalizationManager.Instance != null)
-            await LocalizationManager.Instance.WaitForReady();
+            while (!LocalizationManager.Instance.IsLocalizationReady)
+                await Task.Yield();
 
         // Load UIStrings table
         await LocalizedUIHelper.InitializeAsync();
 
         // Apply initial localized texts
         ApplyLocalization();
-        LocalizationSettings.SelectedLocaleChanged += _ => ApplyLocalization();
 
         _isInitialized = true;
     }
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
 
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        LocalizationSettings.SelectedLocaleChanged -= _ => ApplyLocalization();
-    }
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -98,7 +109,6 @@ public class UIManager : MonoBehaviour
         if (GameObject.FindWithTag("CollisionScene") != null)
         {
             _collisionUI?.RemoveFromClassList("d-none");
-            _playPauseBtn.text = "Pause";
         }
     }
 
@@ -140,57 +150,73 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    private void ApplyLocalization()
+    ///<summary>
+    /// Applies localization to UI elements
+    /// </summary>
+    /// <remarks>
+    public void ApplyLocalization()
     {
-        // Play/Pause
-        LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
-        // Restart
-        LocalizedUIHelper.Apply(_restartBtn, "RestartButton");
-        // Back-to-menu
-        LocalizedUIHelper.Apply(_backToMenuButton.Q<Label>(), "MainMenu");
-        // Speed label
-        LocalizedUIHelper.Apply(_speedLabel, "Speed_Label");
-        // Optionally arrows if they have keys, e.g. "<" / ">"
-        LocalizedUIHelper.Apply(_speedLeftArrow, "SpeedLeftArrow");
-        LocalizedUIHelper.Apply(_speedRightArrow, "SpeedRightArrow");
+        if (!_isInitialized || LocalizationManager.Instance == null || !LocalizationManager.Instance.IsLocalizationReady)
+        {
+            return;
+        }
 
-        // Update the numeric speed portion
+        Debug.Log("[UIManager] ApplyLocalization running...");
+
+        // Make sure LocalizedUIHelper re-fetches the StringTable freshly
+        LocalizedUIHelper.ReloadTable();
+
+        if (_playPauseBtn != null)
+            LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
+
+        if (_restartBtn != null)
+            LocalizedUIHelper.Apply(_restartBtn, "RestartButton");
+
+        if (_backToMenuButton != null)
+        {
+            var label = _backToMenuButton.Q<Label>();
+            if (label != null)
+            {
+                string key = _currentBackButtonMode == BackButtonMode.PreviousScene ? "GoBack" : "MainMenu";
+                LocalizedUIHelper.Apply(label, key);
+            }
+        }
+
+        if (_speedLabel != null)
+            LocalizedUIHelper.Apply(_speedLabel, "Speed_Label");
+
         UpdateSpeedButtonText();
+
+        // Tell all localizers to reload too
+        foreach (var localizer in registeredLocalizers)
+        {
+            if (localizer != null)
+                localizer.ReloadLocalization();
+        }
     }
+
+
 
     /// <summary>
     /// Callback for the BackToMenuButton click event that loads the main menu scene
     /// </summary>
     private void OnBackToMainMenuClicked()
     {
-        var label = _backToMenuButton?.Q<Label>();
-        if (label == null) return;
-
-        // Get localized key
-        string currentKey = LocalizedUIHelper.GetKeyForText(label.text);
-        Debug.Log($"Current key: {currentKey}");
-        
-        if (currentKey  == "MainMenu")
-        {
-            // Load the main menu scene
-            Debug.Log("Loading MainMenu scene");
-            SimulationManager.Instance.LoadScene("MainMenu");
-        }
-        else
-        {
-            // Go back to the previous scene
-            Debug.Log($"Loading previous scene: {SimulationManager.Instance.PreviousScene}");
+        if (_currentBackButtonMode == BackButtonMode.PreviousScene)
             SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
-        }
+        else
+            SimulationManager.Instance.LoadScene("MainMenu");
     }
 
     /// <summary>
     /// Shows the NavBar element
     /// </summary>
-    public void ShowNavBar(string backButtonKey = "MainMenu")
+    public void ShowNavBar(bool goBack = false)
     {
+        if (_navBar == null) return;
         _navBar.style.display = DisplayStyle.Flex;
-        LocalizedUIHelper.Apply(_backToMenuButton.Q<Label>(), backButtonKey);
+        _currentBackButtonMode = goBack ? BackButtonMode.PreviousScene : BackButtonMode.MainMenu;
+        ApplyLocalization();
     }
 
     /// <summary>
@@ -214,19 +240,18 @@ public class UIManager : MonoBehaviour
         // Restart gjeldende scene
         isPaused = false;
         //Setter timescale lik slider
-        Time.timeScale = _timeScales[_currentTimescaleIndex];
-        Scene activeScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(activeScene.name);
+        Time.timeScale = _timeScales[_currentTimescaleIndex];;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void IncreaseTimescale()
+    public void IncreaseTimescale()
     {
         _currentTimescaleIndex = (_currentTimescaleIndex + 1) % _timeScales.Length;
         Time.timeScale = _timeScales[_currentTimescaleIndex];
         UpdateSpeedButtonText();
     }
 
-    private void DecreaseTimescale()
+    public void DecreaseTimescale()
     {
         _currentTimescaleIndex--;
         if (_currentTimescaleIndex < 0) _currentTimescaleIndex = _timeScales.Length - 1;
@@ -235,7 +260,7 @@ public class UIManager : MonoBehaviour
         UpdateSpeedButtonText();
     }
 
-    private void ResetTimescale()
+    public void ResetTimescale()
     {
         _currentTimescaleIndex = System.Array.IndexOf(_timeScales, 1f);
         Time.timeScale = 1f;
@@ -250,6 +275,14 @@ public class UIManager : MonoBehaviour
         _speedLabel.text = string.Format(LocalizedUIHelper.Get("Speed_Label"), scale);
     }
 
+    public void RegisterLocalizer(UILocalizer localizer)
+    {
+        if (!registeredLocalizers.Contains(localizer))
+        {
+            registeredLocalizers.Add(localizer);
+        }
+    }
+
     private void OnDestroy()
     {
 
@@ -259,6 +292,9 @@ public class UIManager : MonoBehaviour
             _backToMenuButton.UnregisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
         }
 
+        // Unregister localization update callback
+        LocalizationManager.LocalizationUpdated -= ApplyLocalization;
+
         // Clean up references to avoid memory leaks
         Instance = null;
         _root = null;
@@ -266,6 +302,5 @@ public class UIManager : MonoBehaviour
         _backToMenuButton = null;
         _sharedUIDocument = null;
     }
-
 
 }

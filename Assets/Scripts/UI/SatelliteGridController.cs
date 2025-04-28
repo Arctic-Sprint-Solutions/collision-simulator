@@ -54,12 +54,7 @@ public class SatelliteGridController : MonoBehaviour
 
         SetSceneTitle();
 
-        // WAIT for localization to be ready BEFORE setting up grid
         await LocalizationSettings.InitializationOperation.Task;
-        if (LocalizationManager.Instance != null)
-        {
-            await LocalizationManager.Instance.WaitForReady();
-        }
 
         await LoadStringTableAsync();
 
@@ -227,7 +222,6 @@ public class SatelliteGridController : MonoBehaviour
         var entry = _stringTable?.GetEntry(key);
         if (entry == null)
         {
-            Debug.LogWarning($"Missing localization for key: {key}");
             return $"{key}: {string.Join(", ", args)}";
         }
 

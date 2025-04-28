@@ -228,10 +228,6 @@ MonoBehaviour:
     m_Localized: Velg en satellitt for simulering
     m_Metadata:
       m_Items: []
-  - m_Id: 3276659979771904
-    m_Localized: VELG
-    m_Metadata:
-      m_Items: []
   - m_Id: 3276468857921536
     m_Localized: 'LEO: {0} km'
     m_Metadata:
@@ -241,7 +237,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3276473974972416
-    m_Localized: "Oppskytings\xE5r: {0} - present"
+    m_Localized: "Oppskytings\xE5r: {0} - n\xE5tid"
     m_Metadata:
       m_Items: []
   - m_Id: 3296750440079360
@@ -260,12 +256,32 @@ MonoBehaviour:
     m_Localized: 'Hastighet: {0}x'
     m_Metadata:
       m_Items: []
-  - m_Id: 3645802310590464
-    m_Localized: "\u2039"
+  - m_Id: 3969864300486656
+    m_Localized: Satellitt
     m_Metadata:
       m_Items: []
-  - m_Id: 3645804265136128
-    m_Localized: "\u203A"
+  - m_Id: 3969858436849664
+    m_Localized: "Roms\xF8ppel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000120226963456
+    m_Localized: "\xD8k hastighet"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4001162456981504
+    m_Localized: Tasten er allerede tilknyttet en annen handling!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000150727942144
+    m_Localized: Nullstill hastighet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4001371014553600
+    m_Localized: "Trykk p\xE5 en tast"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000141915709440
+    m_Localized: Senk hastighet
     m_Metadata:
       m_Items: []
   references:

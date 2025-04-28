@@ -1,89 +1,166 @@
+// Description: This script manages the localization of UI elements in Unity using the Localization package.
+// It automatically updates the text of Label and Button elements based on the current language setting.
+
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Localization.Tables;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 /// <summary>
-/// Applies localized text to UI elements using the assigned UIDocument.
+/// Automatically localizes all Label elements inside a UIDocument.
+/// Updates automatically when the app's language changes via the LocalizationManager.
 /// </summary>
 public class UILocalizer : MonoBehaviour
 {
-    [Tooltip("The UI Document containing elements to localize.")]
+    /// <summary>
+    /// The UIDocument containing UI elements to localize.
+    /// </summary>
     public UIDocument uiDocument;
-
-    [Tooltip("Name of the string table for UI localization.")]
+    
+    /// <summary>
+    /// Name of the localization table to pull text from. Default is "UIStrings".
+    /// </summary>
     public string tableName = "UIStrings";
 
-    private static StringTable _cachedTable;
+    private static StringTable cachedTable;
+    private static Dictionary<string, string> localizedTextCache = new();
 
+    /// <summary>
+    /// Subscribes to localization events and verifies UIDocument.
+    /// </summary>
     private void Awake()
-    {
-        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
-    }
-
-    private void OnDestroy()
-    {
-        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
-    }
-
-    private void OnLocaleChanged(UnityEngine.Localization.Locale locale)
-    {
-        StartCoroutine(ApplyLocalization());
-    }
-
-    private void Start()
-    {
-        StartCoroutine(ApplyLocalization());
-    }
-
-    private IEnumerator ApplyLocalization()
     {
         if (uiDocument == null)
         {
-            Debug.LogError("UILocalizer: UIDocument is not assigned!");
+            uiDocument = GetComponent<UIDocument>();
+            if (uiDocument == null)
+                Debug.LogError("[UILocalizer] No UIDocument assigned or found!");
+        }
+
+        LocalizationManager.LocalizationUpdated += ReloadLocalization;
+    }
+
+    /// <summary>
+    /// Unsubscribes from localization events to prevent memory leaks.
+    /// </summary>
+    private void OnDestroy()
+    {
+        LocalizationManager.LocalizationUpdated -= ReloadLocalization;
+    }
+
+    /// <summary>
+    /// Begins initial localization on scene load.
+    /// </summary>
+    private void Start()
+    {
+        StartCoroutine(ApplyLocalizationCoroutine());
+    }
+
+    /// <summary>
+    /// Reloads the localization data and updates all UI labels.
+    /// Called automatically when the language changes.
+    /// </summary>
+    public void ReloadLocalization()
+    {
+        localizedTextCache.Clear();
+        StartCoroutine(ApplyLocalizationCoroutine());
+    }
+
+    /// <summary>
+    /// Coroutine that loads the StringTable, builds the cache, and updates labels.
+    /// </summary>
+    private IEnumerator ApplyLocalizationCoroutine()
+    {
+        if (uiDocument == null)
+        {
+            Debug.LogError("[UILocalizer] No UIDocument assigned!");
             yield break;
         }
 
-        // Wait for localization system initialization
+        // Wait for the localization system to be initialized
         yield return LocalizationSettings.InitializationOperation;
         if (LocalizationManager.Instance != null)
             yield return new WaitUntil(() => LocalizationManager.Instance.IsLocalizationReady);
 
-        // Load the string table
+        // Allow one frame for the UIDocument hierarchy to be fully ready
+        yield return null;
+
+        // Always refetch the string table after reloads
         var tableOp = LocalizationSettings.StringDatabase.GetTableAsync(tableName);
         yield return tableOp;
 
         if (tableOp.Status != AsyncOperationStatus.Succeeded)
         {
-            Debug.LogError($"UILocalizer: Failed to load table '{tableName}'");
+            Debug.LogError($"[UILocalizer] Failed to load table '{tableName}'");
             yield break;
         }
 
-        _cachedTable = tableOp.Result;
+        cachedTable = tableOp.Result;
+        BuildCache();
 
-        // Get root and ensure it's valid
+        ApplyCachedLocalization();
+    }
+
+    /// <summary>
+    /// Builds a cache mapping keys to localized strings for fast lookup.
+    /// </summary>
+    private void BuildCache()
+    {
+        localizedTextCache.Clear();
+
+        if (cachedTable == null)
+        {
+            Debug.LogWarning("[UILocalizer] BuildCache called but cachedTable is null!");
+            return;
+        }
+
+        foreach (var entry in cachedTable.Values)
+        {
+            if (entry != null && !string.IsNullOrEmpty(entry.Key))
+            {
+                localizedTextCache[entry.Key] = entry.GetLocalizedString();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Applies cached localization data to all Label elements under the UIDocument.
+    /// </summary>
+    private void ApplyCachedLocalization()
+    {
         var root = uiDocument.rootVisualElement;
         if (root == null)
         {
-            Debug.LogWarning("UILocalizer: rootVisualElement is null, skipping localization.");
-            yield break;
+            Debug.LogError("[UILocalizer] rootVisualElement is NULL");
+            return;
         }
 
-        // Localize all labeled elements
+        // Localize all Labels
         foreach (var label in root.Query<Label>().ToList())
         {
             if (string.IsNullOrEmpty(label.name))
                 continue;
 
-            var entry = _cachedTable.GetEntry(label.name);
-            if (entry != null)
-                label.text = entry.GetLocalizedString();
+            if (localizedTextCache.TryGetValue(label.name, out var localizedText))
+            {
+                LocalizedUIHelper.Apply(label, label.name);
+            }
+        }
+
+        // Localize all Buttons
+        foreach (var button in root.Query<Button>().ToList())
+        {
+            if (string.IsNullOrEmpty(button.name))
+                continue;
+
+            if (localizedTextCache.TryGetValue(button.name, out var localizedText))
+            {
+                LocalizedUIHelper.Apply(button, button.name);
+            }
         }
     }
 }

@@ -70,8 +70,23 @@ public class InputManager : MonoBehaviour
     /// <summary>
     private void Update()
     {
-        if (!isCollisionScene || keybinds == null) return;
+        if (keybinds == null) return;
 
+        if (isCollisionScene)
+        {
+            HandleCollisionSceneInputs();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    /// <summary>
+    /// Handles input specific to collision scenes (pausing, restarting, etc.).
+    /// </summary>
+    private void HandleCollisionSceneInputs()
+    {
         if (Input.GetKeyDown(keybinds.pauseKey))
         {
             Debug.Log("[InputManager] Pause key pressed");
@@ -82,6 +97,24 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("[InputManager] Restart key pressed");
             uiManager?.RestartScene();
+        }
+
+        if (Input.GetKeyDown(keybinds.increaseSpeedKey))
+        {
+            Debug.Log("[InputManager] Increase speed key pressed");
+            uiManager?.IncreaseTimescale();
+        }
+
+        if (Input.GetKeyDown(keybinds.decreaseSpeedKey))
+        {
+            Debug.Log("[InputManager] Decrease speed key pressed");
+            uiManager?.DecreaseTimescale();
+        }
+
+        if (Input.GetKeyDown(keybinds.resetSpeedKey))
+        {
+            Debug.Log("[InputManager] Reset speed key pressed");
+            uiManager?.ResetTimescale();
         }
     }
 }

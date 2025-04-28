@@ -9,4 +9,7 @@ public class KeybindSettings : ScriptableObject
 {
     public KeyCode pauseKey = KeyCode.Space;
     public KeyCode restartKey = KeyCode.R;
+    public KeyCode increaseSpeedKey = KeyCode.M;
+    public KeyCode decreaseSpeedKey = KeyCode.B;
+    public KeyCode resetSpeedKey = KeyCode.N;
 }
