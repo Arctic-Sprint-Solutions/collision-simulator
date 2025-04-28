@@ -14,6 +14,8 @@ public class SettingsController : MonoBehaviour
     public UIDocument uiDocument;
     private Button pauseButton;
     private Button restartButton;
+    private Button recordButton;
+    private Button downloadButton;
     private DropdownField languageDropdown;
 
     private bool waitingForKey = false;
@@ -41,6 +43,8 @@ public class SettingsController : MonoBehaviour
 
         pauseButton = root.Q<Button>("PauseButton");
         restartButton = root.Q<Button>("RestartButton");
+        recordButton = root.Q<Button>("RecordButton");
+        downloadButton = root.Q<Button>("DownloadButton");
 
         if (pauseButton != null)
         {
@@ -60,6 +64,26 @@ public class SettingsController : MonoBehaviour
         else
         {
             Debug.LogError("RestartButton not found");
+        }
+
+        if (recordButton != null)
+        {
+            recordButton.clicked += () => StartKeyRebind("Record");
+            recordButton.text = InputManager.Instance.keybinds.recordKey.ToString();
+        }
+        else
+        {
+            Debug.LogError("RecordButton not found");
+        }
+
+        if (downloadButton != null)
+        {
+            downloadButton.clicked += () => StartKeyRebind("Download");
+            downloadButton.text = InputManager.Instance.keybinds.saveKey.ToString();
+        }
+        else
+        {
+            Debug.LogError("DownloadButton not found");
         }
     }
 
@@ -119,6 +143,24 @@ public class SettingsController : MonoBehaviour
             {
                 InputManager.Instance.keybinds.restartKey = key;
                 restartButton.text = key.ToString();
+            };
+        }
+        else if (action == "Record" && recordButton != null)
+        {
+            recordButton.text = "Press any key";
+            onKeySelected = (key) =>
+            {
+                InputManager.Instance.keybinds.recordKey = key;
+                recordButton.text = key.ToString();
+            };
+        }
+        else if (action == "Download" && downloadButton != null)
+        {
+            downloadButton.text = "Press any key";
+            onKeySelected = (key) =>
+            {
+                InputManager.Instance.keybinds.saveKey = key;
+                downloadButton.text = key.ToString();
             };
         }
         else
