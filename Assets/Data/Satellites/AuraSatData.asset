@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: AuraSatData
   m_EditorClassIdentifier: 
   satelliteName: Aura Satellite
-  type: Weather
-  leoInfo: 260
-  weight: 210
-  launchYear: 2018
+  type: Atmospheric Research
+  leoInfo: 705
+  weight: 2950
+  launchYear: 2004
   prefabName: auraSat-lowpoly
   previewImage: {fileID: 21300000, guid: f318fd78aedb940eda05b19b74d343c7, type: 3}
   debrisSceneName: AuraSatColllisionSceneParticle
-  satelliteSceneName: 
+  satelliteSceneName: AuraSatColllisionScene
