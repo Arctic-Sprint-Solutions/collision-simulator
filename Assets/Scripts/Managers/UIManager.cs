@@ -128,8 +128,13 @@ public class UIManager : MonoBehaviour
         _playPauseBtn  = _collisionUI.Q<Button>("playPauseButton");
         _restartBtn    = _collisionUI.Q<Button>("restartButton");
 
+
+        _playPauseBtn.RemoveFromClassList("unity-button");
+        _restartBtn.RemoveFromClassList("unity-button");
+
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
+
 
         // Speed toggle
         _speedToggleButton = _collisionUI.Q<VisualElement>("speedToggleButton");

@@ -16,14 +16,16 @@
                 <engine:VisualElement name="DownloadIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/download-icon.png?fileID=2800000&amp;guid=06237ef8dfc094b45a35b99ebd22d1f6&amp;type=3#download-icon&quot;); margin-right: 0;" />
                 <engine:Label name="DownloadLabel" text="Download" class="navbar-link-text" style="margin-left: 8px;" />
             </engine:VisualElement>
-            <engine:Button text="Start Recording" name="RecordButton" class="d-none" />
-            <engine:Button text="Download Recording" name="DownloadButton" class="d-none" />
         </engine:VisualElement>
     </engine:VisualElement>
     <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 1; position: absolute; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row;">
         <engine:VisualElement name="ButtonContainer" class="flex-row-center">
-            <engine:Button text="Restart" name="restartButton" class="btn scene-control-btn" />
-            <engine:Button text="Pause" name="playPauseButton" class="btn scene-control-btn" />
+            <engine:Button text="Button" name="playPauseButton" class="round-btn">
+                <engine:VisualElement name="pauseIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/pause-icon.png?fileID=2800000&amp;guid=e09c2122cccbd40b6b781d74580c642b&amp;type=3#pause-icon&quot;); margin-right: 0; -unity-background-scale-mode: scale-to-fit;" />
+            </engine:Button>
+            <engine:Button text="Button" name="restartButton" class="round-btn">
+                <engine:VisualElement name="relayIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/replay-icon.png?fileID=2800000&amp;guid=48afd8dd00dbe41599dfed000b871774&amp;type=3#replay-icon&quot;); margin-right: 0; -unity-background-scale-mode: scale-to-fit;" />
+            </engine:Button>
             <engine:VisualElement name="speedToggleButton" class="btn scene-control-btn speed-toggle" style="padding: 5px; border-width: 1px; border-color: white; border-radius: 5px; flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
                 <engine:Label name="speedLeftArrow" text="◀" class="arrow-label" />
                 <engine:Label name="speedLabel" text="Speed: 1x" class="center-label" />
