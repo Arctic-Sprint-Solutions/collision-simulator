@@ -271,6 +271,14 @@ MonoBehaviour:
     m_Localized: "\u203A"
     m_Metadata:
       m_Items: []
+  - m_Id: 3763310234165248
+    m_Localized: Start/Stop Recording
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3764697697345536
+    m_Localized: Download Recording
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
