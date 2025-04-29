@@ -227,16 +227,16 @@ MonoBehaviour:
     m_Key: PressAnyKey
     m_Metadata:
       m_Items: []
-  - m_Id: 3763265745182720
-    m_Key: New Entry
-    m_Metadata:
-      m_Items: []
   - m_Id: 3763310234165248
     m_Key: RecordKeybindLabel
     m_Metadata:
       m_Items: []
   - m_Id: 3764697697345536
     m_Key: DownloadKeybindLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4033553351303168
+    m_Key: Select_Label
     m_Metadata:
       m_Items: []
   m_Metadata:

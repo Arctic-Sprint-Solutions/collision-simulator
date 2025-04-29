@@ -189,7 +189,7 @@ public class SatelliteGridController : MonoBehaviour
 
       // Create select button
       var selectbutton = new Button(() => OnSatelliteSelected(satellite));
-      selectbutton.text = "SELECT";
+      selectbutton.text = Localized("Select_Label");
       selectbutton.RemoveFromClassList("unity-button");
       selectbutton.RemoveFromClassList("unity-text-element");
       selectbutton.AddToClassList("satellite-select-button");

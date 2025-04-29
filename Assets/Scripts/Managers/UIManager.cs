@@ -379,7 +379,7 @@ public class UIManager : MonoBehaviour
         VideoManager.Instance?.SaveCurrentRecording();
     }
 
-    private void IncreaseTimescale()
+    public void IncreaseTimescale()
     {
         _currentTimescaleIndex = (_currentTimescaleIndex + 1) % _timeScales.Length;
         Time.timeScale = _timeScales[_currentTimescaleIndex];
