@@ -231,10 +231,6 @@ MonoBehaviour:
     m_Localized: Select a satellite for the simulation
     m_Metadata:
       m_Items: []
-  - m_Id: 3276659979771904
-    m_Localized: SELECT
-    m_Metadata:
-      m_Items: []
   - m_Id: 3276473974972416
     m_Localized: 'Launch Year: {0} - present'
     m_Metadata:
@@ -263,12 +259,32 @@ MonoBehaviour:
     m_Localized: 'Speed: {0}x'
     m_Metadata:
       m_Items: []
-  - m_Id: 3645802310590464
-    m_Localized: "\u2039"
+  - m_Id: 3969864300486656
+    m_Localized: Satellite
     m_Metadata:
       m_Items: []
-  - m_Id: 3645804265136128
-    m_Localized: "\u203A"
+  - m_Id: 3969858436849664
+    m_Localized: Space Debris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000120226963456
+    m_Localized: Increase Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4001162456981504
+    m_Localized: Key already bound to another action!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000150727942144
+    m_Localized: Reset Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4001371014553600
+    m_Localized: Press any key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000141915709440
+    m_Localized: Decrease Speed
     m_Metadata:
       m_Items: []
   - m_Id: 3763310234165248
@@ -277,6 +293,46 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3764697697345536
     m_Localized: Download Recording
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4033553351303168
+    m_Localized: Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367027253796864
+    m_Localized: Select Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367031582318592
+    m_Localized: Main Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367032974827520
+    m_Localized: Satellite Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367482251894784
+    m_Localized: Debris Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377130531020800
+    m_Localized: Cubesat Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377171601645568
+    m_Localized: Rosetta Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377953235361792
+    m_Localized: Start Recording
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4378009552281600
+    m_Localized: Download
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397003009155072
+    m_Localized: Stop recording
     m_Metadata:
       m_Items: []
   references:

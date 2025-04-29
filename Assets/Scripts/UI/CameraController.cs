@@ -17,12 +17,10 @@ public class CameraController : MonoBehaviour
     private DropdownField _cameraDropdown;
     private VisualElement _cameraDropdownUI;
 
+    private List<string> cameraKeys = new();
+
     public delegate void CameraSelected(int index);
     public static event CameraSelected OnCameraSelected;
-
-    //Camera priorities enabling switch
-    private int defaultPriority = 10;
-    private int activePriority = 20;
 
     /// <summary>
     /// Flag to check if the initial value is set and prevent disabling the playable director
@@ -102,18 +100,40 @@ public class CameraController : MonoBehaviour
         Debug.Log("CameraController: PopulateDropdown called with camera names: " + string.Join(", ", cameraNames));
         if (_cameraDropdown == null) return;
 
-        _cameraDropdown.choices = cameraNames;
-        _cameraDropdown.value = cameraNames[0]; 
-        _cameraDropdown.label = "Select Camera";
+        cameraKeys = cameraNames;
 
-        // Updat the flag to allow disabling the playable director
-        _isInititalValue = false;
-        // _cameraDropdown.style.display = DisplayStyle.Flex;
+        UpdateDropdownOptions();
         ShowDropdown();
 
+        _isInititalValue = false;
     }
 
+    /// <summary>
+    /// Updates the dropdown choices based on the current localization.
+    /// </summary>
+    private void UpdateDropdownOptions()
+    {
+        if (_cameraDropdown == null || cameraKeys == null) return;
 
+        List<string> localizedCameraNames = new List<string>();
+        foreach (var name in cameraKeys)
+        {
+            var localizedName = LocalizedUIHelper.Get(name);
+            localizedCameraNames.Add(localizedName);
+        }
+
+        _cameraDropdown.choices = localizedCameraNames;
+        _cameraDropdown.value = localizedCameraNames.FirstOrDefault();
+        _cameraDropdown.label = LocalizedUIHelper.Get("SelectCameraLabel");
+    }
+
+    /// <summary>
+    /// Reloads localization for the dropdown when the language changes.
+    /// </summary>
+    public void ReloadLocalization()
+    {
+        UpdateDropdownOptions();
+    }
 
     /// <summary>
     /// Handles camera selection from the dropdown
@@ -121,8 +141,12 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void OnCameraChanged(string selectedCameraName)
     {
+        if (cameraKeys == null || _cameraDropdown == null) return;
+
         Debug.Log($"CameraController: OnCameraChanged called with selectedCameraName: {selectedCameraName}");
         int selectedIndex = _cameraDropdown.choices.IndexOf(selectedCameraName);
+        if (selectedIndex < 0) return;
+
         // OnCameraSelected?.Invoke(selectedIndex);
         if(!_isInititalValue) 
         {
