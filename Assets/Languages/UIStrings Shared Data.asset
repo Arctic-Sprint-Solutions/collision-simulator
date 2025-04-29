@@ -239,6 +239,42 @@ MonoBehaviour:
     m_Key: Select_Label
     m_Metadata:
       m_Items: []
+  - m_Id: 4367027253796864
+    m_Key: SelectCameraLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367031582318592
+    m_Key: Main Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367032974827520
+    m_Key: Satellite Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367482251894784
+    m_Key: Debris Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377130531020800
+    m_Key: Cubesat Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377171601645568
+    m_Key: Rosetta Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377953235361792
+    m_Key: StartRecording
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4378009552281600
+    m_Key: DownloadRecording
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397003009155072
+    m_Key: StopRecording
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -299,6 +299,42 @@ MonoBehaviour:
     m_Localized: Select
     m_Metadata:
       m_Items: []
+  - m_Id: 4367027253796864
+    m_Localized: Select Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367031582318592
+    m_Localized: Main Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367032974827520
+    m_Localized: Satellite Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367482251894784
+    m_Localized: Debris Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377130531020800
+    m_Localized: Cubesat Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377171601645568
+    m_Localized: Rosetta Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377953235361792
+    m_Localized: Start Recording
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4378009552281600
+    m_Localized: Download
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397003009155072
+    m_Localized: Stop recording
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

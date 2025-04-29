@@ -81,7 +81,7 @@ public class VideoManager : MonoBehaviour
 
         _isRecording = true;
         UIManager.Instance?.HideDownloadButton();
-        UIManager.Instance?.UpdateRecordButton(iconName: "StopIcon", buttonText: "Stop");
+        UIManager.Instance?.UpdateRecordButton(isRecording: true);
     }
     
     /// <summary>
@@ -100,7 +100,7 @@ public class VideoManager : MonoBehaviour
 
         _isRecording = false;
         UIManager.Instance?.ShowDownloadButton();
-        UIManager.Instance?.UpdateRecordButton(iconName: "CameraIcon", buttonText: "Record");
+        UIManager.Instance?.UpdateRecordButton(isRecording: false);
     }
 
     /// <summary>

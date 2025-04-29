@@ -192,7 +192,17 @@ public class UIManager : MonoBehaviour
         if (_speedLabel != null)
             LocalizedUIHelper.Apply(_speedLabel, "Speed_Label");
 
+        if (_recordBtn != null)
+        {
+            var label = _recordBtn.Q<Label>("RecordLabel");
+            if (label != null)
+            {
+                LocalizedUIHelper.Apply(label, "StartRecording");
+            }
+        }
+
         UpdateSpeedButtonText();
+        UpdateRecordButton(isRecording: false);
 
         // Tell all localizers to reload too
         foreach (var localizer in registeredLocalizers)
@@ -205,12 +215,13 @@ public class UIManager : MonoBehaviour
 
 
     /// <summary>
-    /// Initializes the record and download buttons in the NavBar and sets up theri click events
+    /// Initializes the record and download buttons in the NavBar and sets up the click events.
     /// The record button toggles recording state, and the download button saves the current recording
     /// </summary> 
     private void InitializeRecordButtons()
     {
         _recordBtn = _navBar.Q<VisualElement>("RecordButton2");
+        
         if(_recordBtn != null)
         {
             var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
@@ -302,6 +313,11 @@ public class UIManager : MonoBehaviour
         if (_downloadBtn != null)
         {
             _downloadBtn.RemoveFromClassList("d-none");
+            var label = _downloadBtn.Q<Label>("DownloadLabel");
+            if (label != null)
+            {
+                label.text = LocalizedUIHelper.Get("DownloadRecording");
+            }
         }
     }
 
@@ -319,32 +335,34 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// Updates the icon and the tect of the record button based on the recording state
     /// </summary>
-    public void UpdateRecordButton(string iconName, string buttonText)
+    public void UpdateRecordButton(bool isRecording)
     {
         if (_recordBtn != null)
         {
             var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
             var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
+            var label = _recordBtn.Q<Label>("RecordLabel");
 
-            if (iconName == "StopIcon")
+            if (stopIcon == null || cameraIcon == null || label == null)
             {
-                stopIcon?.RemoveFromClassList("d-none");
-                cameraIcon?.AddToClassList("d-none");
+                Debug.LogWarning("[UIManager] One or more recording UI elements are missing.");
+                return;
+            }
+            if (isRecording)
+            {
+                stopIcon.RemoveFromClassList("d-none");
+                cameraIcon.AddToClassList("d-none");
+                label.text = LocalizedUIHelper.Get("StopRecording");
             }
             else
             {
-                stopIcon?.AddToClassList("d-none");
-                cameraIcon?.RemoveFromClassList("d-none");
-            }
-
-            // Update the text of the record button
-            var label = _recordBtn.Q<Label>();
-            if (label != null)
-            {
-                label.text = buttonText;
+                stopIcon.AddToClassList("d-none");
+                cameraIcon.RemoveFromClassList("d-none");
+                label.text = LocalizedUIHelper.Get("StartRecording");
             }
         }
     }
+    
 
     public void TogglePause()
     {
