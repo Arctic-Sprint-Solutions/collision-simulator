@@ -1,84 +1,104 @@
-using System.Threading.Tasks;
+// Description: This script acts as a helper for UI localization and caching translated strings for performance.
+
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
+using UnityEngine.UIElements;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
+/// <summary>
+/// Provides helpers for UI localization, including caching translated strings.
+/// </summary>
 public static class LocalizedUIHelper
 {
-    private static StringTable _uiStringTable;
-    private static bool _isReady = false;
-    private static readonly string _defaultTable = "UIStrings";
-    private static Dictionary<string, string> _textToKeyMap = new();
+    private static StringTable uiStringTable;
+    private static bool isReady = false;
+    private static readonly Dictionary<string, string> cache = new();
+    private static readonly string defaultTable = "UIStrings";
 
     /// <summary>
-    /// Loads the UIStrings table once.
+    /// Initializes and loads the string table from localization system.
     /// </summary>
     public static async Task InitializeAsync(string tableName = null)
     {
-        if (_isReady) return;
-        // Wait for Unity's Localization system
+        if (isReady) return;
+
         await LocalizationSettings.InitializationOperation.Task;
 
-        // Fetch the table
-        var handle = LocalizationSettings.StringDatabase.GetTableAsync(tableName ?? _defaultTable);
+        var handle = LocalizationSettings.StringDatabase.GetTableAsync(tableName ?? defaultTable);
         await handle.Task;
 
         if (handle.Status == AsyncOperationStatus.Succeeded)
         {
-            _uiStringTable = handle.Result;
-            _isReady = true;
-        // Build reverse lookup dictionary
-            _textToKeyMap.Clear();
-            foreach (var entry in _uiStringTable.Values)
-            {
-                if (entry == null) continue;
-                string localized = entry.GetLocalizedString();
-                if (!string.IsNullOrEmpty(localized))
-                {
-                    _textToKeyMap[localized] = entry.Key;
-                }
-            }
+            uiStringTable = handle.Result;
+            isReady = true;
+            BuildCache();
         }
         else
         {
-            Debug.LogError($"LocalizedUIHelper: Failed to load table '{tableName ?? _defaultTable}'");
+            Debug.LogError($"[LocalizedUIHelper] Failed to load table: {tableName ?? defaultTable}");
+        }
+    }
+
+    /// <summary>
+    /// Forces a re-fetch of the current string table and rebuilds the cache.
+    /// Should be called after language switching.
+    /// </summary>
+    public static void ReloadTable()
+    {
+        isReady = false;
+        _ = InitializeAsync();
+    }
+
+    /// <summary>
+    /// Refreshes the in-memory cache from the currently loaded table.
+    /// </summary>
+    public static void BuildCache()
+    {
+        if (uiStringTable == null)
+        {
+            return;
+        }
+
+        cache.Clear();
+        foreach (var entry in uiStringTable.Values)
+        {
+            if (entry != null && !string.IsNullOrEmpty(entry.Key))
+            {
+                cache[entry.Key] = entry.GetLocalizedString();
+            }
         }
     }
 
     public static string Get(string key)
     {
-        if (!_isReady) return key;
-        var entry = _uiStringTable.GetEntry(key);
-        return entry != null ? entry.GetLocalizedString() : key;
+        if (!isReady || string.IsNullOrEmpty(key)) return key;
+        if (cache.TryGetValue(key, out var localized))
+            return localized;
+
+        var entry = uiStringTable?.GetEntry(key);
+        if (entry != null)
+        {
+            var value = entry.GetLocalizedString();
+            cache[key] = value;
+            return value;
+        }
+
+        Debug.LogWarning($"[LocalizedUIHelper] Missing key: {key}");
+        return key;
     }
 
-    /// <summary>
-    /// Applies localization to a Label element by key.
-    /// </summary>
     public static void Apply(Label label, string key)
     {
         if (label == null) return;
         label.text = Get(key);
     }
 
-    /// <summary>
-    /// Applies localization to a UIElements Button element by key.
-    /// </summary>
     public static void Apply(Button button, string key)
     {
         if (button == null) return;
         button.text = Get(key);
     }
-    /// <summary>
-    /// Maps a localized string to its key.
-    /// </summary>
-    public static string GetKeyForText(string text)
-    {
-        if (string.IsNullOrEmpty(text)) return null;
-        return _textToKeyMap.TryGetValue(text, out var key) ? key : null;
-    }
-
 }

@@ -1,10 +1,11 @@
+// Description: Handles the settings page logic for binding keys and translating the application.
+
 using UnityEngine;
 using UnityEngine.UIElements;
 using System;
 using System.Collections;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
+using UnityEngine.Localization.Settings;
 
 /// <summary>
 /// Controller for the settings page, handling key rebinding and language selection.
@@ -12,10 +13,11 @@ using System.Collections.Generic;
 public class SettingsController : MonoBehaviour
 {
     public UIDocument uiDocument;
-    private Button pauseButton;
-    private Button restartButton;
-    private Button recordButton;
-    private Button downloadButton;
+
+    private Dictionary<string, Button> actionButtonMap;
+    private Dictionary<string, Func<KeyCode>> getKeyMap;
+    private Dictionary<string, Action<KeyCode>> setKeyMap;
+
     private DropdownField languageDropdown;
 
     private bool waitingForKey = false;
@@ -23,80 +25,74 @@ public class SettingsController : MonoBehaviour
 
     private void Start()
     {
-        // Start two coroutines: one for UI (keybinds) and one for ensuring localization is ready.
-        StartCoroutine(WaitForInputManager());
-        StartCoroutine(WaitForLocalization());
+        StartCoroutine(SetupAsync());
     }
 
-    /// <summary>
-    /// Wait until the InputManager and its keybinds are initialized, then set up UI elements.
-    /// </summary>
-    private IEnumerator WaitForInputManager()
+    private IEnumerator SetupAsync()
     {
-        while (InputManager.Instance == null || InputManager.Instance.keybinds == null)
-        {
-            yield return null;
-        }
-
-        var root = uiDocument.rootVisualElement;
-        InitLanguageDropdown(root);
-
-        pauseButton = root.Q<Button>("PauseButton");
-        restartButton = root.Q<Button>("RestartButton");
-        recordButton = root.Q<Button>("RecordButton");
-        downloadButton = root.Q<Button>("DownloadButton");
-
-        if (pauseButton != null)
-        {
-            pauseButton.clicked += () => StartKeyRebind("Pause");
-            pauseButton.text = InputManager.Instance.keybinds.pauseKey.ToString();
-        }
-        else
-        {
-            Debug.LogError("PauseButton not found");
-        }
-
-        if (restartButton != null)
-        {
-            restartButton.clicked += () => StartKeyRebind("Restart");
-            restartButton.text = InputManager.Instance.keybinds.restartKey.ToString();
-        }
-        else
-        {
-            Debug.LogError("RestartButton not found");
-        }
-
-        if (recordButton != null)
-        {
-            recordButton.clicked += () => StartKeyRebind("Record");
-            recordButton.text = InputManager.Instance.keybinds.recordKey.ToString();
-        }
-        else
-        {
-            Debug.LogError("RecordButton not found");
-        }
-
-        if (downloadButton != null)
-        {
-            downloadButton.clicked += () => StartKeyRebind("Download");
-            downloadButton.text = InputManager.Instance.keybinds.saveKey.ToString();
-        }
-        else
-        {
-            Debug.LogError("DownloadButton not found");
-        }
-    }
-
-    /// <summary>
-    /// Wait until the localization system and LocalizationManager are ready.
-    /// </summary>
-    private IEnumerator WaitForLocalization()
-    {
+        yield return new WaitUntil(() => InputManager.Instance != null && InputManager.Instance.keybinds != null);
         yield return LocalizationSettings.InitializationOperation;
         if (LocalizationManager.Instance != null)
-        {
             yield return new WaitUntil(() => LocalizationManager.Instance.IsLocalizationReady);
+
+        InitializeMappings();
+        InitializeUI();
+    }
+
+    private void InitializeMappings()
+    {
+        getKeyMap = new Dictionary<string, Func<KeyCode>>()
+        {
+            { "Pause",         () => InputManager.Instance.keybinds.pauseKey },
+            { "Restart",       () => InputManager.Instance.keybinds.restartKey },
+            { "Record",        () => InputManager.Instance.keybinds.recordKey },
+            { "Download",      () => InputManager.Instance.keybinds.saveKey },
+            { "IncreaseSpeed", () => InputManager.Instance.keybinds.increaseSpeedKey },
+            { "DecreaseSpeed", () => InputManager.Instance.keybinds.decreaseSpeedKey },
+            { "ResetSpeed",    () => InputManager.Instance.keybinds.resetSpeedKey }
+        };
+
+        setKeyMap = new Dictionary<string, Action<KeyCode>>()
+        {
+            { "Pause",         (key) => InputManager.Instance.keybinds.pauseKey = key },
+            { "Restart",       (key) => InputManager.Instance.keybinds.restartKey = key },
+            { "Record",        (key) => InputManager.Instance.keybinds.recordKey = key },
+            { "Download",      (key) => InputManager.Instance.keybinds.saveKey = key },
+            { "IncreaseSpeed", (key) => InputManager.Instance.keybinds.increaseSpeedKey = key },
+            { "DecreaseSpeed", (key) => InputManager.Instance.keybinds.decreaseSpeedKey = key },
+            { "ResetSpeed",    (key) => InputManager.Instance.keybinds.resetSpeedKey = key }
+        };
+    }
+
+    private void InitializeUI()
+    {
+        var root = uiDocument.rootVisualElement;
+
+        actionButtonMap = new Dictionary<string, Button>
+        {
+            { "Pause",         root.Q<Button>("PauseKeybindButton") },
+            { "Restart",       root.Q<Button>("RestartKeybindButton") },
+            { "Record",        root.Q<Button>("RecordKeybindButton") },
+            { "Download",      root.Q<Button>("DownloadKeybindButton") },
+            { "IncreaseSpeed", root.Q<Button>("IncreaseSpeedKeybindButton") },
+            { "DecreaseSpeed", root.Q<Button>("DecreaseSpeedKeybindButton") },
+            { "ResetSpeed",    root.Q<Button>("ResetSpeedKeybindButton") }
+        };
+
+        foreach (var pair in actionButtonMap)
+        {
+            if (pair.Value != null)
+            {
+                pair.Value.clicked += () => StartKeyRebind(pair.Key);
+                pair.Value.text = getKeyMap[pair.Key]().ToString();
+            }
+            else
+            {
+                Debug.LogError($"[SettingsController] Missing Button for {pair.Key}");
+            }
         }
+
+        InitLanguageDropdown(root);
     }
 
     private void Update()
@@ -114,93 +110,65 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Starts the key rebinding procedure for a given action.
-    /// </summary>
     private void StartKeyRebind(string action)
     {
-        if (InputManager.Instance == null || InputManager.Instance.keybinds == null)
-        {
-            Debug.LogError("InputManager or keybinds not initialized!");
+        if (!actionButtonMap.TryGetValue(action, out var button) || button == null)
             return;
-        }
 
         waitingForKey = true;
 
-        if (action == "Pause" && pauseButton != null)
+        string pressAnyKeyText = LocalizedUIHelper.Get("PressAnyKey");
+        button.text = pressAnyKeyText;
+
+        onKeySelected = (key) =>
         {
-            pauseButton.text = "Press any key";
-            onKeySelected = (key) =>
+            if (IsKeyAlreadyBound(key, action))
             {
-                InputManager.Instance.keybinds.pauseKey = key;
-                pauseButton.text = key.ToString();
-            };
-        }
-        else if (action == "Restart" && restartButton != null)
-        {
-            restartButton.text = "Press any key";
-            onKeySelected = (key) =>
-            {
-                InputManager.Instance.keybinds.restartKey = key;
-                restartButton.text = key.ToString();
-            };
-        }
-        else if (action == "Record" && recordButton != null)
-        {
-            recordButton.text = "Press any key";
-            onKeySelected = (key) =>
-            {
-                InputManager.Instance.keybinds.recordKey = key;
-                recordButton.text = key.ToString();
-            };
-        }
-        else if (action == "Download" && downloadButton != null)
-        {
-            downloadButton.text = "Press any key";
-            onKeySelected = (key) =>
-            {
-                InputManager.Instance.keybinds.saveKey = key;
-                downloadButton.text = key.ToString();
-            };
-        }
-        else
-        {
-            Debug.LogError($"Unknown action '{action}' or button was null.");
-        }
+                Debug.LogWarning($"[SettingsController] Key '{key}' already bound to another action.");
+                button.text = getKeyMap[action]().ToString();
+                return;
+            }
+
+            setKeyMap[action](key);
+            button.text = key.ToString();
+        };
     }
 
-    /// <summary>
-    /// Configure the language dropdown to display all available languages and handle selection.
-    /// </summary>
+    private bool IsKeyAlreadyBound(KeyCode key, string currentAction)
+    {
+        foreach (var pair in getKeyMap)
+        {
+            if (pair.Key != currentAction && pair.Value() == key)
+                return true;
+        }
+        return false;
+    }
+
     private void InitLanguageDropdown(VisualElement root)
     {
         languageDropdown = root.Q<DropdownField>("LanguageDropdown");
         if (languageDropdown == null)
         {
-            Debug.LogError("LanguageDropdown not found!");
+            Debug.LogError("[SettingsController] LanguageDropdown not found!");
             return;
         }
 
         var locales = LocalizationSettings.AvailableLocales.Locales;
-        List<string> localeNames = new List<string>();
+        var localeNames = new List<string>();
 
         foreach (var locale in locales)
         {
-            // Uses the LocaleName in the dropdown.
             localeNames.Add(locale.LocaleName);
         }
 
         languageDropdown.choices = localeNames;
 
-        // Set the dropdown's current value based on the currently selected locale.
         var currentLocale = LocalizationSettings.SelectedLocale;
         languageDropdown.value = currentLocale != null ? currentLocale.LocaleName : localeNames[0];
 
-        // When the user selects a new language, updates via the LocalizationManager.
         languageDropdown.RegisterValueChangedCallback(evt =>
         {
-            var selectedName = evt.newValue;
-            var selectedLocale = locales.Find(l => l.LocaleName == selectedName);
+            var selectedLocale = locales.Find(l => l.LocaleName == evt.newValue);
             if (selectedLocale != null && LocalizationManager.Instance != null)
             {
                 LocalizationManager.Instance.SetLanguage(selectedLocale.Identifier.Code);
