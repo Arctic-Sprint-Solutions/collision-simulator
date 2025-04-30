@@ -26,8 +26,8 @@ public class UIManager : MonoBehaviour
     private Button _restartBtn;
     private VisualElement _speedToggleButton;
     private Label _speedLabel;
-    private Label _speedLeftArrow;
-    private Label _speedRightArrow;
+    private VisualElement _speedLeftArrow;
+    private VisualElement _speedRightArrow;
     private DropdownField _cameraDropdown;
     private VisualElement _cameraDropdownUI;
 
@@ -160,12 +160,14 @@ public class UIManager : MonoBehaviour
         _playPauseBtn.clicked += TogglePause;
         _restartBtn.clicked += RestartScene;
 
+        // Hide play icon initially
+        _playPauseBtn.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
 
         // Speed toggle
         _speedToggleButton = _collisionUI.Q<VisualElement>("speedToggleButton");
         _speedLabel        = _speedToggleButton.Q<Label>("speedLabel");
-        _speedLeftArrow    = _speedToggleButton.Q<Label>("speedLeftArrow");
-        _speedRightArrow   = _speedToggleButton.Q<Label>("speedRightArrow");
+        _speedLeftArrow    = _speedToggleButton.Q<VisualElement>("speedLeftArrow");
+        _speedRightArrow   = _speedToggleButton.Q<VisualElement>("speedRightArrow");
 
         _speedLeftArrow.RegisterCallback<ClickEvent>(_ => DecreaseTimescale());
         _speedRightArrow.RegisterCallback<ClickEvent>(_ => IncreaseTimescale());
@@ -387,7 +389,7 @@ public class UIManager : MonoBehaviour
         {
             var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
             var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
-            // var label = _recordBtn.Q<Label>("RecordLabel");
+            var label = _recordBtn.Q<Label>("RecordLabel");
 
             if (stopIcon == null || cameraIcon == null)
             {
@@ -398,13 +400,13 @@ public class UIManager : MonoBehaviour
             {
                 stopIcon.RemoveFromClassList("d-none");
                 cameraIcon.AddToClassList("d-none");
-                // label.text = LocalizedUIHelper.Get("StopRecording");
+                label.text = LocalizedUIHelper.Get("StopRecording");
             }
             else
             {
                 stopIcon.AddToClassList("d-none");
                 cameraIcon.RemoveFromClassList("d-none");
-                // label.text = LocalizedUIHelper.Get("StartRecording");
+                label.text = LocalizedUIHelper.Get("StartRecording");
             }
         }
     }
@@ -416,6 +418,19 @@ public class UIManager : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0f : _timeScales[_currentTimescaleIndex];
         LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
+
+        if( isPaused)
+        {
+            // Show the play icon and hide the pause icon when paused
+            _playPauseBtn.Q<VisualElement>("playIcon")?.RemoveFromClassList("d-none");
+            _playPauseBtn.Q<VisualElement>("pauseIcon")?.AddToClassList("d-none");
+        }
+        else
+        {
+            // Hide the play icon and show the pause icon when not paused
+            _playPauseBtn.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
+            _playPauseBtn.Q<VisualElement>("pauseIcon")?.RemoveFromClassList("d-none");
+        }
     }
 
     public void RestartScene()
