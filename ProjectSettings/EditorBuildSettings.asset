@@ -35,10 +35,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IceSat2CollisionScene.unity
     guid: a1d407a6526674c4ab684792f27c8960
-    path: Assets/Scenes/AboutScene.unity
-    guid: 754100a6dd8ab49f2b4118e36ceaa000
   - enabled: 1
-    path: Assets/Scenes/Cubesat2RuScene.unity
+    path: Assets/Scenes/Cubesat2RuSceneDebris.unity
     guid: b1e9ed4da454cbf45939270a52689e36
   - enabled: 1
     path: Assets/Scenes/SettingsScene.unity
