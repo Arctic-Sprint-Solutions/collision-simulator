@@ -190,7 +190,7 @@ public class UIManager : MonoBehaviour
 
         if (_cameraDropdownUI == null)
         {
-            Debug.LogError("CameraController: cameraDropdownUI not found in the UI.");
+            Debug.LogError("UIManager: cameraDropdownUI not found in the UI.");
             return;
         }
 
