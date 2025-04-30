@@ -1,4 +1,3 @@
-
 .camera-label {
     font-size: 20px;
     color: rgb(0, 200, 255);
@@ -23,9 +22,19 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
-.camera-label:hover .unity-popup-field__input,
-.camera-label:hover .unity-base-popup-field__text,
+.camera-label:hover .unity-popup-field__input {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(48, 250, 136);
+}
+
+.camera-label:hover .unity-base-popup-field__text {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(48, 250, 136);
+}
+
 .camera-label:hover .unity-base-field__input {
     background-color: rgba(0, 0, 0, 0);
     color: rgb(48, 250, 136);
 }
+
+

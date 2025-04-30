@@ -1,6 +1,5 @@
 // Description: Manages persistent UI elements across scenes
 
-using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,6 +28,8 @@ public class UIManager : MonoBehaviour
     private Label _speedLabel;
     private Label _speedLeftArrow;
     private Label _speedRightArrow;
+    private DropdownField _cameraDropdown;
+    private VisualElement _cameraDropdownUI;
 
     private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
     private int _currentTimescaleIndex = 2;
@@ -37,6 +38,19 @@ public class UIManager : MonoBehaviour
 
     private bool isPaused = false;
     private bool _isInitialized = false;
+
+       
+    public DropdownField CameraDropdown
+    {
+        get => _cameraDropdown;
+        set => _cameraDropdown = value;
+    }
+
+    public VisualElement CameraDropdownUI
+    {
+        get => _cameraDropdownUI;
+        set => _cameraDropdownUI = value;
+    }
 
     private enum BackButtonMode { MainMenu, PreviousScene }
     private BackButtonMode _currentBackButtonMode;
@@ -70,6 +84,7 @@ public class UIManager : MonoBehaviour
         InitializePersistentUI();
         InitializeCollisionUI();
         InitializeRecordButtons();
+        InitializeCameraDropDownUI();
 
         // Delay localization-dependent setup
         await SetupAsync();
@@ -139,7 +154,6 @@ public class UIManager : MonoBehaviour
         _playPauseBtn  = _collisionUI.Q<Button>("playPauseButton");
         _restartBtn    = _collisionUI.Q<Button>("restartButton");
 
-
         _playPauseBtn.RemoveFromClassList("unity-button");
         _restartBtn.RemoveFromClassList("unity-button");
 
@@ -160,6 +174,33 @@ public class UIManager : MonoBehaviour
             if (evt.button == (int)MouseButton.MiddleMouse)
                 ResetTimescale();
         });
+    }
+
+    /// <summary>
+    /// Initializes the UI elements for camera selection
+    /// </summary>
+    private void InitializeCameraDropDownUI()
+    {
+        if (_collisionUI == null) return;
+
+        // Get the camera dropdown and make it visible
+        _cameraDropdownUI = _collisionUI.Q<VisualElement>("CameraDropdownContainer");
+
+        if (_cameraDropdownUI == null)
+        {
+            Debug.LogError("CameraController: cameraDropdownUI not found in the UI.");
+            return;
+        }
+
+        _cameraDropdown = _cameraDropdownUI.Q<DropdownField>("CameraDropdown");
+        if (_cameraDropdown == null)
+        {
+            Debug.LogError("CameraController: Camera DropdownField is null.");
+            return;
+        }
+        
+        Debug.Log("CameraController: Camera Dropdown UI initialized successfully.");
+
     }
 
     ///<summary>
@@ -218,14 +259,14 @@ public class UIManager : MonoBehaviour
     }
 
 
-
     /// <summary>
     /// Initializes the record and download buttons in the NavBar and sets up the click events.
     /// The record button toggles recording state, and the download button saves the current recording
     /// </summary> 
     private void InitializeRecordButtons()
     {
-        _recordBtn = _navBar.Q<VisualElement>("RecordButton2");
+        if(_collisionUI == null) return;
+        _recordBtn = _collisionUI.Q<VisualElement>("RecordButton");
         
         if(_recordBtn != null)
         {
@@ -238,7 +279,7 @@ public class UIManager : MonoBehaviour
             _recordBtn.RegisterCallback<ClickEvent>(evt => ToggleRecording());
         }
 
-        _downloadBtn = _navBar.Q<VisualElement>("DownloadButton2");
+        _downloadBtn = _collisionUI.Q<VisualElement>("DownloadButton");
         if(_downloadBtn != null) 
         {   
             Debug.Log("Download button found in NavBar");
@@ -346,9 +387,9 @@ public class UIManager : MonoBehaviour
         {
             var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
             var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
-            var label = _recordBtn.Q<Label>("RecordLabel");
+            // var label = _recordBtn.Q<Label>("RecordLabel");
 
-            if (stopIcon == null || cameraIcon == null || label == null)
+            if (stopIcon == null || cameraIcon == null)
             {
                 Debug.LogWarning("[UIManager] One or more recording UI elements are missing.");
                 return;
@@ -357,13 +398,13 @@ public class UIManager : MonoBehaviour
             {
                 stopIcon.RemoveFromClassList("d-none");
                 cameraIcon.AddToClassList("d-none");
-                label.text = LocalizedUIHelper.Get("StopRecording");
+                // label.text = LocalizedUIHelper.Get("StopRecording");
             }
             else
             {
                 stopIcon.AddToClassList("d-none");
                 cameraIcon.RemoveFromClassList("d-none");
-                label.text = LocalizedUIHelper.Get("StartRecording");
+                // label.text = LocalizedUIHelper.Get("StartRecording");
             }
         }
     }

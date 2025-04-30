@@ -22,9 +22,7 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private PlayableDirector playableDirector;
 
-
     // Cameras - Cinemachine
-    //private List<CinemachineCamera> cameras;
     private List<CinemachineCamera> cameras = new List<CinemachineCamera>();
     private int activeCameraIndex = 0;
 
