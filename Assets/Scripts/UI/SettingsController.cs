@@ -22,6 +22,7 @@ public class SettingsController : MonoBehaviour
 
     private bool waitingForKey = false;
     private Action<KeyCode> onKeySelected;
+    private Coroutine blinkCoroutine;
 
     private void Start()
     {
@@ -117,11 +118,31 @@ public class SettingsController : MonoBehaviour
 
         waitingForKey = true;
 
-        string pressAnyKeyText = LocalizedUIHelper.Get("PressAnyKey");
-        button.text = pressAnyKeyText;
+        // Reset the button text to indicate waiting for input
+        button.text = "|";
+
+        // If a blink coroutine is already running, stop it
+        if( blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+        }
+        blinkCoroutine = StartCoroutine(BlinkText(button));
 
         onKeySelected = (key) =>
         {
+            waitingForKey = false;
+
+            // Stop the blinking coroutine when a key is selected
+            if (blinkCoroutine != null)
+            {
+                StopCoroutine(blinkCoroutine);
+                blinkCoroutine = null;
+            }
+
+            // Reset the element text color when done
+            button.AddToClassList("visible-text");
+            button.RemoveFromClassList("hidden-text");
+            
             if (IsKeyAlreadyBound(key, action))
             {
                 Debug.LogWarning($"[SettingsController] Key '{key}' already bound to another action.");
@@ -131,8 +152,40 @@ public class SettingsController : MonoBehaviour
 
             setKeyMap[action](key);
             button.text = key.ToString();
+
         };
     }
+
+    /// <summary>
+    /// Coroutine to blink the text of the button while waiting for a key input.
+    /// The text will alternate between visible and hidden states.
+    /// The text color is controlled by CSS classes "visible-text" and "hidden-text".
+    /// </summary>
+    /// <param name="element"></param>
+    private IEnumerator BlinkText(VisualElement element)
+    {
+        bool visible = true;
+
+        while (waitingForKey)
+        {
+            visible = !visible;
+
+            if (visible)
+            {
+                element.AddToClassList("visible-text");
+                element.RemoveFromClassList("hidden-text");
+            }
+            else
+            {
+                element.AddToClassList("hidden-text");
+                element.RemoveFromClassList("visible-text");
+            }
+
+            // Blink interval
+            yield return new WaitForSeconds(0.4f);
+        }
+    }
+
 
     private bool IsKeyAlreadyBound(KeyCode key, string currentAction)
     {

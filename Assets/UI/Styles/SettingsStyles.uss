@@ -119,3 +119,11 @@
     font-size: 20px;  
     opacity: 1;
 }
+
+.visible-text {
+    color: rgb(0, 200, 255)
+}
+
+.hidden-text {
+    color: rgba(0, 200, 255, 0)
+}
