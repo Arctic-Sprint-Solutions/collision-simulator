@@ -198,3 +198,7 @@
 .control-btn:hover {
     background-color: rgba(0, 61, 78, 0.74);
 }
+
+.d-none {
+    display: none;
+}
