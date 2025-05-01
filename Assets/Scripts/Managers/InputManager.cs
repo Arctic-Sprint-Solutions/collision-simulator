@@ -129,5 +129,11 @@ public class InputManager : MonoBehaviour
             Debug.Log("[InputManager] Save key pressed");
             VideoManager.Instance?.SaveCurrentRecording();
         }
+        
+        if (Input.GetKeyDown(keybinds.zenModeKey))
+        {
+            Debug.Log("[InputManager] Zen mode key pressed");
+            uiManager?.ToggleZenMode();
+        }
     }
 }

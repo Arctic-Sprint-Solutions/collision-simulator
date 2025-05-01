@@ -275,6 +275,10 @@ MonoBehaviour:
     m_Key: StopRecording
     m_Metadata:
       m_Items: []
+  - m_Id: 4802717544341504
+    m_Key: ShowKeybindsLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
