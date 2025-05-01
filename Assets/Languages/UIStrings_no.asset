@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4001371014553600
-    m_Localized: "Trykk p\xE5 en tast"
+    m_Localized: <Ny tast>
     m_Metadata:
       m_Items: []
   - m_Id: 4000141915709440
@@ -330,6 +330,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4397003009155072
     m_Localized: Stopp opptak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4802717544341504
+    m_Localized: Vis tastevalg
     m_Metadata:
       m_Items: []
   references:

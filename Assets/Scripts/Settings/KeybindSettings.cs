@@ -9,9 +9,10 @@ public class KeybindSettings : ScriptableObject
 {
     public KeyCode pauseKey = KeyCode.Space;
     public KeyCode restartKey = KeyCode.R;
-    public KeyCode increaseSpeedKey = KeyCode.M;
-    public KeyCode decreaseSpeedKey = KeyCode.B;
-    public KeyCode resetSpeedKey = KeyCode.N;
-    public KeyCode recordKey = KeyCode.V;
+    public KeyCode increaseSpeedKey = KeyCode.UpArrow;
+    public KeyCode decreaseSpeedKey = KeyCode.DownArrow;
+    public KeyCode resetSpeedKey = KeyCode.Backspace;
+    public KeyCode recordKey = KeyCode.T;
     public KeyCode saveKey = KeyCode.S;
+    public KeyCode zenModeKey = KeyCode.Z;
 }
