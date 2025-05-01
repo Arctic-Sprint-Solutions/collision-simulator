@@ -6,11 +6,11 @@
         <engine:VisualElement name="TitleContainer" style="flex-grow: 1; width: 1590px; height: 629px; max-height: 93px; align-self: center; background-color: rgb(0, 0, 0); align-content: flex-start; margin-top: -29px;">
             <engine:Label name="SettingsTitle" class="my-2 title" style="padding-left: 45px; margin-top: 9px;" />
         </engine:VisualElement>
-        <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-width: 1522px; max-height: 528px; width: 1600px; padding-top: 0; margin-top: 34px;">
+        <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-width: 1522px; max-height: 528px; width: 1600px; padding-top: 0; margin-top: 34px; align-items: flex-start; align-self: flex-start;">
             <engine:VisualElement name="KeybindSubtitleContainer" style="flex-grow: 1; height: 60px; max-height: 60px; margin-top: 2px; margin-right: 0; margin-bottom: 12px;">
                 <engine:Label name="KeybindSubtitle" class="nav-link-text" style="margin-top: 2px; margin-left: 15px;" />
             </engine:VisualElement>
-            <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-height: 454px; max-width: 1524px; align-content: auto; align-items: stretch; justify-content: flex-start; align-self: flex-end; flex-direction: row; height: 454px; flex-wrap: wrap;">
+            <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-height: 454px; max-width: 1524px; align-content: auto; align-items: flex-start; justify-content: flex-start; align-self: flex-start; flex-direction: row; height: 454px; flex-wrap: wrap; width: 1521px;">
                 <engine:VisualElement name="PauseButtonContainer" class="keybind-container">
                     <engine:Label text="Increase Speed" name="PauseKeybindLabel" class="subtitle keybind-label" />
                     <engine:Button text="F" name="PauseKeybindButton" class="keybind-btn subtitle" />
