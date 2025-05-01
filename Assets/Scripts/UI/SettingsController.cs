@@ -50,7 +50,8 @@ public class SettingsController : MonoBehaviour
             { "Download",      () => InputManager.Instance.keybinds.saveKey },
             { "IncreaseSpeed", () => InputManager.Instance.keybinds.increaseSpeedKey },
             { "DecreaseSpeed", () => InputManager.Instance.keybinds.decreaseSpeedKey },
-            { "ResetSpeed",    () => InputManager.Instance.keybinds.resetSpeedKey }
+            { "ResetSpeed",    () => InputManager.Instance.keybinds.resetSpeedKey },
+            { "ZenMode",       () => InputManager.Instance.keybinds.zenModeKey },
         };
 
         setKeyMap = new Dictionary<string, Action<KeyCode>>()
@@ -61,7 +62,8 @@ public class SettingsController : MonoBehaviour
             { "Download",      (key) => InputManager.Instance.keybinds.saveKey = key },
             { "IncreaseSpeed", (key) => InputManager.Instance.keybinds.increaseSpeedKey = key },
             { "DecreaseSpeed", (key) => InputManager.Instance.keybinds.decreaseSpeedKey = key },
-            { "ResetSpeed",    (key) => InputManager.Instance.keybinds.resetSpeedKey = key }
+            { "ResetSpeed",    (key) => InputManager.Instance.keybinds.resetSpeedKey = key },
+            { "ZenMode",       (key) => InputManager.Instance.keybinds.zenModeKey = key }
         };
     }
 
@@ -77,7 +79,8 @@ public class SettingsController : MonoBehaviour
             { "Download",      root.Q<Button>("DownloadKeybindButton") },
             { "IncreaseSpeed", root.Q<Button>("IncreaseSpeedKeybindButton") },
             { "DecreaseSpeed", root.Q<Button>("DecreaseSpeedKeybindButton") },
-            { "ResetSpeed",    root.Q<Button>("ResetSpeedKeybindButton") }
+            { "ResetSpeed",    root.Q<Button>("ResetSpeedKeybindButton") },
+            { "ZenMode",       root.Q<Button>("ZenModeKeybindButton") }
         };
 
         foreach (var pair in actionButtonMap)

@@ -13,11 +13,11 @@
             <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-height: 454px; max-width: 1524px; align-content: auto; align-items: flex-start; justify-content: flex-start; align-self: flex-start; flex-direction: row; height: 454px; flex-wrap: wrap; width: 1521px;">
                 <engine:VisualElement name="PauseButtonContainer" class="keybind-container">
                     <engine:Label text="Increase Speed" name="PauseKeybindLabel" class="subtitle keybind-label" />
-                    <engine:Button text="F" name="PauseKeybindButton" class="keybind-btn subtitle" />
+                    <engine:Button name="PauseKeybindButton" class="keybind-btn subtitle" />
                 </engine:VisualElement>
                 <engine:VisualElement name="RestartButtonContainer" class="keybind-container">
                     <engine:Label name="RestartKeybindLabel" class="subtitle keybind-label" />
-                    <engine:Button text="Button" name="RestartKeybindButton" class="keybind-btn subtitle" />
+                    <engine:Button text="Backspace" name="RestartKeybindButton" class="keybind-btn subtitle" />
                 </engine:VisualElement>
                 <engine:VisualElement name="IncreaseSpeedButtonContainer" class="keybind-container">
                     <engine:Label name="IncreaseSpeedKeybindLabel" class="subtitle keybind-label" />
@@ -33,11 +33,15 @@
                 </engine:VisualElement>
                 <engine:VisualElement name="RecordButtonContainer" class="keybind-container">
                     <engine:Label name="RecordKeybindLabel" class="subtitle keybind-label" />
-                    <engine:Button text="Button" name="RecordKeybindButton" class="keybind-btn subtitle" />
+                    <engine:Button name="RecordKeybindButton" class="keybind-btn subtitle" />
                 </engine:VisualElement>
                 <engine:VisualElement name="DownloadButtonContainer" class="keybind-container">
                     <engine:Label name="DownloadKeybindLabel" class="subtitle keybind-label" />
-                    <engine:Button text="Button" name="DownloadKeybindButton" class="keybind-btn subtitle" />
+                    <engine:Button name="DownloadKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ZenModeButtonContainer" class="keybind-container">
+                    <engine:Label name="ZenModeKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="ZenModeKeybindButton" class="keybind-btn subtitle" />
                 </engine:VisualElement>
             </engine:VisualElement>
         </engine:VisualElement>
