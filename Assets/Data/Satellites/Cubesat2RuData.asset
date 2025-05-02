@@ -20,4 +20,4 @@ MonoBehaviour:
   prefabName: Cubesat2ruLP
   previewImage: {fileID: 21300000, guid: df2396deea2b64800859fac2b1c9ac7d, type: 3}
   debrisSceneName: Cubesat2RuSceneDebris
-  satelliteSceneName: 
+  satelliteSceneName: Cubesat2RuSceneSatellite
