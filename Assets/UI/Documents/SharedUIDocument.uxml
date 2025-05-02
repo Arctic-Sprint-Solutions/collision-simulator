@@ -4,15 +4,18 @@
     <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
     <Style src="project://database/Assets/UI/Styles/CameraManagerStyles.uss?fileID=7433441132597879392&amp;guid=c694c710541212742b9216e022dbee95&amp;type=3#CameraManagerStyles" />
     <engine:VisualElement name="Root" class="root-container">
-        <engine:VisualElement name="KeybindsEdge" class="keybinds-edge menu">
-            <engine:Label name="ShowKeybinds" class="nav-link-text" style="-unity-background-image-tint-color: rgb(0, 200, 255); align-self: center; align-content: flex-start; padding-bottom: 4px; padding-top: 0; top: -20px; bottom: auto;" />
-        </engine:VisualElement>
-        <engine:ScrollView name="KeybindsPanel" class="keybinds-panel nav-link-text" />
         <engine:VisualElement name="UIContainer" style="flex-grow: 1; display: flex; flex-direction: column;">
             <engine:VisualElement name="NavBar" class="navbar" style="flex-grow: 0; max-height: none; flex-direction: row; justify-content: space-between;">
                 <engine:VisualElement name="BackToMenuButton" class="flex-row-center link-hover" style="flex-grow: 0; flex-shrink: 1; align-items: center;">
                     <engine:VisualElement name="BackIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/circle-back-icon.png?fileID=2800000&amp;guid=ecac4b2a0e7174a82b0f3c2712c05619&amp;type=3#circle-back-icon&quot;);" />
                     <engine:Label name="BackToMenuLabel" text="Main Menu&#10;" class="navbar-link-text nav-link-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="KeybindsEdge" class="keybinds-edge">
+                    <engine:VisualElement name="ToggleKeybindsPanel" class="control-btn" style="flex-grow: 1;">
+                        <engine:Label text="Show Keybinds" name="ShowKeybinds" />
+                        <engine:Label text="Hide Keybinds" name="HideKeybinds" class="d-none" />
+                    </engine:VisualElement>
+                    <engine:ScrollView name="KeybindsPanel" class="keybinds-panel nav-link-text" />
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 0; position: relative; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row; padding-top: 0; padding-right: 30px; padding-bottom: 0; padding-left: 30px; margin-top: auto; background-color: rgba(0, 0, 0, 0);">

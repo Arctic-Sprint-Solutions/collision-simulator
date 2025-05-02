@@ -40,7 +40,9 @@ public class UIManager : MonoBehaviour
     private VisualElement _downloadBtn;
     private VisualElement _keybindsEdge;
     private ScrollView _keybindsPanel;
-    private Label _edgeLabel;
+    private VisualElement _toggleKeybindsPanel;
+    private Label _showKeybindsLabel;
+    private Label _hideKeybindsLabel;
     private int _panelHeight = 200;
 
     private bool isPaused = false;
@@ -86,7 +88,7 @@ public class UIManager : MonoBehaviour
         _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
         _keybindsEdge  = _root.Q<VisualElement>("KeybindsEdge");
         _keybindsPanel = _root.Q<ScrollView>("KeybindsPanel");
-        _edgeLabel     = _root.Q<Label>("ShowKeybinds");
+        _showKeybindsLabel = _root.Q<Label>("ShowKeybinds");
         _collisionUI = _root.Q<VisualElement>("CollisionUI");
 
         // Register for localization updates
@@ -137,6 +139,10 @@ public class UIManager : MonoBehaviour
         _keybindsEdge?.AddToClassList("d-none");
         isPaused = false;
         Time.timeScale = _timeScales[_currentTimescaleIndex];
+
+        // Hide play icon initially and show pause icon
+        _playPauseBtn?.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
+        _playPauseBtn?.Q<VisualElement>("pauseIcon")?.RemoveFromClassList("d-none");
 
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
@@ -226,32 +232,41 @@ public class UIManager : MonoBehaviour
 
         _keybindsEdge  = _root.Q<VisualElement>("KeybindsEdge");
         _keybindsPanel = _root.Q<ScrollView>("KeybindsPanel");
-        _edgeLabel = _keybindsEdge.Q<Label>("ShowKeybinds");
-
+        
         if (_keybindsEdge == null || _keybindsPanel == null)
         {
             Debug.LogError("KeybindsEdge or KeybindsPanel not found.");
             return;
         }
 
-        // Ensure they draw on top
-        _keybindsEdge.BringToFront();
-        _keybindsPanel.BringToFront();
+        _showKeybindsLabel = _keybindsEdge.Q<Label>("ShowKeybinds");
+        _hideKeybindsLabel = _keybindsEdge.Q<Label>("HideKeybinds");
+        _toggleKeybindsPanel = _keybindsEdge.Q<VisualElement>("ToggleKeybindsPanel");
 
-        _keybindsPanel.style.top = new Length(-_panelHeight, LengthUnit.Pixel);
+        // Hide the keybinds panel initially
+        _keybindsPanel.RemoveFromClassList("visible");
+        _showKeybindsLabel.RemoveFromClassList("d-none");
+        _hideKeybindsLabel.AddToClassList("d-none");
 
-        // When pointer enters the strip, populate & snap the panel down
-        _keybindsEdge.RegisterCallback<PointerEnterEvent>(evt =>
+        // Register the click event for the keybinds edge
+        _toggleKeybindsPanel.RegisterCallback<ClickEvent>(evt =>
         {
-            PopulateKeybindsMenu();
-            _keybindsPanel.style.top = 0;
+            // Toggle visibility of the keybinds panel
+            if (_keybindsPanel.ClassListContains("visible"))
+            {
+                _keybindsPanel.RemoveFromClassList("visible");
+                _showKeybindsLabel.RemoveFromClassList("d-none");
+                _hideKeybindsLabel.AddToClassList("d-none");
+            }
+            else
+            {
+                PopulateKeybindsMenu();
+                _keybindsPanel.AddToClassList("visible");
+                _showKeybindsLabel.AddToClassList("d-none");
+                _hideKeybindsLabel.RemoveFromClassList("d-none");
+            }
         });
 
-        // When pointer leaves the panel itself, snap it back up
-        _keybindsPanel.RegisterCallback<PointerLeaveEvent>(evt =>
-        {
-            _keybindsPanel.style.top = new Length(-_panelHeight, LengthUnit.Pixel);
-        });
     }
 
     private void PopulateKeybindsMenu()
@@ -333,12 +348,21 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (_edgeLabel != null)
+        if (_showKeybindsLabel != null)
         {
-            var label = _edgeLabel.Q<Label>("ShowKeybinds");
+            var label = _showKeybindsLabel.Q<Label>("ShowKeybinds");
             if (label != null)
             {
                 LocalizedUIHelper.Apply(label, "ShowKeybindsLabel");
+            }
+        }
+
+        if (_hideKeybindsLabel != null)
+        {
+            var label = _hideKeybindsLabel.Q<Label>("HideKeybinds");
+            if (label != null)
+            {
+                LocalizedUIHelper.Apply(label, "HideKeybindsLabel");
             }
         }
 
@@ -549,7 +573,6 @@ public class UIManager : MonoBehaviour
         if (_rootContainer == null) return;
 
         _rootContainer.style.display = _isZenMode ? DisplayStyle.None : DisplayStyle.Flex;
-        _keybindsPanel.style.top = new Length(-_panelHeight, LengthUnit.Pixel);
     }
 
 

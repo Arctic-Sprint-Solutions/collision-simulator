@@ -279,6 +279,14 @@ MonoBehaviour:
     m_Key: ShowKeybindsLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 5237824931487744
+    m_Key: ZenModeKeybindLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5265999417827328
+    m_Key: HideKeybindsLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
