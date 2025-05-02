@@ -140,6 +140,10 @@ public class UIManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = _timeScales[_currentTimescaleIndex];
 
+        // Hide play icon initially and show pause icon
+        _playPauseBtn?.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
+        _playPauseBtn?.Q<VisualElement>("pauseIcon")?.RemoveFromClassList("d-none");
+
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
         {
@@ -569,7 +573,6 @@ public class UIManager : MonoBehaviour
         if (_rootContainer == null) return;
 
         _rootContainer.style.display = _isZenMode ? DisplayStyle.None : DisplayStyle.Flex;
-        _keybindsPanel.style.top = new Length(-_panelHeight, LengthUnit.Pixel);
     }
 
 

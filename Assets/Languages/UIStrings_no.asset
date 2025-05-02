@@ -340,6 +340,10 @@ MonoBehaviour:
     m_Localized: Zen Modus
     m_Metadata:
       m_Items: []
+  - m_Id: 5265999417827328
+    m_Localized: Gjem tastevalg
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

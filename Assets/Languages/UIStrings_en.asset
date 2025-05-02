@@ -343,6 +343,10 @@ MonoBehaviour:
     m_Localized: Zen Mode
     m_Metadata:
       m_Items: []
+  - m_Id: 5265999417827328
+    m_Localized: Hide keybinds
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
