@@ -87,3 +87,17 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # End of https://www.toptal.com/developers/gitignore/api/unity
+
+# Platform-specific addressable data
+Assets/AddressableAssetsData/OSX/
+Assets/AddressableAssetsData/OSX.meta
+Assets/AddressableAssetsData/Windows/
+Assets/AddressableAssetsData/Windows.meta
+Assets/AddressableAssetsData/Linux/
+Assets/AddressableAssetsData/Linux.meta
+Assets/AddressableAssetsData/Android/
+Assets/AddressableAssetsData/Android.meta
+Assets/AddressableAssetsData/iOS/
+Assets/AddressableAssetsData/iOS.meta
+Assets/AddressableAssetsData/WebGL/
+Assets/AddressableAssetsData/WebGL.meta
