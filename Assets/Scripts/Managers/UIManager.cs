@@ -25,8 +25,6 @@ public class UIManager : MonoBehaviour
     private VisualElement _navBar;
     private VisualElement _backToMenuButton;
     private VisualElement _collisionUI;
-    private DropdownField _cameraDropdown;
-    private VisualElement _cameraDropdownUI;
     private VisualElement _keybindsEdge;
     private ScrollView _keybindsPanel;
     private VisualElement _toggleKeybindsPanel;
@@ -34,20 +32,6 @@ public class UIManager : MonoBehaviour
     private Label _hideKeybindsLabel;
     private bool _isInitialized = false;
     private bool _isZenMode = false;
-
-       
-    public DropdownField CameraDropdown
-    {
-        get => _cameraDropdown;
-        set => _cameraDropdown = value;
-    }
-
-    public VisualElement CameraDropdownUI
-    {
-        get => _cameraDropdownUI;
-        set => _cameraDropdownUI = value;
-    }
-
     private enum BackButtonMode { MainMenu, PreviousScene }
     private BackButtonMode _currentBackButtonMode;
 
@@ -88,8 +72,7 @@ public class UIManager : MonoBehaviour
 
         // Initialize UI elements
         InitializePersistentUI();
-        // InitializeCollisionUI();
-        InitializeCameraDropDownUI();
+        // InitializeCameraDropDownUI();
         InitializeKeybindsHoverPanel();
 
         RegisterUIComponents();
@@ -112,6 +95,11 @@ public class UIManager : MonoBehaviour
         // Recording components
         RegisterComponent("RecordButton", _collisionUI.Q<VisualElement>("RecordButton"));
         RegisterComponent("DownloadButton", _collisionUI.Q<VisualElement>("DownloadButton"));
+
+        // Camera components
+        RegisterComponent("CameraDropdownContainer", _collisionUI.Q<VisualElement>("CameraDropdownContainer"));
+        RegisterComponent("CameraDropdown", _collisionUI.Q<DropdownField>("CameraDropdown"));
+
     }
 
     private void RegisterComponent(string name, VisualElement element)
@@ -196,32 +184,6 @@ public class UIManager : MonoBehaviour
         HideNavBar();
     }
 
-    /// <summary>
-    /// Initializes the UI elements for camera selection
-    /// </summary>
-    private void InitializeCameraDropDownUI()
-    {
-        if (_collisionUI == null) return;
-
-        // Get the camera dropdown and make it visible
-        _cameraDropdownUI = _collisionUI.Q<VisualElement>("CameraDropdownContainer");
-
-        if (_cameraDropdownUI == null)
-        {
-            Debug.LogError("UIManager: cameraDropdownUI not found in the UI.");
-            return;
-        }
-
-        _cameraDropdown = _cameraDropdownUI.Q<DropdownField>("CameraDropdown");
-        if (_cameraDropdown == null)
-        {
-            Debug.LogError("CameraController: Camera DropdownField is null.");
-            return;
-        }
-        
-        Debug.Log("CameraController: Camera Dropdown UI initialized successfully.");
-
-    }
 
     private void InitializeKeybindsHoverPanel()
     {
