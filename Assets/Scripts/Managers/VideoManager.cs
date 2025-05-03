@@ -13,6 +13,8 @@ public class VideoManager : MonoBehaviour
     /// Singleton instance of VideoManager
     /// </summary>
     public static VideoManager Instance { get; private set; }
+    
+    [SerializeField] VideoController _videoController;
 
     #region WebGL JavaScript Plugin Interop
     [DllImport("__Internal")]
@@ -26,6 +28,12 @@ public class VideoManager : MonoBehaviour
     
     [DllImport("__Internal")]
     private static extern bool SaveVideoRecording();
+    #endregion
+
+    #region Events
+    public event System.Action OnRecordingStarted;
+    public event System.Action OnRecordingStopped;
+    public event System.Action OnRecordingSaved;
     #endregion
 
     /// <summary>
@@ -80,8 +88,7 @@ public class VideoManager : MonoBehaviour
         #endif
 
         _isRecording = true;
-        UIManager.Instance?.HideDownloadButton();
-        UIManager.Instance?.UpdateRecordButton(isRecording: true);
+        OnRecordingStarted?.Invoke();
     }
     
     /// <summary>
@@ -99,8 +106,7 @@ public class VideoManager : MonoBehaviour
         #endif
 
         _isRecording = false;
-        UIManager.Instance?.ShowDownloadButton();
-        UIManager.Instance?.UpdateRecordButton(isRecording: false);
+        OnRecordingStopped?.Invoke();
     }
 
     /// <summary>
@@ -112,7 +118,7 @@ public class VideoManager : MonoBehaviour
         SaveVideoRecording();
         #endif
 
-        UIManager.Instance?.HideDownloadButton();
+        OnRecordingSaved?.Invoke();
     }
 
     /// <summary>

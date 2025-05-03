@@ -15,10 +15,11 @@ using UnityEngine.Events;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
-
+    
     // Persistent UI elements
     [SerializeField] private UIDocument _sharedUIDocument;
     [SerializeField] private KeybindSettings _keybindSettings;
+    private Dictionary<string, VisualElement> _uiElements = new Dictionary<string, VisualElement>();
 
     private VisualElement _root;
     private VisualElement _rootContainer;
@@ -36,15 +37,11 @@ public class UIManager : MonoBehaviour
 
     private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
     private int _currentTimescaleIndex = 2;
-    private VisualElement _recordBtn;
-    private VisualElement _downloadBtn;
     private VisualElement _keybindsEdge;
     private ScrollView _keybindsPanel;
     private VisualElement _toggleKeybindsPanel;
     private Label _showKeybindsLabel;
     private Label _hideKeybindsLabel;
-    private int _panelHeight = 200;
-
     private bool isPaused = false;
     private bool _isInitialized = false;
     private bool _isZenMode = false;
@@ -66,6 +63,11 @@ public class UIManager : MonoBehaviour
     private BackButtonMode _currentBackButtonMode;
 
     private List<UILocalizer> registeredLocalizers = new List<UILocalizer>();
+
+    #region  Events
+    public event System.Action OnCollisionSceneLoaded;
+    public event System.Action OnNonCollisionSceneLoaded;
+    #endregion
 
     /// <summary>
     /// Singleton instance of the UIManager
@@ -97,13 +99,45 @@ public class UIManager : MonoBehaviour
         // Initialize UI elements
         InitializePersistentUI();
         InitializeCollisionUI();
-        InitializeRecordButtons();
+        // InitializeRecordButtons();
         InitializeCameraDropDownUI();
         InitializeKeybindsHoverPanel();
+
+        RegisterUIComponents();
 
         // Delay localization-dependent setup
         await SetupAsync();
     }
+
+    private void RegisterUIComponents()
+    {
+        if(_collisionUI == null) return;
+        // Recording components
+        RegisterComponent("RecordButton", _collisionUI.Q<VisualElement>("RecordButton"));
+        RegisterComponent("DownloadButton", _collisionUI.Q<VisualElement>("DownloadButton"));
+    }
+
+    private void RegisterComponent(string name, VisualElement element)
+    {
+        if(element == null)
+        {
+            Debug.LogWarning($"UIManager: Attempted to register a null element for '{name}'");
+            return;
+        }
+
+        _uiElements[name] = element;
+    }
+
+    public T GetElement<T>(string name) where T : VisualElement
+    {
+        if (_uiElements.TryGetValue(name, out VisualElement element))
+        {
+            return element as T;
+        }
+        Debug.LogWarning($"UIManager: Component '{name}' not found.");
+        return null;
+    }
+
 
     /// <summary>
     /// Sets up the UIManager by waiting for the localization system to be ready
@@ -134,7 +168,6 @@ public class UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        HideRecordButton();
         _collisionUI?.AddToClassList("d-none");
         _keybindsEdge?.AddToClassList("d-none");
         isPaused = false;
@@ -151,7 +184,13 @@ public class UIManager : MonoBehaviour
             _playPauseBtn.text = "Pause";
             _keybindsEdge?.RemoveFromClassList("d-none");
 
-            ShowRecordButton();
+            // Notify that a collision scene has been loaded
+            OnCollisionSceneLoaded?.Invoke();   
+        } 
+        else
+        {
+            // Notify that a non-collision scene has been loaded
+            OnNonCollisionSceneLoaded?.Invoke();
         }
     }
 
@@ -339,15 +378,6 @@ public class UIManager : MonoBehaviour
         if (_speedLabel != null)
             LocalizedUIHelper.Apply(_speedLabel, "Speed_Label");
 
-        if (_recordBtn != null)
-        {
-            var label = _recordBtn.Q<Label>("RecordLabel");
-            if (label != null)
-            {
-                LocalizedUIHelper.Apply(label, "StartRecording");
-            }
-        }
-
         if (_showKeybindsLabel != null)
         {
             var label = _showKeybindsLabel.Q<Label>("ShowKeybinds");
@@ -367,44 +397,13 @@ public class UIManager : MonoBehaviour
         }
 
         UpdateSpeedButtonText();
-        UpdateRecordButton(isRecording: false);
+        // UpdateRecordButton(isRecording: false);
 
         // Tell all localizers to reload too
         foreach (var localizer in registeredLocalizers)
         {
             if (localizer != null)
                 localizer.ReloadLocalization();
-        }
-    }
-
-
-    /// <summary>
-    /// Initializes the record and download buttons in the NavBar and sets up the click events.
-    /// The record button toggles recording state, and the download button saves the current recording
-    /// </summary> 
-    private void InitializeRecordButtons()
-    {
-        if(_collisionUI == null) return;
-        _recordBtn = _collisionUI.Q<VisualElement>("RecordButton");
-        
-        if(_recordBtn != null)
-        {
-            var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
-            var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
-            stopIcon?.AddToClassList("d-none"); // Hide stop icon initially
-            cameraIcon?.RemoveFromClassList("d-none"); // Show camera icon initially
-
-            // Register the click event for the record button
-            _recordBtn.RegisterCallback<ClickEvent>(evt => ToggleRecording());
-        }
-
-        _downloadBtn = _collisionUI.Q<VisualElement>("DownloadButton");
-        if(_downloadBtn != null) 
-        {   
-            Debug.Log("Download button found in NavBar");
-            _downloadBtn.RegisterCallback<ClickEvent>(evt => DownloadRecording());
-            // Hide the download button initially
-            _downloadBtn.AddToClassList("d-none");
         }
     }
 
@@ -438,97 +437,6 @@ public class UIManager : MonoBehaviour
         _navBar.style.display = DisplayStyle.None;
     }
 
-    /// <summary>
-    /// Show the record button in the UI
-    /// </summary>
-    private void ShowRecordButton()
-    {
-        if(_recordBtn != null)
-        {
-            _recordBtn.RemoveFromClassList("d-none");
-        }
-
-        if (_downloadBtn != null)
-        {
-            _downloadBtn.AddToClassList("d-none");
-        }
-    }
-
-    /// <summary>
-    /// Hides the record button in the UI
-    /// </summary>
-    private void HideRecordButton()
-    {
-        if(_recordBtn != null)
-        {
-            _recordBtn.AddToClassList("d-none");
-        }
-
-        if (_downloadBtn != null)
-        {
-            _downloadBtn.AddToClassList("d-none");
-        }
-    }
-
-    /// <summary>
-    /// Shows the download button in the UI
-    /// </summary>
-    public void ShowDownloadButton()
-    {
-        if (_downloadBtn != null)
-        {
-            _downloadBtn.RemoveFromClassList("d-none");
-            var label = _downloadBtn.Q<Label>("DownloadLabel");
-            if (label != null)
-            {
-                label.text = LocalizedUIHelper.Get("DownloadRecording");
-            }
-        }
-    }
-
-    /// <summary>
-    /// Hides the download button in the UI
-    /// </summary>
-    public void HideDownloadButton()
-    {
-        if (_downloadBtn != null)
-        {
-            _downloadBtn.AddToClassList("d-none");
-        }
-    }
-
-    /// <summary>
-    /// Updates the icon and the tect of the record button based on the recording state
-    /// </summary>
-    public void UpdateRecordButton(bool isRecording)
-    {
-        if (_recordBtn != null)
-        {
-            var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
-            var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
-            var label = _recordBtn.Q<Label>("RecordLabel");
-
-            if (stopIcon == null || cameraIcon == null)
-            {
-                Debug.LogWarning("[UIManager] One or more recording UI elements are missing.");
-                return;
-            }
-            if (isRecording)
-            {
-                stopIcon.RemoveFromClassList("d-none");
-                cameraIcon.AddToClassList("d-none");
-                label.text = LocalizedUIHelper.Get("StopRecording");
-            }
-            else
-            {
-                stopIcon.AddToClassList("d-none");
-                cameraIcon.RemoveFromClassList("d-none");
-                label.text = LocalizedUIHelper.Get("StartRecording");
-            }
-        }
-    }
-    
-
     public void TogglePause()
     {
         // Toggle pause-status
@@ -559,29 +467,12 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    /// <summary>
-    /// Toggles the recording state using the VideoManager instance.
-    /// </summary>
-    private void ToggleRecording()
-    {
-        VideoManager.Instance?.ToggleRecording();
-    }
-
     public void ToggleZenMode()
     {
         _isZenMode = !_isZenMode;
         if (_rootContainer == null) return;
 
         _rootContainer.style.display = _isZenMode ? DisplayStyle.None : DisplayStyle.Flex;
-    }
-
-
-    /// <summary>
-    /// Downloads the current recording using the VideoManager instance.
-    /// </summary>
-    private void DownloadRecording()
-    {
-        VideoManager.Instance?.SaveCurrentRecording();
     }
 
     public void IncreaseTimescale()
@@ -631,14 +522,6 @@ public class UIManager : MonoBehaviour
         {
             _backToMenuButton.UnregisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
         }
-        if(_recordBtn != null)
-        {
-            _recordBtn.UnregisterCallback<ClickEvent>(e => ToggleRecording());
-        }
-        if(_downloadBtn != null)
-        {
-            _downloadBtn.UnregisterCallback<ClickEvent>(e => DownloadRecording());
-        }
 
         // Unregister localization update callback
         LocalizationManager.LocalizationUpdated -= ApplyLocalization;
@@ -649,8 +532,6 @@ public class UIManager : MonoBehaviour
         _navBar = null;
         _backToMenuButton = null;
         _sharedUIDocument = null;
-        _recordBtn = null;
-        _downloadBtn = null;
     }
 
 }
