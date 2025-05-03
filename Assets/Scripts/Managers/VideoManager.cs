@@ -14,8 +14,6 @@ public class VideoManager : MonoBehaviour
     /// </summary>
     public static VideoManager Instance { get; private set; }
     
-    [SerializeField] VideoController _videoController;
-
     #region WebGL JavaScript Plugin Interop
     [DllImport("__Internal")]
     private static extern bool InitializeVideoRecorder();

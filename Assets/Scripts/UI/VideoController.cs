@@ -11,8 +11,8 @@ public class VideoController : MonoBehaviour
         if(UIManager.Instance != null) 
         {
             // Register UIManager events
-            UIManager.Instance.OnCollisionSceneLoaded += ShowRecordButton;
-            UIManager.Instance.OnNonCollisionSceneLoaded += HideRecordButton;
+            UIManager.Instance.OnCollisionSceneLoaded += InitializeCollisionScene;
+            UIManager.Instance.OnNonCollisionSceneLoaded += InitializeNonCollisionScene;
             
             InitializeUI();
             Debug.Log("[VideoController] UI initialized successfully.");
@@ -71,6 +71,19 @@ public class VideoController : MonoBehaviour
             // Hide the download button initially
             _downloadBtn.AddToClassList("d-none");
         }
+    }
+
+
+    private void InitializeCollisionScene()
+    {
+        UpdateRecordButton(isRecording: false);
+        ShowRecordButton();
+    }
+
+    private void InitializeNonCollisionScene()
+    {
+        UpdateRecordButton(isRecording: false);
+        HideRecordButton();
     }
 
     private void RecordingStarted()

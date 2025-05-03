@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
-using UnityEngine.Events; 
 
 /// <summary>
 /// Singleton class to manage persistent UI elements across scenes,
@@ -26,23 +25,13 @@ public class UIManager : MonoBehaviour
     private VisualElement _navBar;
     private VisualElement _backToMenuButton;
     private VisualElement _collisionUI;
-    private Button _playPauseBtn;
-    private Button _restartBtn;
-    private VisualElement _speedToggleButton;
-    private Label _speedLabel;
-    private VisualElement _speedLeftArrow;
-    private VisualElement _speedRightArrow;
     private DropdownField _cameraDropdown;
     private VisualElement _cameraDropdownUI;
-
-    private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
-    private int _currentTimescaleIndex = 2;
     private VisualElement _keybindsEdge;
     private ScrollView _keybindsPanel;
     private VisualElement _toggleKeybindsPanel;
     private Label _showKeybindsLabel;
     private Label _hideKeybindsLabel;
-    private bool isPaused = false;
     private bool _isInitialized = false;
     private bool _isZenMode = false;
 
@@ -67,6 +56,7 @@ public class UIManager : MonoBehaviour
     #region  Events
     public event System.Action OnCollisionSceneLoaded;
     public event System.Action OnNonCollisionSceneLoaded;
+    public event System.Action OnApplyLocalization;
     #endregion
 
     /// <summary>
@@ -98,8 +88,7 @@ public class UIManager : MonoBehaviour
 
         // Initialize UI elements
         InitializePersistentUI();
-        InitializeCollisionUI();
-        // InitializeRecordButtons();
+        // InitializeCollisionUI();
         InitializeCameraDropDownUI();
         InitializeKeybindsHoverPanel();
 
@@ -112,6 +101,14 @@ public class UIManager : MonoBehaviour
     private void RegisterUIComponents()
     {
         if(_collisionUI == null) return;
+        // Collision UI components
+        RegisterComponent("playPauseButton", _collisionUI.Q<Button>("playPauseButton"));
+        RegisterComponent("restartButton", _collisionUI.Q<Button>("restartButton"));
+        RegisterComponent("speedToggleButton", _collisionUI.Q<VisualElement>("speedToggleButton"));
+        RegisterComponent("speedLabel", _collisionUI.Q<Label>("speedLabel"));
+        RegisterComponent("speedLeftArrow", _collisionUI.Q<VisualElement>("speedLeftArrow"));
+        RegisterComponent("speedRightArrow", _collisionUI.Q<VisualElement>("speedRightArrow"));
+
         // Recording components
         RegisterComponent("RecordButton", _collisionUI.Q<VisualElement>("RecordButton"));
         RegisterComponent("DownloadButton", _collisionUI.Q<VisualElement>("DownloadButton"));
@@ -134,7 +131,6 @@ public class UIManager : MonoBehaviour
         {
             return element as T;
         }
-        Debug.LogWarning($"UIManager: Component '{name}' not found.");
         return null;
     }
 
@@ -170,18 +166,12 @@ public class UIManager : MonoBehaviour
     {
         _collisionUI?.AddToClassList("d-none");
         _keybindsEdge?.AddToClassList("d-none");
-        isPaused = false;
-        Time.timeScale = _timeScales[_currentTimescaleIndex];
-
-        // Hide play icon initially and show pause icon
-        _playPauseBtn?.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
-        _playPauseBtn?.Q<VisualElement>("pauseIcon")?.RemoveFromClassList("d-none");
 
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
         {
             _collisionUI?.RemoveFromClassList("d-none");
-            _playPauseBtn.text = "Pause";
+            // _playPauseBtn.text = "Pause";
             _keybindsEdge?.RemoveFromClassList("d-none");
 
             // Notify that a collision scene has been loaded
@@ -204,38 +194,6 @@ public class UIManager : MonoBehaviour
             _backToMenuButton.RegisterCallback<ClickEvent>(_ => OnBackToMainMenuClicked());
 
         HideNavBar();
-    }
-
-    private void InitializeCollisionUI()
-    {
-        if (_collisionUI == null) return;
-
-        // Play / Restart
-        _playPauseBtn  = _collisionUI.Q<Button>("playPauseButton");
-        _restartBtn    = _collisionUI.Q<Button>("restartButton");
-
-        _playPauseBtn.RemoveFromClassList("unity-button");
-        _restartBtn.RemoveFromClassList("unity-button");
-
-        _playPauseBtn.clicked += TogglePause;
-        _restartBtn.clicked += RestartScene;
-
-        // Hide play icon initially
-        _playPauseBtn.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
-
-        // Speed toggle
-        _speedToggleButton = _collisionUI.Q<VisualElement>("speedToggleButton");
-        _speedLabel        = _speedToggleButton.Q<Label>("speedLabel");
-        _speedLeftArrow    = _speedToggleButton.Q<VisualElement>("speedLeftArrow");
-        _speedRightArrow   = _speedToggleButton.Q<VisualElement>("speedRightArrow");
-
-        _speedLeftArrow.RegisterCallback<ClickEvent>(_ => DecreaseTimescale());
-        _speedRightArrow.RegisterCallback<ClickEvent>(_ => IncreaseTimescale());
-        _speedToggleButton.RegisterCallback<PointerDownEvent>(evt =>
-        {
-            if (evt.button == (int)MouseButton.MiddleMouse)
-                ResetTimescale();
-        });
     }
 
     /// <summary>
@@ -359,12 +317,6 @@ public class UIManager : MonoBehaviour
         // Make sure LocalizedUIHelper re-fetches the StringTable freshly
         LocalizedUIHelper.ReloadTable();
 
-        if (_playPauseBtn != null)
-            LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
-
-        if (_restartBtn != null)
-            LocalizedUIHelper.Apply(_restartBtn, "RestartButton");
-
         if (_backToMenuButton != null)
         {
             var label = _backToMenuButton.Q<Label>();
@@ -375,8 +327,11 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (_speedLabel != null)
-            LocalizedUIHelper.Apply(_speedLabel, "Speed_Label");
+        var speedLabel = GetElement<Label>("SpeedLabel");
+        if(speedLabel != null)
+        {
+            LocalizedUIHelper.Apply(speedLabel, "Speed_Label");
+        }
 
         if (_showKeybindsLabel != null)
         {
@@ -395,9 +350,6 @@ public class UIManager : MonoBehaviour
                 LocalizedUIHelper.Apply(label, "HideKeybindsLabel");
             }
         }
-
-        UpdateSpeedButtonText();
-        // UpdateRecordButton(isRecording: false);
 
         // Tell all localizers to reload too
         foreach (var localizer in registeredLocalizers)
@@ -437,73 +389,12 @@ public class UIManager : MonoBehaviour
         _navBar.style.display = DisplayStyle.None;
     }
 
-    public void TogglePause()
-    {
-        // Toggle pause-status
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : _timeScales[_currentTimescaleIndex];
-        LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
-
-        if( isPaused)
-        {
-            // Show the play icon and hide the pause icon when paused
-            _playPauseBtn.Q<VisualElement>("playIcon")?.RemoveFromClassList("d-none");
-            _playPauseBtn.Q<VisualElement>("pauseIcon")?.AddToClassList("d-none");
-        }
-        else
-        {
-            // Hide the play icon and show the pause icon when not paused
-            _playPauseBtn.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
-            _playPauseBtn.Q<VisualElement>("pauseIcon")?.RemoveFromClassList("d-none");
-        }
-    }
-
-    public void RestartScene()
-    {
-        // Restart gjeldende scene
-        isPaused = false;
-        //Setter timescale lik slider
-        Time.timeScale = _timeScales[_currentTimescaleIndex];;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
     public void ToggleZenMode()
     {
         _isZenMode = !_isZenMode;
         if (_rootContainer == null) return;
 
         _rootContainer.style.display = _isZenMode ? DisplayStyle.None : DisplayStyle.Flex;
-    }
-
-    public void IncreaseTimescale()
-    {
-        _currentTimescaleIndex = (_currentTimescaleIndex + 1) % _timeScales.Length;
-        Time.timeScale = _timeScales[_currentTimescaleIndex];
-        UpdateSpeedButtonText();
-    }
-
-    public void DecreaseTimescale()
-    {
-        _currentTimescaleIndex--;
-        if (_currentTimescaleIndex < 0) _currentTimescaleIndex = _timeScales.Length - 1;
-
-        Time.timeScale = _timeScales[_currentTimescaleIndex];
-        UpdateSpeedButtonText();
-    }
-
-    public void ResetTimescale()
-    {
-        _currentTimescaleIndex = System.Array.IndexOf(_timeScales, 1f);
-        Time.timeScale = 1f;
-        UpdateSpeedButtonText();
-
-    }
-
-    private void UpdateSpeedButtonText()
-    {
-        // "{0}x" portion comes from localization entry "Speed_Label"
-        float scale = _timeScales[_currentTimescaleIndex];
-        _speedLabel.text = string.Format(LocalizedUIHelper.Get("Speed_Label"), scale);
     }
 
     public void RegisterLocalizer(UILocalizer localizer)

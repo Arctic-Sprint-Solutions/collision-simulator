@@ -148,8 +148,7 @@ Transform:
   m_LocalPosition: {x: 0.3048169, y: -0.11423093, z: -1.1998816}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 447358819}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &69191216
@@ -164,7 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8537b37aa1e83444ab4dd71943cecf17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _videoController: {fileID: 447358818}
 --- !u!1 &190957096
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,13 +266,57 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447358817}
   serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3048169, y: -0.11423093, z: -1.1998816}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1258371969}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &874601400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 874601401}
+  - component: {fileID: 874601402}
+  m_Layer: 0
+  m_Name: CollisionUIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &874601401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874601400}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 69191215}
+  m_Father: {fileID: 1258371969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &874601402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874601400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f816bbe2fc69a4ed689aeb038c155049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &942596078
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143f5465311c34a51b52045db56d1889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionUIController: {fileID: 0}
   keybinds: {fileID: 11400000, guid: 638816393c2a946e393ca8b39d175e17, type: 2}
 --- !u!1 &1258371968
 GameObject:
@@ -398,6 +441,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 190957097}
+  - {fileID: 447358819}
+  - {fileID: 874601401}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1258371970
