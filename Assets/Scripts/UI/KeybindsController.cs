@@ -118,6 +118,7 @@ public class KeybindsController : MonoBehaviour
         }
 
         HideKeybindsPanel();
+        UpdateKeybindsLabels();
     }
 
     /// <summary>
@@ -132,6 +133,24 @@ public class KeybindsController : MonoBehaviour
         }
 
         HideKeybindsPanel();
+        UpdateKeybindsLabels();
+    }
+
+    /// <summary>
+    /// Updates the labels for showing and hiding keybinds.
+    /// This method retrieves localized strings for the labels and updates their text.
+    /// </summary>
+    private void UpdateKeybindsLabels()
+    {
+        if(_hideKeybindsLabel != null)
+        {
+            _hideKeybindsLabel.text = LocalizedUIHelper.Get("HideKeybindsLabel");
+        }
+
+        if(_showKeybindsLabel != null)
+        {
+            _showKeybindsLabel.text = LocalizedUIHelper.Get("ShowKeybindsLabel");
+        }
     }
 
     /// <summary>
