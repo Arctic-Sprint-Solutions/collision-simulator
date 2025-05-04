@@ -18,4 +18,5 @@ public class KeybindSettings : ScriptableObject
     public KeyCode camera1Key = KeyCode.Alpha1;
     public KeyCode camera2Key = KeyCode.Alpha2;
     public KeyCode camera3Key = KeyCode.Alpha3;
+    public KeyCode toggleKeybindPanel = KeyCode.K;
 }

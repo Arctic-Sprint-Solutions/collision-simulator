@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
     public event System.Action OnDecreaseTimescale;
     public event System.Action OnResetTimescale;
     public event System.Action<int> OnCameraKeyPressed;
+    public event System.Action OnToggleKeybindPanel;
     #endregion
 
     /// <summary>
@@ -158,6 +159,11 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("[InputManager] Camera 3 key pressed");
             OnCameraKeyPressed?.Invoke(2);
+        }
+        if(Input.GetKeyDown(keybinds.toggleKeybindPanel))
+        {
+            Debug.Log("[InputManager] Toggle keybind panel key pressed");
+            OnToggleKeybindPanel?.Invoke();
         }
     }
 }

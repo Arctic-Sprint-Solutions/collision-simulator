@@ -55,6 +55,7 @@ public class SettingsController : MonoBehaviour
             { "Camera1",       () => InputManager.Instance.keybinds.camera1Key },
             { "Camera2",       () => InputManager.Instance.keybinds.camera2Key },
             { "Camera3",       () => InputManager.Instance.keybinds.camera3Key },
+            { "ToggleKeybindPanel", () => InputManager.Instance.keybinds.toggleKeybindPanel }
         };
 
         setKeyMap = new Dictionary<string, Action<KeyCode>>()
@@ -70,6 +71,8 @@ public class SettingsController : MonoBehaviour
             { "Camera1",       (key) => InputManager.Instance.keybinds.camera1Key = key },
             { "Camera2",       (key) => InputManager.Instance.keybinds.camera2Key = key },
             { "Camera3",       (key) => InputManager.Instance.keybinds.camera3Key = key },
+            { "ToggleKeybindPanel", (key) => InputManager.Instance.keybinds.toggleKeybindPanel = key }
+            
         };
     }
 
@@ -89,7 +92,8 @@ public class SettingsController : MonoBehaviour
             { "ZenMode",       root.Q<Button>("ZenModeKeybindButton") },
             { "Camera1",       root.Q<Button>("Camera1KeybindButton") },
             { "Camera2",       root.Q<Button>("Camera2KeybindButton") },
-            { "Camera3",       root.Q<Button>("Camera3KeybindButton") }
+            { "Camera3",       root.Q<Button>("Camera3KeybindButton") },
+            { "ToggleKeybindPanel", root.Q<Button>("ToggleKeybindPanelButton") }
         };
 
         foreach (var pair in actionButtonMap)

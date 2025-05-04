@@ -30,6 +30,12 @@ public class KeybindsController : MonoBehaviour
             InitializeUI();
             Debug.Log("[KeybindsController] UI initialized successfully.");
         }
+
+        if(InputManager.Instance != null)
+        {
+            InputManager.Instance.OnToggleKeybindPanel += ToggleKeybindsPanel;
+        }
+        
     }
 
     /// <summary>
