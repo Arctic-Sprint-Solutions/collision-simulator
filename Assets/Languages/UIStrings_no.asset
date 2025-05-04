@@ -344,6 +344,18 @@ MonoBehaviour:
     m_Localized: Gjem tastevalg
     m_Metadata:
       m_Items: []
+  - m_Id: 6305760563683328
+    m_Localized: Hovedkamera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305783309393920
+    m_Localized: "Roms\xF8ppelkamera"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305808152256512
+    m_Localized: Satellittkamera
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

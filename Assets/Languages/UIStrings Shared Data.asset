@@ -287,6 +287,18 @@ MonoBehaviour:
     m_Key: HideKeybindsLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 6305760563683328
+    m_Key: Camera1KeybindLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305783309393920
+    m_Key: Camera2KeybindLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305808152256512
+    m_Key: Camera3KeybindLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

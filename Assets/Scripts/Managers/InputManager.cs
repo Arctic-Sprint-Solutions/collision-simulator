@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     public event System.Action OnIncreaseTimescale;
     public event System.Action OnDecreaseTimescale;
     public event System.Action OnResetTimescale;
+    public event System.Action<int> OnCameraKeyPressed;
     #endregion
 
     /// <summary>
@@ -142,6 +143,21 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("[InputManager] Zen mode key pressed");
             uiManager?.ToggleZenMode();
+        }
+        if(Input.GetKeyDown(keybinds.camera1Key))
+        {
+            Debug.Log("[InputManager] Camera 1 key pressed");
+            OnCameraKeyPressed?.Invoke(0);
+        }
+        if(Input.GetKeyDown(keybinds.camera2Key))
+        {
+            Debug.Log("[InputManager] Camera 2 key pressed");
+            OnCameraKeyPressed?.Invoke(1);
+        }
+        if(Input.GetKeyDown(keybinds.camera3Key))
+        {
+            Debug.Log("[InputManager] Camera 3 key pressed");
+            OnCameraKeyPressed?.Invoke(2);
         }
     }
 }

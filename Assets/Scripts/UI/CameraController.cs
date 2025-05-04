@@ -29,6 +29,19 @@ public class CameraController : MonoBehaviour
             // Register CameraManager events
             CameraManager.OnCamerasUpdated += PopulateDropdown;
         }
+
+        if(InputManager.Instance != null)
+        {
+            InputManager.Instance.OnCameraKeyPressed += (index) =>
+            {
+                // Get the camera name based on the index
+                if (cameraKeys != null && index >= 0 && index < cameraKeys.Count)
+                {
+                    string selectedCameraName = cameraKeys[index];
+                    OnCameraChanged(selectedCameraName);
+                }
+            };
+        }
         
     }
 
@@ -121,6 +134,9 @@ public class CameraController : MonoBehaviour
         if (selectedIndex < 0) return;
 
         CameraManager.Instance.SetActiveCamera(selectedIndex);
+
+        // Update the dropdown value to reflect the selected camera
+        _cameraDropdown.value = selectedCameraName;
     }
 
     /// <summary>

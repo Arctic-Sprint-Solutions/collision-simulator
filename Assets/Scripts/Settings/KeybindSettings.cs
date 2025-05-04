@@ -15,4 +15,7 @@ public class KeybindSettings : ScriptableObject
     public KeyCode recordKey = KeyCode.T;
     public KeyCode saveKey = KeyCode.S;
     public KeyCode zenModeKey = KeyCode.Z;
+    public KeyCode camera1Key = KeyCode.Alpha1;
+    public KeyCode camera2Key = KeyCode.Alpha2;
+    public KeyCode camera3Key = KeyCode.Alpha3;
 }
