@@ -94,6 +94,7 @@ public class CameraManager : MonoBehaviour
 
         // Sort cameras by priority from highest to lowest
         cameras = cameras.OrderByDescending(c => c.Priority.Value).ToList();
+        
 
         Debug.Log($"Found {cameras.Count} Second check afterr list - Cinemachine cameras in the scene.");
     }

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
-using UnityEngine.Events; 
 
 /// <summary>
 /// Singleton class to manage persistent UI elements across scenes,
@@ -14,61 +13,41 @@ using UnityEngine.Events;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
+    /// <summary>
+    /// Singleton instance of the UIManager
+    /// </summary>
     public static UIManager Instance { get; private set; }
-
-    // Persistent UI elements
+    #region  Properties
+    /// <summary>
+    /// Reference to the shared UIDocument that contains the persistent UI elements.
+    /// </summary>
     [SerializeField] private UIDocument _sharedUIDocument;
-    [SerializeField] private KeybindSettings _keybindSettings;
-
+    /// <summary>
+    /// Dictionary to hold references to UI elements by name for easy access.
+    /// </summary>
+    private Dictionary<string, VisualElement> _uiElements = new Dictionary<string, VisualElement>();
+    #region UI Elements
     private VisualElement _root;
     private VisualElement _rootContainer;
     private VisualElement _navBar;
     private VisualElement _backToMenuButton;
     private VisualElement _collisionUI;
-    private Button _playPauseBtn;
-    private Button _restartBtn;
-    private VisualElement _speedToggleButton;
-    private Label _speedLabel;
-    private VisualElement _speedLeftArrow;
-    private VisualElement _speedRightArrow;
-    private DropdownField _cameraDropdown;
-    private VisualElement _cameraDropdownUI;
-
-    private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
-    private int _currentTimescaleIndex = 2;
-    private VisualElement _recordBtn;
-    private VisualElement _downloadBtn;
-    private VisualElement _keybindsEdge;
-    private ScrollView _keybindsPanel;
-    private VisualElement _toggleKeybindsPanel;
-    private Label _showKeybindsLabel;
-    private Label _hideKeybindsLabel;
-    private int _panelHeight = 200;
-
-    private bool isPaused = false;
+    #endregion
     private bool _isInitialized = false;
     private bool _isZenMode = false;
-
-       
-    public DropdownField CameraDropdown
-    {
-        get => _cameraDropdown;
-        set => _cameraDropdown = value;
-    }
-
-    public VisualElement CameraDropdownUI
-    {
-        get => _cameraDropdownUI;
-        set => _cameraDropdownUI = value;
-    }
-
     private enum BackButtonMode { MainMenu, PreviousScene }
     private BackButtonMode _currentBackButtonMode;
-
     private List<UILocalizer> registeredLocalizers = new List<UILocalizer>();
+    #endregion
+    #region  Events
+    public event System.Action OnCollisionSceneLoaded;
+    public event System.Action OnNonCollisionSceneLoaded;
+    public event System.Action OnApplyLocalization;
+    #endregion
 
     /// <summary>
-    /// Singleton instance of the UIManager
+    /// Awake method to initialize the UIManager.
+    /// It sets up the singleton instance, registers UI components, and applies localization.
     /// </summary>
     private async void Awake()
     {
@@ -81,29 +60,82 @@ public class UIManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // UI references
-        _root = _sharedUIDocument.rootVisualElement;
-        _rootContainer = _root.Q<VisualElement>("Root");
-        _navBar = _root.Q<VisualElement>("NavBar");
-        _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
-        _keybindsEdge  = _root.Q<VisualElement>("KeybindsEdge");
-        _keybindsPanel = _root.Q<ScrollView>("KeybindsPanel");
-        _showKeybindsLabel = _root.Q<Label>("ShowKeybinds");
-        _collisionUI = _root.Q<VisualElement>("CollisionUI");
+        // Initialize UI elements
+        InitializePersistentUI();
+        RegisterUIComponents();
 
         // Register for localization updates
         LocalizationManager.LocalizationUpdated += ApplyLocalization;
 
-        // Initialize UI elements
-        InitializePersistentUI();
-        InitializeCollisionUI();
-        InitializeRecordButtons();
-        InitializeCameraDropDownUI();
-        InitializeKeybindsHoverPanel();
-
         // Delay localization-dependent setup
         await SetupAsync();
     }
+
+    /// <summary>
+    /// Registers UI components from the shared UIDocument.
+    /// </summary>
+    private void RegisterUIComponents()
+    {
+        if(_collisionUI == null) return;
+
+        // Collision UI components
+        RegisterComponent("playPauseButton", _collisionUI.Q<Button>("playPauseButton"));
+        RegisterComponent("restartButton", _collisionUI.Q<Button>("restartButton"));
+        RegisterComponent("speedLabel", _collisionUI.Q<Label>("speedLabel"));
+        RegisterComponent("speedLeftArrow", _collisionUI.Q<VisualElement>("speedLeftArrow"));
+        RegisterComponent("speedRightArrow", _collisionUI.Q<VisualElement>("speedRightArrow"));
+
+        // Recording components
+        RegisterComponent("RecordButton", _collisionUI.Q<VisualElement>("RecordButton"));
+        RegisterComponent("DownloadButton", _collisionUI.Q<VisualElement>("DownloadButton"));
+
+        // Camera components
+        RegisterComponent("CameraDropdownContainer", _collisionUI.Q<VisualElement>("CameraDropdownContainer"));
+        RegisterComponent("CameraDropdown", _collisionUI.Q<DropdownField>("CameraDropdown"));
+
+        if(_root == null) return;
+
+        // Keybinds components
+        RegisterComponent("KeybindsEdge", _root.Q<VisualElement>("KeybindsEdge"));
+        RegisterComponent("KeybindsPanel", _root.Q<ScrollView>("KeybindsPanel"));
+        RegisterComponent("ToggleKeybindsPanel", _root.Q<VisualElement>("ToggleKeybindsPanel"));
+        RegisterComponent("ShowKeybinds", _root.Q<Label>("ShowKeybinds"));
+        RegisterComponent("HideKeybinds", _root.Q<Label>("HideKeybinds"));
+
+    }
+
+    /// <summary>
+    /// Registers a UI component by name and element and adds it to the dictionary.
+    /// </summary>
+    private void RegisterComponent(string name, VisualElement element)
+    {
+        if(element == null)
+        {
+            Debug.LogWarning($"UIManager: Attempted to register a null element for '{name}'");
+            return;
+        }
+        
+        // Add the element to the dictionary
+        _uiElements[name] = element;
+    }
+
+    /// <summary>
+    /// Retrieves a UI element by name and casts it to the specified type.
+    /// </summary>
+    /// <typeparam name="T">The type to cast the UI element to.</typeparam>
+    /// <param name="name">The name of the UI element to retrieve.</param>
+    /// <returns>The UI element cast to the specified type, or null if not found.</returns>
+    public T GetElement<T>(string name) where T : VisualElement
+    {
+        // Check if the element exists in the dictionary and cast it to the specified type
+        if (_uiElements.TryGetValue(name, out VisualElement element))
+        {
+            return element as T;
+        }
+
+        return null;
+    }
+
 
     /// <summary>
     /// Sets up the UIManager by waiting for the localization system to be ready
@@ -128,30 +160,40 @@ public class UIManager : MonoBehaviour
         _isInitialized = true;
     }
 
+    /// <summary>
+    /// Enables the UIManager by subscribing to scene load events.
+    /// </summary>
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
 
+    /// <summary>
+    /// Disables the UIManager by unsubscribing from scene load events.
+    /// </summary>
     private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
+    /// <summary>
+    /// Callback for when a new scene is loaded.
+    /// It checks if the scene is a collision scene and shows/hides the collision UI accordingly.
+    /// </summary>
+    /// <param name="scene">The loaded scene.</param>
+    /// <param name="mode">The load mode of the scene.</param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        HideRecordButton();
+        // Hide the collision UI by default when a new scene is loaded
         _collisionUI?.AddToClassList("d-none");
-        _keybindsEdge?.AddToClassList("d-none");
-        isPaused = false;
-        Time.timeScale = _timeScales[_currentTimescaleIndex];
 
-        // Hide play icon initially and show pause icon
-        _playPauseBtn?.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
-        _playPauseBtn?.Q<VisualElement>("pauseIcon")?.RemoveFromClassList("d-none");
-
-        // Sjekk om den nye scenen er merket som kollisjonsscene
+        // Check if the loaded scene contains a GameObject with the "CollisionScene" tag
         if (GameObject.FindWithTag("CollisionScene") != null)
         {
+            // Show the collision UI if the scene is a collision scene
             _collisionUI?.RemoveFromClassList("d-none");
-            _playPauseBtn.text = "Pause";
-            _keybindsEdge?.RemoveFromClassList("d-none");
-
-            ShowRecordButton();
+            
+            // Notify that a collision scene has been loaded
+            OnCollisionSceneLoaded?.Invoke();   
+        } 
+        else
+        {
+            // Notify that a non-collision scene has been loaded
+            OnNonCollisionSceneLoaded?.Invoke();
         }
     }
 
@@ -160,156 +202,28 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void InitializePersistentUI()
     {
+        // UI references
+        _root = _sharedUIDocument.rootVisualElement;
+        _rootContainer = _root.Q<VisualElement>("Root");
+        _navBar = _root.Q<VisualElement>("NavBar");
+        _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
+        _collisionUI = _root.Q<VisualElement>("CollisionUI");
+
         // Back-to-menu callback
         if (_backToMenuButton != null)
+        {
             _backToMenuButton.RegisterCallback<ClickEvent>(_ => OnBackToMainMenuClicked());
+        }
 
         HideNavBar();
-    }
-
-    private void InitializeCollisionUI()
-    {
-        if (_collisionUI == null) return;
-
-        // Play / Restart
-        _playPauseBtn  = _collisionUI.Q<Button>("playPauseButton");
-        _restartBtn    = _collisionUI.Q<Button>("restartButton");
-
-        _playPauseBtn.RemoveFromClassList("unity-button");
-        _restartBtn.RemoveFromClassList("unity-button");
-
-        _playPauseBtn.clicked += TogglePause;
-        _restartBtn.clicked += RestartScene;
-
-        // Hide play icon initially
-        _playPauseBtn.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
-
-        // Speed toggle
-        _speedToggleButton = _collisionUI.Q<VisualElement>("speedToggleButton");
-        _speedLabel        = _speedToggleButton.Q<Label>("speedLabel");
-        _speedLeftArrow    = _speedToggleButton.Q<VisualElement>("speedLeftArrow");
-        _speedRightArrow   = _speedToggleButton.Q<VisualElement>("speedRightArrow");
-
-        _speedLeftArrow.RegisterCallback<ClickEvent>(_ => DecreaseTimescale());
-        _speedRightArrow.RegisterCallback<ClickEvent>(_ => IncreaseTimescale());
-        _speedToggleButton.RegisterCallback<PointerDownEvent>(evt =>
-        {
-            if (evt.button == (int)MouseButton.MiddleMouse)
-                ResetTimescale();
-        });
-    }
-
-    /// <summary>
-    /// Initializes the UI elements for camera selection
-    /// </summary>
-    private void InitializeCameraDropDownUI()
-    {
-        if (_collisionUI == null) return;
-
-        // Get the camera dropdown and make it visible
-        _cameraDropdownUI = _collisionUI.Q<VisualElement>("CameraDropdownContainer");
-
-        if (_cameraDropdownUI == null)
-        {
-            Debug.LogError("UIManager: cameraDropdownUI not found in the UI.");
-            return;
-        }
-
-        _cameraDropdown = _cameraDropdownUI.Q<DropdownField>("CameraDropdown");
-        if (_cameraDropdown == null)
-        {
-            Debug.LogError("CameraController: Camera DropdownField is null.");
-            return;
-        }
-        
-        Debug.Log("CameraController: Camera Dropdown UI initialized successfully.");
-
-    }
-
-    private void InitializeKeybindsHoverPanel()
-    {
-        if (_collisionUI == null) return;
-
-        _keybindsEdge  = _root.Q<VisualElement>("KeybindsEdge");
-        _keybindsPanel = _root.Q<ScrollView>("KeybindsPanel");
-        
-        if (_keybindsEdge == null || _keybindsPanel == null)
-        {
-            Debug.LogError("KeybindsEdge or KeybindsPanel not found.");
-            return;
-        }
-
-        _showKeybindsLabel = _keybindsEdge.Q<Label>("ShowKeybinds");
-        _hideKeybindsLabel = _keybindsEdge.Q<Label>("HideKeybinds");
-        _toggleKeybindsPanel = _keybindsEdge.Q<VisualElement>("ToggleKeybindsPanel");
-
-        // Hide the keybinds panel initially
-        _keybindsPanel.RemoveFromClassList("visible");
-        _showKeybindsLabel.RemoveFromClassList("d-none");
-        _hideKeybindsLabel.AddToClassList("d-none");
-
-        // Register the click event for the keybinds edge
-        _toggleKeybindsPanel.RegisterCallback<ClickEvent>(evt =>
-        {
-            // Toggle visibility of the keybinds panel
-            if (_keybindsPanel.ClassListContains("visible"))
-            {
-                _keybindsPanel.RemoveFromClassList("visible");
-                _showKeybindsLabel.RemoveFromClassList("d-none");
-                _hideKeybindsLabel.AddToClassList("d-none");
-            }
-            else
-            {
-                PopulateKeybindsMenu();
-                _keybindsPanel.AddToClassList("visible");
-                _showKeybindsLabel.AddToClassList("d-none");
-                _hideKeybindsLabel.RemoveFromClassList("d-none");
-            }
-        });
-
-    }
-
-    private void PopulateKeybindsMenu()
-    {
-        _keybindsPanel.contentContainer.Clear();
-
-        // map each ScriptableObject field → your Localization Table key
-        var map = new Dictionary<string, string>
-        {
-            { nameof(_keybindSettings.pauseKey), "PauseKeybindLabel"},
-            { nameof(_keybindSettings.restartKey), "RestartKeybindLabel"},
-            { nameof(_keybindSettings.increaseSpeedKey), "IncreaseSpeedKeybindLabel" },
-            { nameof(_keybindSettings.decreaseSpeedKey), "DecreaseSpeedKeybindLabel" },
-            { nameof(_keybindSettings.resetSpeedKey), "ResetSpeedKeybindLabel" },
-            { nameof(_keybindSettings.recordKey), "RecordKeybindLabel"},
-            { nameof(_keybindSettings.saveKey), "DownloadKeybindLabel"},
-            { nameof(_keybindSettings.zenModeKey), "ZenKeybindLabel" }
-        };
-
-        var settingsType = typeof(KeybindSettings);
-        foreach (var key in map)
-        {
-            // get the KeyCode value via reflection
-            var fieldInfo = settingsType.GetField(key.Key);
-            var keyCode   = (KeyCode) fieldInfo.GetValue(_keybindSettings);
-
-            // fetch the localized description string
-            string description = LocalizedUIHelper.Get(key.Value);
-
-            // create a Label: “<Localized-description>: <KeyCode>”
-            var row = new Label($"{description}: {keyCode}");
-            row.AddToClassList("keybind-row");
-
-            _keybindsPanel.contentContainer.Add(row);
-        }
     }
 
     ///<summary>
     /// Applies localization to UI elements
     /// </summary>
-    /// <remarks>
     public void ApplyLocalization()
     {
+        // Check if the localization system is ready
         if (!_isInitialized || LocalizationManager.Instance == null || !LocalizationManager.Instance.IsLocalizationReady)
         {
             return;
@@ -319,12 +233,6 @@ public class UIManager : MonoBehaviour
 
         // Make sure LocalizedUIHelper re-fetches the StringTable freshly
         LocalizedUIHelper.ReloadTable();
-
-        if (_playPauseBtn != null)
-            LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
-
-        if (_restartBtn != null)
-            LocalizedUIHelper.Apply(_restartBtn, "RestartButton");
 
         if (_backToMenuButton != null)
         {
@@ -336,75 +244,13 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (_speedLabel != null)
-            LocalizedUIHelper.Apply(_speedLabel, "Speed_Label");
-
-        if (_recordBtn != null)
-        {
-            var label = _recordBtn.Q<Label>("RecordLabel");
-            if (label != null)
-            {
-                LocalizedUIHelper.Apply(label, "StartRecording");
-            }
-        }
-
-        if (_showKeybindsLabel != null)
-        {
-            var label = _showKeybindsLabel.Q<Label>("ShowKeybinds");
-            if (label != null)
-            {
-                LocalizedUIHelper.Apply(label, "ShowKeybindsLabel");
-            }
-        }
-
-        if (_hideKeybindsLabel != null)
-        {
-            var label = _hideKeybindsLabel.Q<Label>("HideKeybinds");
-            if (label != null)
-            {
-                LocalizedUIHelper.Apply(label, "HideKeybindsLabel");
-            }
-        }
-
-        UpdateSpeedButtonText();
-        UpdateRecordButton(isRecording: false);
-
         // Tell all localizers to reload too
         foreach (var localizer in registeredLocalizers)
         {
             if (localizer != null)
+            {
                 localizer.ReloadLocalization();
-        }
-    }
-
-
-    /// <summary>
-    /// Initializes the record and download buttons in the NavBar and sets up the click events.
-    /// The record button toggles recording state, and the download button saves the current recording
-    /// </summary> 
-    private void InitializeRecordButtons()
-    {
-        if(_collisionUI == null) return;
-        _recordBtn = _collisionUI.Q<VisualElement>("RecordButton");
-        
-        if(_recordBtn != null)
-        {
-            var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
-            var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
-            stopIcon?.AddToClassList("d-none"); // Hide stop icon initially
-            cameraIcon?.RemoveFromClassList("d-none"); // Show camera icon initially
-
-            // Register the click event for the record button
-            _recordBtn.RegisterCallback<ClickEvent>(evt => ToggleRecording());
-        }
-
-        _downloadBtn = _collisionUI.Q<VisualElement>("DownloadButton");
-        if(_downloadBtn != null) 
-        {   
-            Debug.Log("Download button found in NavBar");
-            _downloadBtn.RegisterCallback<ClickEvent>(evt => DownloadRecording());
-            // Hide the download button initially
-            _downloadBtn.AddToClassList("d-none");
+            }
         }
     }
 
@@ -414,17 +260,23 @@ public class UIManager : MonoBehaviour
     private void OnBackToMainMenuClicked()
     {
         if (_currentBackButtonMode == BackButtonMode.PreviousScene)
+        {
             SimulationManager.Instance.LoadScene(SimulationManager.Instance.PreviousScene);
+        }
         else
+        {
             SimulationManager.Instance.LoadScene("MainMenu");
+        }
     }
 
     /// <summary>
     /// Shows the NavBar element
     /// </summary>
+    /// <param name="goBack">If true, sets the back button to go back to the previous scene; otherwise, it goes to the main menu.</param>
     public void ShowNavBar(bool goBack = false)
     {
         if (_navBar == null) return;
+
         _navBar.style.display = DisplayStyle.Flex;
         _currentBackButtonMode = goBack ? BackButtonMode.PreviousScene : BackButtonMode.MainMenu;
         ApplyLocalization();
@@ -439,134 +291,8 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Show the record button in the UI
+    /// Toggles the Zen Mode, which hides the root container and all its children
     /// </summary>
-    private void ShowRecordButton()
-    {
-        if(_recordBtn != null)
-        {
-            _recordBtn.RemoveFromClassList("d-none");
-        }
-
-        if (_downloadBtn != null)
-        {
-            _downloadBtn.AddToClassList("d-none");
-        }
-    }
-
-    /// <summary>
-    /// Hides the record button in the UI
-    /// </summary>
-    private void HideRecordButton()
-    {
-        if(_recordBtn != null)
-        {
-            _recordBtn.AddToClassList("d-none");
-        }
-
-        if (_downloadBtn != null)
-        {
-            _downloadBtn.AddToClassList("d-none");
-        }
-    }
-
-    /// <summary>
-    /// Shows the download button in the UI
-    /// </summary>
-    public void ShowDownloadButton()
-    {
-        if (_downloadBtn != null)
-        {
-            _downloadBtn.RemoveFromClassList("d-none");
-            var label = _downloadBtn.Q<Label>("DownloadLabel");
-            if (label != null)
-            {
-                label.text = LocalizedUIHelper.Get("DownloadRecording");
-            }
-        }
-    }
-
-    /// <summary>
-    /// Hides the download button in the UI
-    /// </summary>
-    public void HideDownloadButton()
-    {
-        if (_downloadBtn != null)
-        {
-            _downloadBtn.AddToClassList("d-none");
-        }
-    }
-
-    /// <summary>
-    /// Updates the icon and the tect of the record button based on the recording state
-    /// </summary>
-    public void UpdateRecordButton(bool isRecording)
-    {
-        if (_recordBtn != null)
-        {
-            var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
-            var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
-            var label = _recordBtn.Q<Label>("RecordLabel");
-
-            if (stopIcon == null || cameraIcon == null)
-            {
-                Debug.LogWarning("[UIManager] One or more recording UI elements are missing.");
-                return;
-            }
-            if (isRecording)
-            {
-                stopIcon.RemoveFromClassList("d-none");
-                cameraIcon.AddToClassList("d-none");
-                label.text = LocalizedUIHelper.Get("StopRecording");
-            }
-            else
-            {
-                stopIcon.AddToClassList("d-none");
-                cameraIcon.RemoveFromClassList("d-none");
-                label.text = LocalizedUIHelper.Get("StartRecording");
-            }
-        }
-    }
-    
-
-    public void TogglePause()
-    {
-        // Toggle pause-status
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : _timeScales[_currentTimescaleIndex];
-        LocalizedUIHelper.Apply(_playPauseBtn, isPaused ? "Resume" : "Pause");
-
-        if( isPaused)
-        {
-            // Show the play icon and hide the pause icon when paused
-            _playPauseBtn.Q<VisualElement>("playIcon")?.RemoveFromClassList("d-none");
-            _playPauseBtn.Q<VisualElement>("pauseIcon")?.AddToClassList("d-none");
-        }
-        else
-        {
-            // Hide the play icon and show the pause icon when not paused
-            _playPauseBtn.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
-            _playPauseBtn.Q<VisualElement>("pauseIcon")?.RemoveFromClassList("d-none");
-        }
-    }
-
-    public void RestartScene()
-    {
-        // Restart gjeldende scene
-        isPaused = false;
-        //Setter timescale lik slider
-        Time.timeScale = _timeScales[_currentTimescaleIndex];;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    /// <summary>
-    /// Toggles the recording state using the VideoManager instance.
-    /// </summary>
-    private void ToggleRecording()
-    {
-        VideoManager.Instance?.ToggleRecording();
-    }
-
     public void ToggleZenMode()
     {
         _isZenMode = !_isZenMode;
@@ -575,46 +301,10 @@ public class UIManager : MonoBehaviour
         _rootContainer.style.display = _isZenMode ? DisplayStyle.None : DisplayStyle.Flex;
     }
 
-
     /// <summary>
-    /// Downloads the current recording using the VideoManager instance.
+    /// Registers a UILocalizer to receive localization updates.
     /// </summary>
-    private void DownloadRecording()
-    {
-        VideoManager.Instance?.SaveCurrentRecording();
-    }
-
-    public void IncreaseTimescale()
-    {
-        _currentTimescaleIndex = (_currentTimescaleIndex + 1) % _timeScales.Length;
-        Time.timeScale = _timeScales[_currentTimescaleIndex];
-        UpdateSpeedButtonText();
-    }
-
-    public void DecreaseTimescale()
-    {
-        _currentTimescaleIndex--;
-        if (_currentTimescaleIndex < 0) _currentTimescaleIndex = _timeScales.Length - 1;
-
-        Time.timeScale = _timeScales[_currentTimescaleIndex];
-        UpdateSpeedButtonText();
-    }
-
-    public void ResetTimescale()
-    {
-        _currentTimescaleIndex = System.Array.IndexOf(_timeScales, 1f);
-        Time.timeScale = 1f;
-        UpdateSpeedButtonText();
-
-    }
-
-    private void UpdateSpeedButtonText()
-    {
-        // "{0}x" portion comes from localization entry "Speed_Label"
-        float scale = _timeScales[_currentTimescaleIndex];
-        _speedLabel.text = string.Format(LocalizedUIHelper.Get("Speed_Label"), scale);
-    }
-
+    /// <param name="localizer">The UILocalizer instance to register.</param>
     public void RegisterLocalizer(UILocalizer localizer)
     {
         if (!registeredLocalizers.Contains(localizer))
@@ -623,21 +313,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Unregisters a UILocalizer to stop receiving localization updates.
+    /// </summary>
     private void OnDestroy()
     {
-
         // Unregister the callback to avoid memory leaks
         if (_backToMenuButton != null)
         {
             _backToMenuButton.UnregisterCallback<ClickEvent>(e => OnBackToMainMenuClicked());
-        }
-        if(_recordBtn != null)
-        {
-            _recordBtn.UnregisterCallback<ClickEvent>(e => ToggleRecording());
-        }
-        if(_downloadBtn != null)
-        {
-            _downloadBtn.UnregisterCallback<ClickEvent>(e => DownloadRecording());
         }
 
         // Unregister localization update callback
@@ -649,8 +333,9 @@ public class UIManager : MonoBehaviour
         _navBar = null;
         _backToMenuButton = null;
         _sharedUIDocument = null;
-        _recordBtn = null;
-        _downloadBtn = null;
+        _collisionUI = null;
+        _uiElements.Clear();
+        registeredLocalizers.Clear();
     }
 
 }
