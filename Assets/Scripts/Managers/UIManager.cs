@@ -42,7 +42,6 @@ public class UIManager : MonoBehaviour
     #region  Events
     public event System.Action OnCollisionSceneLoaded;
     public event System.Action OnNonCollisionSceneLoaded;
-    public event System.Action OnApplyLocalization;
     #endregion
 
     /// <summary>
