@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SatellitePreviewScene.unity
     guid: b61fbe65102844e6dbfc29b74ca1da21
   - enabled: 1
-    path: Assets/Scenes/AcrimSatScene.unity
+    path: Assets/Scenes/AcrimSatDebrisScene.unity
     guid: cf557412d9dc7a34f8c613da873f1599
   - enabled: 1
     path: Assets/Scenes/CubeSatCollisionScene.unity
