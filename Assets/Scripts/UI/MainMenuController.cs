@@ -10,7 +10,6 @@ using UnityEngine.UIElements;
 public class MainMenuController : MonoBehaviour
 {
   [SerializeField] private UIDocument menuUIDocument;
-  [SerializeField] private AppSettings appSettings;
   private VisualElement _rootElement;
 
   /// <summary>
@@ -27,33 +26,12 @@ public class MainMenuController : MonoBehaviour
         return;
     }
 
-    // Set the title and subtitle of the main menu
-    SetMainMenuTitle();
-
     // Use schedule to ensure UI is fully loaded
     _rootElement.schedule.Execute(() => {
         InitializeNavLinks();
     });
   }
 
-  /// <summary>
-  /// Sets the title and subtitle of the main menu
-  /// </summary>
-  private void SetMainMenuTitle()
-  {
-    if(appSettings == null)
-    {
-        Debug.LogError("AppSettings is not assigned.");
-        return;
-    }
-
-    // Find the title element and set its text
-    _rootElement.Q<Label>("MainTitle").text = appSettings.appName;
-  
-    // Find the subtitle element and set its text
-    _rootElement.Q<Label>("MainMenuSubtitle").text = appSettings.appSubtitle;
-    
-  }
 
   /// <summary>
   /// Initializes the navigation links in the main menu and adds click event listeners
