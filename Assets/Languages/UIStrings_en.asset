@@ -280,7 +280,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4001371014553600
-    m_Localized: Press any key
+    m_Localized: <New key>
     m_Metadata:
       m_Items: []
   - m_Id: 4000141915709440
@@ -333,6 +333,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4397003009155072
     m_Localized: Stop recording
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4802717544341504
+    m_Localized: Show keybinds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5237824931487744
+    m_Localized: Zen Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5265999417827328
+    m_Localized: Hide keybinds
     m_Metadata:
       m_Items: []
   references:

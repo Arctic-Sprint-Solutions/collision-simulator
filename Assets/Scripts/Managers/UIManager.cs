@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
+using UnityEngine.Events; 
 
 /// <summary>
 /// Singleton class to manage persistent UI elements across scenes,
@@ -17,8 +18,10 @@ public class UIManager : MonoBehaviour
 
     // Persistent UI elements
     [SerializeField] private UIDocument _sharedUIDocument;
+    [SerializeField] private KeybindSettings _keybindSettings;
 
     private VisualElement _root;
+    private VisualElement _rootContainer;
     private VisualElement _navBar;
     private VisualElement _backToMenuButton;
     private VisualElement _collisionUI;
@@ -35,9 +38,16 @@ public class UIManager : MonoBehaviour
     private int _currentTimescaleIndex = 2;
     private VisualElement _recordBtn;
     private VisualElement _downloadBtn;
+    private VisualElement _keybindsEdge;
+    private ScrollView _keybindsPanel;
+    private VisualElement _toggleKeybindsPanel;
+    private Label _showKeybindsLabel;
+    private Label _hideKeybindsLabel;
+    private int _panelHeight = 200;
 
     private bool isPaused = false;
     private bool _isInitialized = false;
+    private bool _isZenMode = false;
 
        
     public DropdownField CameraDropdown
@@ -73,8 +83,12 @@ public class UIManager : MonoBehaviour
 
         // UI references
         _root = _sharedUIDocument.rootVisualElement;
+        _rootContainer = _root.Q<VisualElement>("Root");
         _navBar = _root.Q<VisualElement>("NavBar");
         _backToMenuButton = _root.Q<VisualElement>("BackToMenuButton");
+        _keybindsEdge  = _root.Q<VisualElement>("KeybindsEdge");
+        _keybindsPanel = _root.Q<ScrollView>("KeybindsPanel");
+        _showKeybindsLabel = _root.Q<Label>("ShowKeybinds");
         _collisionUI = _root.Q<VisualElement>("CollisionUI");
 
         // Register for localization updates
@@ -85,6 +99,7 @@ public class UIManager : MonoBehaviour
         InitializeCollisionUI();
         InitializeRecordButtons();
         InitializeCameraDropDownUI();
+        InitializeKeybindsHoverPanel();
 
         // Delay localization-dependent setup
         await SetupAsync();
@@ -121,14 +136,20 @@ public class UIManager : MonoBehaviour
     {
         HideRecordButton();
         _collisionUI?.AddToClassList("d-none");
+        _keybindsEdge?.AddToClassList("d-none");
         isPaused = false;
         Time.timeScale = _timeScales[_currentTimescaleIndex];
+
+        // Hide play icon initially and show pause icon
+        _playPauseBtn?.Q<VisualElement>("playIcon")?.AddToClassList("d-none");
+        _playPauseBtn?.Q<VisualElement>("pauseIcon")?.RemoveFromClassList("d-none");
 
         // Sjekk om den nye scenen er merket som kollisjonsscene
         if (GameObject.FindWithTag("CollisionScene") != null)
         {
             _collisionUI?.RemoveFromClassList("d-none");
             _playPauseBtn.text = "Pause";
+            _keybindsEdge?.RemoveFromClassList("d-none");
 
             ShowRecordButton();
         }
@@ -205,6 +226,84 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private void InitializeKeybindsHoverPanel()
+    {
+        if (_collisionUI == null) return;
+
+        _keybindsEdge  = _root.Q<VisualElement>("KeybindsEdge");
+        _keybindsPanel = _root.Q<ScrollView>("KeybindsPanel");
+        
+        if (_keybindsEdge == null || _keybindsPanel == null)
+        {
+            Debug.LogError("KeybindsEdge or KeybindsPanel not found.");
+            return;
+        }
+
+        _showKeybindsLabel = _keybindsEdge.Q<Label>("ShowKeybinds");
+        _hideKeybindsLabel = _keybindsEdge.Q<Label>("HideKeybinds");
+        _toggleKeybindsPanel = _keybindsEdge.Q<VisualElement>("ToggleKeybindsPanel");
+
+        // Hide the keybinds panel initially
+        _keybindsPanel.RemoveFromClassList("visible");
+        _showKeybindsLabel.RemoveFromClassList("d-none");
+        _hideKeybindsLabel.AddToClassList("d-none");
+
+        // Register the click event for the keybinds edge
+        _toggleKeybindsPanel.RegisterCallback<ClickEvent>(evt =>
+        {
+            // Toggle visibility of the keybinds panel
+            if (_keybindsPanel.ClassListContains("visible"))
+            {
+                _keybindsPanel.RemoveFromClassList("visible");
+                _showKeybindsLabel.RemoveFromClassList("d-none");
+                _hideKeybindsLabel.AddToClassList("d-none");
+            }
+            else
+            {
+                PopulateKeybindsMenu();
+                _keybindsPanel.AddToClassList("visible");
+                _showKeybindsLabel.AddToClassList("d-none");
+                _hideKeybindsLabel.RemoveFromClassList("d-none");
+            }
+        });
+
+    }
+
+    private void PopulateKeybindsMenu()
+    {
+        _keybindsPanel.contentContainer.Clear();
+
+        // map each ScriptableObject field → your Localization Table key
+        var map = new Dictionary<string, string>
+        {
+            { nameof(_keybindSettings.pauseKey), "PauseKeybindLabel"},
+            { nameof(_keybindSettings.restartKey), "RestartKeybindLabel"},
+            { nameof(_keybindSettings.increaseSpeedKey), "IncreaseSpeedKeybindLabel" },
+            { nameof(_keybindSettings.decreaseSpeedKey), "DecreaseSpeedKeybindLabel" },
+            { nameof(_keybindSettings.resetSpeedKey), "ResetSpeedKeybindLabel" },
+            { nameof(_keybindSettings.recordKey), "RecordKeybindLabel"},
+            { nameof(_keybindSettings.saveKey), "DownloadKeybindLabel"},
+            { nameof(_keybindSettings.zenModeKey), "ZenKeybindLabel" }
+        };
+
+        var settingsType = typeof(KeybindSettings);
+        foreach (var key in map)
+        {
+            // get the KeyCode value via reflection
+            var fieldInfo = settingsType.GetField(key.Key);
+            var keyCode   = (KeyCode) fieldInfo.GetValue(_keybindSettings);
+
+            // fetch the localized description string
+            string description = LocalizedUIHelper.Get(key.Value);
+
+            // create a Label: “<Localized-description>: <KeyCode>”
+            var row = new Label($"{description}: {keyCode}");
+            row.AddToClassList("keybind-row");
+
+            _keybindsPanel.contentContainer.Add(row);
+        }
+    }
+
     ///<summary>
     /// Applies localization to UI elements
     /// </summary>
@@ -246,6 +345,24 @@ public class UIManager : MonoBehaviour
             if (label != null)
             {
                 LocalizedUIHelper.Apply(label, "StartRecording");
+            }
+        }
+
+        if (_showKeybindsLabel != null)
+        {
+            var label = _showKeybindsLabel.Q<Label>("ShowKeybinds");
+            if (label != null)
+            {
+                LocalizedUIHelper.Apply(label, "ShowKeybindsLabel");
+            }
+        }
+
+        if (_hideKeybindsLabel != null)
+        {
+            var label = _hideKeybindsLabel.Q<Label>("HideKeybinds");
+            if (label != null)
+            {
+                LocalizedUIHelper.Apply(label, "HideKeybindsLabel");
             }
         }
 
@@ -449,6 +566,15 @@ public class UIManager : MonoBehaviour
     {
         VideoManager.Instance?.ToggleRecording();
     }
+
+    public void ToggleZenMode()
+    {
+        _isZenMode = !_isZenMode;
+        if (_rootContainer == null) return;
+
+        _rootContainer.style.display = _isZenMode ? DisplayStyle.None : DisplayStyle.Flex;
+    }
+
 
     /// <summary>
     /// Downloads the current recording using the VideoManager instance.

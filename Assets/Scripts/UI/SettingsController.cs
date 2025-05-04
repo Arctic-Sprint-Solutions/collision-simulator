@@ -22,6 +22,7 @@ public class SettingsController : MonoBehaviour
 
     private bool waitingForKey = false;
     private Action<KeyCode> onKeySelected;
+    private Coroutine blinkCoroutine;
 
     private void Start()
     {
@@ -49,7 +50,8 @@ public class SettingsController : MonoBehaviour
             { "Download",      () => InputManager.Instance.keybinds.saveKey },
             { "IncreaseSpeed", () => InputManager.Instance.keybinds.increaseSpeedKey },
             { "DecreaseSpeed", () => InputManager.Instance.keybinds.decreaseSpeedKey },
-            { "ResetSpeed",    () => InputManager.Instance.keybinds.resetSpeedKey }
+            { "ResetSpeed",    () => InputManager.Instance.keybinds.resetSpeedKey },
+            { "ZenMode",       () => InputManager.Instance.keybinds.zenModeKey },
         };
 
         setKeyMap = new Dictionary<string, Action<KeyCode>>()
@@ -60,7 +62,8 @@ public class SettingsController : MonoBehaviour
             { "Download",      (key) => InputManager.Instance.keybinds.saveKey = key },
             { "IncreaseSpeed", (key) => InputManager.Instance.keybinds.increaseSpeedKey = key },
             { "DecreaseSpeed", (key) => InputManager.Instance.keybinds.decreaseSpeedKey = key },
-            { "ResetSpeed",    (key) => InputManager.Instance.keybinds.resetSpeedKey = key }
+            { "ResetSpeed",    (key) => InputManager.Instance.keybinds.resetSpeedKey = key },
+            { "ZenMode",       (key) => InputManager.Instance.keybinds.zenModeKey = key }
         };
     }
 
@@ -76,7 +79,8 @@ public class SettingsController : MonoBehaviour
             { "Download",      root.Q<Button>("DownloadKeybindButton") },
             { "IncreaseSpeed", root.Q<Button>("IncreaseSpeedKeybindButton") },
             { "DecreaseSpeed", root.Q<Button>("DecreaseSpeedKeybindButton") },
-            { "ResetSpeed",    root.Q<Button>("ResetSpeedKeybindButton") }
+            { "ResetSpeed",    root.Q<Button>("ResetSpeedKeybindButton") },
+            { "ZenMode",       root.Q<Button>("ZenModeKeybindButton") }
         };
 
         foreach (var pair in actionButtonMap)
@@ -117,11 +121,31 @@ public class SettingsController : MonoBehaviour
 
         waitingForKey = true;
 
-        string pressAnyKeyText = LocalizedUIHelper.Get("PressAnyKey");
-        button.text = pressAnyKeyText;
+        // Reset the button text to indicate waiting for input
+        button.text = "|";
+
+        // If a blink coroutine is already running, stop it
+        if( blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+        }
+        blinkCoroutine = StartCoroutine(BlinkText(button));
 
         onKeySelected = (key) =>
         {
+            waitingForKey = false;
+
+            // Stop the blinking coroutine when a key is selected
+            if (blinkCoroutine != null)
+            {
+                StopCoroutine(blinkCoroutine);
+                blinkCoroutine = null;
+            }
+
+            // Reset the element text color when done
+            button.AddToClassList("visible-text");
+            button.RemoveFromClassList("hidden-text");
+            
             if (IsKeyAlreadyBound(key, action))
             {
                 Debug.LogWarning($"[SettingsController] Key '{key}' already bound to another action.");
@@ -131,8 +155,40 @@ public class SettingsController : MonoBehaviour
 
             setKeyMap[action](key);
             button.text = key.ToString();
+
         };
     }
+
+    /// <summary>
+    /// Coroutine to blink the text of the button while waiting for a key input.
+    /// The text will alternate between visible and hidden states.
+    /// The text color is controlled by CSS classes "visible-text" and "hidden-text".
+    /// </summary>
+    /// <param name="element"></param>
+    private IEnumerator BlinkText(VisualElement element)
+    {
+        bool visible = true;
+
+        while (waitingForKey)
+        {
+            visible = !visible;
+
+            if (visible)
+            {
+                element.AddToClassList("visible-text");
+                element.RemoveFromClassList("hidden-text");
+            }
+            else
+            {
+                element.AddToClassList("hidden-text");
+                element.RemoveFromClassList("visible-text");
+            }
+
+            // Blink interval
+            yield return new WaitForSeconds(0.4f);
+        }
+    }
+
 
     private bool IsKeyAlreadyBound(KeyCode key, string currentAction)
     {
