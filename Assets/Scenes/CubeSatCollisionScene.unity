@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 371086061a395e84ca61885772eb7ad8, type: 2}
@@ -4017,62 +4017,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &308638137
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 308638139}
-  - component: {fileID: 308638138}
-  m_Layer: 0
-  m_Name: Camera Director
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!320 &308638138
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308638137}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 196249e2920a546339a3ea881cfe0ca2, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 3469217198451323899, guid: 196249e2920a546339a3ea881cfe0ca2, type: 2}
-    value: {fileID: 1015609678}
-  m_ExposedReferences:
-    m_References:
-    - c1f6e161fa8354779aff0e2c327edf43: {fileID: 761459419}
-    - e9c517916277444f788e7a27d0683491: {fileID: 1776449151}
-    - 19d1f163a590448b0b3cc3ee88da6a3f: {fileID: 1995906849}
-    - dd6f4e79668a94027aaa2158ccb22a75: {fileID: 1776449151}
-    - 1c29964921136451a9fae4fcacf1aece: {fileID: 1995906849}
---- !u!4 &308638139
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308638137}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 118.62, y: 1.4145827, z: -0.8840519}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &328417745
 Mesh:
   m_ObjectHideFlags: 0
@@ -37577,7 +37521,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1015609676}
   - {fileID: 764183620}
-  - {fileID: 308638139}
   - {fileID: 1098853093}
   - {fileID: 1778427843}
   - {fileID: 5798529407582466844}
