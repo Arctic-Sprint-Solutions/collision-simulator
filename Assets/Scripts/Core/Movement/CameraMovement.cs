@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Description: Camera script for About Scene to zoom out on start
-public class CameraScriptAboutScene : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     // Camera as the target for the script
     public Transform target;               
