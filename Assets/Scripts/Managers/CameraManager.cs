@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Unity.Cinemachine;
-using UnityEngine.Playables;
-
 
 /// <summary>
 /// Singleton class to handle camera selections
@@ -16,11 +14,6 @@ public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
     [SerializeField] CameraController cameraController;
-
-    /// <summary>
-    /// Reference to the PlayableDirector component for timeline control
-    /// </summary>
-    private PlayableDirector playableDirector;
 
     // Cameras - Cinemachine
     private List<CinemachineCamera> cameras = new List<CinemachineCamera>();
@@ -68,15 +61,7 @@ public class CameraManager : MonoBehaviour
 
         cameraController?.HideDropdown();
 
-        // Find the PlayableDirector component in the scene
-        playableDirector = FindFirstObjectByType<PlayableDirector>();
-
         FindCamerasInScene();
-        if(playableDirector == null)
-        {
-            // Set active camera to the first one in the list
-            SetActiveCamera(0);
-        }
         if(cameras.Count > 1)
         {
             NotifyUI();
@@ -111,17 +96,6 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Disables the PlayableDirector component
-    /// </summary>
-    public void DisablePlayableDirector()
-    {
-        if (playableDirector != null && playableDirector.enabled)
-        {
-            playableDirector.enabled = false;
-            Debug.Log("PlayableDirector disabled.");
-        }
-    }
 
     /// <summary>
     /// Sets the active camera based on index

@@ -12,15 +12,9 @@ using UnityEngine.UIElements;
 public class CameraController : MonoBehaviour
 {
     private List<string> cameraKeys = new();
-
     public delegate void CameraSelected(int index);
     private DropdownField _cameraDropdown;
     private VisualElement _cameraDropdownContainer;
-
-    /// <summary>
-    /// Flag to check if the initial value is set and prevent disabling the playable director
-    /// </summary>
-    private bool _isInititalValue = true;
 
     private void Start()
     {
@@ -38,6 +32,9 @@ public class CameraController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Initializes the UI elements for the camera dropdown.
+    /// </summary>
     private void InitializeUI()
     {
         _cameraDropdownContainer = UIManager.Instance.GetElement<VisualElement>("CameraDropdownContainer");
@@ -81,8 +78,6 @@ public class CameraController : MonoBehaviour
 
         UpdateDropdownOptions();
         ShowDropdown();
-
-        _isInititalValue = false;
     }
 
     /// <summary>
@@ -125,10 +120,6 @@ public class CameraController : MonoBehaviour
         Debug.Log($"CameraController: Selected Index: {selectedIndex}");
         if (selectedIndex < 0) return;
 
-        if(!_isInititalValue) 
-        {
-            CameraManager.Instance.DisablePlayableDirector();
-        }
         CameraManager.Instance.SetActiveCamera(selectedIndex);
     }
 
