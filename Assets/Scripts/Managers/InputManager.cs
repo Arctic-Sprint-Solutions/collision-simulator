@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
-    [SerializeField] CollisionUIController collisionUIController;
-    public KeybindSettings keybinds;
+    [SerializeField] public KeybindSettings keybinds;
     private UIManager uiManager;
     private bool isCollisionScene = false;
 
@@ -100,35 +99,30 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(keybinds.pauseKey))
         {
             Debug.Log("[InputManager] Pause key pressed");
-            // uiManager?.TogglePause();
             OnTogglePause?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.restartKey))
         {
             Debug.Log("[InputManager] Restart key pressed");
-            // uiManager?.RestartScene();
             OnRestartScene?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.increaseSpeedKey))
         {
             Debug.Log("[InputManager] Increase speed key pressed");
-            // uiManager?.IncreaseTimescale();
             OnIncreaseTimescale?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.decreaseSpeedKey))
         {
             Debug.Log("[InputManager] Decrease speed key pressed");
-            // uiManager?.DecreaseTimescale();
             OnDecreaseTimescale?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.resetSpeedKey))
         {
             Debug.Log("[InputManager] Reset speed key pressed");
-            // uiManager?.ResetTimescale();
             OnResetTimescale?.Invoke();
         }
 

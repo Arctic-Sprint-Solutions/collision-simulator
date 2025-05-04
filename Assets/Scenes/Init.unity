@@ -458,7 +458,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sharedUIDocument: {fileID: 190957098}
-  _keybindSettings: {fileID: 11400000, guid: 638816393c2a946e393ca8b39d175e17, type: 2}
 --- !u!114 &1258371971
 MonoBehaviour:
   m_ObjectHideFlags: 0
