@@ -299,6 +299,10 @@ MonoBehaviour:
     m_Key: Camera3KeybindLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 6528305141374976
+    m_Key: ToggleKeybindPanelLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

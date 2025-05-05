@@ -359,6 +359,10 @@ MonoBehaviour:
     m_Localized: Camera 3
     m_Metadata:
       m_Items: []
+  - m_Id: 6528305141374976
+    m_Localized: Show/Hide kyebinds
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
