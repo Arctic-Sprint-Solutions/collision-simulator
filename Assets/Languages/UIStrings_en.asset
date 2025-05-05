@@ -347,6 +347,18 @@ MonoBehaviour:
     m_Localized: Hide keybinds
     m_Metadata:
       m_Items: []
+  - m_Id: 6305760563683328
+    m_Localized: Camera 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305783309393920
+    m_Localized: Camera 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305808152256512
+    m_Localized: Camera 3
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

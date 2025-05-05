@@ -344,6 +344,18 @@ MonoBehaviour:
     m_Localized: Gjem tastevalg
     m_Metadata:
       m_Items: []
+  - m_Id: 6305760563683328
+    m_Localized: Kamera 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305783309393920
+    m_Localized: Kamera 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305808152256512
+    m_Localized: Kamera 3
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

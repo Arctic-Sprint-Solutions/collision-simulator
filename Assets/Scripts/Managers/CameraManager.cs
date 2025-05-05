@@ -91,6 +91,7 @@ public class CameraManager : MonoBehaviour
     {
         if (OnCamerasUpdated != null)
         {
+            Debug.Log("Notifying UI with camera names.");
             List<string> cameraNames = cameras.Select(c => c.name).ToList();
             OnCamerasUpdated.Invoke(cameraNames);
         }
