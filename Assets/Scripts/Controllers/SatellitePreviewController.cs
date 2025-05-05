@@ -20,7 +20,6 @@ public class SatellitePreviewController : MonoBehaviour
 {
     #region Variables
     [SerializeField] private UIDocument uiDocument;
-    [SerializeField] private AppSettings appSettings;
     private GameObject[] _satellitePrefabs;
     private VisualElement _rootElement;
     private Satellite _selectedSatellite;
@@ -170,20 +169,6 @@ public class SatellitePreviewController : MonoBehaviour
         _satelliteCollisionButton.RemoveFromClassList("unity-button");
         _satelliteCollisionButton.RemoveFromClassList("unity-text-element");
 
-        // Update button titles based on the app settings
-        var spaceDebrisTitle = GetCollisionTitle(SceneType.SpaceDebrisCollision);
-        var satelliteCollisionTitle = GetCollisionTitle(SceneType.SatelliteCollision);
-        Debug.Log("Space Debris Title: " + spaceDebrisTitle);
-        Debug.Log("Satellite Collision Title: " + satelliteCollisionTitle);
-        if(spaceDebrisTitle != null)
-        {
-            _spaceDebrisButton.text = spaceDebrisTitle;
-        }
-        if(satelliteCollisionTitle != null)
-        {
-            _satelliteCollisionButton.text = satelliteCollisionTitle;
-        }
-
         // Disable all buttons in the button container
         _spaceDebrisButton.SetEnabled(false);
         _satelliteCollisionButton.SetEnabled(false);
@@ -242,26 +227,6 @@ public class SatellitePreviewController : MonoBehaviour
         if(_selectedScene != null)
         {
             SimulationManager.Instance.LoadScene(_selectedScene);
-        }
-    }
-
-    /// <summary>
-    /// Gets the collision title for a given scene type from the app settings.
-    /// </summary>
-    /// <param name="sceneType">The type of the collision scene.</param>
-    /// <returns>The title for the collision scene, or null if not found.</returns>
-    private string GetCollisionTitle(SceneType sceneType)
-    {
-        if(appSettings == null)
-        {
-            return null;
-        }
-
-        if(sceneType == SceneType.SpaceDebrisCollision)
-        {   
-            return !string.IsNullOrEmpty(appSettings.debrisSceneTitle) ? appSettings.debrisSceneTitle : null;
-        } else {
-            return !string.IsNullOrEmpty(appSettings.satelliteSceneTitle) ? appSettings.satelliteSceneTitle : null;
         }
     }
 

@@ -18,7 +18,6 @@ public class SatelliteGridController : MonoBehaviour
 {
     // Reference to the satellite catalog ScriptableObject
     [SerializeField] private SatelliteCatalog satelliteCatalog;
-    [SerializeField] private AppSettings appSettings;
     // Reference to the UI Document
     private UIDocument uiDocument;
     // Reference to the StringTable for localization
@@ -52,37 +51,11 @@ public class SatelliteGridController : MonoBehaviour
             return;
         }
 
-        SetSceneTitle();
-
         await LocalizationSettings.InitializationOperation.Task;
 
         await LoadStringTableAsync();
 
         SetupSatelliteGrid();
-    }
-
-    /// <summary>
-    /// Set the title and subtitle of the scene.
-    /// </summary>
-    private void SetSceneTitle()
-    {
-      if(appSettings == null)
-      {
-          Debug.LogError("AppSettings is not assigned.");
-          return;
-      }
-
-      try
-      {
-        // Find the title element and set its text
-        _rootElement.Q<Label>("SceneTitle").text = appSettings.satelliteGridTitle;
-        // Find the subtitle element and set its text
-        _rootElement.Q<Label>("SceneSubtitle").text = appSettings.satelliteGridSubtitle;
-      }
-      catch (System.Exception e)
-      {
-          Debug.LogError($"Error setting scene title: {e.Message}");
-      }
     }
 
     private async Task LoadStringTableAsync()
@@ -207,8 +180,6 @@ public class SatelliteGridController : MonoBehaviour
     private void OnSatelliteSelected(Satellite satellite)
     {
         Debug.Log($"Satellite selected: {satellite.satelliteName}");
-        // SimulationManager.Instance.LoadScene(satellite.satelliteSceneName);
-        // SimulationManager.Instance.LoadScene("SatellitePreviewScene");
         SimulationManager.Instance.SelectSatellite(satellite);
     }
 
