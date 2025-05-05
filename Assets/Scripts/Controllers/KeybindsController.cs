@@ -30,6 +30,12 @@ public class KeybindsController : MonoBehaviour
             InitializeUI();
             Debug.Log("[KeybindsController] UI initialized successfully.");
         }
+
+        if(InputManager.Instance != null)
+        {
+            InputManager.Instance.OnToggleKeybindPanel += ToggleKeybindsPanel;
+        }
+        
     }
 
     /// <summary>
@@ -85,7 +91,10 @@ public class KeybindsController : MonoBehaviour
             { nameof(_keybindSettings.resetSpeedKey), "ResetSpeedKeybindLabel" },
             { nameof(_keybindSettings.recordKey), "RecordKeybindLabel"},
             { nameof(_keybindSettings.saveKey), "DownloadKeybindLabel"},
-            { nameof(_keybindSettings.zenModeKey), "ZenKeybindLabel" }
+            { nameof(_keybindSettings.zenModeKey), "ZenKeybindLabel" },
+            { nameof(_keybindSettings.camera1Key), "Camera1KeybindLabel" },
+            { nameof(_keybindSettings.camera2Key), "Camera2KeybindLabel" },
+            { nameof(_keybindSettings.camera3Key), "Camera3KeybindLabel" },
         };
 
         var settingsType = typeof(KeybindSettings);

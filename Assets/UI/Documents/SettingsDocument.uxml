@@ -43,6 +43,22 @@
                     <engine:Label name="ZenModeKeybindLabel" class="subtitle keybind-label" />
                     <engine:Button name="ZenModeKeybindButton" class="keybind-btn subtitle" />
                 </engine:VisualElement>
+                <engine:VisualElement name="ToggleKeybindPanelButtonContainer" class="keybind-container">
+                    <engine:Label name="ToggleKeybindPanelLabel" class="subtitle keybind-label" />
+                    <engine:Button name="ToggleKeybindPanelButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Camera1ButtonContainer" class="keybind-container">
+                    <engine:Label name="Camera1KeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="Camera1KeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Camera2ButtonContainer" class="keybind-container">
+                    <engine:Label name="Camera2KeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="Camera2KeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Camera3ButtonContainer" class="keybind-container">
+                    <engine:Label name="Camera3KeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="Camera3KeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:VisualElement name="LanguageContainer" style="flex-grow: 1; max-height: 161px; height: 204px; max-width: 1522px; width: 1598px; min-height: 130px;">
