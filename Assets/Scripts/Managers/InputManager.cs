@@ -8,9 +8,19 @@ using UnityEngine.SceneManagement;
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
-    public KeybindSettings keybinds;
+    [SerializeField] public KeybindSettings keybinds;
     private UIManager uiManager;
     private bool isCollisionScene = false;
+
+    #region Events
+    public event System.Action OnTogglePause;
+    public event System.Action OnRestartScene;
+    public event System.Action OnIncreaseTimescale;
+    public event System.Action OnDecreaseTimescale;
+    public event System.Action OnResetTimescale;
+    public event System.Action<int> OnCameraKeyPressed;
+    public event System.Action OnToggleKeybindPanel;
+    #endregion
 
     /// <summary>
     ///Locates UIManager, and subscribes to the scene loaded event.
@@ -91,31 +101,31 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(keybinds.pauseKey))
         {
             Debug.Log("[InputManager] Pause key pressed");
-            uiManager?.TogglePause();
+            OnTogglePause?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.restartKey))
         {
             Debug.Log("[InputManager] Restart key pressed");
-            uiManager?.RestartScene();
+            OnRestartScene?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.increaseSpeedKey))
         {
             Debug.Log("[InputManager] Increase speed key pressed");
-            uiManager?.IncreaseTimescale();
+            OnIncreaseTimescale?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.decreaseSpeedKey))
         {
             Debug.Log("[InputManager] Decrease speed key pressed");
-            uiManager?.DecreaseTimescale();
+            OnDecreaseTimescale?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.resetSpeedKey))
         {
             Debug.Log("[InputManager] Reset speed key pressed");
-            uiManager?.ResetTimescale();
+            OnResetTimescale?.Invoke();
         }
 
         if (Input.GetKeyDown(keybinds.recordKey))
@@ -134,6 +144,26 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("[InputManager] Zen mode key pressed");
             uiManager?.ToggleZenMode();
+        }
+        if(Input.GetKeyDown(keybinds.camera1Key))
+        {
+            Debug.Log("[InputManager] Camera 1 key pressed");
+            OnCameraKeyPressed?.Invoke(0);
+        }
+        if(Input.GetKeyDown(keybinds.camera2Key))
+        {
+            Debug.Log("[InputManager] Camera 2 key pressed");
+            OnCameraKeyPressed?.Invoke(1);
+        }
+        if(Input.GetKeyDown(keybinds.camera3Key))
+        {
+            Debug.Log("[InputManager] Camera 3 key pressed");
+            OnCameraKeyPressed?.Invoke(2);
+        }
+        if(Input.GetKeyDown(keybinds.toggleKeybindPanel))
+        {
+            Debug.Log("[InputManager] Toggle keybind panel key pressed");
+            OnToggleKeybindPanel?.Invoke();
         }
     }
 }

@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 371086061a395e84ca61885772eb7ad8, type: 2}
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 1
+    m_Value: 3
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -1716,69 +1716,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &41600500
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 41600501}
-  - component: {fileID: 41600502}
-  m_Layer: 0
-  m_Name: Camera Director
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &41600501
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41600500}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 118.62, y: 1.4145827, z: -0.8840519}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!320 &41600502
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41600500}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: d6857068500554227bdc3bdfd082959c, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -844373616315165908, guid: ec6448a6fa9c44d3f80e96df95b26602, type: 2}
-    value: {fileID: 1015609678}
-  - key: {fileID: -5818589255303189926, guid: d6857068500554227bdc3bdfd082959c, type: 2}
-    value: {fileID: 1015609678}
-  m_ExposedReferences:
-    m_References:
-    - e86681b6a945c4dbc86712237237fbae: {fileID: 14522040}
-    - f70257f637f9b401188b0d4a6c3d85e6: {fileID: 14522040}
-    - d854e838823ef411287293b2d4d62b87: {fileID: 964082654}
-    - 510f1bd7fc5224453b09a552ad8ee6ee: {fileID: 14522040}
-    - 5edeb033b803f400e8c856b45b19d228: {fileID: 2130434154}
-    - e727a5bf773fb4ecaa2718572ea423c7: {fileID: 964082654}
-    - 19ba1c824249f45a7a4c9f4883077cd1: {fileID: 964082654}
-    - d50e25c446e38478ca684aa54f2cbfd1: {fileID: 2130434154}
-    - cf71f2240e4e042bd8d96e9495c1d451: {fileID: 2130434154}
-    - 2672e4c4b12014b0cb471f88fc1d1598: {fileID: 14522040}
 --- !u!1 &41769208
 GameObject:
   m_ObjectHideFlags: 0
@@ -37221,7 +37158,7 @@ GameObject:
   - component: {fileID: 964082656}
   - component: {fileID: 964082657}
   m_Layer: 0
-  m_Name: Cubesat Camera
+  m_Name: Satellite Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37256,7 +37193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 2
+    m_Value: 1
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -39229,7 +39166,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 45
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -39255,8 +39192,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015609673}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0075777336, y: -0.18326086, z: -0.0014126688, w: 0.98303413}
-  m_LocalPosition: {x: 509.66, y: 193.01, z: 236.26001}
+  m_LocalRotation: {x: 0.09526602, y: -0.8606693, z: 0.10041852, w: 0.48998863}
+  m_LocalPosition: {x: 525.72003, y: 211.01001, z: 305.71985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81522,7 +81459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 1
-    m_Value: 3
+    m_Value: 2
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -81716,7 +81653,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1015609676}
   - {fileID: 168233271}
-  - {fileID: 41600501}
   - {fileID: 1778427843}
   - {fileID: 1098853093}
   - {fileID: 589886414}

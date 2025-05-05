@@ -12,33 +12,70 @@ using UnityEngine.UIElements;
 public class CameraController : MonoBehaviour
 {
     private List<string> cameraKeys = new();
-
     public delegate void CameraSelected(int index);
+    private DropdownField _cameraDropdown;
+    private VisualElement _cameraDropdownContainer;
+
+    private void Start()
+    {
+        if(UIManager.Instance != null) 
+        {   
+            InitializeUI();
+            Debug.Log("[CameraControlle] UI initialized successfully.");
+        }
+
+        if(CameraManager.Instance != null)
+        {
+            // Register CameraManager events
+            CameraManager.OnCamerasUpdated += PopulateDropdown;
+        }
+
+        if(InputManager.Instance != null)
+        {
+            InputManager.Instance.OnCameraKeyPressed += (index) =>
+            {
+                // Get the camera name based on the index
+                if (cameraKeys != null && index >= 0 && index < cameraKeys.Count)
+                {
+                    string selectedCameraName = cameraKeys[index];
+                    OnCameraChanged(selectedCameraName);
+                }
+            };
+        }
+        
+    }
 
     /// <summary>
-    /// Flag to check if the initial value is set and prevent disabling the playable director
+    /// Initializes the UI elements for the camera dropdown.
     /// </summary>
-    private bool _isInititalValue = true;
-
-
-    //When enabled - populates dropdown �I
-    private void OnEnable()
+    private void InitializeUI()
     {
-        Debug.Log("CameraController: OnEnable called. Initializing Camera Dropdown UI.");
-        CameraManager.OnCamerasUpdated += PopulateDropdown;
+        _cameraDropdownContainer = UIManager.Instance.GetElement<VisualElement>("CameraDropdownContainer");
+        _cameraDropdown = UIManager.Instance.GetElement<DropdownField>("CameraDropdown");
 
-        if (UIManager.Instance.CameraDropdown != null)
+        if(_cameraDropdown != null)
         {
-            Debug.Log("CameraController: Registering value changed callback for Camera Dropdown.");
             // Register the callback for when the camera dropdown value changes
-            UIManager.Instance.CameraDropdown.RegisterValueChangedCallback(evt => OnCameraChanged(evt.newValue));
+            _cameraDropdown.RegisterValueChangedCallback(evt => OnCameraChanged(evt.newValue));
         }
     }
+
 
     //When enabled - removes elements from dropdown �I
     private void OnDisable()
     {
-        CameraManager.OnCamerasUpdated -= PopulateDropdown;
+        // Unregister event listeners to prevent memory leaks
+        if (CameraManager.Instance != null)
+        {
+            CameraManager.OnCamerasUpdated -= PopulateDropdown;
+        }
+
+        // Unregister the value changed callback for the camera dropdown
+        if (_cameraDropdown != null)
+        {
+            _cameraDropdown.UnregisterValueChangedCallback(evt => OnCameraChanged(evt.newValue));
+        }
+
     }
 
     /// <summary>
@@ -48,14 +85,12 @@ public class CameraController : MonoBehaviour
     private void PopulateDropdown(List<string> cameraNames)
     {
         Debug.Log("CameraController: PopulateDropdown called with camera names: " + string.Join(", ", cameraNames));
-        // if (_cameraDropdown == null) return;
+        if (_cameraDropdown == null) return;
 
         cameraKeys = cameraNames;
 
         UpdateDropdownOptions();
         ShowDropdown();
-
-        _isInititalValue = false;
     }
 
     /// <summary>
@@ -63,7 +98,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void UpdateDropdownOptions()
     {
-        if (UIManager.Instance.CameraDropdown == null || cameraKeys == null) return;
+        if (_cameraDropdown == null || cameraKeys == null) return;
 
         List<string> localizedCameraNames = new List<string>();
         foreach (var name in cameraKeys)
@@ -72,9 +107,9 @@ public class CameraController : MonoBehaviour
             localizedCameraNames.Add(localizedName);
         }
 
-        UIManager.Instance.CameraDropdown.choices = localizedCameraNames;
-        UIManager.Instance.CameraDropdown.value = localizedCameraNames.FirstOrDefault();
-        UIManager.Instance.CameraDropdown.label = LocalizedUIHelper.Get("SelectCameraLabel");
+        _cameraDropdown.choices = localizedCameraNames;
+        _cameraDropdown.value = localizedCameraNames.FirstOrDefault();
+        _cameraDropdown.label = LocalizedUIHelper.Get("SelectCameraLabel");
     }
 
     /// <summary>
@@ -91,18 +126,17 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void OnCameraChanged(string selectedCameraName)
     {
-        if (cameraKeys == null || UIManager.Instance.CameraDropdown == null) return;
+        if (cameraKeys == null || _cameraDropdown == null) return;
 
         Debug.Log($"CameraController: OnCameraChanged called with selectedCameraName: {selectedCameraName}");
-        int selectedIndex = UIManager.Instance.CameraDropdown.choices.IndexOf(selectedCameraName);
+        int selectedIndex = _cameraDropdown.choices.IndexOf(selectedCameraName);
         Debug.Log($"CameraController: Selected Index: {selectedIndex}");
         if (selectedIndex < 0) return;
 
-        if(!_isInititalValue) 
-        {
-            CameraManager.Instance.DisablePlayableDirector();
-        }
         CameraManager.Instance.SetActiveCamera(selectedIndex);
+
+        // Update the dropdown value to reflect the selected camera
+        _cameraDropdown.value = selectedCameraName;
     }
 
     /// <summary>
@@ -110,10 +144,10 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public void HideDropdown()
     {
-        if (UIManager.Instance.CameraDropdownUI != null)
+        if (_cameraDropdownContainer != null)
         {
             // _cameraDropdown.style.display = DisplayStyle.None;
-            UIManager.Instance.CameraDropdownUI.AddToClassList("d-none");
+            _cameraDropdownContainer.AddToClassList("d-none");
         }
     }
 
@@ -122,10 +156,10 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public void ShowDropdown()
     {
-        if (UIManager.Instance.CameraDropdownUI != null)
+        if (_cameraDropdownContainer != null)
         {
-            // _cameraDropdown.style.display = DisplayStyle.Flex;
-            UIManager.Instance.CameraDropdownUI.RemoveFromClassList("d-none");
+            Debug.Log("CameraController: ShowDropdown called.");
+            _cameraDropdownContainer.RemoveFromClassList("d-none");
         }
     }
 }

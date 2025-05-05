@@ -52,6 +52,10 @@ public class SettingsController : MonoBehaviour
             { "DecreaseSpeed", () => InputManager.Instance.keybinds.decreaseSpeedKey },
             { "ResetSpeed",    () => InputManager.Instance.keybinds.resetSpeedKey },
             { "ZenMode",       () => InputManager.Instance.keybinds.zenModeKey },
+            { "Camera1",       () => InputManager.Instance.keybinds.camera1Key },
+            { "Camera2",       () => InputManager.Instance.keybinds.camera2Key },
+            { "Camera3",       () => InputManager.Instance.keybinds.camera3Key },
+            { "ToggleKeybindPanel", () => InputManager.Instance.keybinds.toggleKeybindPanel }
         };
 
         setKeyMap = new Dictionary<string, Action<KeyCode>>()
@@ -63,7 +67,12 @@ public class SettingsController : MonoBehaviour
             { "IncreaseSpeed", (key) => InputManager.Instance.keybinds.increaseSpeedKey = key },
             { "DecreaseSpeed", (key) => InputManager.Instance.keybinds.decreaseSpeedKey = key },
             { "ResetSpeed",    (key) => InputManager.Instance.keybinds.resetSpeedKey = key },
-            { "ZenMode",       (key) => InputManager.Instance.keybinds.zenModeKey = key }
+            { "ZenMode",       (key) => InputManager.Instance.keybinds.zenModeKey = key },
+            { "Camera1",       (key) => InputManager.Instance.keybinds.camera1Key = key },
+            { "Camera2",       (key) => InputManager.Instance.keybinds.camera2Key = key },
+            { "Camera3",       (key) => InputManager.Instance.keybinds.camera3Key = key },
+            { "ToggleKeybindPanel", (key) => InputManager.Instance.keybinds.toggleKeybindPanel = key }
+            
         };
     }
 
@@ -80,7 +89,11 @@ public class SettingsController : MonoBehaviour
             { "IncreaseSpeed", root.Q<Button>("IncreaseSpeedKeybindButton") },
             { "DecreaseSpeed", root.Q<Button>("DecreaseSpeedKeybindButton") },
             { "ResetSpeed",    root.Q<Button>("ResetSpeedKeybindButton") },
-            { "ZenMode",       root.Q<Button>("ZenModeKeybindButton") }
+            { "ZenMode",       root.Q<Button>("ZenModeKeybindButton") },
+            { "Camera1",       root.Q<Button>("Camera1KeybindButton") },
+            { "Camera2",       root.Q<Button>("Camera2KeybindButton") },
+            { "Camera3",       root.Q<Button>("Camera3KeybindButton") },
+            { "ToggleKeybindPanel", root.Q<Button>("ToggleKeybindPanelButton") }
         };
 
         foreach (var pair in actionButtonMap)
