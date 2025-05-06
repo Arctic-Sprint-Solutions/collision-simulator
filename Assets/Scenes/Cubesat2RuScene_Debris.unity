@@ -290,6 +290,7 @@ Transform:
   m_Children:
   - {fileID: 1879322333}
   - {fileID: 651022149}
+  - {fileID: 1061869057}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &419619505
@@ -9501,7 +9502,7 @@ GameObject:
   - component: {fileID: 651022153}
   - component: {fileID: 651022154}
   m_Layer: 0
-  m_Name: Satellite
+  m_Name: Satellite Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11177,6 +11178,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2324852235053927629, guid: 70e5a4941376e4d2caeb6443230c7efe, type: 3}
   m_PrefabInstance: {fileID: 1010077657}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1061869056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061869057}
+  - component: {fileID: 1061869058}
+  m_Layer: 0
+  m_Name: Static Camera (collision)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1061869057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061869056}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.49830446, y: 0.19375013, z: -0.09692728, w: 0.83949906}
+  m_LocalPosition: {x: -165.9, y: -24.9, z: -159}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 261430717}
+  m_LocalEulerAnglesHint: {x: -53.044, y: 44.569, z: -36.289}
+--- !u!114 &1061869058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061869056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 28.3
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &1103704249 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 65abc815bbe6a9b4e91d7e2792e9d218, type: 3}
@@ -11632,7 +11708,7 @@ GameObject:
   - component: {fileID: 1879322335}
   - component: {fileID: 1879322337}
   m_Layer: 0
-  m_Name: Debris
+  m_Name: Debris Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
