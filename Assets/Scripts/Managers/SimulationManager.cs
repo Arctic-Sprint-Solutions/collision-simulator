@@ -2,7 +2,6 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 
 #if UNITY_EDITOR
@@ -10,23 +9,11 @@ using UnityEditor;
 #endif
 
 /// <summary>
-/// Enum representing the different states of the simulation
-/// </summary>
-public enum SimulationState
-{
-  MainMenu,
-  SelectSatellite,
-  SatelliteSelected
-}
-
-/// <summary>
 /// Singleton class to manage the simulation state and handle scene transitions
 /// </summary>
 public class SimulationManager : MonoBehaviour
 {
   public static SimulationManager Instance { get; private set; }
-  private SimulationState currentState;
-  public SimulationState CurrentState => currentState;
 
   // Reference to the selected satellite (from the satellites grid scene)
   private Satellite _selectedSatellite;
@@ -34,6 +21,11 @@ public class SimulationManager : MonoBehaviour
 
   private string _previousScene;
   public string PreviousScene => _previousScene;
+
+  #region  Events
+  public event System.Action OnCollisionSceneLoaded;
+  public event System.Action OnNonCollisionSceneLoaded;
+  #endregion
 
 
   /// <summary>
@@ -66,29 +58,25 @@ public class SimulationManager : MonoBehaviour
   {
     Debug.Log("Scene loaded: " + scene.name);
 
-    // Handle scene-specific logic here
+    // Hide the collision UI by default when a new scene is loaded
+    UIManager.Instance.HideCollisionUI();
+    bool isCollisionScene = false;
+
+    // Handle scene-specific logic
     switch (scene.name)
     {
       case "MainMenu":
-        currentState = SimulationState.MainMenu;
         UIManager.Instance.HideNavBar();
         Time.timeScale = 1f;
         break;
+      case "AboutScene":
+      case "SatellitesGridScene":
       case "SettingsScene":
       case "SpaceDebrisScene":
-        UIManager.Instance.ShowNavBar();
-        UIManager.Instance.ShowNavBar();
-        break;
-      case "AboutScene":
-        UIManager.Instance.ShowNavBar(false);
-        break;
-      case "SatellitesGridScene":
-        currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
         Time.timeScale = 1f;
         break;
       case "SatellitePreviewScene":
-        currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar(true);
         Time.timeScale = 1f;
         break;
@@ -102,20 +90,30 @@ public class SimulationManager : MonoBehaviour
       case "IceSat2Scene_Debris":
       case "RosettaScene_Debris":
       case "RosettaScene_Satellite":
-        currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
-        break;
-      case "Init":
+        UIManager.Instance.ShowCollisionUI();
+        isCollisionScene = true;
         break;
       default:
-        Debug.LogWarning("Unknown scene loaded: " + scene.name);
         break;
+    }
+
+    // Notify listeners if the loaded scene is a collision scene or not
+    if(isCollisionScene)
+    {
+      OnCollisionSceneLoaded?.Invoke();
+    }
+    else
+    {
+      OnNonCollisionSceneLoaded?.Invoke();
     }
   }
 
+  /// <summary>
+  /// Loads a new scene and sets the previous scene
+  /// </summary>
   public void LoadScene(string sceneName)
   {
-    Debug.Log($"Loading scene: {sceneName}");
     _previousScene = SceneManager.GetActiveScene().name;
     SceneManager.LoadScene(sceneName);
   }

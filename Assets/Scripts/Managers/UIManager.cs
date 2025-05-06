@@ -39,10 +39,10 @@ public class UIManager : MonoBehaviour
     private BackButtonMode _currentBackButtonMode;
     private List<UILocalizer> registeredLocalizers = new List<UILocalizer>();
     #endregion
-    #region  Events
-    public event System.Action OnCollisionSceneLoaded;
-    public event System.Action OnNonCollisionSceneLoaded;
-    #endregion
+    // #region  Events
+    // public event System.Action OnCollisionSceneLoaded;
+    // public event System.Action OnNonCollisionSceneLoaded;
+    // #endregion
 
     /// <summary>
     /// Awake method to initialize the UIManager.
@@ -160,43 +160,6 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Enables the UIManager by subscribing to scene load events.
-    /// </summary>
-    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
-
-    /// <summary>
-    /// Disables the UIManager by unsubscribing from scene load events.
-    /// </summary>
-    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
-
-    /// <summary>
-    /// Callback for when a new scene is loaded.
-    /// It checks if the scene is a collision scene and shows/hides the collision UI accordingly.
-    /// </summary>
-    /// <param name="scene">The loaded scene.</param>
-    /// <param name="mode">The load mode of the scene.</param>
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Hide the collision UI by default when a new scene is loaded
-        _collisionUI?.AddToClassList("d-none");
-
-        // Check if the loaded scene contains a GameObject with the "CollisionScene" tag
-        if (GameObject.FindWithTag("CollisionScene") != null)
-        {
-            // Show the collision UI if the scene is a collision scene
-            _collisionUI?.RemoveFromClassList("d-none");
-            
-            // Notify that a collision scene has been loaded
-            OnCollisionSceneLoaded?.Invoke();   
-        } 
-        else
-        {
-            // Notify that a non-collision scene has been loaded
-            OnNonCollisionSceneLoaded?.Invoke();
-        }
-    }
-
-    /// <summary>
     /// Initializes the persistent UI elements
     /// </summary>
     private void InitializePersistentUI()
@@ -287,6 +250,26 @@ public class UIManager : MonoBehaviour
     public void HideNavBar()
     {
         _navBar.style.display = DisplayStyle.None;
+    }
+
+    /// <summary>
+    /// Shows the Collision UI element
+    /// </summary>
+    public void ShowCollisionUI()
+    {
+        if (_collisionUI == null) return;
+
+        _collisionUI.RemoveFromClassList("d-none");
+    }
+
+    /// <summary>
+    /// Hides the Collision UI element
+    /// </summary>
+    public void HideCollisionUI()
+    {
+        if (_collisionUI == null) return;
+
+        _collisionUI.AddToClassList("d-none");
     }
 
     /// <summary>

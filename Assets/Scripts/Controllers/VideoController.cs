@@ -16,11 +16,11 @@ public class VideoController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        if(UIManager.Instance != null) 
+        if(SimulationManager.Instance != null) 
         {
-            // Register UIManager events
-            UIManager.Instance.OnCollisionSceneLoaded += InitializeCollisionScene;
-            UIManager.Instance.OnNonCollisionSceneLoaded += InitializeNonCollisionScene;
+            // Register SimulationManager events
+            SimulationManager.Instance.OnCollisionSceneLoaded += InitializeCollisionScene;
+            SimulationManager.Instance.OnNonCollisionSceneLoaded += InitializeNonCollisionScene;
             
             InitializeUI();
             Debug.Log("[VideoController] UI initialized successfully.");
@@ -42,11 +42,11 @@ public class VideoController : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        if(UIManager.Instance != null) 
+        if(SimulationManager.Instance != null) 
         {
-            // Unregister UIManager events
-            UIManager.Instance.OnCollisionSceneLoaded -= ShowRecordButton;
-            UIManager.Instance.OnNonCollisionSceneLoaded -= HideRecordButton;
+            // Unregister SimulationManager events
+            SimulationManager.Instance.OnCollisionSceneLoaded -= ShowRecordButton;
+            SimulationManager.Instance.OnNonCollisionSceneLoaded -= HideRecordButton;
         }
 
         // Unregister VideoManager events
