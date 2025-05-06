@@ -89,21 +89,21 @@ public class SimulationManager : MonoBehaviour
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar(true);
         Time.timeScale = 1f;
-
         break;
       case "CubeSatCollisionScene":
-      case "Cubesat2RuScene":
+      case "Cubesat2RuScene_Debris":
+      case "Cubesat2RuScene_Satellite":
       case "RosettaCollisionScene":
       case "AuraSatColllisionScene":
       case "IceSat2CollisionScene":
       case "AuraSatColllisionSceneParticle":
       case "RosettaDebrisCollisionScene":
+      case "AcrimSatScene_Debris":
+      case "AcrimSatScene_Satellite":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
-
         break;
       case "Init":
-
         break;
       default:
         Debug.LogWarning("Unknown scene loaded: " + scene.name);
