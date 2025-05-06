@@ -2,6 +2,8 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -32,6 +34,7 @@ public class SimulationManager : MonoBehaviour
 
   private string _previousScene;
   public string PreviousScene => _previousScene;
+
 
   /// <summary>
   /// Initializes the singleton instance and subscribes to the scene loaded event
@@ -72,34 +75,33 @@ public class SimulationManager : MonoBehaviour
         Time.timeScale = 1f;
         break;
       case "SettingsScene":
-        UIManager.Instance.ShowNavBar();
-        break;
       case "SpaceDebrisScene":
         UIManager.Instance.ShowNavBar();
+        UIManager.Instance.ShowNavBar();
         break;
-        case "AboutScene":
+      case "AboutScene":
         UIManager.Instance.ShowNavBar(false);
         break;
-        case "SatellitesGridScene":
+      case "SatellitesGridScene":
         currentState = SimulationState.SelectSatellite;
         UIManager.Instance.ShowNavBar();
         Time.timeScale = 1f;
         break;
-        case "SatellitePreviewScene":
+      case "SatellitePreviewScene":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar(true);
         Time.timeScale = 1f;
         break;
-      case "CubeSatCollisionScene":
-      case "Cubesat2RuScene_Debris":
-      case "Cubesat2RuScene_Satellite":
-      case "RosettaCollisionScene":
-      case "AuraSatColllisionScene":
-      case "IceSat2CollisionScene":
-      case "AuraSatColllisionSceneParticle":
-      case "RosettaDebrisCollisionScene":
       case "AcrimSatScene_Debris":
       case "AcrimSatScene_Satellite":
+      case "AuraSatScene_Debris":
+      case "AuraSatScene_Satellite":
+      case "CubesatScene_Debris":
+      case "Cubesat2RuScene_Debris":
+      case "Cubesat2RuScene_Satellite":
+      case "IceSat2Scene_Debris":
+      case "RosettaScene_Debris":
+      case "RosettaScene_Satellite":
         currentState = SimulationState.SatelliteSelected;
         UIManager.Instance.ShowNavBar();
         break;

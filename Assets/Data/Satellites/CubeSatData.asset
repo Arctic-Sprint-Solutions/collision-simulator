@@ -19,5 +19,5 @@ MonoBehaviour:
   launchYear: 2020
   prefabName: Cubesat1
   previewImage: {fileID: 21300000, guid: c2288ab4e49144b7fbb655029b3f1959, type: 3}
-  debrisSceneName: CubeSatCollisionScene
-  satelliteSceneName: RosettaCollisionScene
+  debrisSceneName: CubesatScene_Debris
+  satelliteSceneName: RosettaScene_Satellite
