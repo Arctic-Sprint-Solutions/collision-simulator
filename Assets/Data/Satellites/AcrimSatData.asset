@@ -19,5 +19,5 @@ MonoBehaviour:
   launchYear: 1989
   prefabName: acrimsat_LP
   previewImage: {fileID: 21300000, guid: 6b0a8a271aa4342029a1f732a2bdb368, type: 3}
-  debrisSceneName: 
-  satelliteSceneName: 
+  debrisSceneName: AcrimSatScene_Debris
+  satelliteSceneName: AcrimSatScene_Satellite

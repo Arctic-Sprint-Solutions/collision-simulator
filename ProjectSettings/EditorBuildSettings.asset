@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SatellitePreviewScene.unity
     guid: b61fbe65102844e6dbfc29b74ca1da21
   - enabled: 1
-    path: Assets/Scenes/AcrimSatScene.unity
+    path: Assets/Scenes/AcrimSatScene_Debris.unity
     guid: cf557412d9dc7a34f8c613da873f1599
   - enabled: 1
     path: Assets/Scenes/CubeSatCollisionScene.unity
@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/Scenes/IceSat2CollisionScene.unity
     guid: a1d407a6526674c4ab684792f27c8960
   - enabled: 1
-    path: Assets/Scenes/Cubesat2RuScene.unity
+    path: Assets/Scenes/Cubesat2RuScene_Debris.unity
     guid: b1e9ed4da454cbf45939270a52689e36
   - enabled: 1
     path: Assets/Scenes/SettingsScene.unity
@@ -50,6 +50,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AboutScene.unity
     guid: bf711f132c974a24db7a0079b9d674c1
+  - enabled: 1
+    path: Assets/Scenes/Cubesat2RuScene_Satellite.unity
+    guid: 4528c2df94d5de449aa9fc765181e40b
+  - enabled: 1
+    path: Assets/Scenes/AcrimSatScene_Satellite.unity
+    guid: 8fdc03e1d011d0d498c6237695e3f525
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ca5b5e433f3804bd087f22a99304d6c9, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

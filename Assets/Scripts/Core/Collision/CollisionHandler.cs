@@ -63,6 +63,7 @@ public class CollisionHandler : MonoBehaviour
     /// <param name="other">The collider that triggered this event.</param>
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Triggered");
         HandleCollision("trigger with", other.gameObject);
     }
 
