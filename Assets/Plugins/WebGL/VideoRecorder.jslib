@@ -29,7 +29,8 @@ mergeInto(LibraryManager.library, {
             console.log("Found canvas:", canvas);
             
             // Create a stream from the canvas
-            var stream = canvas.captureStream(30); // 30 FPS
+            var stream = canvas.captureStream(60); // 60 FPS
+            window.unityRecorder.stream = stream;
             
             // Create MediaRecorder instance
             var recorder;
@@ -55,7 +56,7 @@ mergeInto(LibraryManager.library, {
             };
             
             // Start recording
-            recorder.start(100); // collect 100ms chunks
+            recorder.start(1000); // 1 second timeslice
             window.unityRecorder.mediaRecorder = recorder;
             console.log("Recording started");
             return true;
@@ -69,6 +70,13 @@ mergeInto(LibraryManager.library, {
             window.unityRecorder.mediaRecorder.state !== "recording") {
             console.error("Not recording");
             return false;
+        }
+
+        // Clean up tracks to release resources
+        if (window.unityRecorder.stream) {
+            window.unityRecorder.stream.getTracks().forEach(track => {
+                track.stop();
+            });
         }
         
         try {
@@ -99,6 +107,9 @@ mergeInto(LibraryManager.library, {
             a.href = url;
             a.download = "unity_recording_" + new Date().toISOString().replace(/[:.]/g, '-') + ".webm";
             a.click();
+
+            // Call back to Unity with the video URL
+            SendMessage("VideoManager", "OnRecordingFinished", url);
             
             // Clean up
             window.URL.revokeObjectURL(url);
