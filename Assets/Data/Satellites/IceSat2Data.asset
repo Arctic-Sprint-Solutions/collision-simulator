@@ -19,5 +19,5 @@ MonoBehaviour:
   launchYear: 2018
   prefabName: icesat
   previewImage: {fileID: 21300000, guid: 9bacb9dfcbac5de4089599a9fb0ac24d, type: 3}
-  debrisSceneName: IceSat2CollisionScene
+  debrisSceneName: IceSat2Scene_Debris
   satelliteSceneName: 
