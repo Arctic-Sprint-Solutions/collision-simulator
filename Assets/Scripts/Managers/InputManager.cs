@@ -1,16 +1,13 @@
+// Description: The InputManager class handles user input and triggers corresponding events
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 
-///<summary>
-///Handles inputs based on the SceneTag.
-///<summary>
+/// <summary>
+/// Singleton class to manage user input and trigger corresponding events.
+/// </summary>
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
     [SerializeField] public KeybindSettings keybinds;
-    private UIManager uiManager;
-    private bool isCollisionScene = false;
 
     #region Events
     public event System.Action OnTogglePause;
@@ -23,7 +20,7 @@ public class InputManager : MonoBehaviour
     #endregion
 
     /// <summary>
-    ///Locates UIManager, and subscribes to the scene loaded event.
+    /// Sets up the singleton instance and ensures that only one instance of InputManager exists.
     /// <summary>
     private void Awake()
     {
@@ -35,61 +32,20 @@ public class InputManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        uiManager = FindFirstObjectByType<UIManager>();
-        if (uiManager == null)
-        {
-            Debug.LogError("UIManager not found in the scene.");
-            enabled = false;
-            return;
-        }
-
-
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     /// <summary>
-    ///Unsubscribes from the scene loaded event when the object is destroyed.
-    /// <summary>
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    /// <summary>
-    ///When scene is loaded, collect SceneTag and handles which keybinds are availible. 
-    ///Handles scene-specific logic when a new scene is loaded.
-    /// <summary>
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        GameObject tagObj = GameObject.Find("SceneTag");
-        if (tagObj != null && tagObj.CompareTag("CollisionScene"))
-        {
-            isCollisionScene = true;
-            Debug.Log($"[InputManager] Entered collision scene: {scene.name}");
-        }
-        else
-        {
-            isCollisionScene = false;
-            Debug.Log($"[InputManager] Entered non-collision scene: {scene.name}");
-        }
-    }
-
-    /// <summary>
-    ///Monitors keypresses according to scene, and manages logic.
-    /// <summary>
+    /// Update is called once per frame. Checks if the current scene is a collision scene 
+    /// and calls the collision scene input handler.
+    /// </summary>
     private void Update()
     {
         if (keybinds == null) return;
 
-        if (isCollisionScene)
+        // Check if the current scene is a collision scene
+        if (SimulationManager.Instance?.IsCollisionScene == true)
         {
             HandleCollisionSceneInputs();
-        }
-        else
-        {
-            return;
         }
     }
 
@@ -143,7 +99,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(keybinds.zenModeKey))
         {
             Debug.Log("[InputManager] Zen mode key pressed");
-            uiManager?.ToggleZenMode();
+            UIManager.Instance?.ToggleZenMode();
         }
         if(Input.GetKeyDown(keybinds.camera1Key))
         {
