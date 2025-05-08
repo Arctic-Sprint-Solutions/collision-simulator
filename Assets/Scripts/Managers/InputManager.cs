@@ -122,4 +122,15 @@ public class InputManager : MonoBehaviour
             OnToggleKeybindPanel?.Invoke();
         }
     }
+
+    /// <summary>
+    /// Cleans up the singleton instance when the object is destroyed.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 }
