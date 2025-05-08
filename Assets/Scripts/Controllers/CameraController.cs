@@ -142,9 +142,9 @@ public class CameraController : MonoBehaviour
             CameraManager.Instance.SetActiveCamera(selectedIndex);
             // Find the name of the selected camera using the index
             string selectedCameraName = LocalizedUIHelper.Get(cameraKeys[selectedIndex]);
-            if (selectedCameraName == null)
+            if (string.IsNullOrEmpty(selectedCameraName))
             {
-                Debug.LogError($"CameraController: Camera name not found for index {selectedIndex}");
+                Debug.LogError($"CameraController: Camera name is null or empty for index {selectedIndex}");
                 return;
             }
             // Update the dropdown value to reflect the selected camera;
