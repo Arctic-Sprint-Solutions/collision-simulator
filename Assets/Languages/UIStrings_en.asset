@@ -103,10 +103,10 @@ MonoBehaviour:
       between satellites and space debris. Developed using the Unity game engine
       and Blender for 3D modeling, Orbital Watch provides a visual representation
       of collisions in space. Satellite models have been imported from NASAs publicly
-      available 3D model library.\n\n\uFFFD Show students the growing challenge of
-      space debris \n\uFFFD Observe collisions from different angles and how they
-      affect various satellites  \n\uFFFD Learn how space debris is a growing concern
-      and why further research is needed"
+      available 3D model library.\n\n- Show students the growing challenge of space
+      debris \n- Observe collisions from different angles and how they affect various
+      satellites  \n- Learn how space debris is a growing concern and why further
+      research is needed"
     m_Metadata:
       m_Items: []
   - m_Id: 2645027531513856

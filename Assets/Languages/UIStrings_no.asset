@@ -83,10 +83,10 @@ MonoBehaviour:
       enkle kollisjoner mellom satellitter og roms\xF8ppel. Utviklet med Unity-spillmotoren
       og Blender for 3D-modellering, gir Orbital Watch en visuell fremstilling av
       kollisjoner i verdensrommet. Satellittmodeller er importert fra NASAs offentlig
-      tilgjengelige 3D-modellbibliotek.\n\n\uFFFD Vis studenter den \xF8kende utfordringen
-      med roms\xF8ppel\n\uFFFD Observer kollisjoner fra forskjellige vinkler og hvordan
-      de p\xE5virker ulike satellitter\n\uFFFD L\xE6r hvorfor roms\xF8ppel er en
-      voksende bekymring og hvorfor videre forskning er n\xF8dvendig"
+      tilgjengelige 3D-modellbibliotek.\n\n- Vis studenter den \xF8kende utfordringen
+      med roms\xF8ppel\n- Observer kollisjoner fra forskjellige vinkler og hvordan
+      de p\xE5virker ulike satellitter\n- L\xE6r hvorfor roms\xF8ppel er en voksende
+      bekymring og hvorfor videre forskning er n\xF8dvendig"
     m_Metadata:
       m_Items: []
   - m_Id: 2645022120861696
