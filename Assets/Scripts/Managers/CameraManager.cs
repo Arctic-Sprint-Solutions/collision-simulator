@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using Unity.Cinemachine;
 
 /// <summary>
-/// Singleton class to handle camera selections
+/// Singleton class to find and manage all Cinemachine cameras in the scene.
 /// <summary>
 public class CameraManager : MonoBehaviour
 {
