@@ -32,15 +32,7 @@ public class CameraController : MonoBehaviour
 
         if(InputManager.Instance != null)
         {
-            InputManager.Instance.OnCameraKeyPressed += (index) =>
-            {
-                // Get the camera name based on the index
-                if (cameraKeys != null && index >= 0 && index < cameraKeys.Count)
-                {
-                    string selectedCameraName = cameraKeys[index];
-                    OnCameraChanged(selectedCameraName);
-                }
-            };
+            InputManager.Instance.OnCameraKeyPressed += (index) => OnCameraChanged(index);
         }
         
     }
@@ -98,6 +90,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void UpdateDropdownOptions()
     {
+        Debug.Log("CameraController: UpdateDropdownOptions called.");
         if (_cameraDropdown == null || cameraKeys == null) return;
 
         List<string> localizedCameraNames = new List<string>();
@@ -127,16 +120,43 @@ public class CameraController : MonoBehaviour
     private void OnCameraChanged(string selectedCameraName)
     {
         if (cameraKeys == null || _cameraDropdown == null) return;
-
-        Debug.Log($"CameraController: OnCameraChanged called with selectedCameraName: {selectedCameraName}");
+        
+        // Find the index of the selected camera name in the cameraKeys list
         int selectedIndex = _cameraDropdown.choices.IndexOf(selectedCameraName);
-        Debug.Log($"CameraController: Selected Index: {selectedIndex}");
         if (selectedIndex < 0) return;
 
         CameraManager.Instance.SetActiveCamera(selectedIndex);
 
         // Update the dropdown value to reflect the selected camera
         _cameraDropdown.value = selectedCameraName;
+    }
+
+    /// <summary>
+    /// Overloaded method to handle camera selection by index instead of name
+    /// <param name="selectedIndex">The selected camera index in the camera dropdown UI.</param>
+    /// </summary>
+    private void OnCameraChanged(int selectedIndex)
+    {
+        if (cameraKeys == null || _cameraDropdown == null) return;
+
+        if(selectedIndex >= 0 && selectedIndex < cameraKeys.Count)
+        {
+            CameraManager.Instance.SetActiveCamera(selectedIndex);
+            // Find the name of the selected camera using the index
+            string selectedCameraName = LocalizedUIHelper.Get(cameraKeys[selectedIndex]);
+            if (selectedCameraName == null)
+            {
+                Debug.LogError($"CameraController: Camera name not found for index {selectedIndex}");
+                return;
+            }
+            // Update the dropdown value to reflect the selected camera;
+            _cameraDropdown.value = selectedCameraName;
+        }
+        else
+        {
+            Debug.LogError($"CameraController: Invalid camera index: {selectedIndex}");
+        }
+
     }
 
     /// <summary>
