@@ -76,7 +76,6 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void PopulateDropdown(List<string> cameraNames)
     {
-        Debug.Log("CameraController: PopulateDropdown called with camera names: " + string.Join(", ", cameraNames));
         if (_cameraDropdown == null) return;
 
         cameraKeys = cameraNames;
@@ -90,7 +89,6 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void UpdateDropdownOptions()
     {
-        Debug.Log("CameraController: UpdateDropdownOptions called.");
         if (_cameraDropdown == null || cameraKeys == null) return;
 
         List<string> localizedCameraNames = new List<string>();
