@@ -36,8 +36,7 @@ jobs:
     - name: Install Doxygen and LaTeX
       run: |
         sudo apt-get update
-        sudo apt-get install -y doxygen graphviz
-        sudo apt-get install -y texlive-full
+        sudo apt-get install -y doxygen graphviz texlive-latex-base texlive-latex-recommended texlive-latex-extra
     
     - name: Generate Doxygen documentation
       run: |
@@ -48,31 +47,15 @@ jobs:
       run: |
         # Navigate to the LaTeX output directory
         cd latex
-        # Ensure epstopdf is available
-        which epstopdf
-        # Compile the PDF with verbose output for debugging
+        # Compile the PDF
         make pdf
-        # If the above fails, try running pdflatex with more diagnostics
-        if [ $? -ne 0 ]; then
-          echo "First make attempt failed, trying with more diagnostics..."
-          pdflatex -interaction=nonstopmode -halt-on-error refman.tex
-        fi
         # Ensure docs directory exists
         if [ ! -d "../docs" ]; then
           mkdir -p ../docs
         fi
-        # If PDF was generated, copy it to docs directory
-        if [ -f "refman.pdf" ]; then
-          cp refman.pdf ../docs/documentation.pdf
-          echo "PDF successfully generated and copied to docs directory"
-        else
-          echo "PDF generation failed"
-          # List files to help with debugging
-          ls -la
-          # Check the log file
-          cat refman.log
-          exit 1
-        fi
+        # Copy the PDF to docs directory for deployment
+        cp refman.pdf ../docs/documentation.pdf
+
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
