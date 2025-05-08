@@ -94,7 +94,7 @@ public class LocalizationManager : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        // Clan up the singleton instance
+        // Clean up the singleton instance
         if (Instance == this)
         {
             Instance = null;
