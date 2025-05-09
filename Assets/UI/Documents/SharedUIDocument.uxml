@@ -45,7 +45,7 @@
                     </engine:VisualElement>
                 </engine:VisualElement>
                 <engine:VisualElement name="CameraDropdownContainer" class="d-none" style="margin-left: auto; right: 30px; position: relative;">
-                    <engine:DropdownField label="Dropdown" name="CameraDropdown" class="camera-label" />
+                    <engine:DropdownField name="CameraDropdown" class="camera-label" />
                 </engine:VisualElement>
             </engine:VisualElement>
         </engine:VisualElement>

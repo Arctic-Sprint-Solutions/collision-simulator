@@ -100,7 +100,7 @@ public class CameraController : MonoBehaviour
 
         _cameraDropdown.choices = localizedCameraNames;
         _cameraDropdown.value = localizedCameraNames.FirstOrDefault();
-        _cameraDropdown.label = LocalizedUIHelper.Get("SelectCameraLabel");
+        // _cameraDropdown.label = LocalizedUIHelper.Get("SelectCameraLabel");
     }
 
     /// <summary>
