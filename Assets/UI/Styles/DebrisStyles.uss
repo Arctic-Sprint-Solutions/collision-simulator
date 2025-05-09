@@ -1,100 +1,26 @@
-.container {
-    width: 100%;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 32px;
-    display: flex;
+.control-btn {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgb(0, 200, 255);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    font-size: 16px;
+    margin-top: 16px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    padding-right: 0;
     flex-direction: row;
     align-items: center;
-    height: 100%;
-}
-
-.my-1 {
-    margin-top: 4px;
-    margin-bottom: 4px;
-}
-
-.my-2 {
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-.full-width-container {
-    width: 100%;
-    padding: 64px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    height: 100%;
-}
-
-.flex-col-start {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.flex-row-between {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.flex-row-center {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
+    transition: color 0.2s ease-in-out;
 }
 
-/* Scene Titles */
-.scene-title {
-    margin-top: 60px;
-    margin-bottom: 32px;
-    align-items: center;
-    font-size: 48px;
-    color: rgb(255, 100, 100); /* More alerting red tone for debris control */
-    -unity-font-definition: url("project://database/Assets/Fonts/Orbitron-Regular.ttf?fileID=12800000&guid=8d9b146c6ee6241558a82ea5922c5327&type=3#Orbitron-Regular");
-}
-
-/* Subtitles */
-.subtitle {
-    font-size: 24px;
-    color: rgb(200, 200, 200);
-    margin: 0;
-    padding: 0;
-    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
-}
-
-/* Navbar */
-.navbar {
-    padding: 32px 64px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-/* Interactive Buttons */
-.button {
-    padding: 12px 24px;
-    font-size: 18px;
-    background-color: rgb(100, 100, 255); /* Blue action buttons */
-    color: white;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: rgb(150, 150, 255);
-}
-
-/* Hover Effects */
-.link-hover:hover .nav-link-text {
-    color: rgb(255, 80, 80); /* Red color for warnings */
-}
-
-.link-hover:hover .nav-icon {
-    -unity-background-image-tint-color: rgb(255, 80, 80);
+.control-btn:hover {
+    background-color: rgba(0, 61, 78, 0.8);
 }

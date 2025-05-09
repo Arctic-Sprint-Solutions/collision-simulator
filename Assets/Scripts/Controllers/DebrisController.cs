@@ -55,6 +55,8 @@ public class DebrisController : MonoBehaviour
 
         if (showInfoButton != null)
         {
+            showInfoButton.RemoveFromClassList("unity-button");
+            showInfoButton.RemoveFromClassList("unity-text-element");
             showInfoButton.clicked += () => ToggleInfoPanel(true);
         }
 

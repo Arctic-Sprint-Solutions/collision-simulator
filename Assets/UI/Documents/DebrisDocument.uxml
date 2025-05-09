@@ -1,6 +1,7 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
     <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <Style src="project://database/Assets/UI/Styles/DebrisStyles.uss?fileID=7433441132597879392&amp;guid=aaa42bf5b569d45468e589e2b2aad881&amp;type=3#DebrisStyles" />
     <engine:VisualElement name="MenuContainer" class="full-width-container" style="position: absolute; bottom: -457px; right: -61px; max-width: 400px; width: 100%;">
         <engine:VisualElement name="Menu" class="menu" style="padding: 16px; width: 252px; background-color: rgba(0, 0, 0, 0.8); border-radius: 8px; height: 414px; color: rgb(0, 0, 0);">
             <engine:VisualElement name="TitleContainer" class="flex-col-start">
@@ -8,22 +9,25 @@
                 <engine:Label text="Manage Space Debris" name="DebrisSubtitle" class="subtitle my-2" style="font-size: 21px;" />
             </engine:VisualElement>
             <engine:VisualElement name="LargeDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 16px;">
-                <engine:Toggle name="ToggleDebrisA" class="nav-link-text my-2">
+                <engine:Toggle name="ToggleDebrisA" class="nav-link-text">
                     <engine:Label name="LargeDebrisText" text=" Large Debris" class="nav-link-text my-2" style="font-size: 25px;" />
                 </engine:Toggle>
             </engine:VisualElement>
-            <engine:VisualElement name="MediumDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 8px;">
-                <engine:Toggle name="ToggleDebrisB" class="nav-link-text my-2">
-                    <engine:Label name="MediumDebrisText" text=" Medium Debris" class="nav-link-text my-2" style="font-size: 25px;" />
+            <engine:VisualElement name="MediumDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 0;">
+                <engine:Toggle name="ToggleDebrisB" class="nav-link-text">
+                    <engine:Label name="MediumDebrisText" text=" Medium Debris" class="nav-link-text" style="font-size: 25px;" />
                 </engine:Toggle>
             </engine:VisualElement>
-            <engine:VisualElement name="SmallDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 8px;">
-                <engine:Toggle name="ToggleDebrisC" class="nav-link-text my-2">
-                    <engine:Label name="SmallDebrisText" text=" Small Debris" class="nav-link-text my-2" style="font-size: 25px;" />
+            <engine:VisualElement name="SmallDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 0;">
+                <engine:Toggle name="ToggleDebrisC" class="nav-link-text">
+                    <engine:Label name="SmallDebrisText" text=" Small Debris" class="nav-link-text" style="font-size: 25px;" />
                 </engine:Toggle>
             </engine:VisualElement>
-            <engine:VisualElement name="ShowInfo" style="flex-grow: 1; align-self: auto; align-items: auto; justify-content: flex-start; align-content: auto; width: auto; margin-top: 12px; margin-left: -3px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; white-space: nowrap; height: ; margin-bottom: 0;">
-                <engine:Button text="Show information" icon-image="project://database/Assets/Sprites/info-icon.png?fileID=2800000&amp;guid=270d8f47899784ae4b8cbc13229d9645&amp;type=3#info-icon" name="ShowInfoButton" focusable="true" selectable="true" usage-hints="DynamicColor" style="color: rgb(2, 186, 237); font-size: 15px; width: 202px; -unity-text-align: middle-center; justify-content: center; align-self: center; align-content: center; align-items: center; display: flex; visibility: visible; overflow: visible; flex-basis: 0; flex-direction: row; flex-wrap: nowrap; flex-shrink: 0; border-left-color: rgb(0, 199, 255); border-right-color: rgb(0, 199, 255); border-top-color: rgb(0, 199, 255); border-bottom-color: rgb(0, 199, 255); background-color: rgba(0, 0, 0, 0.51); -unity-text-outline-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(255, 255, 255); transform-origin: right; cursor: initial; height: 54px; padding-top: 25px; padding-right: 47px; padding-bottom: 25px; padding-left: 0; margin-right: 0; text-shadow: 0 0 0 rgba(255, 0, 0, 0.63); margin-top: 13px; margin-bottom: 0; margin-left: 0;" />
+            <engine:VisualElement name="ShowInfo">
+                <engine:Button name="ShowInfoButton" class="control-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-right: 10px; flex-direction: row;">
+                    <engine:VisualElement name="ShowInfoIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/info-icon.png?fileID=2800000&amp;guid=270d8f47899784ae4b8cbc13229d9645&amp;type=3#info-icon&quot;);" />
+                    <engine:Label text="Label" name="ShowInfoLabel" style="margin-left: 8px;" />
+                </engine:Button>
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>
