@@ -47,3 +47,19 @@
 .close-btn:hover {
     background-color: rgba(0, 61, 78, 0.8);
 }
+
+.link-button {
+    background-color: transparent; 
+    border-width: 0; 
+    color: rgb(0, 200, 255); 
+    font-size: 18px; 
+    flex-grow: 0; 
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.link-button:hover {
+    color: rgb(48, 250, 136);
+}

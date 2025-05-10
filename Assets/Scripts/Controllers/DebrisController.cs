@@ -18,6 +18,7 @@ public class DebrisController : MonoBehaviour
     private Toggle toggleC;
     private Button showInfoButton;
     private Button closeInfoButton;
+    private Button linkButton;
     private VisualElement infoContainer;
     private Label showInfoLabel;
     private Label hideInfoLabel;
@@ -72,6 +73,7 @@ public class DebrisController : MonoBehaviour
         // Get Info elements
         showInfoButton = root.Q<Button>("ShowInfoButton");
         closeInfoButton = root.Q<Button>("CloseInfoButton");
+        linkButton = root.Q<Button>("EsaLinkButton");
         infoContainer = root.Q<VisualElement>("InfoContainer");
         showInfoLabel = root.Q<Label>("ShowInfoLabel");
         hideInfoLabel = root.Q<Label>("HideInfoLabel");
@@ -93,6 +95,14 @@ public class DebrisController : MonoBehaviour
             closeInfoButton.RemoveFromClassList("unity-text-element");
             // Add the click event to the close button
             closeInfoButton.clicked += () => ToggleInfoPanel(false);
+        }
+
+        if (linkButton != null)
+        {
+            linkButton.RemoveFromClassList("unity-button");
+            linkButton.RemoveFromClassList("unity-text-element");
+            // Add the click event to the link button
+            linkButton.clicked += () => Application.OpenURL(linkButton.text);
         }
 
         // Hide the info label by default

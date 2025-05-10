@@ -307,6 +307,10 @@ MonoBehaviour:
     m_Key: HideInfoLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 8388000391094272
+    m_Key: SourceLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
