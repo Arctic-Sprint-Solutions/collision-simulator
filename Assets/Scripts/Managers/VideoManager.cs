@@ -156,4 +156,16 @@ public class VideoManager : MonoBehaviour
         // Todo: Update UI once the recording is finished
         Debug.Log("Recording finished: " + videoUrl);
     }
+
+    /// <summary>
+    /// Cleans up the singleton instance when the object is destroyed.
+    /// </summary>
+    private void OnDestroy()
+    {
+        // Clean up the singleton instance
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 }
