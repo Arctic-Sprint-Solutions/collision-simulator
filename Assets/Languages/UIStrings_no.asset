@@ -237,7 +237,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3276473974972416
-    m_Localized: "Oppskytings\xE5r: {0} - n\xE5tid"
+    m_Localized: "Oppskytings\xE5r: {0}"
     m_Metadata:
       m_Items: []
   - m_Id: 3296750440079360

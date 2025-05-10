@@ -232,7 +232,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3276473974972416
-    m_Localized: 'Launch Year: {0} - present'
+    m_Localized: 'Launch Year: {0}'
     m_Metadata:
       m_Items: []
   - m_Id: 3276472918007808

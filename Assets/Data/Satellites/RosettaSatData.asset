@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed99cfd493044bfa8726c6920c92683, type: 3}
   m_Name: RosettaSatData
   m_EditorClassIdentifier: 
-  satelliteName: Rosetta
+  satelliteName: Rosetta Satellite
   type: Space Probe
   leoInfo: N/A
   weight: 3000
