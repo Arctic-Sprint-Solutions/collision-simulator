@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2908803484147712
-    m_Key: ShowInfoButton
+    m_Key: ShowInfoLabel
     m_Metadata:
       m_Items: []
   - m_Id: 2909021575372800
@@ -301,6 +301,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 6528305141374976
     m_Key: ToggleKeybindPanelLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8368609486168064
+    m_Key: HideInfoLabel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8388000391094272
+    m_Key: SourceLabel
     m_Metadata:
       m_Items: []
   m_Metadata:

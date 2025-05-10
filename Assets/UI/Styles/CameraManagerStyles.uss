@@ -2,41 +2,68 @@
     font-size: 16px;
     color: rgb(0, 200, 255);
     -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
-    padding: 5px;
-    border-width: 2px;
-    border-color: rgb(0, 200, 255);
+    background-color: transparent;
     border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.7);
     transition: color 0.2s ease-in-out;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-left: 8px;
+    min-width: 250px;
 }
 
 .camera-label .unity-popup-field__input {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
 }
 
 .camera-label .unity-base-popup-field__text {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
 }
 
 .camera-label .unity-base-field__input {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.7);
+    border-left-color: rgb(0, 200, 255);
+    border-right-color: rgb(0, 200, 255);
+    border-top-color: rgb(0, 200, 255);
+    border-bottom-color: rgb(0, 200, 255);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .camera-label:hover .unity-popup-field__input {
-    background-color: rgba(0, 0, 0, 0);
-    color: rgb(48, 250, 136);
-}
-
-.camera-label:hover .unity-base-popup-field__text {
-    background-color: rgba(0, 0, 0, 0);
-    color: rgb(48, 250, 136);
+    background-color: rgba(0, 61, 78, 0.8);
 }
 
 .camera-label:hover .unity-base-field__input {
-    background-color: rgba(0, 0, 0, 0);
-    color: rgb(48, 250, 136);
+    background-color: rgba(0, 61, 78, 0.8);
 }
 
-.d-none {
-    display: none;
+.unity-base-popup-field__arrow {
+    -unity-background-image-tint-color: rgb(0, 200, 255);
+}
+
+.unity-base-dropdown__item {
+    flex-grow: 1;
+}
+
+.unity-base-dropdown #unity-content-container {
+    flex-direction: column;
+}
+
+.unity-base-dropdown__checkmark {
+    -unity-background-image-tint-color: rgb(0, 200, 255);
+}
+
+.unity-base-dropdown__container-outer {
+    border-left-color: rgb(0, 200, 255);
+    border-right-color: rgb(0, 200, 255);
+    border-top-color: rgb(0, 200, 255);
+    border-bottom-color: rgb(0, 200, 255);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
