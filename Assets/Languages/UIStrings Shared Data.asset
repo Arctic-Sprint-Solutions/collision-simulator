@@ -311,6 +311,10 @@ MonoBehaviour:
     m_Key: SourceLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 8754749410107392
+    m_Key: RecordingFinishedLabel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

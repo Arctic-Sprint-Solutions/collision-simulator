@@ -82,6 +82,7 @@ public class UIManager : MonoBehaviour
         // Recording components
         RegisterComponent("RecordButton", _collisionUI.Q<VisualElement>("RecordButton"));
         RegisterComponent("DownloadButton", _collisionUI.Q<VisualElement>("DownloadButton"));
+        RegisterComponent("RecordingFinishedLabel", _collisionUI.Q<Label>("RecordingFinishedLabel"));
 
         // Camera components
         RegisterComponent("CameraDropdownContainer", _collisionUI.Q<VisualElement>("CameraDropdownContainer"));

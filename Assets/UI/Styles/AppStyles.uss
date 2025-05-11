@@ -168,6 +168,7 @@
     align-items: center;
     justify-content: center;
     transition: color 0.2s ease-in-out;
+    -unity-background-image-tint-color: rgb(0, 200, 255);
 }
 
 .btn-icon-small {
@@ -203,3 +204,42 @@
     display: none;
 }
 
+.recording {
+    color: rgb(255, 0, 0);
+    border-color: rgb(255, 0, 0);
+}
+
+.recording .btn-icon {
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+}
+
+.recording-label {
+    color: rgb(230, 230, 230);
+    font-size: 18px; 
+    margin: 0;  
+    padding: 8px; 
+    align-self: center; 
+    position: absolute; 
+    left: 0; 
+    top: -48px; 
+    background-color: rgba(0, 0, 0, 0.75);
+    transition: all 0.2s ease-in-out;
+    opacity: 0
+}
+
+.recording-label:hover {
+     color: rgb(48, 250, 136); 
+}
+
+.show-label {
+    opacity: 1;
+}
+
+.download-btn {
+    border-color: rgb(48, 250, 136);
+    color: rgb(48, 250, 136);
+}
+
+.download-btn .btn-icon {
+    -unity-background-image-tint-color: rgb(48, 250, 136);
+}

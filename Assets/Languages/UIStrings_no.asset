@@ -368,6 +368,10 @@ MonoBehaviour:
     m_Localized: 'Kilde: '
     m_Metadata:
       m_Items: []
+  - m_Id: 8754749410107392
+    m_Localized: 'Video lastet ned:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

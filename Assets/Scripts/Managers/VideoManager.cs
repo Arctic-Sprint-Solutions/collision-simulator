@@ -13,6 +13,9 @@ public class VideoManager : MonoBehaviour
     /// Singleton instance of VideoManager
     /// </summary>
     public static VideoManager Instance { get; private set; }
+
+    private string _downloadUrl;
+    public string DownloadUrl => _downloadUrl;
     
     #region WebGL JavaScript Plugin Interop
     [DllImport("__Internal")]
@@ -69,6 +72,9 @@ public class VideoManager : MonoBehaviour
         #if !UNITY_EDITOR && UNITY_WEBGL
         InitializeVideoRecorder();
         #endif
+
+        // Reset the download URL
+        _downloadUrl = string.Empty;
     }
     
     /// <summary>
@@ -114,6 +120,9 @@ public class VideoManager : MonoBehaviour
     {        
         #if !UNITY_EDITOR && UNITY_WEBGL
         SaveVideoRecording();
+        #elif UNITY_EDITOR
+        // Placeholder URL for the saved video
+        _downloadUrl = "http://example.com/video.mp4"; 
         #endif
 
         OnRecordingSaved?.Invoke();
@@ -150,11 +159,11 @@ public class VideoManager : MonoBehaviour
     
     /// <summary>
     /// Callback method to be called from JavaScript when the recording is finished.
+    /// This method receives the URL of the recorded video.
     /// </summary>
     public void OnRecordingFinished(string videoUrl)
     {
-        // Todo: Update UI once the recording is finished
-        Debug.Log("Recording finished: " + videoUrl);
+        _downloadUrl = videoUrl;
     }
 
     /// <summary>

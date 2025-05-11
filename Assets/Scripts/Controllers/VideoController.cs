@@ -8,8 +8,23 @@ using UnityEngine.UIElements;
 /// </summary>
 public class VideoController : MonoBehaviour
 {
+    /// <summary>
+    /// The record button element in the UI.
+    /// Holds the start/stop recording icon and label.
+    /// </summary>
     private VisualElement _recordBtn;
+    /// <summary>
+    /// The download button element in the UI.
+    /// </summary>
     private VisualElement _downloadBtn;
+    /// <summary>
+    /// The label that indicates the recording has finished.
+    /// </summary>
+    private Label _recordingFinishedLabel;
+    /// <summary>
+    /// The duration for which the recording finished label is displayed.
+    /// </summary>
+    private float _showLabelDuration = 5f;
 
     /// <summary>
     /// Initializes the VideoController and registers necessary events.
@@ -66,11 +81,12 @@ public class VideoController : MonoBehaviour
         // Get the record button from the UIManager
         _recordBtn = UIManager.Instance.GetElement<VisualElement>("RecordButton");
         if(_recordBtn != null)
-        {
+        {   
             var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
             var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
             stopIcon?.AddToClassList("d-none"); // Hide stop icon initially
             cameraIcon?.RemoveFromClassList("d-none"); // Show camera icon initially
+            _recordBtn.RemoveFromClassList("recording"); // Remove recording class if present
 
             // Register the click event for the record button
             _recordBtn.RegisterCallback<ClickEvent>(evt => ToggleRecording());
@@ -84,6 +100,14 @@ public class VideoController : MonoBehaviour
             _downloadBtn.RegisterCallback<ClickEvent>(evt => DownloadRecording());
             // Hide the download button initially
             _downloadBtn.AddToClassList("d-none");
+        }
+
+        // Get the recording finished label from the UIManager
+        _recordingFinishedLabel = UIManager.Instance.GetElement<Label>("RecordingFinishedLabel");
+        if(_recordingFinishedLabel != null)
+        {
+            // Hide the recording finished label initially
+            _recordingFinishedLabel.RemoveFromClassList("show-label");
         }
     }
 
@@ -113,6 +137,10 @@ public class VideoController : MonoBehaviour
     {
         HideDownloadButton();
         UpdateRecordButton(isRecording: true);
+        
+        // Cancel any pending invocations to hide the label
+        CancelInvoke(nameof(HideRecordingFinishedLabel));
+        HideRecordingFinishedLabel();
     }
 
     /// <summary>
@@ -132,6 +160,50 @@ public class VideoController : MonoBehaviour
     private void RecordingSaved()
     {
         HideDownloadButton();
+
+        // Cancel any pending invocations before showing the label
+        CancelInvoke(nameof(HideRecordingFinishedLabel));
+        
+        // Show the recording finished label for a short duration
+        if(_recordingFinishedLabel != null) {
+            // Get the url for the saved recording
+            var downloadUrl = VideoManager.Instance.DownloadUrl;
+            if (!string.IsNullOrEmpty(downloadUrl))
+            {
+                // Set the label text to the download URL
+                _recordingFinishedLabel.text = LocalizedUIHelper.Get("RecordingFinishedLabel") + " " + downloadUrl;
+
+                // Add a click event to the label to open the download URL
+                _recordingFinishedLabel.RegisterCallback<ClickEvent>(evt =>
+                {
+                    Application.OpenURL(downloadUrl);
+                });
+            }
+            else
+            {
+                // Set the label text to indicate that the recording has been saved
+                _recordingFinishedLabel.text = LocalizedUIHelper.Get("RecordingFinishedLabel");
+
+                // Unregister the click event if the download URL is empty
+                _recordingFinishedLabel.UnregisterCallback<ClickEvent>(evt =>
+                {
+                    Application.OpenURL(downloadUrl);
+                });
+            }
+            _recordingFinishedLabel.AddToClassList("show-label");
+            // Hide the label after a delay of 5 seconds
+            Invoke(nameof(HideRecordingFinishedLabel), _showLabelDuration);
+        }
+    }
+
+    /// <summary>
+    /// Hides the recording finished label by adding display none class.
+    /// </summary>
+    private void HideRecordingFinishedLabel()
+    {
+        if(_recordingFinishedLabel != null) {
+            _recordingFinishedLabel.RemoveFromClassList("show-label");
+        }
     }
 
     /// <summary>
@@ -214,12 +286,16 @@ public class VideoController : MonoBehaviour
                 stopIcon.RemoveFromClassList("d-none");
                 cameraIcon.AddToClassList("d-none");
                 label.text = LocalizedUIHelper.Get("StopRecording");
+
+                _recordBtn.AddToClassList("recording");
             }
             else
             {
                 stopIcon.AddToClassList("d-none");
                 cameraIcon.RemoveFromClassList("d-none");
                 label.text = LocalizedUIHelper.Get("StartRecording");
+
+                _recordBtn.RemoveFromClassList("recording");
             }
         }
     }
@@ -254,6 +330,14 @@ public class VideoController : MonoBehaviour
         if (_downloadBtn != null)
         {
             _downloadBtn.UnregisterCallback<ClickEvent>(evt => DownloadRecording());
+        }
+
+        if (_recordingFinishedLabel != null)
+        {
+            _recordingFinishedLabel.UnregisterCallback<ClickEvent>(evt =>
+            {
+                Application.OpenURL(VideoManager.Instance.DownloadUrl);
+            });
         }
 
         // Clear references

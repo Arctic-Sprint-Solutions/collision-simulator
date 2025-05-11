@@ -21,14 +21,15 @@
             <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 0; position: relative; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row; padding-top: 0; padding-right: 30px; padding-bottom: 0; padding-left: 30px; margin-top: auto; background-color: rgba(0, 0, 0, 0);">
                 <engine:VisualElement name="RecordButtons" class="flex-row-center" style="flex-grow: 0; margin-right: auto; position: relative; left: auto; align-self: center;">
                     <engine:VisualElement name="RecordButton" class="d-none control-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-right: 10px; flex-direction: row;">
-                        <engine:VisualElement name="CameraIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/video-icon.png?fileID=2800000&amp;guid=950fb44b29a5b46878ebb97799fe91b9&amp;type=3#video-icon&quot;); margin-right: 0;" />
-                        <engine:VisualElement name="StopIcon" class="d-none btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/stop-icon.png?fileID=2800000&amp;guid=a7033ed839ae943b2acda0f13bf00aed&amp;type=3#stop-icon&quot;); margin-right: 0; color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);" />
+                        <engine:VisualElement name="CameraIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/video-icon-white.png?fileID=2800000&amp;guid=1e27cb3e1074f44bdb190a42b7aa0cc3&amp;type=3#video-icon-white&quot;); margin-right: 0;" />
+                        <engine:VisualElement name="StopIcon" class="d-none btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/stop-icon-white.png?fileID=2800000&amp;guid=161681acaff754f76911030a21dacc31&amp;type=3#stop-icon-white&quot;); margin-right: 0;" />
                         <engine:Label text="Start Recording" name="RecordLabel" style="margin-left: 8px;" />
                     </engine:VisualElement>
-                    <engine:VisualElement name="DownloadButton" class="flex-row-center d-none control-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-left: 0;">
-                        <engine:VisualElement name="DownloadIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/download-icon.png?fileID=2800000&amp;guid=06237ef8dfc094b45a35b99ebd22d1f6&amp;type=3#download-icon&quot;); margin-right: 0;" />
+                    <engine:VisualElement name="DownloadButton" class="flex-row-center d-none control-btn download-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-left: 0;">
+                        <engine:VisualElement name="DownloadIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/download-icon-white.png?fileID=2800000&amp;guid=f17d20a833dcb46d59f7f45e773918b1&amp;type=3#download-icon-white&quot;); margin-right: 0;" />
                         <engine:Label text="Download" name="DowloadLabel" style="margin-left: 8px;" />
                     </engine:VisualElement>
+                    <engine:Label text="Recording Finished" name="RecordingFinishedLabel" class="recording-label" />
                 </engine:VisualElement>
                 <engine:VisualElement name="ButtonContainer" class="flex-row-center" style="position: absolute; align-self: center;">
                     <engine:Button text="Button" name="playPauseButton" class="control-btn" style="color: rgba(76, 76, 76, 0); margin-right: 10px;">
