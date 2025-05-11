@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed99cfd493044bfa8726c6920c92683, type: 3}
   m_Name: RosettaSatData
   m_EditorClassIdentifier: 
-  satelliteName: Rosetta
+  satelliteName: Rosetta Satellite
   type: Space Probe
   leoInfo: N/A
   weight: 3000
   launchYear: 2004
   prefabName: Rosetta
   previewImage: {fileID: 21300000, guid: 6c9f5c6a8b9d34e2e9026bff535badf5, type: 3}
-  debrisSceneName: RosettaDebrisCollisionScene
-  satelliteSceneName: RosettaCollisionScene
+  debrisSceneName: RosettaScene_Debris
+  satelliteSceneName: RosettaScene_Satellite

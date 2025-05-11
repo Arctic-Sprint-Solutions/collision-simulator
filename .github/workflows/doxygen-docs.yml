@@ -33,13 +33,28 @@ jobs:
     - name: Setup Pages
       uses: actions/configure-pages@v4
 
-    - name: Install Doxygen
-      run: sudo apt-get install -y doxygen graphviz
+    - name: Install Doxygen and LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y doxygen graphviz texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-font-utils
 
     - name: Generate Doxygen documentation
       run: |
         # Use the existing Doxyfile
         doxygen Doxyfile
+
+    - name: Compile PDF from LaTeX
+      run: |
+        # Navigate to the LaTeX output directory
+        cd latex
+        # Compile the PDF
+        make pdf
+        # Ensure docs directory exists
+        if [ ! -d "../docs" ]; then
+          mkdir -p ../docs
+        fi
+        # Copy the PDF to docs directory for deployment
+        cp refman.pdf ../docs/documentation.pdf
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3

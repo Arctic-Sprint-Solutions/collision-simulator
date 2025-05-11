@@ -23,11 +23,11 @@ public class CollisionUIController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        if(UIManager.Instance != null) 
+        if(SimulationManager.Instance != null) 
         {
-            // Register UIManager events
-            UIManager.Instance.OnCollisionSceneLoaded += InitializeCollisionScene;
-            UIManager.Instance.OnNonCollisionSceneLoaded += ResetScene;
+            // Register SimulationManager events
+            SimulationManager.Instance.OnCollisionSceneLoaded += InitializeCollisionScene;
+            SimulationManager.Instance.OnNonCollisionSceneLoaded += ResetScene;
             
             InitializeUI();
             Debug.Log("[CollisionUIControlle] UI initialized successfully.");
@@ -194,10 +194,10 @@ public class CollisionUIController : MonoBehaviour
     private void OnDestroy()
     {
         // Unregister all events to prevent memory leaks
-        if(UIManager.Instance != null) 
+        if(SimulationManager.Instance != null) 
         {
-            UIManager.Instance.OnCollisionSceneLoaded -= InitializeCollisionScene;
-            UIManager.Instance.OnNonCollisionSceneLoaded -= ResetScene;
+            SimulationManager.Instance.OnCollisionSceneLoaded -= InitializeCollisionScene;
+            SimulationManager.Instance.OnNonCollisionSceneLoaded -= ResetScene;
         }
 
         if(InputManager.Instance != null)
