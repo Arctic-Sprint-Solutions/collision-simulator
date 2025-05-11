@@ -372,7 +372,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8754749410107392
-    m_Localized: 'Video downloaded: '
+    m_Localized: Video downloaded. Check your downloads folder.
     m_Metadata:
       m_Items: []
   references:

@@ -369,7 +369,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8754749410107392
-    m_Localized: 'Video lastet ned:'
+    m_Localized: Video lastet ned. Se nedlastningsmappe.
     m_Metadata:
       m_Items: []
   references:

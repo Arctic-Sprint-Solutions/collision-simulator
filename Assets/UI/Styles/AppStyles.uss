@@ -214,7 +214,7 @@
 }
 
 .recording-label {
-    color: rgb(230, 230, 230);
+    color: rgb(48, 250, 136); 
     font-size: 18px; 
     margin: 0;  
     padding: 8px; 
@@ -225,10 +225,6 @@
     background-color: rgba(0, 0, 0, 0.75);
     transition: all 0.2s ease-in-out;
     opacity: 0
-}
-
-.recording-label:hover {
-     color: rgb(48, 250, 136); 
 }
 
 .show-label {

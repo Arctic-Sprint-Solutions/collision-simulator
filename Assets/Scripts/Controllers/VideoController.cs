@@ -165,31 +165,7 @@ public class VideoController : MonoBehaviour
         CancelInvoke(nameof(HideRecordingFinishedLabel));
         
         // Show the recording finished label for a short duration
-        if(_recordingFinishedLabel != null) {
-            // Get the url for the saved recording
-            var downloadUrl = VideoManager.Instance.DownloadUrl;
-            if (!string.IsNullOrEmpty(downloadUrl))
-            {
-                // Set the label text to the download URL
-                _recordingFinishedLabel.text = LocalizedUIHelper.Get("RecordingFinishedLabel") + " " + downloadUrl;
-
-                // Add a click event to the label to open the download URL
-                _recordingFinishedLabel.RegisterCallback<ClickEvent>(evt =>
-                {
-                    Application.OpenURL(downloadUrl);
-                });
-            }
-            else
-            {
-                // Set the label text to indicate that the recording has been saved
-                _recordingFinishedLabel.text = LocalizedUIHelper.Get("RecordingFinishedLabel");
-
-                // Unregister the click event if the download URL is empty
-                _recordingFinishedLabel.UnregisterCallback<ClickEvent>(evt =>
-                {
-                    Application.OpenURL(downloadUrl);
-                });
-            }
+        if(_recordingFinishedLabel != null && VideoManager.Instance.DownloadSuccess) {
             _recordingFinishedLabel.AddToClassList("show-label");
             // Hide the label after a delay of 5 seconds
             Invoke(nameof(HideRecordingFinishedLabel), _showLabelDuration);
@@ -330,14 +306,6 @@ public class VideoController : MonoBehaviour
         if (_downloadBtn != null)
         {
             _downloadBtn.UnregisterCallback<ClickEvent>(evt => DownloadRecording());
-        }
-
-        if (_recordingFinishedLabel != null)
-        {
-            _recordingFinishedLabel.UnregisterCallback<ClickEvent>(evt =>
-            {
-                Application.OpenURL(VideoManager.Instance.DownloadUrl);
-            });
         }
 
         // Clear references

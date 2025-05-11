@@ -14,8 +14,8 @@ public class VideoManager : MonoBehaviour
     /// </summary>
     public static VideoManager Instance { get; private set; }
 
-    private string _downloadUrl;
-    public string DownloadUrl => _downloadUrl;
+    private bool _downloadSuccess = false;
+    public bool DownloadSuccess => _downloadSuccess;
     
     #region WebGL JavaScript Plugin Interop
     [DllImport("__Internal")]
@@ -73,8 +73,8 @@ public class VideoManager : MonoBehaviour
         InitializeVideoRecorder();
         #endif
 
-        // Reset the download URL
-        _downloadUrl = string.Empty;
+        // Reset the download success flag
+        _downloadSuccess = false;
     }
     
     /// <summary>
@@ -121,8 +121,7 @@ public class VideoManager : MonoBehaviour
         #if !UNITY_EDITOR && UNITY_WEBGL
         SaveVideoRecording();
         #elif UNITY_EDITOR
-        // Placeholder URL for the saved video
-        _downloadUrl = "http://example.com/video.mp4"; 
+        _downloadSuccess = true;
         #endif
 
         OnRecordingSaved?.Invoke();
@@ -159,11 +158,12 @@ public class VideoManager : MonoBehaviour
     
     /// <summary>
     /// Callback method to be called from JavaScript when the recording is finished.
-    /// This method receives the URL of the recorded video.
+    /// Sets the download success flag to true.
     /// </summary>
     public void OnRecordingFinished(string videoUrl)
     {
-        _downloadUrl = videoUrl;
+        Debug.Log("Recording finished. Video URL: " + videoUrl);
+        _downloadSuccess = true;
     }
 
     /// <summary>
