@@ -223,10 +223,10 @@ public class VideoController : MonoBehaviour
         {
             _downloadBtn.RemoveFromClassList("d-none");
             var label = _downloadBtn.Q<Label>("DownloadLabel");
-            if (label != null)
-            {
-                label.text = LocalizedUIHelper.Get("DownloadRecording");
-            }
+            // if (label != null)
+            // {
+            //     label.text = LocalizedUIHelper.Get("DownloadLabel");
+            // }
         }
     }
 

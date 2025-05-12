@@ -100,7 +100,6 @@ public class CameraController : MonoBehaviour
 
         _cameraDropdown.choices = localizedCameraNames;
         _cameraDropdown.value = localizedCameraNames.FirstOrDefault();
-        _cameraDropdown.label = LocalizedUIHelper.Get("SelectCameraLabel");
     }
 
     /// <summary>
@@ -164,7 +163,6 @@ public class CameraController : MonoBehaviour
     {
         if (_cameraDropdownContainer != null)
         {
-            // _cameraDropdown.style.display = DisplayStyle.None;
             _cameraDropdownContainer.AddToClassList("d-none");
         }
     }
@@ -176,7 +174,6 @@ public class CameraController : MonoBehaviour
     {
         if (_cameraDropdownContainer != null)
         {
-            Debug.Log("CameraController: ShowDropdown called.");
             _cameraDropdownContainer.RemoveFromClassList("d-none");
         }
     }
