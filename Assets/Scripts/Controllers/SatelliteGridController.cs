@@ -2,9 +2,12 @@
 
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Tables;
 using UnityEngine.Localization.Settings;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 /// <summary>
 /// Controller for the satellite grid UI.
@@ -13,19 +16,13 @@ using System.Threading.Tasks;
 /// </summary>
 public class SatelliteGridController : MonoBehaviour
 {
-    /// <summary>
-    /// Reference to the SatelliteCatalog that contains the list of satellites.
-    /// </summary>
+    // Reference to the satellite catalog ScriptableObject
     [SerializeField] private SatelliteCatalog satelliteCatalog;
-    /// <summary>
-    /// Reference to the UIDocument that contains the UI elements.
-    /// </summary>
+    // Reference to the UI Document
     private UIDocument uiDocument;
-    /// <summary>
-    /// Reference to the StringTable that contains localized strings for the UI.
-    /// </summary>
+    // Reference to the StringTable for localization
     private StringTable _stringTable;
-    
+    // Container for the satellite grid
     private VisualElement satelliteGridContainer;
     private VisualElement _rootElement;
 
@@ -37,10 +34,6 @@ public class SatelliteGridController : MonoBehaviour
         SetupAsync();
     } 
 
-    /// <summary>
-    /// Asynchronous setup method to initialize the UI and load localization settings.
-    /// Sets up the satellite grid.
-    /// </summary>
     private async void SetupAsync()
     {
         // Normal startup logic here
@@ -65,10 +58,6 @@ public class SatelliteGridController : MonoBehaviour
         SetupSatelliteGrid();
     }
 
-    /// <summary>
-    /// Asynchronously load the StringTable for localization.
-    /// This method waits for the localization settings to be initialized and then loads the StringTable.
-    /// </summary>
     private async Task LoadStringTableAsync()
     {
         var handle = LocalizationSettings.StringDatabase.GetTableAsync("UIStrings");

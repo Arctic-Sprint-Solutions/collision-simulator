@@ -2,6 +2,7 @@
 
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
@@ -38,6 +39,10 @@ public class UIManager : MonoBehaviour
     private BackButtonMode _currentBackButtonMode;
     private List<UILocalizer> registeredLocalizers = new List<UILocalizer>();
     #endregion
+    // #region  Events
+    // public event System.Action OnCollisionSceneLoaded;
+    // public event System.Action OnNonCollisionSceneLoaded;
+    // #endregion
 
     /// <summary>
     /// Awake method to initialize the UIManager.

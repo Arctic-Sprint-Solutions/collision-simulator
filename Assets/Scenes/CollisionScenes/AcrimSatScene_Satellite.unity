@@ -34318,6 +34318,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 624f2e8d306193e4f83a0131bf71333c, type: 3}
+--- !u!1 &1605326886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1605326887}
+  m_Layer: 0
+  m_Name: SceneTag
+  m_TagString: CollisionScene
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1605326887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605326886}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000005948823, y: -0, z: 0.0000000037252903, w: 1}
+  m_LocalPosition: {x: 118.61984, y: 1.410367, z: -0.88017887}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1608909088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3023514253261009481, guid: 461ada4cbdcf9fb49934a6e5ed82d4ad, type: 3}
@@ -40540,6 +40571,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1075412673}
+  - {fileID: 1605326887}
   - {fileID: 529498455}
   - {fileID: 530094020}
   - {fileID: 366935696}

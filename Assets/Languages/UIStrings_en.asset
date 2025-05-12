@@ -103,10 +103,10 @@ MonoBehaviour:
       between satellites and space debris. Developed using the Unity game engine
       and Blender for 3D modeling, Orbital Watch provides a visual representation
       of collisions in space. Satellite models have been imported from NASAs publicly
-      available 3D model library.\n\n- Show students the growing challenge of space
-      debris \n- Observe collisions from different angles and how they affect various
-      satellites  \n- Learn how space debris is a growing concern and why further
-      research is needed"
+      available 3D model library.\n\n\uFFFD Show students the growing challenge of
+      space debris \n\uFFFD Observe collisions from different angles and how they
+      affect various satellites  \n\uFFFD Learn how space debris is a growing concern
+      and why further research is needed"
     m_Metadata:
       m_Items: []
   - m_Id: 2645027531513856
@@ -200,7 +200,7 @@ MonoBehaviour:
       of debris. \n\nThe debris system is based on the following \n\n- Large Debris
       (Objects greater than 10 cm) - 40 500 objects\n\n- Medium Debris (Objects from
       greater than 1 cm to 10 cm) - 1 100 000 objects\n\n- Small Debris (Objects
-      from greater than 1 cm to 1 mm) - 130 000 000 objects"
+      from greater than 1 cm to 1 mm) - 130 000 000 objects\n\nSource: https://www.esa.int/Space_Safety/Space_Debris/Space_debris_by_the_numbers"
     m_Metadata:
       m_Items: []
   - m_Id: 2914638683758592
@@ -232,7 +232,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3276473974972416
-    m_Localized: 'Launch Year: {0}'
+    m_Localized: 'Launch Year: {0} - present'
     m_Metadata:
       m_Items: []
   - m_Id: 3276472918007808

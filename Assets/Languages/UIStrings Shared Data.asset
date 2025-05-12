@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2908803484147712
-    m_Key: ShowInfoLabel
+    m_Key: ShowInfoButton
     m_Metadata:
       m_Items: []
   - m_Id: 2909021575372800

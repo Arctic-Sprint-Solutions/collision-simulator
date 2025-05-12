@@ -185,7 +185,7 @@
     color: rgb(0, 200, 255);
     border-color: rgb(0, 200, 255);
     border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: transparent;
     -unity-font-style: normal;
     border-left-width: 2px;
     border-right-width: 2px;
@@ -197,7 +197,7 @@
 }
 
 .control-btn:hover {
-    background-color: rgba(0, 61, 78, 0.8);
+    background-color: rgba(0, 61, 78, 0.74);
 }
 
 .d-none {

@@ -27,23 +27,26 @@ public class LocalizationManager : MonoBehaviour
     /// </summary>
     public bool IsLocalizationReady { get; private set; } = false;
 
-    /// <summary>
-    /// Initializes the singleton instance and sets up the localization system.
-    /// </summary>
     private void Awake()
     {
-        // Ensure that there is only one instance of LocalizationManager
-        if (Instance != null && Instance != this)
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            StartCoroutine(LoadSavedLanguage());
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+            LocalizedUIHelper.BuildCache();
+
+        }
+        else
         {
             Destroy(gameObject);
-            return;
         }
-        
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-        StartCoroutine(LoadSavedLanguage());
-        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
-        LocalizedUIHelper.BuildCache();
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
     }
 
     /// <summary>
@@ -87,20 +90,5 @@ public class LocalizationManager : MonoBehaviour
     private void OnLocaleChanged(Locale _)
     {
         LocalizationUpdated?.Invoke();
-    }
-
-    /// <summary>
-    /// Cleans up the singleton instance and unsubscribes from events.
-    /// </summary>
-    private void OnDestroy()
-    {
-        // Clean up the singleton instance
-        if (Instance == this)
-        {
-            Instance = null;
-        }
-
-        // Unsubscribe from the event to prevent memory leaks
-        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
     }
 }

@@ -83,10 +83,10 @@ MonoBehaviour:
       enkle kollisjoner mellom satellitter og roms\xF8ppel. Utviklet med Unity-spillmotoren
       og Blender for 3D-modellering, gir Orbital Watch en visuell fremstilling av
       kollisjoner i verdensrommet. Satellittmodeller er importert fra NASAs offentlig
-      tilgjengelige 3D-modellbibliotek.\n\n- Vis studenter den \xF8kende utfordringen
-      med roms\xF8ppel\n- Observer kollisjoner fra forskjellige vinkler og hvordan
-      de p\xE5virker ulike satellitter\n- L\xE6r hvorfor roms\xF8ppel er en voksende
-      bekymring og hvorfor videre forskning er n\xF8dvendig"
+      tilgjengelige 3D-modellbibliotek.\n\n\uFFFD Vis studenter den \xF8kende utfordringen
+      med roms\xF8ppel\n\uFFFD Observer kollisjoner fra forskjellige vinkler og hvordan
+      de p\xE5virker ulike satellitter\n\uFFFD L\xE6r hvorfor roms\xF8ppel er en
+      voksende bekymring og hvorfor videre forskning er n\xF8dvendig"
     m_Metadata:
       m_Items: []
   - m_Id: 2645022120861696
@@ -197,7 +197,7 @@ MonoBehaviour:
       f\xF8lgende kategorier:\n\n- Store objekter (st\xF8rre enn 10 cm) \u2013 40
       500 objekter\n\n- Mellomstore objekter (mellom 1 cm og 10 cm) \u2013 1 100
       000 objekter\n\n- Sm\xE5 objekter (mellom 1 mm og 1 cm) \u2013 130 000 000
-      objekter"
+      objekter\n\nKilde: https://www.esa.int/Space_Safety/Space_Debris/Space_debris_by_the_numbers"
     m_Metadata:
       m_Items: []
   - m_Id: 2914638683758592
@@ -237,7 +237,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3276473974972416
-    m_Localized: "Oppskytings\xE5r: {0}"
+    m_Localized: "Oppskytings\xE5r: {0} - n\xE5tid"
     m_Metadata:
       m_Items: []
   - m_Id: 3296750440079360

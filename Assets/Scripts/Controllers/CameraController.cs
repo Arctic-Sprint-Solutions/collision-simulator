@@ -7,9 +7,7 @@ using UnityEngine.UIElements;
 
 
 /// <summary>
-/// CameraController is responsible for managing the camera selection UI.
-/// It populates a dropdown with available cameras and handles camera selection.
-/// It listens for camera updates from the CameraManager and updates the UI accordingly.
+/// Singleton class for camera dropdown UI and ensures that it persists across scenes
 /// </summary>
 public class CameraController : MonoBehaviour
 {
@@ -18,9 +16,6 @@ public class CameraController : MonoBehaviour
     private DropdownField _cameraDropdown;
     private VisualElement _cameraDropdownContainer;
 
-    /// <summary>
-    /// Initializes the CameraController and sets up event listeners.
-    /// </summary>
     private void Start()
     {
         if(UIManager.Instance != null) 
@@ -57,9 +52,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Cleans up the CameraController by unregistering event listeners.
-    /// </summary>
+
+    //When enabled - removes elements from dropdown �I
     private void OnDisable()
     {
         // Unregister event listeners to prevent memory leaks
@@ -106,7 +100,7 @@ public class CameraController : MonoBehaviour
 
         _cameraDropdown.choices = localizedCameraNames;
         _cameraDropdown.value = localizedCameraNames.FirstOrDefault();
-        // _cameraDropdown.label = LocalizedUIHelper.Get("SelectCameraLabel");
+        _cameraDropdown.label = LocalizedUIHelper.Get("SelectCameraLabel");
     }
 
     /// <summary>
