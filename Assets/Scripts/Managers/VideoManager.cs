@@ -13,6 +13,9 @@ public class VideoManager : MonoBehaviour
     /// Singleton instance of VideoManager
     /// </summary>
     public static VideoManager Instance { get; private set; }
+
+    private bool _downloadSuccess = false;
+    public bool DownloadSuccess => _downloadSuccess;
     
     #region WebGL JavaScript Plugin Interop
     [DllImport("__Internal")]
@@ -69,6 +72,9 @@ public class VideoManager : MonoBehaviour
         #if !UNITY_EDITOR && UNITY_WEBGL
         InitializeVideoRecorder();
         #endif
+
+        // Reset the download success flag
+        _downloadSuccess = false;
     }
     
     /// <summary>
@@ -114,6 +120,8 @@ public class VideoManager : MonoBehaviour
     {        
         #if !UNITY_EDITOR && UNITY_WEBGL
         SaveVideoRecording();
+        #elif UNITY_EDITOR
+        _downloadSuccess = true;
         #endif
 
         OnRecordingSaved?.Invoke();
@@ -150,10 +158,25 @@ public class VideoManager : MonoBehaviour
     
     /// <summary>
     /// Callback method to be called from JavaScript when the recording is finished.
+    /// Sets the download success flag to true.
     /// </summary>
     public void OnRecordingFinished(string videoUrl)
     {
         // Todo: Update UI once the recording is finished
         Debug.Log("Recording finished: " + videoUrl);
+        _downloadSuccess = true;
+    }
+
+    /// <summary>
+    /// Cleans up the singleton instance when the object is destroyed.
+    /// </summary>
+    private void OnDestroy()
+    {
+        // Clean up the singleton instance
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 }
+
