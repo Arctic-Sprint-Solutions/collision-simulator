@@ -360,6 +360,18 @@ MonoBehaviour:
     m_Localized: Vis/gjem tastevalg
     m_Metadata:
       m_Items: []
+  - m_Id: 8368609486168064
+    m_Localized: Gjem Informasjon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8388000391094272
+    m_Localized: 'Kilde: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8754749410107392
+    m_Localized: Video lastet ned. Se nedlastningsmappe.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

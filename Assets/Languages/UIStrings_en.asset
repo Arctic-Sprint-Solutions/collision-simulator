@@ -363,6 +363,18 @@ MonoBehaviour:
     m_Localized: Show/Hide kyebinds
     m_Metadata:
       m_Items: []
+  - m_Id: 8368609486168064
+    m_Localized: Hide Information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8388000391094272
+    m_Localized: 'Source: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8754749410107392
+    m_Localized: Video downloaded. Check your downloads folder.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

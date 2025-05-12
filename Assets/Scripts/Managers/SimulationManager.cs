@@ -88,6 +88,7 @@ public class SimulationManager : MonoBehaviour
       case "Cubesat2RuScene_Debris":
       case "Cubesat2RuScene_Satellite":
       case "IceSat2Scene_Debris":
+      case "IceSat2Scene_Satellite":
       case "RosettaScene_Debris":
       case "RosettaScene_Satellite":
         UIManager.Instance.ShowNavBar();
