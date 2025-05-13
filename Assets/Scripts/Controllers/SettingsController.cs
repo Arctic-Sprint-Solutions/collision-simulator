@@ -24,11 +24,17 @@ public class SettingsController : MonoBehaviour
     private Action<KeyCode> onKeySelected;
     private Coroutine blinkCoroutine;
 
+    /// <summary>
+    /// Singleton instance of the SettingsController.
+    /// </summary>
     private void Start()
     {
         StartCoroutine(SetupAsync());
     }
 
+    /// <summary>
+    /// Sets up the settings controller, waiting for the localization system to be ready.
+    /// </summary>
     private IEnumerator SetupAsync()
     {
         yield return new WaitUntil(() => InputManager.Instance != null && InputManager.Instance.keybinds != null);
@@ -40,6 +46,9 @@ public class SettingsController : MonoBehaviour
         InitializeUI();
     }
 
+    /// <summary>
+    /// Initializes the key mappings for getting and setting key bindings.
+    /// </summary>
     private void InitializeMappings()
     {
         getKeyMap = new Dictionary<string, Func<KeyCode>>()
@@ -76,6 +85,9 @@ public class SettingsController : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Initializes the UI elements and their event handlers.
+    /// </summary>
     private void InitializeUI()
     {
         var root = uiDocument.rootVisualElement;
@@ -112,6 +124,10 @@ public class SettingsController : MonoBehaviour
         InitLanguageDropdown(root);
     }
 
+    /// <summary>
+    /// Updates the settings controller each frame.
+    /// Checks for key input if waiting for a key to be selected.
+    /// </summary>
     private void Update()
     {
         if (!waitingForKey) return;
@@ -127,6 +143,9 @@ public class SettingsController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts the key rebinding process for a specific action.
+    /// </summary>
     private void StartKeyRebind(string action)
     {
         if (!actionButtonMap.TryGetValue(action, out var button) || button == null)
@@ -202,7 +221,9 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Checks if the key is already bound to another action.
+    /// </summary>
     private bool IsKeyAlreadyBound(KeyCode key, string currentAction)
     {
         foreach (var pair in getKeyMap)
@@ -213,6 +234,9 @@ public class SettingsController : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Initializes the language dropdown and its event handlers.
+    /// </summary>
     private void InitLanguageDropdown(VisualElement root)
     {
         languageDropdown = root.Q<DropdownField>("LanguageDropdown");

@@ -87,6 +87,9 @@ public class LocalizationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Event handler for when the locale changes.
+    /// </summary>
     private void OnLocaleChanged(Locale _)
     {
         LocalizationUpdated?.Invoke();
