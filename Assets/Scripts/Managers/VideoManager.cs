@@ -162,8 +162,6 @@ public class VideoManager : MonoBehaviour
     /// </summary>
     public void OnRecordingFinished(string videoUrl)
     {
-        // Todo: Update UI once the recording is finished
-        Debug.Log("Recording finished: " + videoUrl);
         _downloadSuccess = true;
     }
 

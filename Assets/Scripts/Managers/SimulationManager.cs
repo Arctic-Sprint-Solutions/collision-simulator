@@ -15,17 +15,22 @@ public class SimulationManager : MonoBehaviour
 {
   public static SimulationManager Instance { get; private set; }
 
-  // Reference to the selected satellite (from the satellites grid scene)
-  private Satellite _selectedSatellite;
-  public Satellite SelectedSatellite => _selectedSatellite;
+    #region  Private Properties
+    private Satellite _selectedSatellite;
+    private string _previousScene;
+    private bool _isCollisionScene = false;
+    #endregion
 
-  private string _previousScene;
-  public string PreviousScene => _previousScene;
+    #region  Public Properties
+    public Satellite SelectedSatellite => _selectedSatellite;
+    public string PreviousScene => _previousScene;
+    public bool IsCollisionScene => _isCollisionScene;
+    #endregion
 
-  #region  Events
-  public event System.Action OnCollisionSceneLoaded;
-  public event System.Action OnNonCollisionSceneLoaded;
-  #endregion
+    #region  Events
+    public event System.Action OnCollisionSceneLoaded;
+    public event System.Action OnNonCollisionSceneLoaded;
+    #endregion
 
 
   /// <summary>
@@ -60,7 +65,7 @@ public class SimulationManager : MonoBehaviour
 
     // Hide the collision UI by default when a new scene is loaded
     UIManager.Instance.HideCollisionUI();
-    bool isCollisionScene = false;
+    _isCollisionScene = false;
 
     // Handle scene-specific logic
     switch (scene.name)
@@ -93,14 +98,14 @@ public class SimulationManager : MonoBehaviour
       case "RosettaScene_Satellite":
         UIManager.Instance.ShowNavBar();
         UIManager.Instance.ShowCollisionUI();
-        isCollisionScene = true;
+        _isCollisionScene = true;
         break;
       default:
         break;
     }
 
     // Notify listeners if the loaded scene is a collision scene or not
-    if(isCollisionScene)
+    if(_isCollisionScene)
     {
       OnCollisionSceneLoaded?.Invoke();
     }

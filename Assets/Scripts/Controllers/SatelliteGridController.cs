@@ -2,12 +2,9 @@
 
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Tables;
 using UnityEngine.Localization.Settings;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 /// <summary>
 /// Controller for the satellite grid UI.
