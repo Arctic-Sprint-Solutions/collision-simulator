@@ -72,6 +72,10 @@ public static class LocalizedUIHelper
         }
     }
 
+    /// <summary>
+    /// Retrieves a localized string from the cache or the string table.
+    /// </summary>
+    /// <param name="key">The key for the localized string.</param>
     public static string Get(string key)
     {
         if (!isReady || string.IsNullOrEmpty(key)) return key;
@@ -90,12 +94,18 @@ public static class LocalizedUIHelper
         return key;
     }
 
+    /// <summary>
+    /// Applies the localized string to a label component.
+    /// </summary>
     public static void Apply(Label label, string key)
     {
         if (label == null) return;
         label.text = Get(key);
     }
 
+    /// <summary>
+    /// Applies the localized string to a button component.
+    /// </summary>
     public static void Apply(Button button, string key)
     {
         if (button == null) return;
