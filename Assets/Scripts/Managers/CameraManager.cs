@@ -12,6 +12,9 @@ using Unity.Cinemachine;
 /// <summary>
 public class CameraManager : MonoBehaviour
 {
+    /// <summary>
+    /// Singleton instance of CameraManager
+    /// </summary>
     public static CameraManager Instance { get; private set; }
     /// <summary>
     /// Reference to the CameraController script for managing camera dropdown UI
@@ -22,10 +25,19 @@ public class CameraManager : MonoBehaviour
     /// List of all Cinemachine cameras in the scene
     /// </summary>
     private List<CinemachineCamera> cameras = new List<CinemachineCamera>();
+    /// <summary>
+    /// Index of the currently active camera
+    /// </summary>
     private int activeCameraIndex = 0;
 
     #region Events
+    /// <summary>
+    /// Delegate for notifying UI with the list of camera names
+    /// </summary>
     public delegate void CamerasUpdated(List<string> cameraNames);
+    /// <summary>
+    /// Event triggered when the list of cameras is updated
+    /// </summary>
     public static event CamerasUpdated OnCamerasUpdated;
     #endregion
 
@@ -50,7 +62,7 @@ public class CameraManager : MonoBehaviour
     /// Subscribes to the scene loaded event to handle camera updates
     /// </summary>
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
-    
+
     /// <summary>
     /// Unsubscribes from the scene loaded event to prevent memory leaks
     /// </summary>
@@ -68,10 +80,10 @@ public class CameraManager : MonoBehaviour
         FindCamerasInScene();
 
         // If there are more than one camera, notify the UI
-        if(cameras.Count > 1)
+        if (cameras.Count > 1)
         {
             NotifyUI();
-        } 
+        }
     }
 
 
@@ -87,7 +99,7 @@ public class CameraManager : MonoBehaviour
 
         // Sort cameras by priority from highest to lowest
         cameras = cameras.OrderByDescending(c => c.Priority.Value).ToList();
-        
+
         Debug.Log($"Found {cameras.Count} Second check afterr list - Cinemachine cameras in the scene.");
     }
 

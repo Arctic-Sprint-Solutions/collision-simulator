@@ -9,12 +9,32 @@ using System.Collections.Generic;
 /// </summary>
 public class KeybindsController : MonoBehaviour
 {
+    #region Properties
+    /// <summary>
+    /// A reference to the KeybindSettings ScriptableObject that contains keybinds.
+    /// </summary>
     [SerializeField] private KeybindSettings _keybindSettings;
+    /// <summary>
+    /// A reference to the Keybinds container in the UI.
+    /// </summary>
     private VisualElement _keybindsEdge;
+    /// <summary>
+    /// A reference to the keybinds panel in the UI.
+    /// </summary>
     private ScrollView _keybindsPanel;
+    /// <summary>
+    /// A reference to the button to toggle keybinds panel in the UI.
+    /// </summary>
     private VisualElement _toggleKeybindsPanel;
+    /// <summary>
+    /// A reference to the label that displays "Show Keybinds" in the UI.
+    /// </summary>
     private Label _showKeybindsLabel;
+    /// <summary>
+    /// A reference to the label that displays "Hide Keybinds" in the UI.
+    /// </summary>
     private Label _hideKeybindsLabel;
+    #endregion
 
     /// <summary>
     /// Initializes the KeybindsController and registers UIManager events.

@@ -13,10 +13,23 @@ using UnityEngine.UIElements;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
+    /// <summary>
+    /// A list of camera keys to be used for populating the dropdown.
+    /// </summary>
     private List<string> cameraKeys = new();
-    public delegate void CameraSelected(int index);
+    /// <summary>
+    /// The dropdown field for selecting cameras in the UI.
+    /// </summary>
     private DropdownField _cameraDropdown;
+    /// <summary>
+    /// The container for the camera dropdown in the UI.
+    /// </summary>
     private VisualElement _cameraDropdownContainer;
+    /// <summary>
+    /// A delegate for handling camera selection events.
+    /// </summary>
+    /// <param name="index">The index of the selected camera.</param>
+    public delegate void CameraSelected(int index);
 
     /// <summary>
     /// Initializes the CameraController and sets up event listeners.
@@ -31,12 +44,13 @@ public class CameraController : MonoBehaviour
 
         if(CameraManager.Instance != null)
         {
-            // Register CameraManager events
+            // Register the event listener for camera updates
             CameraManager.OnCamerasUpdated += PopulateDropdown;
         }
 
         if(InputManager.Instance != null)
         {
+            // Register the event listener for camera key presses
             InputManager.Instance.OnCameraKeyPressed += (index) => OnCameraChanged(index);
         }
         
@@ -92,18 +106,21 @@ public class CameraController : MonoBehaviour
 
     /// <summary>
     /// Updates the dropdown choices based on the current localization.
+    /// This method retrieves the localized names for each camera key and updates the dropdown options accordingly.
     /// </summary>
     private void UpdateDropdownOptions()
     {
         if (_cameraDropdown == null || cameraKeys == null) return;
 
         List<string> localizedCameraNames = new List<string>();
+        // Iterate through the camera keys and get their localized names
         foreach (var name in cameraKeys)
         {
             var localizedName = LocalizedUIHelper.Get(name);
             localizedCameraNames.Add(localizedName);
         }
 
+        // Update the dropdown choices with the localized names and set the default value
         _cameraDropdown.choices = localizedCameraNames;
         _cameraDropdown.value = localizedCameraNames.FirstOrDefault();
     }
@@ -128,6 +145,7 @@ public class CameraController : MonoBehaviour
         int selectedIndex = _cameraDropdown.choices.IndexOf(selectedCameraName);
         if (selectedIndex < 0) return;
 
+        // Set the active camera in the CameraManager using the selected index
         CameraManager.Instance.SetActiveCamera(selectedIndex);
 
         // Update the dropdown value to reflect the selected camera

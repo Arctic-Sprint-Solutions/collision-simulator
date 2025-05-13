@@ -101,3 +101,5 @@ Assets/AddressableAssetsData/iOS/
 Assets/AddressableAssetsData/iOS.meta
 Assets/AddressableAssetsData/WebGL/
 Assets/AddressableAssetsData/WebGL.meta
+
+.editorconfig

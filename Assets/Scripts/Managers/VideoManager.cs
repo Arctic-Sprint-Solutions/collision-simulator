@@ -13,20 +13,25 @@ public class VideoManager : MonoBehaviour
     /// Singleton instance of VideoManager
     /// </summary>
     public static VideoManager Instance { get; private set; }
-
+    /// <summary>
+    /// Flag to indicate if the video download was successful
+    /// </summary>
     private bool _downloadSuccess = false;
+    /// <summary>
+    /// Getter for the download success flag
+    /// </summary>
     public bool DownloadSuccess => _downloadSuccess;
-    
+
     #region WebGL JavaScript Plugin Interop
     [DllImport("__Internal")]
     private static extern bool InitializeVideoRecorder();
-    
+
     [DllImport("__Internal")]
     private static extern bool StartVideoRecording();
-    
+
     [DllImport("__Internal")]
     private static extern bool StopVideoRecording();
-    
+
     [DllImport("__Internal")]
     private static extern bool SaveVideoRecording();
     #endregion
@@ -58,17 +63,17 @@ public class VideoManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-    
+
     /// <summary>
     /// Called when the script instance is being loaded.
     /// Initializes the video recorder if running in WebGL.
     /// </summary>
     private void Start()
-    {        
+    {
         #if !UNITY_EDITOR && UNITY_WEBGL
         InitializeVideoRecorder();
         #endif
@@ -76,7 +81,7 @@ public class VideoManager : MonoBehaviour
         // Reset the download success flag
         _downloadSuccess = false;
     }
-    
+
     /// <summary>
     /// Starts the video recording if running in WebGL. Uses the JavaScript plugin to handle the recording.
     /// </summary>
@@ -86,7 +91,7 @@ public class VideoManager : MonoBehaviour
         {
             return;
         }
-            
+
         #if !UNITY_EDITOR && UNITY_WEBGL
         StartVideoRecording();
         #endif
@@ -94,7 +99,7 @@ public class VideoManager : MonoBehaviour
         _isRecording = true;
         OnRecordingStarted?.Invoke();
     }
-    
+
     /// <summary>
     /// Stops the video recording if it is currently active. Uses the JavaScript plugin to handle the stopping.
     /// </summary>
@@ -104,7 +109,7 @@ public class VideoManager : MonoBehaviour
         {
             return;
         }
-                    
+
         #if !UNITY_EDITOR && UNITY_WEBGL
         StopVideoRecording();
         #endif
@@ -117,7 +122,7 @@ public class VideoManager : MonoBehaviour
     /// Saves the recorded video. Uses the JavaScript plugin to handle the download.
     /// </summary>
     private void SaveRecording()
-    {        
+    {
         #if !UNITY_EDITOR && UNITY_WEBGL
         SaveVideoRecording();
         #elif UNITY_EDITOR
@@ -141,7 +146,7 @@ public class VideoManager : MonoBehaviour
             StartRecording();
         }
     }
-    
+
     /// <summary>
     /// Saves the current recording if not already recording.
     /// </summary>
@@ -152,10 +157,10 @@ public class VideoManager : MonoBehaviour
             Debug.LogWarning("Cannot save recording while still recording.");
             return;
         }
-        
+
         SaveRecording();
     }
-    
+
     /// <summary>
     /// Callback method to be called from JavaScript when the recording is finished.
     /// Sets the download success flag to true.
