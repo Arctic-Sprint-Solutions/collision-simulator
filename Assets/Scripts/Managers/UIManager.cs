@@ -13,11 +13,11 @@ using System.Collections.Generic;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
+    #region  Properties
     /// <summary>
     /// Singleton instance of the UIManager
     /// </summary>
     public static UIManager Instance { get; private set; }
-    #region  Properties
     /// <summary>
     /// Reference to the shared UIDocument that contains the persistent UI elements.
     /// </summary>
@@ -26,23 +26,50 @@ public class UIManager : MonoBehaviour
     /// Dictionary to hold references to UI elements by name for easy access.
     /// </summary>
     private Dictionary<string, VisualElement> _uiElements = new Dictionary<string, VisualElement>();
-    #region UI Elements
+    /// <summary>
+    /// Reference to the root VisualElement of the shared UIDocument.
+    /// </summary>
     private VisualElement _root;
+    /// <summary>
+    /// Reference to the root container of the UI.
+    /// </summary>
     private VisualElement _rootContainer;
+    /// <summary>
+    /// Reference to the navigation bar element.
+    /// </summary>
     private VisualElement _navBar;
+    /// <summary>
+    /// Reference to the back-to-menu button element.
+    /// </summary>
     private VisualElement _backToMenuButton;
+    /// <summary>
+    /// Reference to the collision UI element.
+    /// </summary>
     private VisualElement _collisionUI;
-    #endregion
+    /// <summary>
+    /// Flag to indicate if the UIManager has been initialized.
+    /// </summary>
     private bool _isInitialized = false;
+    /// <summary>
+    /// Flag to indicate if Zen Mode is active.
+    /// Zen Mode hides the root container and all its children.
+    /// </summary>
     private bool _isZenMode = false;
+    /// <summary>
+    /// Enum to define the back button mode.
+    /// MainMenu mode loads the main menu scene,
+    /// PreviousScene mode loads the previous scene.
+    /// </summary>
     private enum BackButtonMode { MainMenu, PreviousScene }
+    /// <summary>
+    /// Current mode of the back button.
+    /// </summary>
     private BackButtonMode _currentBackButtonMode;
+    /// <summary>
+    /// List of registered UILocalizers to receive localization updates.
+    /// </summary>
     private List<UILocalizer> registeredLocalizers = new List<UILocalizer>();
     #endregion
-    // #region  Events
-    // public event System.Action OnCollisionSceneLoaded;
-    // public event System.Action OnNonCollisionSceneLoaded;
-    // #endregion
 
     /// <summary>
     /// Awake method to initialize the UIManager.
@@ -75,7 +102,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void RegisterUIComponents()
     {
-        if(_collisionUI == null) return;
+        if (_collisionUI == null) return;
 
         // Collision UI components
         RegisterComponent("playPauseButton", _collisionUI.Q<Button>("playPauseButton"));
@@ -93,7 +120,7 @@ public class UIManager : MonoBehaviour
         RegisterComponent("CameraDropdownContainer", _collisionUI.Q<VisualElement>("CameraDropdownContainer"));
         RegisterComponent("CameraDropdown", _collisionUI.Q<DropdownField>("CameraDropdown"));
 
-        if(_root == null) return;
+        if (_root == null) return;
 
         // Keybinds components
         RegisterComponent("KeybindsEdge", _root.Q<VisualElement>("KeybindsEdge"));
@@ -109,12 +136,12 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void RegisterComponent(string name, VisualElement element)
     {
-        if(element == null)
+        if (element == null)
         {
             Debug.LogWarning($"UIManager: Attempted to register a null element for '{name}'");
             return;
         }
-        
+
         // Add the element to the dictionary
         _uiElements[name] = element;
     }

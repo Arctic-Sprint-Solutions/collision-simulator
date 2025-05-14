@@ -8,21 +8,66 @@ using UnityEngine.UIElements;
 /// </summary>
 public class DebrisController : MonoBehaviour
 {
+    #region Properties
+    /// <summary>
+    /// A reference to the PersistentParticles class for managing large debris particle system.
+    /// </summary>
     [SerializeField] private PersistentParticles BigParticleSystem;
+    /// <summary>
+    /// A reference to the PersistentParticles class for managing medium debris particle system.
+    /// </summary>
     [SerializeField] private PersistentParticles MediumParticleSystem;
+    /// <summary>
+    /// A reference to the PersistentParticles class for managing small debris particle system.
+    /// </summary>
     [SerializeField] private PersistentParticles SmallParticleSystem;
 
+    /// <summary>
+    /// A reference to the UIDocument component for accessing UI elements.
+    /// </summary>
     private UIDocument uiDocument;
+    /// <summary>
+    /// A reference to the toggle for large debris in the UI.
+    /// </summary>
     private Toggle toggleA;
+    /// <summary>
+    /// A reference to the toggle for medium debris in the UI.
+    /// </summary>
     private Toggle toggleB;
+    /// <summary>
+    /// A reference to the toggle for small debris in the UI.
+    /// </summary>
     private Toggle toggleC;
+    /// <summary>
+    /// A reference to the button for showing the info panel in the UI.
+    /// </summary>
     private Button showInfoButton;
+    /// <summary>
+    /// A reference to the button for closing the info panel in the UI.
+    /// </summary>
     private Button closeInfoButton;
+    /// <summary>
+    /// A reference to the button for opening the ESA link in the UI.
+    /// </summary>
     private Button linkButton;
+    /// <summary>
+    /// A reference to the container for the info panel in the UI.
+    /// </summary>
     private VisualElement infoContainer;
+    /// <summary>
+    /// A reference to the label for the button to show the info panel in the UI.
+    /// </summary>
     private Label showInfoLabel;
+    /// <summary>
+    /// A reference to the label for the button to hide the info panel in the UI.
+    /// </summary>
     private Label hideInfoLabel;
+    /// <summary>
+    /// A flag indicating whether the info panel is currently visible.
+    /// Default is false (not visible).
+    /// </summary>
     private bool isInfoPanelVisible = false;
+    #endregion
 
     /// <summary>
     /// Runs when the script instance is being loaded.

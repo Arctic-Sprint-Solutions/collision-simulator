@@ -9,14 +9,43 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class CollisionUIController : MonoBehaviour
 {
+    #region Properties
+    /// <summary>
+    /// A reference to the play/pause button in the UI.
+    /// </summary>
     private Button _playPauseBtn;
+    /// <summary>
+    /// A reference to the restart button in the UI.
+    /// </summary>
     private Button _restartBtn;
+    /// <summary>
+    /// A reference to the label displaying the current speed in the UI.
+    /// </summary>
     private Label _speedLabel;
+    /// <summary>
+    /// A reference to the left arrow for decreasing speed in the UI.
+    /// </summary>
     private VisualElement _speedLeftArrow;
+    /// <summary>
+    /// A reference to the right arrow for increasing speed in the UI.
+    /// </summary>
     private VisualElement _speedRightArrow;
+    /// <summary>
+    /// A flag indicating whether the simulation is currently paused.
+    /// Default is false (not paused).
+    /// </summary>
     private bool _isPaused = false;
+    /// <summary>
+    /// An array of time scales for the simulation.
+    /// The default time scale is 1.0 (normal speed).
+    /// </summary>
     private readonly float[] _timeScales = { 0.25f, 0.5f, 1f, 1.5f, 2f, 4f };
+    /// <summary>
+    /// The current index of the time scale in the array.
+    /// Default is 2 (1.0).
+    /// </summary>
     private int _currentTimescaleIndex = 2;
+    #endregion
 
     /// <summary>
     /// Initializes the CollisionUIController, setting up event listeners and UI elements.

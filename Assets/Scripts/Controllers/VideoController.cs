@@ -31,18 +31,18 @@ public class VideoController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        if(SimulationManager.Instance != null) 
+        if (SimulationManager.Instance != null)
         {
             // Register SimulationManager events
             SimulationManager.Instance.OnCollisionSceneLoaded += InitializeCollisionScene;
             SimulationManager.Instance.OnNonCollisionSceneLoaded += InitializeNonCollisionScene;
-            
+
             InitializeUI();
             Debug.Log("[VideoController] UI initialized successfully.");
         }
 
         // Register VideoManager events
-        if(VideoManager.Instance != null)
+        if (VideoManager.Instance != null)
         {
             VideoManager.Instance.OnRecordingStarted += RecordingStarted;
             VideoManager.Instance.OnRecordingStopped += RecordingStopped;
@@ -57,7 +57,7 @@ public class VideoController : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        if(SimulationManager.Instance != null) 
+        if (SimulationManager.Instance != null)
         {
             // Unregister SimulationManager events
             SimulationManager.Instance.OnCollisionSceneLoaded -= ShowRecordButton;
@@ -65,7 +65,7 @@ public class VideoController : MonoBehaviour
         }
 
         // Unregister VideoManager events
-        if(VideoManager.Instance != null)
+        if (VideoManager.Instance != null)
         {
             VideoManager.Instance.OnRecordingStarted -= RecordingStarted;
             VideoManager.Instance.OnRecordingStopped -= RecordingStopped;
@@ -80,8 +80,8 @@ public class VideoController : MonoBehaviour
     {
         // Get the record button from the UIManager
         _recordBtn = UIManager.Instance.GetElement<VisualElement>("RecordButton");
-        if(_recordBtn != null)
-        {   
+        if (_recordBtn != null)
+        {
             var stopIcon = _recordBtn.Q<VisualElement>("StopIcon");
             var cameraIcon = _recordBtn.Q<VisualElement>("CameraIcon");
             stopIcon?.AddToClassList("d-none"); // Hide stop icon initially
@@ -94,8 +94,8 @@ public class VideoController : MonoBehaviour
 
         // Get the download button from the UIManager
         _downloadBtn = UIManager.Instance.GetElement<VisualElement>("DownloadButton");
-        if(_downloadBtn != null) 
-        {   
+        if (_downloadBtn != null)
+        {
             Debug.Log("Download button found in NavBar");
             _downloadBtn.RegisterCallback<ClickEvent>(evt => DownloadRecording());
             // Hide the download button initially
@@ -104,7 +104,7 @@ public class VideoController : MonoBehaviour
 
         // Get the recording finished label from the UIManager
         _recordingFinishedLabel = UIManager.Instance.GetElement<Label>("RecordingFinishedLabel");
-        if(_recordingFinishedLabel != null)
+        if (_recordingFinishedLabel != null)
         {
             // Hide the recording finished label initially
             _recordingFinishedLabel.RemoveFromClassList("show-label");
@@ -137,7 +137,7 @@ public class VideoController : MonoBehaviour
     {
         HideDownloadButton();
         UpdateRecordButton(isRecording: true);
-        
+
         // Cancel any pending invocations to hide the label
         CancelInvoke(nameof(HideRecordingFinishedLabel));
         HideRecordingFinishedLabel();
@@ -163,9 +163,10 @@ public class VideoController : MonoBehaviour
 
         // Cancel any pending invocations before showing the label
         CancelInvoke(nameof(HideRecordingFinishedLabel));
-        
+
         // Show the recording finished label for a short duration
-        if(_recordingFinishedLabel != null && VideoManager.Instance.DownloadSuccess) {
+        if (_recordingFinishedLabel != null && VideoManager.Instance.DownloadSuccess)
+        {
             _recordingFinishedLabel.AddToClassList("show-label");
             // Hide the label after a delay of 5 seconds
             Invoke(nameof(HideRecordingFinishedLabel), _showLabelDuration);
@@ -177,7 +178,8 @@ public class VideoController : MonoBehaviour
     /// </summary>
     private void HideRecordingFinishedLabel()
     {
-        if(_recordingFinishedLabel != null) {
+        if (_recordingFinishedLabel != null)
+        {
             _recordingFinishedLabel.RemoveFromClassList("show-label");
         }
     }
@@ -187,7 +189,7 @@ public class VideoController : MonoBehaviour
     /// </summary>
     public void ShowRecordButton()
     {
-        if(_recordBtn != null)
+        if (_recordBtn != null)
         {
             _recordBtn.RemoveFromClassList("d-none");
         }
@@ -203,7 +205,7 @@ public class VideoController : MonoBehaviour
     /// </summary>
     public void HideRecordButton()
     {
-        if(_recordBtn != null)
+        if (_recordBtn != null)
         {
             _recordBtn.AddToClassList("d-none");
         }
@@ -223,10 +225,6 @@ public class VideoController : MonoBehaviour
         {
             _downloadBtn.RemoveFromClassList("d-none");
             var label = _downloadBtn.Q<Label>("DownloadLabel");
-            // if (label != null)
-            // {
-            //     label.text = LocalizedUIHelper.Get("DownloadLabel");
-            // }
         }
     }
 
@@ -284,7 +282,7 @@ public class VideoController : MonoBehaviour
         VideoManager.Instance?.ToggleRecording();
     }
 
-     /// <summary>
+    /// <summary>
     /// Downloads the current recording using the VideoManager instance.
     /// </summary>
     private void DownloadRecording()
@@ -310,7 +308,7 @@ public class VideoController : MonoBehaviour
 
         // Clear references
         _recordBtn = null;
-        _downloadBtn = null;       
+        _downloadBtn = null;
     }
 
 }

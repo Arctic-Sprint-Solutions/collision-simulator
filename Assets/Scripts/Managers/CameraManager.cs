@@ -8,21 +8,42 @@ using UnityEngine.SceneManagement;
 using Unity.Cinemachine;
 
 /// <summary>
-/// Singleton class to handle camera selections
+/// Singleton class to find and manage all Cinemachine cameras in the scene.
 /// <summary>
 public class CameraManager : MonoBehaviour
 {
+    /// <summary>
+    /// Singleton instance of CameraManager
+    /// </summary>
     public static CameraManager Instance { get; private set; }
+    /// <summary>
+    /// Reference to the CameraController script for managing camera dropdown UI
+    /// </summary>
     [SerializeField] CameraController cameraController;
 
-    // Cameras - Cinemachine
+    /// <summary>
+    /// List of all Cinemachine cameras in the scene
+    /// </summary>
     private List<CinemachineCamera> cameras = new List<CinemachineCamera>();
+    /// <summary>
+    /// Index of the currently active camera
+    /// </summary>
     private int activeCameraIndex = 0;
 
+    #region Events
+    /// <summary>
+    /// Delegate for notifying UI with the list of camera names
+    /// </summary>
     public delegate void CamerasUpdated(List<string> cameraNames);
+    /// <summary>
+    /// Event triggered when the list of cameras is updated
+    /// </summary>
     public static event CamerasUpdated OnCamerasUpdated;
+    #endregion
 
-
+    /// <summary>
+    /// Sets up the singleton instance and ensures that only one instance of CameraManager exists.
+    /// </summary>
     private void Awake()
     {
 
@@ -38,34 +59,31 @@ public class CameraManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Enables Scenemanager to load scene
+    /// Subscribes to the scene loaded event to handle camera updates
     /// </summary>
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
 
     /// <summary>
-    /// Enables Scenemanager to offload scene
+    /// Unsubscribes from the scene loaded event to prevent memory leaks
     /// </summary>
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
     /// <summary>
-    /// Loads scene and notifies CameraController UI of cameras
+    /// Handles the scene loaded event to find cameras in the new scene
+    /// and notify the UI with the updated camera list.
     /// </summary>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
+        // Hide the camera dropdown UI when a new scene is loaded
         cameraController?.HideDropdown();
 
         FindCamerasInScene();
-        if(cameras.Count > 1)
+
+        // If there are more than one camera, notify the UI
+        if (cameras.Count > 1)
         {
             NotifyUI();
-        } 
+        }
     }
 
 
@@ -74,12 +92,13 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void FindCamerasInScene()
     {
+        // Clear the previous list of cameras
         cameras.Clear();
+        // Fin all cinemachine cameras in the scene 
         cameras.AddRange(FindObjectsByType<CinemachineCamera>(FindObjectsInactive.Include, FindObjectsSortMode.None));
 
         // Sort cameras by priority from highest to lowest
         cameras = cameras.OrderByDescending(c => c.Priority.Value).ToList();
-        
 
         Debug.Log($"Found {cameras.Count} Second check afterr list - Cinemachine cameras in the scene.");
     }
@@ -93,6 +112,7 @@ public class CameraManager : MonoBehaviour
         {
             Debug.Log("Notifying UI with camera names.");
             List<string> cameraNames = cameras.Select(c => c.name).ToList();
+            // Invoke the event to notify the UI with the camera names
             OnCamerasUpdated.Invoke(cameraNames);
         }
     }
@@ -114,5 +134,17 @@ public class CameraManager : MonoBehaviour
         Debug.Log($"Active Camera: {cameras[activeCameraIndex].name}");
     }
 
-}
+    /// <summary>
+    /// Unsubscribes from the scene loaded event when the object is destroyed
+    /// </summary>
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
 
+        // Clean up the singleton instance
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+}

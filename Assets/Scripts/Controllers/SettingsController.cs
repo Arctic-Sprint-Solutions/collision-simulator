@@ -12,20 +12,46 @@ using UnityEngine.Localization.Settings;
 /// </summary>
 public class SettingsController : MonoBehaviour
 {
+    #region Properties
+    /// <summary>
+    /// Reference to the UIDocument component for accessing UI elements.
+    /// </summary>
     public UIDocument uiDocument;
-
+    /// <summary>
+    /// Dictionary mapping action names to their corresponding buttons.
+    /// </summary>
     private Dictionary<string, Button> actionButtonMap;
+    /// <summary>
+    /// Dictionary to hold the key mappings for getting the key bindings.
+    /// </summary>
     private Dictionary<string, Func<KeyCode>> getKeyMap;
+    /// <summary>
+    /// Dictionary to hold the key mappings for setting the key bindings.
+    /// </summary>
     private Dictionary<string, Action<KeyCode>> setKeyMap;
-
+    /// <summary>
+    /// Reference to the dropdown field for language selection in the UI.
+    /// </summary>
     private DropdownField languageDropdown;
-
+    /// <summary>
+    /// Indicates whether the controller is currently waiting for a key input.
+    /// Defaults to false.
+    /// </summary>
     private bool waitingForKey = false;
+    /// <summary>
+    /// Action to be invoked when a key is selected.
+    /// </summary>
     private Action<KeyCode> onKeySelected;
+    /// <summary>
+    /// Coroutine for blinking the button text while waiting for a key input.
+    /// Used to imitate a cursor line.
+    /// </summary>
     private Coroutine blinkCoroutine;
+    #endregion
 
     /// <summary>
-    /// Singleton instance of the SettingsController.
+    /// Calls the StartCoroutine to set up the settings controller.
+    /// This method is called when the script instance is being loaded.
     /// </summary>
     private void Start()
     {
@@ -81,12 +107,12 @@ public class SettingsController : MonoBehaviour
             { "Camera2",       (key) => InputManager.Instance.keybinds.camera2Key = key },
             { "Camera3",       (key) => InputManager.Instance.keybinds.camera3Key = key },
             { "ToggleKeybindPanel", (key) => InputManager.Instance.keybinds.toggleKeybindPanel = key }
-            
+
         };
     }
 
     /// <summary>
-    /// Initializes the UI elements and their event handlers.
+    /// Initializes the UI and sets up the key binding buttons.
     /// </summary>
     private void InitializeUI()
     {
@@ -108,6 +134,7 @@ public class SettingsController : MonoBehaviour
             { "ToggleKeybindPanel", root.Q<Button>("ToggleKeybindPanelButton") }
         };
 
+        // Loop through the actionButtonMap and set up the buttons with their corresponding actions
         foreach (var pair in actionButtonMap)
         {
             if (pair.Value != null)
@@ -121,6 +148,7 @@ public class SettingsController : MonoBehaviour
             }
         }
 
+        // Initialize the language dropdown
         InitLanguageDropdown(root);
     }
 
@@ -157,7 +185,7 @@ public class SettingsController : MonoBehaviour
         button.text = "|";
 
         // If a blink coroutine is already running, stop it
-        if( blinkCoroutine != null)
+        if (blinkCoroutine != null)
         {
             StopCoroutine(blinkCoroutine);
         }
@@ -177,7 +205,7 @@ public class SettingsController : MonoBehaviour
             // Reset the element text color when done
             button.AddToClassList("visible-text");
             button.RemoveFromClassList("hidden-text");
-            
+
             if (IsKeyAlreadyBound(key, action))
             {
                 Debug.LogWarning($"[SettingsController] Key '{key}' already bound to another action.");
@@ -196,7 +224,7 @@ public class SettingsController : MonoBehaviour
     /// The text will alternate between visible and hidden states.
     /// The text color is controlled by CSS classes "visible-text" and "hidden-text".
     /// </summary>
-    /// <param name="element"></param>
+    /// <param name="element">The VisualElement to blink.</param>
     private IEnumerator BlinkText(VisualElement element)
     {
         bool visible = true;
