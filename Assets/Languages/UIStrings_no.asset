@@ -1,0 +1,373 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UIStrings_no
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: no
+  m_SharedData: {fileID: 11400000, guid: 0ce2c0866ae3c4d6ca04a36b9f9884ed, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1367555956736
+    m_Localized: Orbital Watch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31687747559424
+    m_Localized: "3D Kollisjonssimulator for Roms\xF8ppel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33502727757824
+    m_Localized: Last inn satellitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33768625659904
+    m_Localized: "Se roms\xF8ppel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33771280654336
+    m_Localized: Om
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33913744384000
+    m_Localized: Innstillinger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33918710439936
+    m_Localized: "G\xE5 tilbake til Jorden"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322973603979264
+    m_Localized: Innstillinger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323794827730944
+    m_Localized: Pause av kollisjoner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322975487221760
+    m_Localized: "Tastevalg for kollisjoner (Trykk for \xE5 endre)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637173462392832
+    m_Localized: Omstart av kollisjoner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2637435669307392
+    m_Localized: "Spr\xE5k"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639493038333952
+    m_Localized: Hovedmeny
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2639631513280512
+    m_Localized: Omstart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645571188809728
+    m_Localized: Veien Videre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645558383599616
+    m_Localized: "Orbital Watch er et visuelt verkt\xF8y laget for \xE5 simulere
+      enkle kollisjoner mellom satellitter og roms\xF8ppel. Utviklet med Unity-spillmotoren
+      og Blender for 3D-modellering, gir Orbital Watch en visuell fremstilling av
+      kollisjoner i verdensrommet. Satellittmodeller er importert fra NASAs offentlig
+      tilgjengelige 3D-modellbibliotek.\n\n\uFFFD Vis studenter den \xF8kende utfordringen
+      med roms\xF8ppel\n\uFFFD Observer kollisjoner fra forskjellige vinkler og hvordan
+      de p\xE5virker ulike satellitter\n\uFFFD L\xE6r hvorfor roms\xF8ppel er en
+      voksende bekymring og hvorfor videre forskning er n\xF8dvendig"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645022120861696
+    m_Localized: Om Orbital Watch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645028361986048
+    m_Localized: Om Orbital Watch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645027531513856
+    m_Localized: "Ny teknologi og kommersialiseringen av satellittsystemer har f\xF8rt
+      til at et \xF8kende antall satellitter blir skutt opp i verdensrommet. N\xE5r
+      objekter brytes opp eller kolliderer i bane, skaper de det som kalles roms\xF8ppel.
+      Mer forskning er n\xF8dvendig for \xE5 forst\xE5 hvordan roms\xF8ppel p\xE5virker
+      satellitter, men \xF8kt bevissthet er det f\xF8rste steget."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645560266842112
+    m_Localized: Om prosjektet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645564045910016
+    m_Localized: "Utfordringen med \xE5 simulere kollisjoner"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645562233970688
+    m_Localized: "V\xE5ren 2025 ble et prosjekt lagt til bachelorprogrammet i datateknikk
+      ved UiT \u2013 Norges arktiske universitet, kalt \"Visualisering av kollisjoner
+      mellom satellitter og roms\xF8ppel\". Hovedkravene til prosjektet var \xE5
+      utvikle et visuelt verkt\xF8y som kunne simulere enkle kollisjoner mellom satellitter
+      og roms\xF8ppel. Verkt\xF8yet skulle brukes i undervisning slik at flere studenter
+      (og andre potensielle interessenter) kunne l\xE6re mer om effektene av roms\xF8ppel.\n\nOppdragsgiveren
+      for prosjektet var P\xE5l Gunnar Ellingsen, f\xF8rsteamanuensis innen satellitteknologi
+      og fjernm\xE5ling ved Institutt for elektroteknologi ved UiT. Hovedveilederen
+      for prosjektet var Frode Nesje, universitetslektor ved Institutt for datateknologi
+      og beregningsorientert ingeni\xF8rvitenskap ved UiT.\n\nProsjektet ble gjennomf\xF8rt
+      av utviklingsteamet Arctic Sprint Solutions 2.0, best\xE5ende av fire avgangsstudenter
+      innen bachelorprogrammet i datateknikk ved UiT: Madeleine Woodbury, Ola Gi\xE6ver,
+      Gabriel Halstensen og Ingrid Ledingham."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645565866237952
+    m_Localized: "Den st\xF8rste utfordringen med \xE5 simulere kollisjoner mellom
+      roms\xF8ppel er mangelen p\xE5 forskning om hvordan objekter faktisk oppf\xF8rer
+      seg i rommet etter en kollisjon. Objekter som beveger seg i bane rundt jorden
+      har vanligvis ekstremt h\xF8y hastighet \u2013 opptil 7 kilometer i sekundet
+      (25 000 kilometer i timen). Til sammenligning beveger en rifle-kule seg med
+      en hastighet p\xE5 rundt 1,2 kilometer i sekundet \u2013 en br\xF8kdel av dette.
+      N\xE5r to objekter kolliderer i bane med slike hastigheter, kan den relative
+      kollisjonshastigheten n\xE5 opptil 15 kilometer i sekundet (54 000 kilometer
+      i timen). \xC5 simulere slike kollisjoner er derfor sv\xE6rt utfordrende \u2013
+      b\xE5de n\xE5r man gj\xF8r det fysisk i eksperimenter og n\xE5r man visualiserer
+      det med verkt\xF8y som Orbit Watch. Det er vanskelig \xE5 etterligne kollisjonseffekter
+      n\xE5r det finnes lite eller ingen tilgjengelig data fra virkelige hendelser."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645569347510272
+    m_Localized: "For \xE5 lage et visuelt verkt\xF8y for kollisjoner med roms\xF8ppel
+      har det v\xE6rt viktig \xE5 legge til side fors\xF8k p\xE5 \xE5 gjenskape hvordan
+      objekter faktisk oppf\xF8rer seg i rommet. Prosjektet har f\xE5tt i oppdrag
+      \xE5 simulere enkle kollisjoner, ikke \xE5 gi en n\xF8yaktig fremstilling av
+      hvordan objekter fysisk oppf\xF8rer seg i bane ved sammenst\xF8t."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645567686565888
+    m_Localized: Prosjektets avgrensninger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2645941407440896
+    m_Localized: "Selv om Orbital Watch ble laget for \xE5 simulere enkle kollisjoner,
+      har det potensial for videreutvikling \u2013 kanskje som en del av en masteroppgave
+      i anvendt vitenskap. Fremtidige forbedringer kan inkludere mer forskning p\xE5
+      ekte romfysikk, noe som vil muliggj\xF8re mer presise fremstillinger av kollisjoner
+      i bane. Man kan ogs\xE5 vurdere \xE5 eksperimentere med mer avanserte spillmotorer,
+      som Unreal, for \xE5 forbedre den grafiske kvaliteten og \xE5pne for st\xF8rre
+      grad av tilpasning.\n\nVidere utvikling vil sannsynligvis kreve mer tid og
+      ressurser for \xE5 oppn\xE5 h\xF8yere grad av simuleringsn\xF8yaktighet. Men
+      akkurat som i spillverdenen er det alltid plass til en oppf\xF8lger \u2013
+      med h\xF8yere oppl\xF8sning og enda mer innhold."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2909021575372800
+    m_Localized: "Om roms\xF8ppel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908210342453248
+    m_Localized: Store objekter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908547145064448
+    m_Localized: Medium objekter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2908785276674048
+    m_Localized: "Sm\xE5 objekter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2910835972562944
+    m_Localized: "Den europeiske romfartsorganisasjonen (ESA) gir informasjon om
+      mengden roms\xF8ppel i lav jordbane (L.E.O) gjennom statistiske \nmodeller.
+      Det visuelle roms\xF8ppelet som vises her representerer kun en br\xF8kdel (0,0001538)
+      av den totale mengden s\xF8ppel. \n\nSystemet for roms\xF8ppel er basert p\xE5
+      f\xF8lgende kategorier:\n\n- Store objekter (st\xF8rre enn 10 cm) \u2013 40
+      500 objekter\n\n- Mellomstore objekter (mellom 1 cm og 10 cm) \u2013 1 100
+      000 objekter\n\n- Sm\xE5 objekter (mellom 1 mm og 1 cm) \u2013 130 000 000
+      objekter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914638683758592
+    m_Localized: "Roms\xF8ppel-kontroller"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914662360604672
+    m_Localized: "Visualiser Roms\xF8ppel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918922615840768
+    m_Localized: 'Vekt:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918924448751616
+    m_Localized: "\xC5r:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2918925962895360
+    m_Localized: Last Simulasjon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2923432138563584
+    m_Localized: Velg kollisjonstype
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3273923129303040
+    m_Localized: Velg en satellitt for simulering
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276468857921536
+    m_Localized: 'LEO: {0} km'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276472918007808
+    m_Localized: 'Vekt: {0} kg'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3276473974972416
+    m_Localized: "Oppskytings\xE5r: {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3296750440079360
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297700483489792
+    m_Localized: Spill av
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297702366732288
+    m_Localized: "G\xE5 tilbake"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3297705134972928
+    m_Localized: 'Hastighet: {0}x'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3969864300486656
+    m_Localized: Satellitt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3969858436849664
+    m_Localized: "Roms\xF8ppel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000120226963456
+    m_Localized: "\xD8k hastighet"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4001162456981504
+    m_Localized: Tasten er allerede tilknyttet en annen handling!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000150727942144
+    m_Localized: Nullstill hastighet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4001371014553600
+    m_Localized: <Ny tast>
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4000141915709440
+    m_Localized: Senk hastighet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3763310234165248
+    m_Localized: Start/Stopp Opptak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3764697697345536
+    m_Localized: Last ned opptak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4033553351303168
+    m_Localized: Velg
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367031582318592
+    m_Localized: Hovedkamera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367032974827520
+    m_Localized: Satellittkamera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367482251894784
+    m_Localized: "Roms\xF8ppelkamera"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377130531020800
+    m_Localized: Cubesatkamera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377171601645568
+    m_Localized: Rosettakamera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4377953235361792
+    m_Localized: Start opptak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4378009552281600
+    m_Localized: Last ned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4397003009155072
+    m_Localized: Stopp opptak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4802717544341504
+    m_Localized: Vis tastevalg
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5237824931487744
+    m_Localized: Zen Modus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5265999417827328
+    m_Localized: Gjem tastevalg
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305760563683328
+    m_Localized: Kamera 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305783309393920
+    m_Localized: Kamera 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6305808152256512
+    m_Localized: Kamera 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6528305141374976
+    m_Localized: Vis/gjem tastevalg
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8368609486168064
+    m_Localized: Gjem Informasjon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8388000391094272
+    m_Localized: 'Kilde: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8754749410107392
+    m_Localized: Video lastet ned. Se nedlastningsmappe.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9241660004229120
+    m_Localized: Vis inromasjon
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

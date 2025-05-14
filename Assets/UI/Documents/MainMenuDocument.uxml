@@ -1,0 +1,34 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <engine:VisualElement name="Container" class="full-width-container" style="flex-grow: 1; align-items: flex-start; max-width: 1600px;">
+        <engine:VisualElement name="Menu" class="menu" style="flex-grow: 1; padding-bottom: 32px; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 0; padding-top: 32px; padding-right: 32px; padding-left: 32px;">
+            <engine:VisualElement name="TitleContainer" class="flex-col-start" style="flex-grow: 0; flex-wrap: nowrap;">
+                <engine:Label text="Orbital Watch" name="MainTitle" class="title my-2" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <engine:Label text="3D Space Debris Collision Simulator" name="MainMenuSubtitle" class="subtitle my-2" style="white-space: normal; font-size: 28px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="NavLinks" style="flex-grow: 0; align-items: flex-start; justify-content: center; padding-top: 48px; padding-right: 0;">
+                <engine:VisualElement name="LoadSatellites" class="nav-link" style="flex-grow: 0; align-items: center;">
+                    <engine:VisualElement name="SatelliteIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/satellite-icon.png?fileID=2800000&amp;guid=a82261ee17b8a4128a17cba5cb28aca8&amp;type=3#satellite-icon&quot;);" />
+                    <engine:Label text="Load Satellites" name="LinkLoadSatellites" class="my-2 nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ViewSpaceDebris" class="nav-link" style="flex-grow: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                    <engine:VisualElement name="StarsIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/stars-icon.png?fileID=2800000&amp;guid=0ec7d57974f7c4c7fa0ccef6de2dcdef&amp;type=3#stars-icon&quot;);" />
+                    <engine:Label text="View Space Debris" name="LinkViewDebris" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="About" class="nav-link" style="flex-grow: 0;">
+                    <engine:VisualElement name="InfoIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/info-icon.png?fileID=2800000&amp;guid=270d8f47899784ae4b8cbc13229d9645&amp;type=3#info-icon&quot;);" />
+                    <engine:Label text="About" name="LinkAbout" class="my-2 nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Settings" class="nav-link" style="flex-grow: 0;">
+                    <engine:VisualElement name="SettingsIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/settings-icon.png?fileID=2800000&amp;guid=2d1bb925fe7574d9c971455284e49acd&amp;type=3#settings-icon&quot;);" />
+                    <engine:Label text="Settings" name="LinkSettings" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ReturnToEarth" class="nav-link" style="flex-grow: 0;">
+                    <engine:VisualElement name="EarthIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/earth-icon.png?fileID=2800000&amp;guid=0b1bdeab00839405ba5758f61c64511d&amp;type=3#earth-icon&quot;);" />
+                    <engine:Label text="Return to Earth" name="LinkReturn" class="nav-link-text" style="margin-top: 8px; margin-right: 0; margin-bottom: 8px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

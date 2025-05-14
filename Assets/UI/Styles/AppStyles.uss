@@ -1,0 +1,238 @@
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+
+.my-1 {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.my-2 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.full-width-container {
+    width: 100%;
+    padding: 64px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.flex-col-start {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.flex-row-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-row-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.title {
+    font-size: 56px;
+    color: rgb(0, 200, 255);
+    margin: 0;
+    padding: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/Orbitron-Regular.ttf?fileID=12800000&guid=8d9b146c6ee6241558a82ea5922c5327&type=3#Orbitron-Regular");
+}
+
+.subtitle {
+    font-size: 28px;
+    color: rgb(230, 230, 230);
+    margin: 0;
+    padding: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&guid=31ef9af198e904200ade4523ce535842&type=3#ChakraPetch-Regular");
+}
+
+.navbar {
+    padding-top: 30px;
+    padding-right: 64px;
+    padding-bottom: 16px;
+    padding-left: 48px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-self: auto;
+    align-items: center;
+}
+
+.scene-title {
+    margin-top: 60px;
+    margin-right: 0;
+    margin-bottom: 20px;
+    margin-left: 0;
+    align-items: center;
+}
+
+.link-hover:hover .nav-link-text {
+    color: rgb(48, 250, 136);
+}
+
+.link-hover:hover .nav-icon {
+    -unity-background-image-tint-color: rgb(48, 250, 136);
+}
+
+.btn:hover {
+    color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(0, 200, 255);
+    background-color: rgb(0, 200, 255);
+    border-color: rgb(0, 200, 255);
+}
+
+.btn {
+    margin: 0;
+    padding: 8px 20px;
+    color: rgb(0, 200, 255);
+    border-width: 2px;
+    border-color: rgb(0, 200, 255);
+    border-radius: 8px;
+    background-color: transparent;
+    -unity-font-style: normal;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    -unity-text-align: upper-center;
+}
+
+.btn-lg {
+    padding: 16px 32px;
+    font-size: 24px;
+}
+
+.btn:disabled {
+    color: rgba(0, 200, 255, 0.4);
+    border-color: rgba(0, 200, 255, 0.4);
+    background-color: transparent;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    color: rgba(0, 200, 255, 0.4);
+    border-color: rgba(0, 200, 255, 0.4);
+    background-color: transparent;
+    -unity-background-image-tint-color: rgba(0, 200, 255, 0.4);
+}
+
+.selected {
+    color: rgb(0, 9, 74);
+    border-color: rgb(0, 200, 255);
+    background-color: rgb(0, 200, 255);
+    -unity-background-image-tint-color: rgb(0, 200, 255);
+    --unity-text-color: rgb(0, 9, 74);
+}
+
+.scene-control-btn {
+    background-color: transparent;
+    margin-left: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -unity-text-align: middle-center;
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    padding-right: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease-in-out;
+    -unity-background-image-tint-color: rgb(0, 200, 255);
+}
+
+.btn-icon-small {
+    width: 18px;
+    height: 18px;
+}
+
+.control-btn {
+    margin: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: rgb(0, 200, 255);
+    border-color: rgb(0, 200, 255);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    -unity-font-style: normal;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    -unity-text-align: upper-center;
+    font-size: 16px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.control-btn:hover {
+    background-color: rgba(0, 61, 78, 0.8);
+}
+
+.d-none {
+    display: none;
+}
+
+.recording {
+    color: rgb(255, 0, 0);
+    border-color: rgb(255, 0, 0);
+}
+
+.recording .btn-icon {
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+}
+
+.recording-label {
+    color: rgb(48, 250, 136); 
+    font-size: 18px; 
+    margin: 0;  
+    padding: 8px; 
+    align-self: center; 
+    position: absolute; 
+    left: 0; 
+    top: -48px; 
+    background-color: rgba(0, 0, 0, 0.75);
+    transition: all 0.2s ease-in-out;
+    opacity: 0
+}
+
+.show-label {
+    opacity: 1;
+}
+
+.download-btn {
+    border-color: rgb(48, 250, 136);
+    color: rgb(48, 250, 136);
+}
+
+.download-btn .btn-icon {
+    -unity-background-image-tint-color: rgb(48, 250, 136);
+}

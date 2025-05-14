@@ -1,0 +1,48 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <Style src="project://database/Assets/UI/Styles/DebrisStyles.uss?fileID=7433441132597879392&amp;guid=aaa42bf5b569d45468e589e2b2aad881&amp;type=3#DebrisStyles" />
+    <engine:VisualElement name="MenuContainer" class="full-width-container" style="position: absolute; bottom: -457px; right: -61px; max-width: 400px; width: 100%;">
+        <engine:VisualElement name="Menu" class="menu" style="padding: 16px; width: 252px; background-color: rgba(0, 0, 0, 0.8); border-radius: 8px; height: 414px; color: rgb(0, 0, 0);">
+            <engine:VisualElement name="TitleContainer" class="flex-col-start">
+                <engine:Label text="Debris Control Panel" name="DebrisMainTitle" class="title my-2" style="font-size: 19px;" />
+                <engine:Label text="Manage Space Debris" name="DebrisSubtitle" class="subtitle my-2" style="font-size: 21px;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="LargeDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 16px;">
+                <engine:Toggle name="ToggleDebrisA" class="nav-link-text">
+                    <engine:Label name="LargeDebrisText" text=" Large Debris" class="nav-link-text my-2" style="font-size: 25px;" />
+                </engine:Toggle>
+            </engine:VisualElement>
+            <engine:VisualElement name="MediumDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 0;">
+                <engine:Toggle name="ToggleDebrisB" class="nav-link-text">
+                    <engine:Label name="MediumDebrisText" text=" Medium Debris" class="nav-link-text" style="font-size: 25px;" />
+                </engine:Toggle>
+            </engine:VisualElement>
+            <engine:VisualElement name="SmallDebris" style="flex-grow: 0; align-items: flex-start; justify-content: center; margin-top: 0;">
+                <engine:Toggle name="ToggleDebrisC" class="nav-link-text">
+                    <engine:Label name="SmallDebrisText" text=" Small Debris" class="nav-link-text" style="font-size: 25px;" />
+                </engine:Toggle>
+            </engine:VisualElement>
+            <engine:VisualElement name="ShowInfo">
+                <engine:Button name="ShowInfoButton" class="control-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-right: 10px; flex-direction: row;">
+                    <engine:VisualElement name="ShowInfoIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/info-icon.png?fileID=2800000&amp;guid=270d8f47899784ae4b8cbc13229d9645&amp;type=3#info-icon&quot;);" />
+                    <engine:Label text="Show Information" name="ShowInfoLabel" style="margin-left: 8px;" />
+                    <engine:Label name="HideInfoLabel" class="d-none" style="margin-left: 8px;" />
+                </engine:Button>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+    <engine:VisualElement name="InfoContainer" class="container menu full-width-container" style="width: 70%; height: 74%; align-self: center; align-items: flex-start; justify-content: flex-start; align-content: center; background-color: rgba(0, 0, 0, 0.8); margin-top: 237px; margin-right: 100px; margin-bottom: 30px; margin-left: 100px; max-width: 1465px; top: -100px;">
+        <engine:Button name="CloseInfoButton" class="close-btn">
+            <engine:VisualElement name="CloseIcon" class="close-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/close-icon.png?fileID=2800000&amp;guid=a374bb9014a6b402ba784d3bcbcd3a3e&amp;type=3#close-icon&quot;);" />
+        </engine:Button>
+        <engine:Label text="About space debris" name="AboutHeadline" class="subtitle" style="border-left-color: rgba(0, 200, 255, 0); border-right-color: rgba(0, 200, 255, 0); border-top-color: rgba(0, 200, 255, 0); border-bottom-color: rgba(0, 200, 255, 0); background-color: rgba(0, 0, 0, 0); color: rgb(0, 200, 255); margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;" />
+        <engine:VisualElement name="Info" style="flex-grow: 1; max-width: none; width: 1200px; height: 575px; margin-top: 0; margin-right: 0; justify-content: space-between; align-items: flex-start; position: absolute; top: 140px; left: 70px;">
+            <engine:Label text="The European Space Agency (ESA) provide information about the current amount of space debris in Lower Earth Orbit (L.E.O) &#10;through statistical models. Visual debris shown here represents a fraction (0.0001538) of the total amount of debris. &#10;&#10;&#10;&#10;&#10;&#10;The debris system is based on the following numbers:&#10;&#10;&#10;- Large Debris (Objects greater than 10 cm) - 40 500 objects&#10;&#10;- Medium Debris (Objects from greater than 1 cm to 10 cm) - 1 100 000 objects&#10;&#10;- Small Debris (Objects from greater than 1 cm to 1 mm) - 130 000 000 objects&#10;&#10;&#10;&#10;&#10;&#10;" name="DebrisInfo" emoji-fallback-support="true" double-click-selects-word="false" class="subtitle" style="align-items: flex-start; align-self: flex-start; font-size: 21px; height: 575px; width: 1200px;" />
+            <engine:VisualElement name="SourceInfo" style="flex-grow: 1; flex-direction: row; flex-shrink: 0; align-items: center; align-self: flex-start;">
+                <engine:Label text="Source:" name="SourceLabel" style="color: rgb(206, 206, 206); font-size: 18px; margin-left: 8px; -unity-text-align: middle-left;" />
+                <engine:Button name="EsaLinkButton" text="https://www.esa.int/Space_Safety/Space_Debris/Space_debris_by_the_numbers" class="link-button" style="justify-content: center;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

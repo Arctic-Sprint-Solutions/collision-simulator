@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="Screen" style="flex-grow: 1; flex-direction: column; align-items: auto; justify-content: flex-start; align-content: auto; flex-shrink: 1;">
+        <engine:VisualElement name="ButtonContainer" style="flex-grow: 1; justify-content: flex-end; flex-basis: 20px; align-self: flex-end; align-items: auto; align-content: auto; flex-direction: row;">
+            <engine:Button text="Pause" name="playPauseButton" />
+            <engine:Button text="Restart" name="restartButton" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

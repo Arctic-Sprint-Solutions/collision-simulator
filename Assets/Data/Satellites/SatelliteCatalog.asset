@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411d78ae3d7ed44bea13bab4efe321ae, type: 3}
+  m_Name: SatelliteCatalog
+  m_EditorClassIdentifier: 
+  satellites:
+  - {fileID: 11400000, guid: 3c3850471513142dabf08e1095988c60, type: 2}
+  - {fileID: 11400000, guid: db70391b4259b46be87db7982e75de02, type: 2}
+  - {fileID: 11400000, guid: 7da465570401a496098058d920f8034e, type: 2}
+  - {fileID: 11400000, guid: 27f6d9163ab3b4544937ba83473b1319, type: 2}
+  - {fileID: 11400000, guid: d65ac739047884b43931281e99775b24, type: 2}
+  - {fileID: 11400000, guid: e0a6925b80961e24fa82a4bffe175b1d, type: 2}

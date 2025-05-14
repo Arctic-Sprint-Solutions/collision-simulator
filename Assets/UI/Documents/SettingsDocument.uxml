@@ -1,0 +1,71 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <Style src="project://database/Assets/UI/Styles/SettingsStyles.uss?fileID=7433441132597879392&amp;guid=6a5443de73e4f48b7af729b4e7a45ecb&amp;type=3#SettingsStyles" />
+    <engine:VisualElement name="SettingsContainer" class="menu" style="flex-grow: 1; height: 80%; width: 85%; max-width: 1600px; max-height: 900px; background-color: rgba(0, 0, 0, 0.75); -unity-text-align: upper-left; align-items: flex-start; align-self: center; align-content: auto; top: 100px;">
+        <engine:VisualElement name="TitleContainer" style="flex-grow: 1; width: 100%; height: auto; max-height: 93px; align-self: center; background-color: rgb(0, 0, 0); align-content: flex-start; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-text-align: upper-center;">
+            <engine:Label text="This is title" name="SettingsTitle" class="my-2 title" style="padding-left: 45px; margin-top: 9px;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-width: none; max-height: 528px; width: 100%; padding-top: 0; margin-top: 0; align-items: flex-start; align-self: flex-start;">
+            <engine:VisualElement name="KeybindSubtitleContainer" style="flex-grow: 0; height: auto; max-height: none; margin-top: 0; margin-right: 0; margin-bottom: 12px; margin-left: 0; flex-direction: row; width: 100%; padding-bottom: 32px;">
+                <engine:Label text="This is title" name="KeybindSubtitle" class="nav-link-text" style="margin-top: 0; margin-left: 0; flex-grow: 1; margin-right: 0; margin-bottom: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: upper-center;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="KeybindsContainer" style="flex-grow: 1; max-height: 454px; max-width: none; align-content: auto; align-items: flex-start; justify-content: flex-start; align-self: flex-start; flex-direction: row; height: auto; flex-wrap: wrap; width: 100%;">
+                <engine:VisualElement name="PauseButtonContainer" class="keybind-container">
+                    <engine:Label text="Increase Speed" name="PauseKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="PauseKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="RestartButtonContainer" class="keybind-container">
+                    <engine:Label name="RestartKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button text="Backspace" name="RestartKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="IncreaseSpeedButtonContainer" class="keybind-container">
+                    <engine:Label name="IncreaseSpeedKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="IncreaseSpeedKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="DecreaseSpeedButtonContainer" class="keybind-container">
+                    <engine:Label name="DecreaseSpeedKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="DecreaseSpeedKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ResetSpeedButtonContainer" class="keybind-container">
+                    <engine:Label name="ResetSpeedKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="ResetSpeedKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="RecordButtonContainer" class="keybind-container">
+                    <engine:Label name="RecordKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="RecordKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="DownloadButtonContainer" class="keybind-container">
+                    <engine:Label name="DownloadKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="DownloadKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ZenModeButtonContainer" class="keybind-container">
+                    <engine:Label name="ZenModeKeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="ZenModeKeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ToggleKeybindPanelButtonContainer" class="keybind-container">
+                    <engine:Label name="ToggleKeybindPanelLabel" class="subtitle keybind-label" />
+                    <engine:Button name="ToggleKeybindPanelButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Camera1ButtonContainer" class="keybind-container">
+                    <engine:Label name="Camera1KeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="Camera1KeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Camera2ButtonContainer" class="keybind-container">
+                    <engine:Label name="Camera2KeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="Camera2KeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+                <engine:VisualElement name="Camera3ButtonContainer" class="keybind-container">
+                    <engine:Label name="Camera3KeybindLabel" class="subtitle keybind-label" />
+                    <engine:Button name="Camera3KeybindButton" class="keybind-btn subtitle" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="LanguageContainer" style="flex-grow: 1; max-height: 161px; height: auto; max-width: none; width: 100%; min-height: 130px;">
+            <engine:VisualElement name="LanguageSubtitleContainer" style="flex-grow: 1; height: 60px; max-height: 60px; margin-top: 2px; margin-right: 0; margin-bottom: 0;">
+                <engine:Label name="LanguageSubtitle" text="Language" class="nav-link-text" style="margin-top: 2px; margin-left: 15px;" />
+            </engine:VisualElement>
+            <engine:DropdownField name="LanguageDropdown" class="language-dropdown" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/ChakraPetch-Regular.ttf?fileID=12800000&amp;guid=31ef9af198e904200ade4523ce535842&amp;type=3#ChakraPetch-Regular&quot;);" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

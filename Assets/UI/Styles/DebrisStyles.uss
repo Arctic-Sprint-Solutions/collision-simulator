@@ -1,0 +1,65 @@
+.control-btn {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgb(0, 200, 255);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    font-size: 16px;
+    margin-top: 16px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    padding-right: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease-in-out;
+}
+
+.control-btn:hover {
+    background-color: rgba(0, 61, 78, 0.8);
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgb(0, 200, 255);
+    border-color: rgb(0, 200, 255);
+    border-radius: 4px;
+    border-width: 1px;
+    padding: 8px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.close-icon {
+    width: 20px;
+    height: 20px;
+    -unity-background-image-tint-color: rgb(0, 200, 255);
+} 
+
+.close-btn:hover {
+    background-color: rgba(0, 61, 78, 0.8);
+}
+
+.link-button {
+    background-color: transparent; 
+    border-width: 0; 
+    color: rgb(0, 200, 255); 
+    font-size: 18px; 
+    flex-grow: 0; 
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.link-button:hover {
+    color: rgb(48, 250, 136);
+}

@@ -1,0 +1,54 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/OverlayStyles.uss?fileID=7433441132597879392&amp;guid=ca58737bd6a214ebebeadf157859628c&amp;type=3#OverlayStyles" />
+    <Style src="project://database/Assets/UI/Styles/AppStyles.uss?fileID=7433441132597879392&amp;guid=b9a0e5c6a5bb147f3a3b1f7c9b8a2b02&amp;type=3#AppStyles" />
+    <Style src="project://database/Assets/UI/Styles/MainMenuStyles.uss?fileID=7433441132597879392&amp;guid=9b87ca904a1704097977c79559f9780f&amp;type=3#MainMenuStyles" />
+    <Style src="project://database/Assets/UI/Styles/CameraManagerStyles.uss?fileID=7433441132597879392&amp;guid=c694c710541212742b9216e022dbee95&amp;type=3#CameraManagerStyles" />
+    <engine:VisualElement name="Root" class="root-container">
+        <engine:VisualElement name="UIContainer" style="flex-grow: 1; display: flex; flex-direction: column;">
+            <engine:VisualElement name="NavBar" class="navbar" style="flex-grow: 0; max-height: none; flex-direction: row; justify-content: space-between;">
+                <engine:VisualElement name="BackToMenuButton" class="flex-row-center link-hover" style="flex-grow: 0; flex-shrink: 1; align-items: center;">
+                    <engine:VisualElement name="BackIcon" class="nav-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/circle-back-icon.png?fileID=2800000&amp;guid=ecac4b2a0e7174a82b0f3c2712c05619&amp;type=3#circle-back-icon&quot;);" />
+                    <engine:Label name="BackToMenuLabel" text="Main Menu&#10;" class="navbar-link-text nav-link-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="KeybindsEdge" class="keybinds-edge d-none">
+                    <engine:VisualElement name="ToggleKeybindsPanel" class="control-btn" style="flex-grow: 1;">
+                        <engine:Label text="Show Keybinds" name="ShowKeybinds" />
+                        <engine:Label text="Hide Keybinds" name="HideKeybinds" class="d-none" />
+                    </engine:VisualElement>
+                    <engine:ScrollView name="KeybindsPanel" class="keybinds-panel nav-link-text" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement name="CollisionUI" class="d-none" style="flex-grow: 0; position: relative; left: 0; bottom: 5%; width: 100%; justify-content: center; flex-direction: row; padding-top: 0; padding-right: 30px; padding-bottom: 0; padding-left: 30px; margin-top: auto; background-color: rgba(0, 0, 0, 0);">
+                <engine:VisualElement name="RecordButtons" class="flex-row-center" style="flex-grow: 0; margin-right: auto; position: relative; left: auto; align-self: center;">
+                    <engine:VisualElement name="RecordButton" class="d-none control-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-right: 10px; flex-direction: row;">
+                        <engine:VisualElement name="CameraIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/video-icon-white.png?fileID=2800000&amp;guid=1e27cb3e1074f44bdb190a42b7aa0cc3&amp;type=3#video-icon-white&quot;); margin-right: 0;" />
+                        <engine:VisualElement name="StopIcon" class="d-none btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/stop-icon-white.png?fileID=2800000&amp;guid=161681acaff754f76911030a21dacc31&amp;type=3#stop-icon-white&quot;); margin-right: 0;" />
+                        <engine:Label text="Start Recording" name="RecordLabel" style="margin-left: 8px;" />
+                    </engine:VisualElement>
+                    <engine:VisualElement name="DownloadButton" class="flex-row-center d-none control-btn download-btn" style="flex-grow: 0; flex-shrink: 1; align-items: center; margin-left: 0;">
+                        <engine:VisualElement name="DownloadIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/download-icon-white.png?fileID=2800000&amp;guid=f17d20a833dcb46d59f7f45e773918b1&amp;type=3#download-icon-white&quot;); margin-right: 0;" />
+                        <engine:Label text="Download" name="DowloadLabel" style="margin-left: 8px;" />
+                    </engine:VisualElement>
+                    <engine:Label text="Recording Finished" name="RecordingFinishedLabel" class="recording-label" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ButtonContainer" class="flex-row-center" style="position: absolute; align-self: center;">
+                    <engine:Button text="Button" name="playPauseButton" class="control-btn" style="color: rgba(76, 76, 76, 0); margin-right: 10px;">
+                        <engine:VisualElement name="pauseIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/pause-icon.png?fileID=2800000&amp;guid=e09c2122cccbd40b6b781d74580c642b&amp;type=3#pause-icon&quot;); margin-right: 0; -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(0, 200, 255);" />
+                        <engine:VisualElement name="playIcon" class="btn-icon d-none" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/play-white.png?fileID=2800000&amp;guid=d66689fb3708745978390d66abe4c315&amp;type=3#play-white&quot;); margin-right: 0; -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(0, 200, 255);" />
+                    </engine:Button>
+                    <engine:Button text="Button" name="restartButton" class="control-btn" style="color: rgba(0, 200, 255, 0); margin-right: 10px;">
+                        <engine:VisualElement name="relayIcon" class="btn-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/replay-icon.png?fileID=2800000&amp;guid=48afd8dd00dbe41599dfed000b871774&amp;type=3#replay-icon&quot;); margin-right: 0; -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(0, 200, 255);" />
+                    </engine:Button>
+                    <engine:VisualElement name="speedToggleButton" class="control-btn" style="flex-grow: 1; flex-direction: row; align-items: center;">
+                        <engine:VisualElement name="speedLeftArrow" class="btn-icon btn-icon-small" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/left-arrow-icon.png?fileID=2800000&amp;guid=e1cb92ead18e041569629ae96f2b2ba9&amp;type=3#left-arrow-icon&quot;); margin-right: 0; -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(0, 200, 255);" />
+                        <engine:Label name="speedLabel" text="Speed: 1x" class="center-label" style="margin-right: 8px; margin-left: 8px;" />
+                        <engine:VisualElement name="speedRightArrow" class="btn-icon btn-icon-small" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/right-arrow-icon.png?fileID=2800000&amp;guid=5f6e966bea01f455b87405b918546bd1&amp;type=3#right-arrow-icon&quot;); margin-right: 0; -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(0, 200, 255);" />
+                    </engine:VisualElement>
+                </engine:VisualElement>
+                <engine:VisualElement name="CameraDropdownContainer" class="d-none" style="margin-left: auto; right: 30px; position: relative;">
+                    <engine:DropdownField name="CameraDropdown" class="camera-label" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
