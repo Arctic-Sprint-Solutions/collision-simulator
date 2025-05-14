@@ -181,8 +181,8 @@ public class SatellitePreviewController : MonoBehaviour
         SetLabel(infoCard, "Subtitle", _selectedSatellite.type);
 
         // Set the satellite infor text
-        SetLabel(infoCard, "LEOText", _selectedSatellite.leoInfo);
-        SetLabel(infoCard, "WeightText", _selectedSatellite.weight.ToString());
+        SetLabel(infoCard, "LEOText", _selectedSatellite.leoInfo + " km");
+        SetLabel(infoCard, "WeightText", _selectedSatellite.weight.ToString() + " kg");
         SetLabel(infoCard, "YearText", _selectedSatellite.launchYear.ToString());
     }
 
