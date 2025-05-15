@@ -1,8 +1,8 @@
 using UnityEngine;
 
-///<summary>
-// Singleton class to manage input events and the logic for the keybinds.
-///<summary>
+/// <summary>
+/// Singleton class to manage input events and the logic for the keybinds.
+/// <summary>
 public class InputManager : MonoBehaviour
 {
     /// <summary>
