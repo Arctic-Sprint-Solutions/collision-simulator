@@ -5,5 +5,7 @@
         <engine:Label text="Satellites" name="SatelliteGridTitle" class="title" style="-unity-text-align: upper-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         <engine:Label text="Select a satellite for the simulation" name="SatelliteGridSubtitle" class="subtitle" />
     </engine:VisualElement>
-    <engine:VisualElement name="SatelliteGridContainer" class="satellite-container" style="flex-grow: 1;" />
+    <engine:ScrollView mode="VerticalAndHorizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" class="custom-scroll-view" style="padding-bottom: 40px;">
+        <engine:VisualElement name="SatelliteGridContainer" class="satellite-container" style="flex-grow: 1; max-height: 100%; padding-bottom: 32px;" />
+    </engine:ScrollView>
 </engine:UXML>

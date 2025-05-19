@@ -1,21 +1,34 @@
 // Description: This script controls the orbital movement of a satellite around a planet object.
 using UnityEngine;
 
-// <summary>
-// This script controls the orbital movement of a satellite around a planet object.
-// </summary>
+/// <summary>
+/// This script controls the orbital movement of a satellite around a planet object.
+/// </summary>
 public class OrbitalMovement : MonoBehaviour
 {
-    // The planet object to orbit around
+    /// <summary>
+    /// The planet object to orbit around.
+    /// </summary>
     [SerializeField] private Transform planet;
-    // Radius of the orbit
+    /// <summary> 
+    /// Radius of the orbit
+    /// </summary>
     [SerializeField] private float orbitRadius = 120f;
-    // Speed of the orbit in degrees per second
+    /// <summary> 
+    /// Speed of the orbit in degrees per second
+    /// </summary>
     [SerializeField] private float orbitSpeed = 2f;
-    // Inclination of the orbit in degrees (0 = equatorial, 90 = polar)
+    /// <summary>
+    /// Inclination of the orbit in degrees (0 = equatorial, 90 = polar)
+    /// </summary>
     [SerializeField] private float inclination = 95f;
-    // Starting angle of the orbit in degrees
+    /// <summary> 
+    /// Starting angle of the orbit in degrees
+    /// </summary>
     [SerializeField] private float startAngle = 225f;
+    /// <summary>
+    /// Current angle of the satellite in the orbit
+    /// </summary>
     private float currentAngle;
 
     /// <summary>

@@ -43,11 +43,11 @@ public class WebGLBuilder
         // Log appropriate message based on build result
         if (summary.result == BuildResult.Succeeded)
         {
-            Debug.Log($"✅ WebGL build succeeded: {summary.totalSize} bytes");
+            Debug.Log($"WebGL build succeeded: {summary.totalSize} bytes");
         }
         else
         {
-            Debug.LogError($"❌ WebGL build failed: {summary.result}");
+            Debug.LogError($"WebGL build failed: {summary.result}");
         }
     }
 }

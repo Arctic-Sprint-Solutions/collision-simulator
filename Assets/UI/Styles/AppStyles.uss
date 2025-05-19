@@ -236,3 +236,25 @@
 .download-btn .btn-icon {
     -unity-background-image-tint-color: rgb(48, 250, 136);
 }
+
+
+/* Hide crustom scroll view while allowing scroll if needed */
+.custom-scroll-view {
+    overflow: scroll; 
+}
+
+.custom-scroll-view.unity-scroll-view .unity-scroller {
+    width: 0;
+    min-width: 0;
+    opacity: 0;
+    display: none; 
+}
+
+.custom-scroll-view.unity-scroll-view .unity-scroll-view__content-container {
+    padding-right: 8px;
+}
+
+.custom-scroll-view.unity-scroll-view .unity-scroll-view__content-viewport {
+    overflow: scroll;
+}
+
