@@ -196,7 +196,7 @@ MonoBehaviour:
       of debris. \n\nThe debris system is based on the following \n\n- Large Debris
       (Objects greater than 10 cm) - 40 500 objects\n\n- Medium Debris (Objects from
       greater than 1 cm to 10 cm) - 1 100 000 objects\n\n- Small Debris (Objects
-      from greater than 1 cm to 1 mm) - 130 000 000 objects"
+      from greater than 1 mm to 1 cm) - 130 000 000 objects"
     m_Metadata:
       m_Items: []
   - m_Id: 2914638683758592
@@ -352,7 +352,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6528305141374976
-    m_Localized: Show/Hide kyebinds
+    m_Localized: Show/Hide keybinds
     m_Metadata:
       m_Items: []
   - m_Id: 8368609486168064
@@ -369,6 +369,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 9241660004229120
     m_Localized: Show Information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16393678766465024
+    m_Localized: Select a satellite for the simulation
     m_Metadata:
       m_Items: []
   references:

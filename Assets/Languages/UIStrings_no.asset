@@ -368,6 +368,10 @@ MonoBehaviour:
     m_Localized: Vis inromasjon
     m_Metadata:
       m_Items: []
+  - m_Id: 16393678766465024
+    m_Localized: Velg en satellitt for simulasjonen
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

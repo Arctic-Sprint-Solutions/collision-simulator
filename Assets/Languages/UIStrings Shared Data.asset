@@ -311,6 +311,10 @@ MonoBehaviour:
     m_Key: ShowInfoLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 16393678766465024
+    m_Key: SatelliteGridSubtitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
